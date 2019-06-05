@@ -8,7 +8,7 @@ namespace ann_shop_server.Services
 {
     public class StockService : Service<StockService>
     {
-        public List<ProductModel> getQuantities(List<tbl_StockManager> stock)
+        public IEnumerable<StockModel> getQuantities(List<tbl_StockManager> stock)
         {
             var result = stock
                     .Select(x => new
@@ -49,12 +49,13 @@ namespace ann_shop_server.Services
                         }
                     )
                     .GroupBy(x => x.parentID)
-                    .Select(g => new ProductModel
+                    .Select(g => new StockModel()
                     {
-                        id = g.Key,
+                        productID = g.Key,
+                        quantity = g.Sum(x => Convert.ToInt32(x.quantityCurrent)) ,
                         availability = g.Sum(x => x.quantityCurrent) > 0 ? true : false
                     })
-                    .OrderBy(x => x.id)
+                    .OrderBy(x => x.productID)
                     .ToList();
 
             return result;

@@ -280,6 +280,9 @@
     <Compile Include="Models\common\PaginationMetadataModel.cs" />
     <Compile Include="Models\common\PagingParameterModel.cs" />
     <Compile Include="Models\common\ProductModel.cs" />
+    <Compile Include="Models\common\ProductVariableModel.cs" />
+    <Compile Include="Models\common\StockModel.cs" />
+    <Compile Include="Models\common\VariableModel.cs" />
     <Compile Include="Models\Delivery.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -292,6 +295,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\product\ProductDetailPageModel.cs" />
     <Compile Include="Models\product\ProductPageModel.cs" />
+    <Compile Include="Models\product\ProductRelatedPageModel.cs" />
     <Compile Include="Models\Session.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -421,7 +425,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Services\ImageService.cs" />
     <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\VariableService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\StockService.cs" />
     <Compile Include="Startup.cs" />
