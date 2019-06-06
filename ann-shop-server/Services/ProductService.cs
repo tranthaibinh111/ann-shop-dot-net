@@ -88,7 +88,7 @@ namespace ann_shop_server.Services
                             name = p.ProductTitle,
                             sku = p.ProductSKU,
                             materials = p.Materials,
-                            avatar = "/uploads/images/8438-33d76f7e-d7e9-4659-a1c0-4426b191c22c.jpeg",
+                            avatar = p.ProductImage,
                             regularPrice = p.Regular_Price.HasValue ? p.Regular_Price.Value : 0,
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
                         }
@@ -241,7 +241,7 @@ namespace ann_shop_server.Services
                             id = v.ID,
                             categoryID = p.CategoryID.Value,
                             sku = v.SKU,
-                            avatar = "/uploads/images/8438-33d76f7e-d7e9-4659-a1c0-4426b191c22c.jpeg",
+                            avatar = v.Image,
                             materials = p.Materials,
                             regularPrice = v.Regular_Price.HasValue ? v.Regular_Price.Value : 0,
                             retailPrice = v.RetailPrice.HasValue ? v.RetailPrice.Value : 0
@@ -333,18 +333,7 @@ namespace ann_shop_server.Services
                 var sizes = VariableService.Instance.getVariables(id, (int)VariableType.Size);
 
                 // Get images of product
-                //var images = ImageService.getByProduct(id);
-                var images = new List<string>()
-                {
-                    "/uploads/images/8438-33d76f7e-d7e9-4659-a1c0-4426b191c22c.jpeg",
-                    "/uploads/images/6C9A0876.jpeg",
-                    "/uploads/images/6C9A0877.jpeg",
-                    "/uploads/images/6C9A0878.jpeg",
-                    "/uploads/images/6C9A0879.jpeg",
-                    "/uploads/images/6C9A0880.jpeg",
-                    "/uploads/images/6C9A0881.jpeg",
-                    "/uploads/images/6C9A0882.jpeg"
-                };
+                var images = ImageService.Instance.getByProduct(id);
 
                 var products = data.Where(x => x.CategoryID.HasValue)
                     .Join(
@@ -403,15 +392,7 @@ namespace ann_shop_server.Services
 
         public string getImageWithVariable(int productID, List<int> variables)
         {
-            if(variables.Count > 1)
-            {
-                return "/uploads/images/6C9A0878.jpeg";
-            }
-            else
-            {
-                return "/uploads/images/6C9A0881.jpeg";
-            }
-            //return ImageService.Instance.getByProductVariable(productID, variables);
+            return ImageService.Instance.getByProductVariable(productID, variables);
         }
     }
 }
