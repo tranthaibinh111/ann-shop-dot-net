@@ -10,6 +10,7 @@ namespace ann_shop_server.Models
         public int id { get; set; }
         public int categoryID { get; set; }
         public string categoryName { get; set; }
+        public string categorySlug { get; set; }
         public string sku { get; set; }
         public string name { get; set; }
         public string avatar { get; set; }

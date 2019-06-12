@@ -17,7 +17,8 @@ namespace ann_shop_server.Services
                 .Select(x => new ProductCategoryModel() {
                     id = x.ID,
                     title = x.CategoryName,
-                    description = x.CategoryDescription
+                    description = x.CategoryDescription,
+                    slug = x.Slug
                 })
                 .ToList();
 
@@ -40,7 +41,9 @@ namespace ann_shop_server.Services
                 {
                     id = x.ID,
                     title = x.CategoryName,
-                    description = x.CategoryDescription
+                    description = x.CategoryDescription,
+                    slug = x.Slug
+                    
                 })
                 .FirstOrDefault();
             if (parent != null)
@@ -63,7 +66,8 @@ namespace ann_shop_server.Services
                     {
                         id = x.ID,
                         title = x.CategoryName,
-                        description = x.CategoryDescription
+                        description = x.CategoryDescription,
+                        slug = x.Slug
                     })
                     .FirstOrDefault();
 
@@ -76,6 +80,7 @@ namespace ann_shop_server.Services
                         id = parent.id,
                         title = parent.title,
                         description = parent.description,
+                        slug = parent.slug,
                         child = child
                     };
                 }
