@@ -8,7 +8,7 @@ namespace ann_shop_server.Services
 {
     public class VariableService: Service<VariableService>
     {
-        public IEnumerable<VariableModel> getVariables(int parentID, int kindID)
+        public List<VariableModel> getVariables(int parentID, int kindID)
         {
             using (var con = new inventorymanagementEntities())
             {

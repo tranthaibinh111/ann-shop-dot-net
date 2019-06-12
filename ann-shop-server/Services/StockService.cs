@@ -8,7 +8,7 @@ namespace ann_shop_server.Services
 {
     public class StockService : Service<StockService>
     {
-        public IEnumerable<StockModel> getQuantities(List<tbl_StockManager> stock)
+        public List<StockModel> getQuantities(List<tbl_StockManager> stock)
         {
             var result = stock
                     .Select(x => new

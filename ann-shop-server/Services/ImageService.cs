@@ -8,7 +8,7 @@ namespace ann_shop_server.Services
 {
     public class ImageService: Service<ImageService>
     {
-        public IEnumerable<string> getByProduct(int productID)
+        public List<string> getByProduct(int productID)
         {
             using (var con = new inventorymanagementEntities())
             {
