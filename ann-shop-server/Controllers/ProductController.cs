@@ -18,37 +18,60 @@ namespace ann_shop_server.Controllers
 
         // GET api/product
         [Route("api/v1/product")]
-        public IEnumerable<ProductModel> Get([FromUri]PagingParameterModel pagingParameterModel, string category = "", string search = "")
+        public IHttpActionResult Get([FromUri]PagingParameterModel pagingParameterModel, string category = "", string search = "")
         {
             var productPage = _service.getProducts(category, pagingParameterModel.pageNumber, pagingParameterModel.pageSize, search);
 
-            // Setting Header
-            HttpContext.Current.Response.Headers.Add("Access-Control-Expose-Headers", "X-Paging-Headers");
-            HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(productPage.paginationMetadata));
+            if (productPage.data.Count > 0)
+            {
+                // Setting Header
+                HttpContext.Current.Response.Headers.Add("Access-Control-Expose-Headers", "X-Paging-Headers");
+                HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(productPage.paginationMetadata));
 
-            // Returing List of product Collections
-            return productPage.data;
+                // Returing List of product Collections
+                return Ok<List<ProductModel>>(productPage.data);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // GET api/product/productID:int
         [Route("api/v1/product/{id:int}")]
-        public ProductDetailPageModel Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return _service.getProductDetail(id);
+            var prod = _service.getProductDetail(id);
+
+            if (prod != null)
+            {
+                return Ok<ProductDetailPageModel>(prod);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // Get api/product/productID:int/related
         [Route("api/v1/product/{id:int}/related")]
-        public IEnumerable<ProductVariableModel> GetProductRelated(int id, [FromUri]PagingParameterModel pagingParameterModel)
+        public IHttpActionResult GetProductRelated(int id, [FromUri]PagingParameterModel pagingParameterModel)
         {
             var relatedProduct = _service.getProductRelated(id, pagingParameterModel.pageNumber, pagingParameterModel.pageSize);
 
-            // Setting Header
-            HttpContext.Current.Response.Headers.Add("Access-Control-Expose-Headers", "X-Paging-Headers");
-            HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(relatedProduct.paginationMetadata));
+            if (relatedProduct.data.Count > 0)
+            {
+                // Setting Header
+                HttpContext.Current.Response.Headers.Add("Access-Control-Expose-Headers", "X-Paging-Headers");
+                HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(relatedProduct.paginationMetadata));
 
-            // Returing List of relate product Collections
-            return relatedProduct.data;
+                // Returing List of relate product Collections
+                return Ok<List<ProductVariableModel>>(relatedProduct.data);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // GET api/product/productID:int

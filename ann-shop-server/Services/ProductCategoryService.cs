@@ -7,7 +7,7 @@ namespace ann_shop_server.Services
 {
     public class ProductCategoryService : Service<ProductCategoryService>
     {
-        public IEnumerable<ProductCategoryModel> getCategoryChild(inventorymanagementEntities con, ProductCategoryModel parent)
+        public List<ProductCategoryModel> getCategoryChild(inventorymanagementEntities con, ProductCategoryModel parent)
         {
             var result = new List<ProductCategoryModel>();
             result.Add(parent);
@@ -32,7 +32,7 @@ namespace ann_shop_server.Services
             return result;
         }
 
-        public IEnumerable<ProductCategoryModel> getCategoryChild(inventorymanagementEntities con, string categorySlug)
+        public List<ProductCategoryModel> getCategoryChild(inventorymanagementEntities con, string categorySlug)
         {
             var parent = con.tbl_Category
                 .Where(x => x.Slug == categorySlug)
@@ -81,7 +81,7 @@ namespace ann_shop_server.Services
                 }
                 else
                 {
-                    return new ProductCategoryPageModel();
+                    return null;
                 }
             }
         }
