@@ -11,9 +11,9 @@ namespace ann_shop_server.Models
         public string title { get; set; }
         public string image { get; set; }
         public string content { get; set; }
-        public Nullable<int> featured { get; set; }
-        public Nullable<int> categoryID { get; set; }
+        public int? featured { get; set; }
+        public int? categoryID { get; set; }
         public string categoryName { get; set; }
-        public Nullable<System.DateTime> createdDate { get; set; }
+        public DateTime? createdDate { get; set; }
     }
 }

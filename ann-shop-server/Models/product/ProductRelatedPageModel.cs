@@ -8,6 +8,6 @@ namespace ann_shop_server.Models
     public class ProductRelatedPageModel
     {
         public PaginationMetadataModel paginationMetadata { get; set; }
-        public IEnumerable<ProductVariableModel> data { get; set; }
+        public List<ProductVariableModel> data { get; set; }
     }
 }

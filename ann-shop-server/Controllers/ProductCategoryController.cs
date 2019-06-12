@@ -18,9 +18,18 @@ namespace ann_shop_server.Controllers
 
         // GET api/product/productID:int
         [Route("api/v1/product-category/{*slug}")]
-        public ProductCategoryPageModel Get(string slug)
+        public IHttpActionResult Get(string slug)
         {
-            return _service.getProductCategoryDetail(slug);
+            var category = _service.getProductCategoryDetail(slug);
+
+            if (category != null)
+            {
+                return Ok<ProductCategoryPageModel>(category);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
     }

@@ -22,12 +22,14 @@ namespace ann_shop_server.Controllers
         {
             var post = _service.getPostDetail(id);
 
-            if (post == null)
+            if (post != null)
+            {
+                return Ok<PostModel>(post);
+            }
+            else
             {
                 return NotFound();
             }
-
-            return Ok<PostModel>(post);
         }
 
     }
