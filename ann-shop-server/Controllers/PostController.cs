@@ -18,9 +18,16 @@ namespace ann_shop_server.Controllers
 
         // GET api/post/postID:int
         [Route("api/v1/post/{id:int}")]
-        public PostModel Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return _service.getPostDetail(id);
+            var post = _service.getPostDetail(id);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return Ok<PostModel>(post);
         }
 
     }
