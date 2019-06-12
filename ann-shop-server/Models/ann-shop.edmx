@@ -31,7 +31,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
             <PropertyRef Name="ModifiedBy" />
             <PropertyRef Name="ModifiedDate" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BankName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="AccountName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="AccountNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
@@ -107,6 +107,23 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="IsNegativeFee" Type="bit" />
         </EntityType>
+        <EntityType Name="Register">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="UnSignedName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ProvinceID" Type="int" />
+          <Property Name="Note" Type="nvarchar" MaxLength="300" />
+          <Property Name="ProductCategory" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Session">
           <Key>
             <PropertyRef Name="ID" />
@@ -132,16 +149,6 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="tbl_Account">
           <Key>
@@ -318,6 +325,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="TransportCompanySubID" Type="int" />
           <Property Name="CustomerPhone2" Type="nvarchar" MaxLength="15" />
           <Property Name="CustomerPhoneBackup" Type="nvarchar" MaxLength="15" />
+          <Property Name="UnSignedNick" Type="varchar" MaxLength="255" />
+          <Property Name="UnSignedName" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="tbl_CustomerLevel">
           <Key>
@@ -576,6 +585,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="ProductStyle" Type="int" />
           <Property Name="ShowHomePage" Type="int" />
           <Property Name="ProductImageClean" Type="nvarchar(max)" />
+          <Property Name="WebPublish" Type="bit" />
+          <Property Name="WebUpdate" Type="datetime" />
         </EntityType>
         <EntityType Name="tbl_ProductImage">
           <Key>
@@ -834,9 +845,9 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fee" EntityType="Self.Fee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FeeType" EntityType="Self.FeeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Register" EntityType="Self.Register" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipper" EntityType="Self.Shipper" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Account" EntityType="Self.tbl_Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_AccountInfo" EntityType="Self.tbl_AccountInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Agent" EntityType="Self.tbl_Agent" Schema="dbo" store:Type="Tables" />
@@ -972,6 +983,23 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsNegativeFee" Type="Boolean" />
         </EntityType>
+        <EntityType Name="Register">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnSignedName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProvinceID" Type="Int32" />
+          <Property Name="Note" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="Session">
           <Key>
             <PropertyRef Name="ID" />
@@ -997,16 +1025,6 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tbl_Account">
           <Key>
@@ -1183,6 +1201,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="TransportCompanySubID" Type="Int32" />
           <Property Name="CustomerPhone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="CustomerPhoneBackup" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="UnSignedNick" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UnSignedName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tbl_CustomerLevel">
           <Key>
@@ -1441,6 +1461,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="ProductStyle" Type="Int32" />
           <Property Name="ShowHomePage" Type="Int32" />
           <Property Name="ProductImageClean" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebPublish" Type="Boolean" />
+          <Property Name="WebUpdate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="tbl_ProductImage">
           <Key>
@@ -1706,7 +1728,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
             <PropertyRef Name="ModifiedBy" />
             <PropertyRef Name="ModifiedDate" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccountNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1725,9 +1747,9 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <EntitySet Name="Deliveries" EntityType="Self.Delivery" />
           <EntitySet Name="Fees" EntityType="Self.Fee" />
           <EntitySet Name="FeeTypes" EntityType="Self.FeeType" />
+          <EntitySet Name="Registers" EntityType="Self.Register" />
           <EntitySet Name="Sessions" EntityType="Self.Session" />
           <EntitySet Name="Shippers" EntityType="Self.Shipper" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tbl_Account" EntityType="Self.tbl_Account" />
           <EntitySet Name="tbl_AccountInfo" EntityType="Self.tbl_AccountInfo" />
           <EntitySet Name="tbl_Agent" EntityType="Self.tbl_Agent" />
@@ -1854,6 +1876,24 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Registers">
+            <EntityTypeMapping TypeName="inventorymanagementModel.Register">
+              <MappingFragment StoreEntitySet="Register">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UnSignedName" ColumnName="UnSignedName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ProductCategory" ColumnName="ProductCategory" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Sessions">
             <EntityTypeMapping TypeName="inventorymanagementModel.Session">
               <MappingFragment StoreEntitySet="Session">
@@ -1879,17 +1919,6 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="inventorymanagementModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2076,6 +2105,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
                 <ScalarProperty Name="TransportCompanySubID" ColumnName="TransportCompanySubID" />
                 <ScalarProperty Name="CustomerPhone2" ColumnName="CustomerPhone2" />
                 <ScalarProperty Name="CustomerPhoneBackup" ColumnName="CustomerPhoneBackup" />
+                <ScalarProperty Name="UnSignedNick" ColumnName="UnSignedNick" />
+                <ScalarProperty Name="UnSignedName" ColumnName="UnSignedName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2348,6 +2379,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
                 <ScalarProperty Name="ProductStyle" ColumnName="ProductStyle" />
                 <ScalarProperty Name="ShowHomePage" ColumnName="ShowHomePage" />
                 <ScalarProperty Name="ProductImageClean" ColumnName="ProductImageClean" />
+                <ScalarProperty Name="WebPublish" ColumnName="WebPublish" />
+                <ScalarProperty Name="WebUpdate" ColumnName="WebUpdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -7,43 +7,32 @@ namespace ann_shop_server.Services
 {
     public class ProductService : Service<ProductService>
     {
-        private IEnumerable<int> getCategoryChild(inventorymanagementEntities con, int parentID)
-        {
-            var result = new List<int>();
-            result.Add(parentID);
-
-            var child = con.tbl_Category
-                .Where(x => x.ParentID.Value == parentID)
-                .Select(x => x.ID)
-                .ToList();
-
-            if (child.Count > 0)
-            {
-                foreach (var id in child)
-                {
-                    result.AddRange(getCategoryChild(con, id));
-                }
-            }
-
-            return result;
-        }
-
-        public ProductPageModel getProducts(int categoryID, int pageNumber, int pageSize)
+        public ProductPageModel getProducts(int categoryID, int pageNumber, int pageSize, string search)
         {
             using (var con = new inventorymanagementEntities())
             {
-                var source = con.tbl_Product.OrderBy(o => o.ID);
+                var source = con.tbl_Product.Where(x => x.WebPublish == true).OrderByDescending(o => o.ID);
 
                 if (categoryID != 0)
                 {
                     // Trường hợp đặt biệt: Đối ưng đệ quy cho sql server
-                    var categories = new List<int>();
-                    categories.AddRange(getCategoryChild(con, categoryID));
+                    var categories = new List<ProductCategoryModel>();
+                    categories.AddRange(ProductCategoryService.Instance.getCategoryChild(con, categoryID));
+                    var categoryIDs = categories.Select(x => x.id).OrderByDescending(o => o).ToList();
 
                     source = source
-                        .Where(x => categories.Contains(x.CategoryID.Value))
-                        .OrderBy(o => o.ID);
+                        .Where(x => x.WebPublish == true)
+                        .Where(x => categoryIDs.Contains(x.CategoryID.Value))
+                        .OrderByDescending(o => o.ID);
                 }
+
+                if (!String.IsNullOrEmpty(search))
+                {
+                    source = con.tbl_Product
+                        .Where(x => x.ProductSKU.Contains(search) || x.ProductTitle.Contains(search))
+                        .OrderByDescending(o => o.ID);
+                }
+
                 // Get's No of Rows Count
                 int count = source.Count();
 
@@ -71,7 +60,7 @@ namespace ann_shop_server.Services
                         d => d.ID,
                         (s, d) => s
                     )
-                    .OrderBy(x => new { x.ParentID, x.ProductID, x.ProductVariableID })
+                    .OrderByDescending(x => new { x.ParentID, x.ProductID, x.ProductVariableID })
                     .ToList();
                 var stocks = StockService.Instance.getQuantities(stockFilter);
 
@@ -93,7 +82,7 @@ namespace ann_shop_server.Services
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
                         }
                     )
-                    .OrderBy(x => x.id)
+                    .OrderByDescending(x => x.id)
                     .ToList();
 
                 products = products
@@ -120,7 +109,7 @@ namespace ann_shop_server.Services
                             retailPrice = parent.pro.retailPrice
                         }
                     )
-                    .OrderBy(o => o.id)
+                    .OrderByDescending(o => o.id)
                     .ToList();
 
                 // if CurrentPage is greater than 1 means it has previousPage

@@ -30,9 +30,9 @@ namespace ann_shop_server.Models
         public virtual DbSet<Delivery> Deliveries { get; set; }
         public virtual DbSet<Fee> Fees { get; set; }
         public virtual DbSet<FeeType> FeeTypes { get; set; }
+        public virtual DbSet<Register> Registers { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tbl_Account> tbl_Account { get; set; }
         public virtual DbSet<tbl_AccountInfo> tbl_AccountInfo { get; set; }
         public virtual DbSet<tbl_Agent> tbl_Agent { get; set; }
