@@ -7,17 +7,17 @@ namespace ann_shop_server.Services
 {
     public class ProductService : Service<ProductService>
     {
-        public ProductPageModel getProducts(int categoryID, int pageNumber, int pageSize, string search)
+        public ProductPageModel getProducts(string categorySlug, int pageNumber, int pageSize, string search)
         {
             using (var con = new inventorymanagementEntities())
             {
                 var source = con.tbl_Product.Where(x => x.WebPublish == true).OrderByDescending(o => o.ID);
 
-                if (categoryID != 0)
+                if (!String.IsNullOrEmpty(categorySlug))
                 {
                     // Trường hợp đặt biệt: Đối ưng đệ quy cho sql server
                     var categories = new List<ProductCategoryModel>();
-                    categories.AddRange(ProductCategoryService.Instance.getCategoryChild(con, categoryID));
+                    categories.AddRange(ProductCategoryService.Instance.getCategoryChild(con, categorySlug));
                     var categoryIDs = categories.Select(x => x.id).OrderByDescending(o => o).ToList();
 
                     source = source

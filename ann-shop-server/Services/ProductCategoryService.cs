@@ -32,10 +32,10 @@ namespace ann_shop_server.Services
             return result;
         }
 
-        public IEnumerable<ProductCategoryModel> getCategoryChild(inventorymanagementEntities con, int parentID)
+        public IEnumerable<ProductCategoryModel> getCategoryChild(inventorymanagementEntities con, string categorySlug)
         {
             var parent = con.tbl_Category
-                .Where(x => x.ID == parentID)
+                .Where(x => x.Slug == categorySlug)
                 .Select(x => new ProductCategoryModel()
                 {
                     id = x.ID,
@@ -53,12 +53,12 @@ namespace ann_shop_server.Services
             }
         }
 
-        public ProductCategoryPageModel getProductCategoryDetail(int id)
+        public ProductCategoryPageModel getProductCategoryDetail(string slug)
         {
             using (var con = new inventorymanagementEntities())
             {
                 var parent = con.tbl_Category
-                    .Where(x => x.ID == id)
+                    .Where(x => x.Slug == slug)
                     .Select(x => new ProductCategoryModel()
                     {
                         id = x.ID,
