@@ -251,7 +251,9 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductCategoryController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -284,6 +286,8 @@
     </Compile>
     <Compile Include="Models\common\PaginationMetadataModel.cs" />
     <Compile Include="Models\common\PagingParameterModel.cs" />
+    <Compile Include="Models\common\PostModel.cs" />
+    <Compile Include="Models\common\ProductCategoryModel.cs" />
     <Compile Include="Models\common\ProductModel.cs" />
     <Compile Include="Models\common\ProductVariableModel.cs" />
     <Compile Include="Models\common\StockModel.cs" />
@@ -298,16 +302,18 @@
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\post\PostPageModel.cs" />
+    <Compile Include="Models\product-category\ProductCategoryPageModel.cs" />
     <Compile Include="Models\product\ProductDetailPageModel.cs" />
     <Compile Include="Models\product\ProductPageModel.cs" />
     <Compile Include="Models\product\ProductRelatedPageModel.cs" />
+    <Compile Include="Models\Register.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Session.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Shipper.cs">
-      <DependentUpon>ann-shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Account.cs">
@@ -431,6 +437,8 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Services\ImageService.cs" />
+    <Compile Include="Services\PostService.cs" />
+    <Compile Include="Services\ProductCategoryService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\VariableService.cs" />
     <Compile Include="Services\Service.cs" />
@@ -552,7 +560,7 @@
           <IISUrl>http://www.ann-shop-server.com:8080</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>True</UseCustomServer>
-          <CustomServerUrl>http://ann-shop-server.com:8080</CustomServerUrl>
+          <CustomServerUrl>http://ann-shop-server.com</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
