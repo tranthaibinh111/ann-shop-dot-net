@@ -21,8 +21,7 @@ namespace ann_shop_server.Controllers
         public IHttpActionResult Get([FromUri]PagingParameterModel pagingParameterModel, string category = "", string search = "")
         {
             var productPage = _service.getProducts(category, pagingParameterModel.pageNumber, pagingParameterModel.pageSize, search);
-
-            if (productPage.data.Count > 0)
+            if (productPage != null)
             {
                 // Setting Header
                 HttpContext.Current.Response.Headers.Add("Access-Control-Expose-Headers", "X-Paging-Headers");

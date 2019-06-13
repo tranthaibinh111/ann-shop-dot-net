@@ -15,7 +15,7 @@ namespace ann_shop_server.Services
                 var post = con.tbl_Post
                     .Where(x => x.ID == id)
                     .GroupJoin(
-                        con.tbl_Category,
+                        con.tbl_PostCategory,
                         p => p.CategoryID,
                         c => c.ID,
                         (p, c) => new { p, c }
@@ -29,7 +29,7 @@ namespace ann_shop_server.Services
                             image = parent.p.Image,
                             featured = parent.p.Featured,
                             content = parent.p.Content,
-                            categoryName = children != null ? children.CategoryName : String.Empty,
+                            categoryName = children != null ? children.Title : String.Empty,
                             categoryID = parent.p.CategoryID,
                             createdDate = parent.p.CreatedDate,
                         }

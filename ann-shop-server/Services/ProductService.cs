@@ -15,15 +15,24 @@ namespace ann_shop_server.Services
 
                 if (!String.IsNullOrEmpty(categorySlug))
                 {
-                    // Trường hợp đặt biệt: Đối ưng đệ quy cho sql server
-                    var categories = new List<ProductCategoryModel>();
-                    categories.AddRange(ProductCategoryService.Instance.getCategoryChild(con, categorySlug));
-                    var categoryIDs = categories.Select(x => x.id).OrderByDescending(o => o).ToList();
+                    // Check category co ton tai ko
+                    var category = ProductCategoryService.Instance.getProductCategoryDetail(categorySlug);
+                    if (category != null)
+                    {
+                        // Trường hợp đặt biệt: Đối ưng đệ quy cho sql server
+                        var categories = new List<ProductCategoryModel>();
+                        categories.AddRange(ProductCategoryService.Instance.getCategoryChild(con, categorySlug));
+                        var categoryIDs = categories.Select(x => x.id).OrderByDescending(o => o).ToList();
 
-                    source = source
-                        .Where(x => x.WebPublish == true)
-                        .Where(x => categoryIDs.Contains(x.CategoryID.Value))
-                        .OrderByDescending(o => o.ID);
+                        source = source
+                            .Where(x => x.WebPublish == true)
+                            .Where(x => categoryIDs.Contains(x.CategoryID.Value))
+                            .OrderByDescending(o => o.ID);
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
 
                 if (!String.IsNullOrEmpty(search))

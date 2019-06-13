@@ -52,7 +52,7 @@ namespace ann_shop_server.Services
             }
             else
             {
-                return new List<ProductCategoryModel>();
+                return null;
             }
         }
 
