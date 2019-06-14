@@ -18,9 +18,9 @@ namespace ann_shop_server.Controllers
 
         // GET api/product
         [Route("api/v1/product")]
-        public IHttpActionResult Get([FromUri]PagingParameterModel pagingParameterModel, string category = "", string search = "")
+        public IHttpActionResult Get([FromUri]PagingParameterModel pagingParameterModel, string category = "", string search = "", string sort = "")
         {
-            var productPage = _service.getProducts(category, pagingParameterModel.pageNumber, pagingParameterModel.pageSize, search);
+            var productPage = _service.getProducts(category, pagingParameterModel.pageNumber, pagingParameterModel.pageSize, search, sort);
             if (productPage != null)
             {
                 // Setting Header
@@ -34,6 +34,13 @@ namespace ann_shop_server.Controllers
             {
                 return NotFound();
             }
+        }
+
+        // GET api/product
+        [Route("api/v1/product/sort")]
+        public List<ProductSortModel> GetProductSort()
+        {
+            return _service.getProductSort();
         }
 
         // GET api/product/productID:int
