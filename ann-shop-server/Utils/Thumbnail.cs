@@ -10,6 +10,7 @@ namespace ann_shop_server.Utils
 {
     public class Thumbnail
     {
+        private const string SERVER_IMAGE = "http://hethongann.com";
         public enum Size
         {
             Source,
@@ -23,7 +24,7 @@ namespace ann_shop_server.Utils
         {
             if (String.IsNullOrEmpty(image))
             {
-                return "/App_Themes/Ann/image/placeholder.png";
+                return String.Format("{0}/Ann/image/placeholder.png", SERVER_IMAGE);
             }
 
             var directory = String.Empty;
@@ -45,7 +46,7 @@ namespace ann_shop_server.Utils
                     directory = String.Empty;
                     break;
             }
-            return String.Format("/uploads/images{0}/{1}", directory, image);
+            return String.Format("{0}/uploads/images{1}/{2}", SERVER_IMAGE, directory, image);
         }
 
         public static List<ThumbnailModel> getALL(string image)
