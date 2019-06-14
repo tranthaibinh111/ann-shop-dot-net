@@ -1,4 +1,5 @@
 ﻿using ann_shop_server.Models;
+using ann_shop_server.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,12 @@ namespace ann_shop_server.Services
                         (p, i) => i.ProductImage
                     );
 
-                var images = imageProduct.Union(imageProductVariable).Union(imageProductImage).ToList();
+                var images = imageProduct
+                    .Union(imageProductVariable)
+                    .Union(imageProductImage)
+                    .ToList();
 
-                return images;
+                return images.Select(x => Thumbnail.getURL(x, Thumbnail.Size.Source)).ToList();
             }
         }
 
@@ -56,10 +60,9 @@ namespace ann_shop_server.Services
                         v => v.ProductVariableID,
                         (p, v) => p
                     )
-                    .Select(x => x.image)
                     .ToList();
 
-                return images.FirstOrDefault();
+                return images.Select(x => Thumbnail.getURL(x.image, Thumbnail.Size.Source)).FirstOrDefault();
             }
         }
     }

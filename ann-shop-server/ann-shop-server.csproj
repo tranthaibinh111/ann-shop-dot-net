@@ -291,6 +291,7 @@
     <Compile Include="Models\common\ProductModel.cs" />
     <Compile Include="Models\common\ProductVariableModel.cs" />
     <Compile Include="Models\common\StockModel.cs" />
+    <Compile Include="Models\common\ThumbnailModel.cs" />
     <Compile Include="Models\common\VariableModel.cs" />
     <Compile Include="Models\Delivery.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
@@ -307,6 +308,7 @@
     <Compile Include="Models\product\ProductDetailPageModel.cs" />
     <Compile Include="Models\product\ProductPageModel.cs" />
     <Compile Include="Models\product\ProductRelatedPageModel.cs" />
+    <Compile Include="Models\product\ProductSortModel.cs" />
     <Compile Include="Models\Register.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -444,6 +446,7 @@
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\StockService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\Thumbnail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

@@ -14,6 +14,7 @@ namespace ann_shop_server.Models
         public string sku { get; set; }
         public string name { get; set; }
         public string avatar { get; set; }
+        public List<ThumbnailModel> thumbnails { get; set; } = new List<ThumbnailModel>();
         public string materials { get; set; }
         public int quantity { get; set; } = 0;
         public bool availability { get; set; } = false;

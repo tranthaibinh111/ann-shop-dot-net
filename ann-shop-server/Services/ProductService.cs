@@ -1,4 +1,5 @@
 ﻿using ann_shop_server.Models;
+using ann_shop_server.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,24 @@ namespace ann_shop_server.Services
 {
     public class ProductService : Service<ProductService>
     {
-        public ProductPageModel getProducts(string categorySlug, int pageNumber, int pageSize, string search)
+        public List<ProductSortModel> getProductSort()
+        {
+            var sort = new List<ProductSortModel>() {
+                new ProductSortModel() { key = String.Empty, name = "Mặc định"},
+                new ProductSortModel() { key = ((int)ProductSort.PriceAsc).ToString(), name = "Giá tăng dần"},
+                new ProductSortModel() { key = ((int)ProductSort.PriceDesc).ToString(), name = "Giá giảm dần"},
+                new ProductSortModel() { key = ((int)ProductSort.ModelNew).ToString(), name = "Mẩu mới nhất"},
+                new ProductSortModel() { key = ((int)ProductSort.ProductNew).ToString(), name = "Mới nhập kho"}
+            };
+
+            return sort;
+        }
+
+        public ProductPageModel getProducts(string categorySlug, int pageNumber, int pageSize, string search, string sort)
         {
             using (var con = new inventorymanagementEntities())
             {
-                var source = con.tbl_Product.Where(x => x.WebPublish == true).OrderByDescending(o => o.ID);
+                var source = con.tbl_Product.Where(x => x.WebPublish == true);
 
                 if (!String.IsNullOrEmpty(categorySlug))
                 {
@@ -26,8 +40,7 @@ namespace ann_shop_server.Services
 
                         source = source
                             .Where(x => x.WebPublish == true)
-                            .Where(x => categoryIDs.Contains(x.CategoryID.Value))
-                            .OrderByDescending(o => o.ID);
+                            .Where(x => categoryIDs.Contains(x.CategoryID.Value));
                     }
                     else
                     {
@@ -38,8 +51,28 @@ namespace ann_shop_server.Services
                 if (!String.IsNullOrEmpty(search))
                 {
                     source = con.tbl_Product
-                        .Where(x => x.ProductSKU.Contains(search) || x.ProductTitle.Contains(search))
-                        .OrderByDescending(o => o.ID);
+                        .Where(x => x.ProductSKU.Contains(search) || x.ProductTitle.Contains(search));
+                }
+
+                if (sort == ((int)ProductSort.PriceAsc).ToString())
+                {
+                    source = source.OrderBy(o => o.Retail_Price.Value);
+                }
+                else if (sort == ((int)ProductSort.PriceDesc).ToString())
+                {
+                    source = source.OrderByDescending(o => o.Retail_Price.Value);
+                }
+                else if (sort == ((int)ProductSort.ModelNew).ToString())
+                {
+                    source = source.OrderByDescending(o => o.CreatedDate.Value);
+                }
+                else if (sort == ((int)ProductSort.ProductNew).ToString())
+                {
+                    source = source.OrderByDescending(o => o.WebUpdate.Value);
+                }
+                else
+                {
+                    source = source.OrderByDescending(o => o.ID);
                 }
 
                 // Get's No of Rows Count
@@ -69,7 +102,6 @@ namespace ann_shop_server.Services
                         d => d.ID,
                         (s, d) => s
                     )
-                    .OrderByDescending(x => new { x.ParentID, x.ProductID, x.ProductVariableID })
                     .ToList();
                 var stocks = StockService.Instance.getQuantities(stockFilter);
 
@@ -92,7 +124,6 @@ namespace ann_shop_server.Services
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
                         }
                     )
-                    .OrderByDescending(x => x.id)
                     .ToList();
 
                 products = products
@@ -113,14 +144,14 @@ namespace ann_shop_server.Services
                             name = parent.pro.name,
                             sku = parent.pro.sku,
                             materials = parent.pro.materials,
-                            avatar = parent.pro.avatar,
+                            avatar = Thumbnail.getURL(parent.pro.avatar, Thumbnail.Size.Source),
+                            thumbnails = Thumbnail.getALL(parent.pro.avatar),
                             quantity = child != null ? child.quantity : 0,
                             availability = child != null ? child.availability : false,
                             regularPrice = parent.pro.regularPrice,
                             retailPrice = parent.pro.retailPrice
                         }
                     )
-                    .OrderByDescending(o => o.id)
                     .ToList();
 
                 // if CurrentPage is greater than 1 means it has previousPage
@@ -275,7 +306,8 @@ namespace ann_shop_server.Services
                             sku = x.sku,
                             color = x.color,
                             size = x.size,
-                            avatar = x.avatar,
+                            avatar = Thumbnail.getURL(x.avatar, Thumbnail.Size.Source),
+                            thumbnails = Thumbnail.getALL(x.avatar),
                             materials = x.materials,
                             regularPrice = x.regularPrice,
                             retailPrice = x.retailPrice
@@ -348,6 +380,7 @@ namespace ann_shop_server.Services
                             categorySlug = c.Slug,
                             name = p.ProductTitle,
                             sku = p.ProductSKU,
+                            avatar = p.ProductImage,
                             materials = p.Materials,
                             regularPrice = p.Regular_Price.HasValue ? p.Regular_Price.Value : 0,
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
@@ -376,6 +409,8 @@ namespace ann_shop_server.Services
                             sku = parent.pro.sku,
                             colors = colors,
                             sizes = sizes,
+                            avatar = Thumbnail.getURL(parent.pro.avatar, Thumbnail.Size.Source),
+                            thumbnails = Thumbnail.getALL(parent.pro.avatar),
                             materials = parent.pro.materials,
                             images = images,
                             quantity = child != null ? child.quantity : 0,
