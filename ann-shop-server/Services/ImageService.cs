@@ -14,26 +14,36 @@ namespace ann_shop_server.Services
             using (var con = new inventorymanagementEntities())
             {
                 var data = con.tbl_Product.Where(x => x.ID == productID);
-                var imageProduct = data.Select(x => x.ProductImage);
-                var imageProductVariable = data
+                var productVariable = data
                     .Join(
                         con.tbl_ProductVariable,
                         p => p.ID,
                         v => v.ProductID,
-                        (p, v) => v.Image
+                        (p, v) => v
                     );
-
-                var imageProductImage = data
+                var productImage = data
                     .Join(
                         con.tbl_ProductImage,
                         p => p.ID,
                         i => i.ProductID,
-                        (p, i) => i.ProductImage
-                    );
+                        (p, i) => new { p, i}
+                    )
+                    .Where(x => x.i.ProductImage != x.p.ProductImage)
+                    .Select(x => x.i)
+                    .Join(
+                        productVariable,
+                        i => i.ProductID,
+                        v => v.ProductID,
+                        (i, v) => new { i, v }
+                    )
+                    .Where(x => x.i.ProductImage != x.v.Image)
+                    .Select(x => x.i);
 
-                var images = imageProduct
-                    .Union(imageProductVariable)
-                    .Union(imageProductImage)
+                var images = data.Select(x => new { index = 1, image = x.ProductImage })
+                    .Union(productVariable.Select(x => new { index = 2, image = x.Image }))
+                    .Union(productImage.Select(x => new { index = 3, image = x.ProductImage }))
+                    .OrderBy(x => x.index)
+                    .Select(x => x.image)
                     .ToList();
 
                 return images.Select(x => Thumbnail.getURL(x, Thumbnail.Size.Source)).ToList();
