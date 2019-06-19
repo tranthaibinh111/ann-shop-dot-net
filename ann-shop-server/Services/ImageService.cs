@@ -46,7 +46,16 @@ namespace ann_shop_server.Services
                     .Select(x => x.image)
                     .ToList();
 
-                return images.Select(x => Thumbnail.getURL(x, Thumbnail.Size.Source)).ToList();
+                images = images.Where(x => !String.IsNullOrEmpty(x)).Select(x => x).ToList();
+
+                if (images.Count == 0)
+                {
+                    return new List<string>() { Thumbnail.getURL(String.Empty, Thumbnail.Size.Source) };
+                }
+                else
+                {
+                    return images.Select(x => Thumbnail.getURL(x, Thumbnail.Size.Source)).ToList();
+                }
             }
         }
 

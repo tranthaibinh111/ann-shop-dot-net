@@ -179,14 +179,21 @@ namespace ann_shop_server.Services
             }
         }
 
-        private string getVariableName(string sku, string color, string size)
+        private string getVariableName(string color, string size)
         {
             var strColor = !String.IsNullOrEmpty(color) ? String.Format("-{0}", color) : String.Empty;
             var strSize = !String.IsNullOrEmpty(size) ? String.Format("-{0}", size) : String.Empty;
+            var result = String.Concat(strColor, strSize);
 
-            return String.Concat(sku, strColor, strSize);
+            if (!String.IsNullOrEmpty(result) && result.Length > 1)
+            {
+                return result.Substring(1);
+            }
+            else
+            {
+                return String.Empty;
+            }
         }
-
 
         public ProductRelatedPageModel getProductRelated(int parentID, int pageNumber, int pageSize)
         {
@@ -302,7 +309,7 @@ namespace ann_shop_server.Services
                         {
                             id = x.id,
                             categoryID = x.categoryID,
-                            name = getVariableName(x.sku, x.color, x.size),
+                            name = getVariableName(x.color, x.size),
                             sku = x.sku,
                             color = x.color,
                             size = x.size,
