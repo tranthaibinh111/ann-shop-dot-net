@@ -45,15 +45,39 @@ namespace ann_shop_server.Services
                         (last, rec) => new
                         {
                             parentID = last.parentID,
-                            quantityCurrent = rec.QuantityCurrent.HasValue ? rec.QuantityCurrent.Value : 0
+                            quantity = rec.Quantity.HasValue ? rec.Quantity.Value : 0,
+                            quantityCurrent = rec.QuantityCurrent.HasValue ? rec.QuantityCurrent.Value : 0,
+                            type = rec.Type.HasValue ? rec.Type.Value : 0
                         }
                     )
+                    .Select(x =>
+                    {
+                        var calQuantity = 0.0;
+                        switch (x.type)
+                        {
+                            case 1:
+                                calQuantity = x.quantityCurrent + x.quantity;
+                                break;
+                            case 2:
+                                calQuantity = x.quantityCurrent - x.quantity;
+                                break;
+                            default:
+                                calQuantity = 0;
+                                break;
+                        }
+
+                        return new
+                        {
+                            parentID = x.parentID,
+                            calQuantity = calQuantity
+                        };
+                    })
                     .GroupBy(x => x.parentID)
                     .Select(g => new StockModel()
                     {
                         productID = g.Key,
-                        quantity = g.Sum(x => Convert.ToInt32(x.quantityCurrent)) ,
-                        availability = g.Sum(x => x.quantityCurrent) > 0 ? true : false
+                        quantity = g.Sum(x => Convert.ToInt32(x.calQuantity)) ,
+                        availability = g.Sum(x => x.calQuantity) > 0 ? true : false
                     })
                     .OrderBy(x => x.productID)
                     .ToList();

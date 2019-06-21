@@ -14,7 +14,7 @@ namespace ann_shop_server
         public static void Register(HttpConfiguration config)
         {
             // Cross-Origin Resource Sharing in ASP.Net Web API allows cross-domain access to your Web API methods
-            string origin = "http://localhost:4200";
+            string origin = "http://localhost:4200, http://xemgiasi.com, http://xuongann.com";
             EnableCorsAttribute cors = new EnableCorsAttribute(origin, "*", "*");
             config.EnableCors(cors);
 

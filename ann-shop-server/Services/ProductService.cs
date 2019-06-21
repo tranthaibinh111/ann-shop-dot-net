@@ -11,11 +11,10 @@ namespace ann_shop_server.Services
         public List<ProductSortModel> getProductSort()
         {
             var sort = new List<ProductSortModel>() {
-                new ProductSortModel() { key = String.Empty, name = "Mặc định"},
+                new ProductSortModel() { key = ((int)ProductSort.ProductNew).ToString(), name = "Mới nhập kho"},
                 new ProductSortModel() { key = ((int)ProductSort.PriceAsc).ToString(), name = "Giá tăng dần"},
                 new ProductSortModel() { key = ((int)ProductSort.PriceDesc).ToString(), name = "Giá giảm dần"},
                 new ProductSortModel() { key = ((int)ProductSort.ModelNew).ToString(), name = "Mẩu mới nhất"},
-                new ProductSortModel() { key = ((int)ProductSort.ProductNew).ToString(), name = "Mới nhập kho"}
             };
 
             return sort;
@@ -56,23 +55,23 @@ namespace ann_shop_server.Services
 
                 if (sort == ((int)ProductSort.PriceAsc).ToString())
                 {
-                    source = source.OrderBy(o => o.Retail_Price.Value);
+                    source = source.OrderBy(o => o.Regular_Price);
                 }
                 else if (sort == ((int)ProductSort.PriceDesc).ToString())
                 {
-                    source = source.OrderByDescending(o => o.Retail_Price.Value);
+                    source = source.OrderByDescending(o => o.Regular_Price);
                 }
                 else if (sort == ((int)ProductSort.ModelNew).ToString())
                 {
-                    source = source.OrderByDescending(o => o.CreatedDate.Value);
+                    source = source.OrderByDescending(o => o.ID);
                 }
                 else if (sort == ((int)ProductSort.ProductNew).ToString())
                 {
-                    source = source.OrderByDescending(o => o.WebUpdate.Value);
+                    source = source.OrderByDescending(o => o.WebUpdate);
                 }
                 else
                 {
-                    source = source.OrderByDescending(o => o.ID);
+                    source = source.OrderByDescending(o => o.WebUpdate);
                 }
 
                 // Get's No of Rows Count
@@ -153,6 +152,9 @@ namespace ann_shop_server.Services
                         }
                     )
                     .ToList();
+
+                // hide out of stock product
+                products = products.Where(x => x.availability != false).ToList();
 
                 // if CurrentPage is greater than 1 means it has previousPage
                 var previousPage = CurrentPage > 1 ? "Yes" : "No";
