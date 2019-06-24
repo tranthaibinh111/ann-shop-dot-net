@@ -122,6 +122,7 @@ namespace ann_shop_server.Services
                             avatar = p.ProductImage,
                             regularPrice = p.Regular_Price.HasValue ? p.Regular_Price.Value : 0,
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
+                            content = p.ProductContent
                         }
                     )
                     .ToList();
@@ -146,10 +147,13 @@ namespace ann_shop_server.Services
                             materials = parent.pro.materials,
                             avatar = Thumbnail.getURL(parent.pro.avatar, Thumbnail.Size.Source),
                             thumbnails = Thumbnail.getALL(parent.pro.avatar),
+                            colors = VariableService.Instance.getVariables(parent.pro.id, (int)VariableType.Color),
+                            sizes = VariableService.Instance.getVariables(parent.pro.id, (int)VariableType.Size),
                             quantity = child != null ? child.quantity : 0,
                             availability = child != null ? child.availability : false,
                             regularPrice = parent.pro.regularPrice,
-                            retailPrice = parent.pro.retailPrice
+                            retailPrice = parent.pro.retailPrice,
+                            content = parent.pro.content
                         }
                     )
                     .ToList();

@@ -46,7 +46,7 @@ namespace ann_shop_server.Services
                     .Select(x => x.image)
                     .ToList();
 
-                images = images.Where(x => !String.IsNullOrEmpty(x)).Select(x => x).ToList();
+                images = images.Where(x => !String.IsNullOrEmpty(x)).Select(x => x).Distinct().ToList();
 
                 if (images.Count == 0)
                 {
