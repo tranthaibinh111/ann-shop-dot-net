@@ -16,9 +16,12 @@ namespace ann_shop_server.Models
         public string avatar { get; set; }
         public List<ThumbnailModel> thumbnails { get; set; } = new List<ThumbnailModel>();
         public string materials { get; set; }
+        public List<VariableModel> colors { get; set; } = new List<VariableModel>();
+        public List<VariableModel> sizes { get; set; } = new List<VariableModel>();
         public int quantity { get; set; } = 0;
         public bool availability { get; set; } = false;
         public double regularPrice { get; set; } = 0;
         public double retailPrice { get; set; } = 0;
+        public string content { get; set; }
     }
 }
