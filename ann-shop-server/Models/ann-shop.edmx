@@ -79,6 +79,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Times" Type="int" />
         </EntityType>
         <EntityType Name="Fee">
           <Key>
@@ -123,6 +124,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="UserID" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Referer" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Session">
           <Key>
@@ -534,6 +536,9 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar(max)" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="WebPublish" Type="bit" />
+          <Property Name="WebUpdate" Type="datetime" />
+          <Property Name="Slug" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="tbl_PostCategory">
           <Key>
@@ -588,6 +593,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="ProductImageClean" Type="nvarchar(max)" />
           <Property Name="WebPublish" Type="bit" />
           <Property Name="WebUpdate" Type="datetime" />
+          <Property Name="UnSignedTitle" Type="varchar" MaxLength="255" />
+          <Property Name="Slug" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="tbl_ProductImage">
           <Key>
@@ -955,6 +962,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Times" Type="Int32" />
         </EntityType>
         <EntityType Name="Fee">
           <Key>
@@ -999,6 +1007,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="UserID" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Referer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Session">
           <Key>
@@ -1410,6 +1419,9 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="WebPublish" Type="Boolean" />
+          <Property Name="WebUpdate" Type="DateTime" Precision="3" />
+          <Property Name="Slug" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tbl_PostCategory">
           <Key>
@@ -1464,6 +1476,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <Property Name="ProductImageClean" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="WebPublish" Type="Boolean" />
           <Property Name="WebUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UnSignedTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Slug" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tbl_ProductImage">
           <Key>
@@ -1831,6 +1845,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <EntitySetMapping Name="Deliveries">
             <EntityTypeMapping TypeName="inventorymanagementModel.Delivery">
               <MappingFragment StoreEntitySet="Delivery">
+                <ScalarProperty Name="Times" ColumnName="Times" />
                 <ScalarProperty Name="UUID" ColumnName="UUID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ShipperID" ColumnName="ShipperID" />
@@ -1880,6 +1895,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <EntitySetMapping Name="Registers">
             <EntityTypeMapping TypeName="inventorymanagementModel.Register">
               <MappingFragment StoreEntitySet="Register">
+                <ScalarProperty Name="Referer" ColumnName="Referer" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UnSignedName" ColumnName="UnSignedName" />
@@ -2315,6 +2331,9 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <EntitySetMapping Name="tbl_Post">
             <EntityTypeMapping TypeName="inventorymanagementModel.tbl_Post">
               <MappingFragment StoreEntitySet="tbl_Post">
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="WebUpdate" ColumnName="WebUpdate" />
+                <ScalarProperty Name="WebPublish" ColumnName="WebPublish" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
@@ -2354,6 +2373,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.BankAccount' does not have
           <EntitySetMapping Name="tbl_Product">
             <EntityTypeMapping TypeName="inventorymanagementModel.tbl_Product">
               <MappingFragment StoreEntitySet="tbl_Product">
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="UnSignedTitle" ColumnName="UnSignedTitle" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ProductOldID" ColumnName="ProductOldID" />

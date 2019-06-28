@@ -50,28 +50,7 @@ namespace ann_shop_server.Services
                 if (!String.IsNullOrEmpty(search))
                 {
                     source = con.tbl_Product
-                        .Where(x => x.ProductSKU.Contains(search) || x.ProductTitle.Contains(search));
-                }
-
-                if (sort == ((int)ProductSort.PriceAsc).ToString())
-                {
-                    source = source.OrderBy(o => o.Regular_Price);
-                }
-                else if (sort == ((int)ProductSort.PriceDesc).ToString())
-                {
-                    source = source.OrderByDescending(o => o.Regular_Price);
-                }
-                else if (sort == ((int)ProductSort.ModelNew).ToString())
-                {
-                    source = source.OrderByDescending(o => o.ID);
-                }
-                else if (sort == ((int)ProductSort.ProductNew).ToString())
-                {
-                    source = source.OrderByDescending(o => o.WebUpdate);
-                }
-                else
-                {
-                    source = source.OrderByDescending(o => o.WebUpdate);
+                        .Where(x => x.ProductSKU.Contains(search) || x.ProductTitle.Contains(search) || x.UnSignedTitle.Contains(search));
                 }
 
                 // Get's No of Rows Count
@@ -89,14 +68,9 @@ namespace ann_shop_server.Services
                 // Calculating Totalpage by Dividing (No of Records / Pagesize)
                 int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
 
-                // Returns List of Customer after applying Paging
-                var data = source
-                    .Skip((CurrentPage - 1) * PageSize)
-                    .Take(PageSize);
-
                 var stockFilter = con.tbl_StockManager
                     .Join(
-                        data,
+                        source,
                         s => s.ParentID,
                         d => d.ID,
                         (s, d) => s
@@ -104,12 +78,12 @@ namespace ann_shop_server.Services
                     .ToList();
                 var stocks = StockService.Instance.getQuantities(stockFilter);
 
-                var products = data.Where(x => x.CategoryID.HasValue)
+                var products = source.Where(x => x.CategoryID.HasValue)
                     .Join(
                         con.tbl_Category,
                         pro => pro.CategoryID.Value,
                         cat => cat.ID,
-                        (p, c) => new ProductModel()
+                        (p, c) => new
                         {
                             id = p.ID,
                             categoryID = p.CategoryID.Value,
@@ -121,12 +95,14 @@ namespace ann_shop_server.Services
                             avatar = p.ProductImage,
                             regularPrice = p.Regular_Price.HasValue ? p.Regular_Price.Value : 0,
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
-                            content = p.ProductContent
+                            content = p.ProductContent,
+                            webUpdate = p.WebUpdate,
+                            slug = p.Slug
                         }
                     )
                     .ToList();
 
-                products = products
+                var data = products
                     .GroupJoin(
                         stocks,
                         pro => pro.id,
@@ -135,7 +111,7 @@ namespace ann_shop_server.Services
                     )
                     .SelectMany(
                         x => x.info.DefaultIfEmpty(),
-                        (parent, child) => new ProductModel()
+                        (parent, child) => new
                         {
                             id = parent.pro.id,
                             categoryID = parent.pro.categoryID,
@@ -152,13 +128,59 @@ namespace ann_shop_server.Services
                             availability = child != null ? child.availability : false,
                             regularPrice = parent.pro.regularPrice,
                             retailPrice = parent.pro.retailPrice,
-                            content = parent.pro.content
+                            content = parent.pro.content,
+                            webUpdate = parent.pro.webUpdate,
+                            slug = parent.pro.slug
                         }
                     )
-                    .ToList();
+                    .Where(x => x.availability != false);
 
-                // hide out of stock product
-                products = products.Where(x => x.availability != false).ToList();
+                if (sort == ((int)ProductSort.PriceAsc).ToString())
+                {
+                    data = data.OrderBy(o => o.regularPrice);
+                }
+                else if (sort == ((int)ProductSort.PriceDesc).ToString())
+                {
+                    data = data.OrderByDescending(o => o.regularPrice);
+                }
+                else if (sort == ((int)ProductSort.ModelNew).ToString())
+                {
+                    data = data.OrderByDescending(o => o.id);
+                }
+                else if (sort == ((int)ProductSort.ProductNew).ToString())
+                {
+                    data = data.OrderByDescending(o => o.webUpdate);
+                }
+                else
+                {
+                    data = data.OrderByDescending(o => o.webUpdate);
+                }
+
+                // Returns List of product after applying Paging
+                var result = data
+                    .Skip((CurrentPage - 1) * PageSize)
+                    .Take(PageSize)
+                    .Select(x => new ProductModel()
+                    {
+                        id = x.id,
+                        categoryID = x.categoryID,
+                        categoryName = x.categoryName,
+                        categorySlug = x.categorySlug,
+                        name = x.name,
+                        sku = x.sku,
+                        materials = x.materials,
+                        avatar = x.avatar,
+                        thumbnails = x.thumbnails,
+                        colors = x.colors,
+                        sizes = x.sizes,
+                        quantity = x.quantity,
+                        availability = x.availability,
+                        regularPrice = x.regularPrice,
+                        retailPrice = x.retailPrice,
+                        content = x.content,
+                        slug = x.slug
+                    })
+                    .ToList();
 
                 // if CurrentPage is greater than 1 means it has previousPage
                 var previousPage = CurrentPage > 1 ? "Yes" : "No";
@@ -180,7 +202,7 @@ namespace ann_shop_server.Services
                 return new ProductPageModel()
                 {
                     paginationMetadata = paginationMetadata,
-                    data = products
+                    data = result
                 };
             }
         }
@@ -354,12 +376,16 @@ namespace ann_shop_server.Services
             }
         }
 
-        public ProductDetailPageModel getProductDetail(int id)
+        public ProductDetailPageModel getProductDetail(string slug)
         {
             using (var con = new inventorymanagementEntities())
             {
-                // Returns List of Customer after applying Paging
-                var data = con.tbl_Product.Where(x => x.ID == id);
+                var data = con.tbl_Product.Where(x => x.Slug == slug);
+
+                if (data.FirstOrDefault() == null)
+                    return null;
+
+                var id = data.FirstOrDefault().ID;
 
                 // Get quantity
                 var stockFilter = con.tbl_StockManager
