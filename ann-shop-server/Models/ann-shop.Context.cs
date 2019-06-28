@@ -16,7 +16,7 @@ namespace ann_shop_server.Models
     public partial class inventorymanagementEntities : DbContext
     {
         public inventorymanagementEntities()
-            : base("name=DefaultConnection")
+            : base("name=inventorymanagementEntities")
         {
         }
     

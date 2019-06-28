@@ -44,11 +44,11 @@ namespace ann_shop_server.Controllers
             return _service.getProductSort();
         }
 
-        // GET api/product/productID:int
-        [Route("api/v1/product/{id:int}")]
-        public IHttpActionResult Get(int id)
+        // GET api/product/slug
+        [Route("api/v1/product/{*slug}")]
+        public IHttpActionResult Get(string slug)
         {
-            var prod = _service.getProductDetail(id);
+            var prod = _service.getProductDetail(slug);
 
             if (prod != null)
             {

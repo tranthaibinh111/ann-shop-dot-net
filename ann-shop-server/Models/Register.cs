@@ -26,5 +26,6 @@ namespace ann_shop_server.Models
         public Nullable<int> UserID { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string Referer { get; set; }
     }
 }

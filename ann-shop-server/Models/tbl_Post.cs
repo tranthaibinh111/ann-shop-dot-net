@@ -25,5 +25,8 @@ namespace ann_shop_server.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<bool> WebPublish { get; set; }
+        public Nullable<System.DateTime> WebUpdate { get; set; }
+        public string Slug { get; set; }
     }
 }
