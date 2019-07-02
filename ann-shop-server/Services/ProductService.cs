@@ -8,6 +8,7 @@ namespace ann_shop_server.Services
 {
     public class ProductService : Service<ProductService>
     {
+        #region function get
         public List<ProductSortModel> getProductSort()
         {
             var sort = new List<ProductSortModel>() {
@@ -37,9 +38,7 @@ namespace ann_shop_server.Services
                         categories.AddRange(ProductCategoryService.Instance.getCategoryChild(con, categorySlug));
                         var categoryIDs = categories.Select(x => x.id).OrderByDescending(o => o).ToList();
 
-                        source = source
-                            .Where(x => x.WebPublish == true)
-                            .Where(x => categoryIDs.Contains(x.CategoryID.Value));
+                        source = source.Where(x => categoryIDs.Contains(x.CategoryID.Value));
                     }
                     else
                     {
@@ -52,21 +51,6 @@ namespace ann_shop_server.Services
                     source = con.tbl_Product
                         .Where(x => x.ProductSKU.Contains(search) || x.ProductTitle.Contains(search) || x.UnSignedTitle.Contains(search));
                 }
-
-                // Get's No of Rows Count
-                int count = source.Count();
-
-                // Parameter is passed from Query string if it is null then it default Value will be pageNumber:1
-                int CurrentPage = pageNumber;
-
-                // Parameter is passed from Query string if it is null then it default Value will be pageSize:20
-                int PageSize = pageSize;
-
-                // Display TotalCount to Records to User  
-                int TotalCount = count;
-
-                // Calculating Totalpage by Dividing (No of Records / Pagesize)
-                int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
 
                 var stockFilter = con.tbl_StockManager
                     .Join(
@@ -83,7 +67,7 @@ namespace ann_shop_server.Services
                         con.tbl_Category,
                         pro => pro.CategoryID.Value,
                         cat => cat.ID,
-                        (p, c) => new
+                        (p, c) => new ProductModel()
                         {
                             id = p.ID,
                             categoryID = p.CategoryID.Value,
@@ -96,8 +80,9 @@ namespace ann_shop_server.Services
                             regularPrice = p.Regular_Price.HasValue ? p.Regular_Price.Value : 0,
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
                             content = p.ProductContent,
-                            webUpdate = p.WebUpdate,
-                            slug = p.Slug
+                            slug = p.Slug,
+                            webPublish = p.WebPublish.HasValue ? p.WebPublish.Value : false,
+                            webUpdate = p.WebUpdate.HasValue ? p.WebUpdate.Value : DateTime.MinValue
                         }
                     )
                     .ToList();
@@ -111,7 +96,7 @@ namespace ann_shop_server.Services
                     )
                     .SelectMany(
                         x => x.info.DefaultIfEmpty(),
-                        (parent, child) => new
+                        (parent, child) => new ProductModel()
                         {
                             id = parent.pro.id,
                             categoryID = parent.pro.categoryID,
@@ -129,8 +114,9 @@ namespace ann_shop_server.Services
                             regularPrice = parent.pro.regularPrice,
                             retailPrice = parent.pro.retailPrice,
                             content = parent.pro.content,
-                            webUpdate = parent.pro.webUpdate,
-                            slug = parent.pro.slug
+                            slug = parent.pro.slug,
+                            webPublish = parent.pro.webPublish,
+                            webUpdate = parent.pro.webUpdate
                         }
                     )
                     .Where(x => x.availability != false);
@@ -156,30 +142,25 @@ namespace ann_shop_server.Services
                     data = data.OrderByDescending(o => o.webUpdate);
                 }
 
+                // Get's No of Rows Count
+                int count = data.Count();
+
+                // Parameter is passed from Query string if it is null then it default Value will be pageNumber:1
+                int CurrentPage = pageNumber;
+
+                // Parameter is passed from Query string if it is null then it default Value will be pageSize:20
+                int PageSize = pageSize;
+
+                // Display TotalCount to Records to User  
+                int TotalCount = count;
+
+                // Calculating Totalpage by Dividing (No of Records / Pagesize)
+                int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+
                 // Returns List of product after applying Paging
                 var result = data
                     .Skip((CurrentPage - 1) * PageSize)
                     .Take(PageSize)
-                    .Select(x => new ProductModel()
-                    {
-                        id = x.id,
-                        categoryID = x.categoryID,
-                        categoryName = x.categoryName,
-                        categorySlug = x.categorySlug,
-                        name = x.name,
-                        sku = x.sku,
-                        materials = x.materials,
-                        avatar = x.avatar,
-                        thumbnails = x.thumbnails,
-                        colors = x.colors,
-                        sizes = x.sizes,
-                        quantity = x.quantity,
-                        availability = x.availability,
-                        regularPrice = x.regularPrice,
-                        retailPrice = x.retailPrice,
-                        content = x.content,
-                        slug = x.slug
-                    })
                     .ToList();
 
                 // if CurrentPage is greater than 1 means it has previousPage
@@ -470,5 +451,43 @@ namespace ann_shop_server.Services
         {
             return ImageService.Instance.getByProductVariable(productID, variables);
         }
+        #endregion
+
+        #region function update
+        public bool updateWebPublich(int productID)
+        {
+            using(var con = new inventorymanagementEntities())
+            {
+                var product = con.tbl_Product.Where(x => x.ID == productID).FirstOrDefault();
+
+                if (product != null)
+                {
+                    product.WebPublish = !product.WebPublish;
+                    con.SaveChanges();
+
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public bool updateWebUpdate(int productID)
+        {
+            using (var con = new inventorymanagementEntities())
+            {
+                var product = con.tbl_Product.Where(x => x.ID == productID).FirstOrDefault();
+
+                if (product != null)
+                {
+                    product.WebUpdate = DateTime.Now;
+                    con.SaveChanges();
+                }
+            }
+
+            return true;
+        }
+
+        #endregion
     }
 }
