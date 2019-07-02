@@ -24,5 +24,8 @@ namespace ann_shop_server.Models
         public double retailPrice { get; set; } = 0;
         public string content { get; set; }
         public string slug { get; set; }
+        // Add property which used for manage product by admin
+        public bool webPublish { get; set; } = false;
+        public DateTime webUpdate { get; set; } = DateTime.MinValue;
     }
 }

@@ -1,8 +1,9 @@
 ﻿using ann_shop_server.Models;
 using ann_shop_server.Services;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
@@ -34,6 +35,40 @@ namespace ann_shop_server.Controllers
             else
             {
                 return NotFound();
+            }
+        }
+
+        // Put api/product/id for webpublic
+        [Route("api/v1/product/{id:int}/webpublic")]
+        [HttpPatch]
+        public HttpResponseMessage PutWebPublich(int id)
+        {
+            var result = this._service.updateWebPublich(id);
+
+            if (result == true)
+            {
+                return new HttpResponseMessage(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
+            }
+        }
+
+        // Put api/product/id for webpublic
+        [Route("api/v1/product/{id:int}/webupdate")]
+        [HttpPatch]
+        public HttpResponseMessage PutWebUpdate(int id)
+        {
+            var result = this._service.updateWebUpdate(id);
+
+            if (result == true)
+            {
+                return new HttpResponseMessage(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
             }
         }
 
