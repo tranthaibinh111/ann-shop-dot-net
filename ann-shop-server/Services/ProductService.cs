@@ -38,9 +38,7 @@ namespace ann_shop_server.Services
                         categories.AddRange(ProductCategoryService.Instance.getCategoryChild(con, categorySlug));
                         var categoryIDs = categories.Select(x => x.id).OrderByDescending(o => o).ToList();
 
-                        source = source
-                            .Where(x => x.WebPublish == true)
-                            .Where(x => categoryIDs.Contains(x.CategoryID.Value));
+                        source = source.Where(x => categoryIDs.Contains(x.CategoryID.Value));
                     }
                     else
                     {
@@ -53,21 +51,6 @@ namespace ann_shop_server.Services
                     source = con.tbl_Product
                         .Where(x => x.ProductSKU.Contains(search) || x.ProductTitle.Contains(search) || x.UnSignedTitle.Contains(search));
                 }
-
-                // Get's No of Rows Count
-                int count = source.Count();
-
-                // Parameter is passed from Query string if it is null then it default Value will be pageNumber:1
-                int CurrentPage = pageNumber;
-
-                // Parameter is passed from Query string if it is null then it default Value will be pageSize:20
-                int PageSize = pageSize;
-
-                // Display TotalCount to Records to User  
-                int TotalCount = count;
-
-                // Calculating Totalpage by Dividing (No of Records / Pagesize)
-                int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
 
                 var stockFilter = con.tbl_StockManager
                     .Join(
@@ -158,6 +141,21 @@ namespace ann_shop_server.Services
                 {
                     data = data.OrderByDescending(o => o.webUpdate);
                 }
+
+                // Get's No of Rows Count
+                int count = data.Count();
+
+                // Parameter is passed from Query string if it is null then it default Value will be pageNumber:1
+                int CurrentPage = pageNumber;
+
+                // Parameter is passed from Query string if it is null then it default Value will be pageSize:20
+                int PageSize = pageSize;
+
+                // Display TotalCount to Records to User  
+                int TotalCount = count;
+
+                // Calculating Totalpage by Dividing (No of Records / Pagesize)
+                int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
 
                 // Returns List of product after applying Paging
                 var result = data
