@@ -52,5 +52,8 @@ namespace ann_shop_server.Models
         public Nullable<double> OtherFeeValue { get; set; }
         public Nullable<int> PostalDeliveryType { get; set; }
         public string CustomerNewPhone { get; set; }
+        public string UserHelp { get; set; }
+        public bool VerifiedCOD { get; set; }
+        public string VerifiedBy { get; set; }
     }
 }

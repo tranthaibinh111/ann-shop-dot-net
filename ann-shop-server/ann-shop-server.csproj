@@ -252,6 +252,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Pages\InvoiceCustomerController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductCategoryController.cs" />
@@ -285,17 +286,16 @@
     <Compile Include="Models\BankTransfer.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\common\LoginModel.cs" />
-    <Compile Include="Models\common\PaginationMetadataModel.cs" />
-    <Compile Include="Models\common\PagingParameterModel.cs" />
-    <Compile Include="Models\common\PostModel.cs" />
-    <Compile Include="Models\common\ProductCategoryModel.cs" />
-    <Compile Include="Models\common\ProductModel.cs" />
-    <Compile Include="Models\common\ProductVariableModel.cs" />
-    <Compile Include="Models\common\StockModel.cs" />
-    <Compile Include="Models\common\ThumbnailModel.cs" />
-    <Compile Include="Models\common\VariableModel.cs" />
+    <Compile Include="Models\CronJob.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CronJobProductStatu.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Delivery.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliveryPostOffice.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Fee.cs">
@@ -304,14 +304,36 @@
     <Compile Include="Models\FeeType.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Pages\InvoiceCustomer\CustomerModel.cs" />
+    <Compile Include="Models\common\LoginModel.cs" />
+    <Compile Include="Models\Pages\InvoiceCustomer\FeeOtherModel.cs" />
+    <Compile Include="Models\Pages\InvoiceCustomer\OrderItemModel.cs" />
+    <Compile Include="Models\Pages\InvoiceCustomer\OrderModel.cs" />
+    <Compile Include="Models\common\PaginationMetadataModel.cs" />
+    <Compile Include="Models\common\PagingParameterModel.cs" />
+    <Compile Include="Models\common\PostModel.cs" />
+    <Compile Include="Models\common\ProductCategoryModel.cs" />
+    <Compile Include="Models\common\ProductModel.cs" />
+    <Compile Include="Models\common\ProductVariableModel.cs" />
+    <Compile Include="Models\Pages\InvoiceCustomer\ProductModel.cs" />
+    <Compile Include="Models\common\StockModel.cs" />
+    <Compile Include="Models\common\ThumbnailModel.cs" />
+    <Compile Include="Models\common\VariableModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Pages\InvoiceCustomer\RefundModel.cs" />
     <Compile Include="Models\post\PostPageModel.cs" />
     <Compile Include="Models\product-category\ProductCategoryPageModel.cs" />
     <Compile Include="Models\product\ProductDetailPageModel.cs" />
     <Compile Include="Models\product\ProductPageModel.cs" />
     <Compile Include="Models\product\ProductRelatedPageModel.cs" />
     <Compile Include="Models\product\ProductSortModel.cs" />
+    <Compile Include="Models\ReceivedProductHistory.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Register.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegisterProduct.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Session.cs">
@@ -441,6 +463,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Services\ImageService.cs" />
+    <Compile Include="Services\Pages\InvoiceCustomerService.cs" />
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Services\ProductCategoryService.cs" />
     <Compile Include="Services\ProductService.cs" />
