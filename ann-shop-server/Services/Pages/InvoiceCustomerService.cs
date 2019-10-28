@@ -1,4 +1,5 @@
 ﻿using ann_shop_server.Models;
+using ann_shop_server.Models.common.Order;
 using ann_shop_server.Models.Pages.InvoiceCustomer;
 using System;
 using System.Collections.Generic;
@@ -67,8 +68,125 @@ namespace ann_shop_server.Services.Pages
                         productVariableID = x.ProductVariableID.Value,
                         sku = x.SKU,
                         price = x.Price.HasValue ? x.Price.Value : 0,
-                        quantity = x.Quantity.HasValue ? x.Quantity.Value : 0 
+                        quantity = x.Quantity.HasValue ? (int)x.Quantity.Value : 0
                     });
+                #endregion
+
+                #region Cập nhật yêu cầu của khách hàng
+                // Lấy tất cả yêu cầu của khách hàng
+                var requirement = con.CustomerEditOrders
+                    .Where(x => x.OrderID == orderID)
+                    .Select(x => new {
+                        orderItemID = x.OrderItemID,
+                        productID = x.ProductID,
+                        productVariableID = x.ProductVariableID,
+                        sku = x.SKU,
+                        price = x.Price,
+                        quantity = x.Quantity,
+                        status = x.Status,
+                        createdDate = x.CreatedDate
+                    });
+
+                if (requirement.Count() > 0)
+                {
+                    // Lấy ra yêu cầu cuối cùng của khách hàng
+                    var requirementLast = requirement
+                        .GroupBy(g => new {
+                            status = g.status,
+                            productID = g.productID,
+                            productVariableID = g.productVariableID,
+                            sku = g.sku
+                        })
+                        .Select(x => new
+                        {
+                            status = x.Key.status,
+                            productID = x.Key.productID,
+                            productVariableID = x.Key.productVariableID,
+                            sku = x.Key.sku,
+                            createdDate = x.Max(m => m.createdDate)
+                        });
+
+                    var requirementExcute = requirement
+                        .Join(
+                            requirementLast,
+                            r => new
+                            {
+                                status = r.status,
+                                productID = r.productID,
+                                productVariableID = r.productVariableID,
+                                createdDate = r.createdDate
+                            },
+                            l => new
+                            {
+                                status = l.status,
+                                productID = l.productID,
+                                productVariableID = l.productVariableID,
+                                createdDate = l.createdDate
+                            },
+                            (r, l) => r
+                        );
+
+                    // Thực thi yêu cầu thêm sản phẩm
+                    var requirementAdd = requirementExcute.Where(x => x.status == RequirementKind.Add);
+
+                    if (requirementAdd.Count() > 0)
+                    {
+                        var orderItemAdd = requirementExcute
+                          .Where(x => x.status == RequirementKind.Add)
+                          .Select(x => new
+                          {
+                              orderItemID = x.orderItemID,
+                              productID = x.productID,
+                              productVariableID = x.productVariableID,
+                              sku = x.sku,
+                              price = x.price,
+                              quantity = x.quantity,
+                          });
+
+                        orderItems = orderItems.Union(orderItemAdd);
+                    }
+
+                    // Thực thi yêu cầu chỉnh sửa
+                    var requirementEdit = requirementExcute.Where(x => x.status == RequirementKind.Edit);
+                    if (requirementEdit.Count() > 0)
+                        orderItems = orderItems
+                            .GroupJoin(
+                                requirementEdit,
+                                i => i.sku,
+                                r => r.sku,
+                                (i, r) => new { orderItem = i, requirement = r }
+                            )
+                            .SelectMany(
+                                x => x.requirement.DefaultIfEmpty(),
+                                (parent, child) => new
+                                {
+                                    orderItemID = parent.orderItem.orderItemID,
+                                    productID = parent.orderItem.productID,
+                                    productVariableID = parent.orderItem.productVariableID,
+                                    sku = parent.orderItem.sku,
+                                    price = child != null ? child.price : parent.orderItem.price,
+                                    quantity = child != null ? child.quantity : parent.orderItem.quantity,
+                                }
+                            );
+
+                    // Thực thi yêu cầu xóa
+                    var requirementDelete = requirementExcute.Where(x => x.status == RequirementKind.Delete);
+
+                    if (requirementDelete.Count() > 0)
+                    {
+                        // Tìm ra những order item loại bỏ
+                        var orderItemRemove = orderItems
+                            .Join(
+                                requirementDelete.Where(x => x.status == RequirementKind.Delete),
+                                i => i.sku,
+                                r => r.sku,
+                                (i, r) => i
+                            );
+
+                        // Thực thi loại bỏ
+                        orderItems = orderItems.Except(orderItemRemove);
+                    }
+                }
                 #endregion
 
                 #region Lấy thông tin sản phẩm
@@ -91,8 +209,8 @@ namespace ann_shop_server.Services.Pages
                 var products = con.tbl_Product
                     .Join(
                         productFilter.Where(x => x.productVariableID == 0),
-                        p => p.ID,
-                        o => o.productID,
+                        p => p.ProductSKU,
+                        o => o.sku,
                         (p, o) => new {
                             productID = p.ID,
                             productVariableID = 0,
@@ -107,8 +225,8 @@ namespace ann_shop_server.Services.Pages
                 var productVariables = con.tbl_ProductVariable
                     .Join(
                         productFilter.Where(x => x.productVariableID != 0),
-                        pv => pv.ID,
-                        o => o.productVariableID,
+                        pv => pv.SKU,
+                        o => o.sku,
                         (pv, o) => pv
                     )
                     .Join(
@@ -195,17 +313,12 @@ namespace ann_shop_server.Services.Pages
                     });
                 #endregion
 
+                #region Dữ liệu triết xuất
                 var data = orderItems
                     .GroupJoin(
                         products,
-                        o => new {
-                            productID = o.productID,
-                            productVariableID = o.productVariableID
-                        },
-                        p => new {
-                            productID = p.productID,
-                            productVariableID = 0
-                        },
+                        o => o.sku,
+                        p => p.sku,
                         (o, p) => new { orderItem = o, product = p }
                     )
                     .SelectMany(
@@ -214,8 +327,8 @@ namespace ann_shop_server.Services.Pages
                     )
                     .GroupJoin(
                         productVariables,
-                        temp1 => new { productID = temp1.orderItem.productID, productVariableID = temp1.orderItem.productVariableID },
-                        pv => new { productID = 0, productVariableID = pv.productVariableID },
+                        temp1 => temp1.orderItem.sku,
+                        pv => pv.sku,
                         (temp1, pv) => new { orderItem = temp1.orderItem, product = temp1.product, productVariable = pv }
                     )
                     .SelectMany(
@@ -223,6 +336,7 @@ namespace ann_shop_server.Services.Pages
                         (parent, child) => new { orderItem = parent.orderItem, product = parent.product, productVariable = child }
                     )
                     .ToList();
+                #endregion
 
                 return data.Select(x =>
                 {
@@ -326,6 +440,7 @@ namespace ann_shop_server.Services.Pages
                 return new OrderModel()
                 {
                     id = order.ID,
+                    kind = order.OrderType.Value,
                     createdDate = order.CreatedDate.Value,
                     dateDone = order.DateDone,
                     staffName = order.CreatedBy,
@@ -340,6 +455,90 @@ namespace ann_shop_server.Services.Pages
                     feeOthers = feeOthers,
                     price = price
                 };
+            }
+        }
+        #endregion
+
+        #region create
+        public CustomerEditOrder addRequirement(int customerID, int orderID, OrderItemModel orderItem, int requirementKind)
+        {
+            try
+            {
+                using (var con = new inventorymanagementEntities())
+                {
+                    var requirement = new CustomerEditOrder()
+                    {
+                        OrderID = orderID,
+                        OrderItemID = orderItem.id,
+                        ProductID = orderItem.product.productID,
+                        ProductVariableID = orderItem.product.productVariableID,
+                        SKU = orderItem.product.sku,
+                        Quantity = orderItem.quantity,
+                        Price = orderItem.price,
+                        TotalPrice = orderItem.totalPrice,
+                        Status = requirementKind,
+                        CustomerID = customerID,
+                        CreatedDate = DateTime.Now
+                    };
+
+                    con.CustomerEditOrders.Add(requirement);
+                    con.SaveChanges();
+
+                    return requirement;
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Xảy ra lỗi trong quá trình khởi tạo yêu cầu của khách hàng");
+            }
+        }
+
+        public List<CustomerEditOrder> addRequirement(int customerID, int orderID, List<OrderItemModel> orderItems, int requirementKind)
+        {
+            try
+            {
+                using (var con = new inventorymanagementEntities())
+                {
+                    var index = 0;
+                    var result = new List<CustomerEditOrder>();
+
+                    foreach (var item in orderItems)
+                    {
+                        ++index;
+                        var requirement = new CustomerEditOrder()
+                        {
+                            OrderID = orderID,
+                            OrderItemID = item.id,
+                            ProductID = item.product.productID,
+                            ProductVariableID = item.product.productVariableID,
+                            SKU = item.product.sku,
+                            Quantity = item.quantity,
+                            Price = item.price,
+                            TotalPrice = item.totalPrice,
+                            Status = requirementKind,
+                            CustomerID = customerID,
+                            CreatedDate = DateTime.Now
+                        };
+
+                        result.Add(requirement);
+                        con.CustomerEditOrders.Add(requirement);
+
+                        if (index >= 100)
+                        {
+                            index = 0;
+                            con.SaveChanges();
+                        }
+                    }
+                    
+                    if(index > 0)
+                        con.SaveChanges();
+
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Xảy ra lỗi trong quá trình khởi tạo yêu cầu của khách hàng");
             }
         }
         #endregion

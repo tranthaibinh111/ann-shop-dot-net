@@ -78,5 +78,6 @@ namespace ann_shop_server.Models
         public virtual DbSet<tbl_Variable> tbl_Variable { get; set; }
         public virtual DbSet<tbl_VariableValue> tbl_VariableValue { get; set; }
         public virtual DbSet<tbl_WhiteDomain> tbl_WhiteDomain { get; set; }
+        public virtual DbSet<CustomerEditOrder> CustomerEditOrders { get; set; }
     }
 }

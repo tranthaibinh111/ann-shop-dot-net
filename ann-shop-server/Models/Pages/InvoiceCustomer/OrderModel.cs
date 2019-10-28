@@ -8,6 +8,7 @@ namespace ann_shop_server.Models.Pages.InvoiceCustomer
     public class OrderModel
     {
         public int id { get; set; }
+        public int kind { get; set; }
         public DateTime createdDate { get; set; } 
         public Nullable<DateTime> dateDone { get; set; }
         public string staffName { get; set; }

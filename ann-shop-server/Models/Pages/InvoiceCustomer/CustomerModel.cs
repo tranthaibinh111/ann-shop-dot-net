@@ -5,10 +5,7 @@ using System.Web;
 
 namespace ann_shop_server.Models.Pages.InvoiceCustomer
 {
-    public class CustomerModel
+    public class CustomerModel: Models.common.Customer.CustomerModel
     {
-        public int id { get; set; }
-        public string fullName { get; set; }
-        public string phone { get; set; }
     }
 }

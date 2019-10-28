@@ -1,15 +1,9 @@
-﻿using ann_shop_server.Models;
-using ann_shop_server.Models.Pages.InvoiceCustomer;
+﻿using ann_shop_server.Models.Pages.InvoiceCustomer;
 using ann_shop_server.Services.Pages;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
+using ann_shop_server.Models.common.Order;
+using System.Collections.Generic;
 
 namespace ann_shop_server.Controllers.Pages
 {
@@ -21,21 +15,6 @@ namespace ann_shop_server.Controllers.Pages
         public InvoiceCustomerController()
         {
             _service = InvoiceCustomerService.Instance;
-        }
-
-        /// <summary>
-        /// Kiểm tra xem đơn hàng này có thuộc khách hàng này không
-        /// </summary>
-        /// <param name="order"></param>
-        /// <param name="customer"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("{orderID:int}/checkCustomer/{customerID:int}")]
-        public IHttpActionResult checkExistOrder(int orderID, int customerID)
-        {
-            var exist = _service.checkExistOrder(orderID, customerID);
-
-            return Ok<bool>(exist);
         }
 
         /// <summary>
@@ -104,6 +83,79 @@ namespace ann_shop_server.Controllers.Pages
                 return Ok(orderItems);
             else
                 return NotFound();
+        }
+
+        /// <summary>
+        /// Tạo yêu cầu xóa order item của khách hàng
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <param name="orderID"></param>
+        /// <param name="orderItem"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("{orderID:int}/deleteOrderItem")]
+        public IHttpActionResult deleteOrderItem(int orderID, int customerID, OrderItemModel orderItem)
+        {
+            try
+            {
+                var requirement = _service.addRequirement(customerID, orderID, orderItem, RequirementKind.Delete);
+
+                return Ok(requirement);
+            }
+            catch (System.Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+        /// <summary>
+        /// Tạo yêu cầu chỉnh sửa của khách hàng
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <param name="orderID"></param>
+        /// <param name="orderItem"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("{orderID:int}/editOrderItem")]
+        public IHttpActionResult editOrderItem(int orderID, int customerID, OrderItemModel orderItem)
+        {
+            try
+            {
+                var requirement = _service.addRequirement(customerID, orderID, orderItem, RequirementKind.Edit);
+
+                return Ok(requirement);
+            }
+            catch (System.Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Tạo yêu cầu chỉnh sửa của khách hàng
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <param name="orderID"></param>
+        /// <param name="orderItems"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("{orderID:int}/addOrderItem")]
+        public IHttpActionResult addOrderItem(int orderID, int customerID, List<OrderItemModel> orderItems)
+        {
+            try
+            {
+                var requirement = _service.addRequirement(customerID, orderID, orderItems, RequirementKind.Add);
+
+                return Ok(requirement);
+            }
+            catch (System.Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

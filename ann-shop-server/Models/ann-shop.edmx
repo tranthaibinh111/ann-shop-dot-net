@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="inventorymanagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="inventorymanagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bank">
           <Key>
             <PropertyRef Name="ID" />
@@ -80,6 +80,23 @@
           <Property Name="Note" Type="nchar" MaxLength="255" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerEditOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="OrderItemID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductVariableID" Type="int" Nullable="false" />
+          <Property Name="SKU" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="TotalPrice" Type="float" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Delivery">
           <Key>
@@ -956,6 +973,7 @@
           <EntitySet Name="BankTransfer" EntityType="Self.BankTransfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CronJob" EntityType="Self.CronJob" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CronJobProductStatus" EntityType="Self.CronJobProductStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerEditOrder" EntityType="Self.CustomerEditOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeliveryPostOffice" EntityType="Self.DeliveryPostOffice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fee" EntityType="Self.Fee" Schema="dbo" store:Type="Tables" />
@@ -1005,8 +1023,7 @@
           <EntitySet Name="tbl_VariableValue" EntityType="Self.tbl_VariableValue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_WhiteDomain" EntityType="Self.tbl_WhiteDomain" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="inventorymanagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2009,7 +2026,25 @@
           <EntitySet Name="tbl_Variable" EntityType="Self.tbl_Variable" />
           <EntitySet Name="tbl_VariableValue" EntityType="Self.tbl_VariableValue" />
           <EntitySet Name="tbl_WhiteDomain" EntityType="Self.tbl_WhiteDomain" />
+          <EntitySet Name="CustomerEditOrders" EntityType="inventorymanagementModel.CustomerEditOrder" />
         </EntityContainer>
+        <EntityType Name="CustomerEditOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="OrderItemID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="TotalPrice" Type="Double" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductVariableID" Type="Int32" Nullable="false" />
+          <Property Name="SKU" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3010,6 +3045,24 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerEditOrders">
+            <EntityTypeMapping TypeName="inventorymanagementModel.CustomerEditOrder">
+              <MappingFragment StoreEntitySet="CustomerEditOrder">
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="ProductVariableID" ColumnName="ProductVariableID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OrderItemID" ColumnName="OrderItemID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
