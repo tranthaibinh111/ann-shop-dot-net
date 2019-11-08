@@ -10,10 +10,4 @@ namespace ann_shop_server.Models
         Color = 1,
         Size = 2
     };
-
-    public class VariableModel
-    {
-        public int key { get; set; }
-        public string name { get; set; }
-    }
 }
