@@ -165,6 +165,7 @@ namespace ann_shop_server.Services
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
                             availability = false,
                             materials = p.Materials,
+                            webPublish = p.WebPublish.HasValue ? p.WebPublish.Value : false,
                             webUpdate = p.WebUpdate,
                             slug = p.Slug
                         }
@@ -182,7 +183,7 @@ namespace ann_shop_server.Services
                         x => x.info.DefaultIfEmpty(),
                         (parent, child) => new { product = parent.pro, stock = child }
                     )
-                    .Where(x => x.stock != null && x.stock.availability)
+                    .Where(x => x.product.webPublish && x.stock != null && x.stock.quantity >= 5)
                     .Select(x => new
                     {
                         productID = x.product.productID,
@@ -233,7 +234,7 @@ namespace ann_shop_server.Services
                     .Select(x => new CategoryProductModel()
                     {
                         id = x.productID,
-                        title = x.title,
+                        name = x.title,
                         sku = x.sku,
                         thumbnails = x.thumbnails,
                         regularPrice = x.regularPrice,
@@ -297,6 +298,7 @@ namespace ann_shop_server.Services
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
                             availability = false,
                             materials = p.Materials,
+                            webPublish = p.WebPublish.HasValue ? p.WebPublish.Value : false,
                             webUpdate = p.WebUpdate,
                             slug = p.Slug
                         }
@@ -314,7 +316,7 @@ namespace ann_shop_server.Services
                         x => x.info.DefaultIfEmpty(),
                         (parent, child) => new { product = parent.pro, stock = child }
                     )
-                    .Where(x => x.stock != null && x.stock.availability)
+                    .Where(x => x.product.webPublish && x.stock != null && x.stock.availability)
                     .Select(x => new
                     {
                         productID = x.product.productID,
@@ -365,7 +367,7 @@ namespace ann_shop_server.Services
                     .Select(x => new CategoryProductModel()
                     {
                         id = x.productID,
-                        title = x.title,
+                        name = x.title,
                         sku = x.sku,
                         thumbnails = x.thumbnails,
                         regularPrice = x.regularPrice,

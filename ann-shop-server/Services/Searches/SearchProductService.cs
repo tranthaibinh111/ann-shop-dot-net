@@ -273,7 +273,7 @@ namespace ann_shop_server.Services.Searches
                     .Select(x => new CategoryProductModel()
                     {
                         id = x.productID,
-                        title = x.title,
+                        name = x.title,
                         sku = x.sku,
                         thumbnails = x.thumbnails,
                         regularPrice = x.regularPrice,

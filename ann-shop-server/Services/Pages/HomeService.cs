@@ -52,7 +52,9 @@ namespace ann_shop_server.Services.Pages
                             avatar = p.ProductImage,
                             regularPrice = p.Regular_Price.HasValue ? p.Regular_Price.Value : 0,
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
-                            slug = p.Slug
+                            slug = p.Slug,
+                            webPublish = p.WebPublish.HasValue ? p.WebPublish.Value : false,
+                            webUpdate = p.WebUpdate
                         }
                     )
                     .ToList();
@@ -68,11 +70,12 @@ namespace ann_shop_server.Services.Pages
                         x => x.info.DefaultIfEmpty(),
                         (parent, child) => new { product = parent.pro, stock = child }
                     )
-                    .Where(x => x.stock != null && x.stock.availability )
+                    .Where(x => x.product.webPublish && x.stock != null && x.stock.quantity >= 5 )
+                    .OrderByDescending(o => o.product.webUpdate)
                     .Select(x => new HomeProductModel()
                     {
                         id = x.product.productID,
-                        title = x.product.title,
+                        name = x.product.title,
                         sku = x.product.sku,
                         thumbnails = Thumbnail.getALL(x.product.avatar),
                         regularPrice = x.product.regularPrice,
