@@ -9,7 +9,7 @@ namespace ann_shop_server.Models
     {
         public int id { get; set; }
         public string sku { get; set; }
-        public string title { get; set; }
+        public string name { get; set; }
         public List<ThumbnailModel> thumbnails { get; set; }
         public double regularPrice { get; set; }
         public double retailPrice { get; set; }
