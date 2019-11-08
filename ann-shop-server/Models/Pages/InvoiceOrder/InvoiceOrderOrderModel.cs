@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ann_shop_server.Models.Pages.InvoiceCustomer
+namespace ann_shop_server.Models
 {
-    public class OrderModel
+    public class InvoiceOrderOrderModel
     {
         public int id { get; set; }
         public int kind { get; set; }
@@ -17,10 +17,10 @@ namespace ann_shop_server.Models.Pages.InvoiceCustomer
         public double discountPerItem { get; set; }
         public double discount { get; set; }
         public double priceDiscount { get; set; }
-        public RefundModel refund { get; set; }
+        public InvoiceOrderRefundModel refund { get; set; }
         public double remainderMoney { get; set; }
         public double feeShipping { get; set; }
-        public List<FeeOtherModel> feeOthers { get; set; }
+        public List<InvoiceOrderFeeOtherModel> feeOthers { get; set; }
         public double price { get; set; }
     }
 }

@@ -1,26 +1,24 @@
 ﻿using ann_shop_server.Models;
-using ann_shop_server.Models.common.Order;
-using ann_shop_server.Models.Pages.InvoiceCustomer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ann_shop_server.Services.Pages
 {
-    public class InvoiceCustomerService : Service<InvoiceCustomerService>
+    public class InvoiceOrderService : Service<InvoiceOrderService>
     {
         /// <summary>
         /// Lấy thông tin khách hàng
         /// </summary>
         /// <param name="customerID"></param>
         /// <returns></returns>
-        public CustomerModel getCustomer(int customerID)
+        public InvoiceOrderCustomerModel getCustomer(int customerID)
         {
             using (var con = new inventorymanagementEntities())
             {
                 return con.tbl_Customer
                     .Where(x => x.ID == customerID)
-                    .Select(x => new CustomerModel()
+                    .Select(x => new InvoiceOrderCustomerModel()
                     {
                         id = x.ID,
                         fullName = x.CustomerName,
@@ -55,7 +53,7 @@ namespace ann_shop_server.Services.Pages
         /// </summary>
         /// <param name="orderID"></param>
         /// <returns></returns>
-        public List<OrderItemModel> getOrderItems(int orderID)
+        public List<InvoiceOrderOrderItemModel> getOrderItems(int orderID)
         {
             using (var con = new inventorymanagementEntities())
             {
@@ -127,12 +125,12 @@ namespace ann_shop_server.Services.Pages
                         );
 
                     // Thực thi yêu cầu thêm sản phẩm
-                    var requirementAdd = requirementExcute.Where(x => x.status == RequirementKind.Add);
+                    var requirementAdd = requirementExcute.Where(x => x.status == CustomerRequirement.Add);
 
                     if (requirementAdd.Count() > 0)
                     {
                         var orderItemAdd = requirementExcute
-                          .Where(x => x.status == RequirementKind.Add)
+                          .Where(x => x.status == CustomerRequirement.Add)
                           .Select(x => new
                           {
                               orderItemID = x.orderItemID,
@@ -147,7 +145,7 @@ namespace ann_shop_server.Services.Pages
                     }
 
                     // Thực thi yêu cầu chỉnh sửa
-                    var requirementEdit = requirementExcute.Where(x => x.status == RequirementKind.Edit);
+                    var requirementEdit = requirementExcute.Where(x => x.status == CustomerRequirement.Edit);
                     if (requirementEdit.Count() > 0)
                         orderItems = orderItems
                             .GroupJoin(
@@ -170,14 +168,14 @@ namespace ann_shop_server.Services.Pages
                             );
 
                     // Thực thi yêu cầu xóa
-                    var requirementDelete = requirementExcute.Where(x => x.status == RequirementKind.Delete);
+                    var requirementDelete = requirementExcute.Where(x => x.status == CustomerRequirement.Delete);
 
                     if (requirementDelete.Count() > 0)
                     {
                         // Tìm ra những order item loại bỏ
                         var orderItemRemove = orderItems
                             .Join(
-                                requirementDelete.Where(x => x.status == RequirementKind.Delete),
+                                requirementDelete.Where(x => x.status == CustomerRequirement.Delete),
                                 i => i.sku,
                                 r => r.sku,
                                 (i, r) => i
@@ -340,7 +338,7 @@ namespace ann_shop_server.Services.Pages
 
                 return data.Select(x =>
                 {
-                    var product = new Models.Pages.InvoiceCustomer.ProductModel();
+                    var product = new InvoiceOrderProductModel();
 
                     if (x.product != null && x.productVariable == null)
                     {
@@ -363,7 +361,7 @@ namespace ann_shop_server.Services.Pages
                         product.size = x.productVariable.size;
                     }
 
-                    return new OrderItemModel()
+                    return new InvoiceOrderOrderItemModel()
                     {
                         id = x.orderItem.orderItemID,
                         product = product,
@@ -381,7 +379,7 @@ namespace ann_shop_server.Services.Pages
         /// <param name="orderID"></param>
         /// <param name="customer"></param>
         /// <returns></returns>
-        public OrderModel getOrder(int orderID, int customer)
+        public InvoiceOrderOrderModel getOrder(int orderID, int customer)
         {
             using (var con = new inventorymanagementEntities())
             {
@@ -410,7 +408,7 @@ namespace ann_shop_server.Services.Pages
                         refundMoney = x.TotalPrice
                     })
                     .ToList()
-                    .Select(x => new RefundModel()
+                    .Select(x => new InvoiceOrderRefundModel()
                     {
                         id = x.id,
                         refundMoney = Convert.ToDouble(x.refundMoney)
@@ -427,7 +425,7 @@ namespace ann_shop_server.Services.Pages
                         t => t.ID,
                         (f, t) => new { fee = f, type = t }
                     )
-                    .Select(x => new FeeOtherModel()
+                    .Select(x => new InvoiceOrderFeeOtherModel()
                     {
                         uuid = x.fee.UUID,
                         feeName = x.type.Name,
@@ -437,7 +435,7 @@ namespace ann_shop_server.Services.Pages
 
                 var price = remainderMoney + Convert.ToDouble(order.FeeShipping) + feeOthers.Sum(s => s.feePrice);
 
-                return new OrderModel()
+                return new InvoiceOrderOrderModel()
                 {
                     id = order.ID,
                     kind = order.OrderType.Value,
@@ -460,7 +458,7 @@ namespace ann_shop_server.Services.Pages
         #endregion
 
         #region create
-        public CustomerEditOrder addRequirement(int customerID, int orderID, OrderItemModel orderItem, int requirementKind)
+        public CustomerEditOrder addRequirement(int customerID, int orderID, InvoiceOrderOrderItemModel orderItem, int requirementKind)
         {
             try
             {
@@ -493,7 +491,7 @@ namespace ann_shop_server.Services.Pages
             }
         }
 
-        public List<CustomerEditOrder> addRequirement(int customerID, int orderID, List<OrderItemModel> orderItems, int requirementKind)
+        public List<CustomerEditOrder> addRequirement(int customerID, int orderID, List<InvoiceOrderOrderItemModel> orderItems, int requirementKind)
         {
             try
             {

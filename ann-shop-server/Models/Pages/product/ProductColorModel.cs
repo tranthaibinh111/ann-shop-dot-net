@@ -5,11 +5,9 @@ using System.Web;
 
 namespace ann_shop_server.Models
 {
-    public class OrderType
+    public class ProductColorModel
     {
-        // Lẻ
-        public const int Retail = 1;
-        // Sỉ
-        public const int Wholesale = 2;
+        public int id { get; set; }
+        public string name { get; set; }
     }
 }

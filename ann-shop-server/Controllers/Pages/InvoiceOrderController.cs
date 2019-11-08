@@ -1,20 +1,19 @@
-﻿using ann_shop_server.Models.Pages.InvoiceCustomer;
-using ann_shop_server.Services.Pages;
+﻿using ann_shop_server.Services.Pages;
 using System.Threading.Tasks;
 using System.Web.Http;
-using ann_shop_server.Models.common.Order;
 using System.Collections.Generic;
+using ann_shop_server.Models;
 
-namespace ann_shop_server.Controllers.Pages
+namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/invoice")]
-    public class InvoiceCustomerController : ApiController
+    public class InvoiceOrderController : ApiController
     {
-        private InvoiceCustomerService _service;
+        private InvoiceOrderService _service;
 
-        public InvoiceCustomerController()
+        public InvoiceOrderController()
         {
-            _service = InvoiceCustomerService.Instance;
+            _service = InvoiceOrderService.Instance;
         }
 
         /// <summary>
@@ -94,11 +93,11 @@ namespace ann_shop_server.Controllers.Pages
         /// <returns></returns>
         [HttpPost]
         [Route("{orderID:int}/deleteOrderItem")]
-        public IHttpActionResult deleteOrderItem(int orderID, int customerID, OrderItemModel orderItem)
+        public IHttpActionResult deleteOrderItem(int orderID, int customerID, InvoiceOrderOrderItemModel orderItem)
         {
             try
             {
-                var requirement = _service.addRequirement(customerID, orderID, orderItem, RequirementKind.Delete);
+                var requirement = _service.addRequirement(customerID, orderID, orderItem, CustomerRequirement.Delete);
 
                 return Ok(requirement);
             }
@@ -119,11 +118,11 @@ namespace ann_shop_server.Controllers.Pages
         /// <returns></returns>
         [HttpPost]
         [Route("{orderID:int}/editOrderItem")]
-        public IHttpActionResult editOrderItem(int orderID, int customerID, OrderItemModel orderItem)
+        public IHttpActionResult editOrderItem(int orderID, int customerID, InvoiceOrderOrderItemModel orderItem)
         {
             try
             {
-                var requirement = _service.addRequirement(customerID, orderID, orderItem, RequirementKind.Edit);
+                var requirement = _service.addRequirement(customerID, orderID, orderItem, CustomerRequirement.Edit);
 
                 return Ok(requirement);
             }
@@ -143,11 +142,11 @@ namespace ann_shop_server.Controllers.Pages
         /// <returns></returns>
         [HttpPost]
         [Route("{orderID:int}/addOrderItem")]
-        public IHttpActionResult addOrderItem(int orderID, int customerID, List<OrderItemModel> orderItems)
+        public IHttpActionResult addOrderItem(int orderID, int customerID, List<InvoiceOrderOrderItemModel> orderItems)
         {
             try
             {
-                var requirement = _service.addRequirement(customerID, orderID, orderItems, RequirementKind.Add);
+                var requirement = _service.addRequirement(customerID, orderID, orderItems, CustomerRequirement.Add);
 
                 return Ok(requirement);
             }

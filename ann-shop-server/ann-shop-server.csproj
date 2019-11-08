@@ -252,10 +252,11 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Pages\InvoiceCustomerController.cs" />
+    <Compile Include="Controllers\Pages\ANNShopController.cs" />
+    <Compile Include="Controllers\Pages\InvoiceOrderController.cs" />
     <Compile Include="Controllers\PostController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\ProductCategoryController.cs" />
+    <Compile Include="Controllers\Pages\ProductController.cs" />
+    <Compile Include="Controllers\Pages\CategoryController.cs" />
     <Compile Include="Controllers\Searches\SearchProductController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -312,29 +313,32 @@
     <Compile Include="Models\FeeType.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Pages\InvoiceCustomer\CustomerModel.cs" />
+    <Compile Include="Models\Pages\Category\CategoryCategoryModel.cs" />
+    <Compile Include="Models\Pages\Category\CategoryProductModel.cs" />
+    <Compile Include="Models\Pages\Category\CategorySortModel.cs" />
+    <Compile Include="Models\Pages\Home\HomeProductModel.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderCustomerModel.cs" />
     <Compile Include="Models\common\LoginModel.cs" />
-    <Compile Include="Models\Pages\InvoiceCustomer\FeeOtherModel.cs" />
-    <Compile Include="Models\Pages\InvoiceCustomer\OrderItemModel.cs" />
-    <Compile Include="Models\Pages\InvoiceCustomer\OrderModel.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderFeeOtherModel.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderOrderItemModel.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderOrderModel.cs" />
     <Compile Include="Models\common\PaginationMetadataModel.cs" />
     <Compile Include="Models\common\PagingParameterModel.cs" />
     <Compile Include="Models\common\PostModel.cs" />
     <Compile Include="Models\common\ProductCategoryModel.cs" />
-    <Compile Include="Models\common\ProductModel.cs" />
-    <Compile Include="Models\common\ProductVariableModel.cs" />
-    <Compile Include="Models\Pages\InvoiceCustomer\ProductModel.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderProductModel.cs" />
     <Compile Include="Models\common\StockModel.cs" />
     <Compile Include="Models\common\ThumbnailModel.cs" />
-    <Compile Include="Models\common\VariableModel.cs" />
+    <Compile Include="Models\common\VariableType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Pages\InvoiceCustomer\RefundModel.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderRefundModel.cs" />
+    <Compile Include="Models\Pages\product\ProductColorModel.cs" />
+    <Compile Include="Models\Pages\product\ProductSizeModel.cs" />
     <Compile Include="Models\post\PostPageModel.cs" />
     <Compile Include="Models\product-category\ProductCategoryPageModel.cs" />
-    <Compile Include="Models\product\ProductDetailPageModel.cs" />
-    <Compile Include="Models\product\ProductPageModel.cs" />
-    <Compile Include="Models\product\ProductRelatedPageModel.cs" />
-    <Compile Include="Models\product\ProductSortModel.cs" />
+    <Compile Include="Models\Pages\product\ProductProductModel.cs" />
+    <Compile Include="Models\Pages\product\ProductRelatedModel.cs" />
+    <Compile Include="Models\Pages\product\ProductSortModel.cs" />
     <Compile Include="Models\ReceivedProductHistory.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -344,7 +348,9 @@
     <Compile Include="Models\RegisterProduct.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Searches\ProductModel.cs" />
+    <Compile Include="Models\Search\SearchProductProductModel.cs" />
+    <Compile Include="Models\Search\SearchProductOrderedModel.cs" />
+    <Compile Include="Models\Search\SearchProductSortModel.cs" />
     <Compile Include="Models\Session.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -468,18 +474,15 @@
     <Compile Include="Models\tbl_WhiteDomain.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\common\Customer\CustomerModel.cs" />
-    <Compile Include="Models\common\Product\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
-    <Compile Include="Services\ImageService.cs" />
-    <Compile Include="Services\Pages\InvoiceCustomerService.cs" />
+    <Compile Include="Services\Pages\HomeService.cs" />
+    <Compile Include="Services\Pages\InvoiceOrderService.cs" />
     <Compile Include="Services\PostService.cs" />
-    <Compile Include="Services\ProductCategoryService.cs" />
-    <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\Pages\CategoryService.cs" />
+    <Compile Include="Services\Pages\ProductService.cs" />
     <Compile Include="Services\Searches\SearchProductService.cs" />
-    <Compile Include="Services\VariableService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\StockService.cs" />
     <Compile Include="Startup.cs" />
