@@ -14,5 +14,6 @@ namespace ann_shop_server.Models
         public double regularPrice { get; set; }
         public double retailPrice { get; set; }
         public string slug { get; set; }
+        public bool availability { get; set; }
     }
 }

@@ -284,6 +284,19 @@ namespace ann_shop_server.Services
                     .Skip((pagination.currentPage - 1) * pagination.pageSize)
                     .Take(pagination.pageSize);
 
+                // Get quantity
+                var stockFilter = con.tbl_StockManager
+                    .Join(
+                        data,
+                        s => new { productID = s.ParentID.Value, productVariableID = s.ProductVariableID.Value },
+                        d => new { productID = d.ProductID.Value, productVariableID = d.ID },
+                        (s, d) => s
+                    )
+                    .OrderBy(x => new { x.ParentID, x.ProductID, x.ProductVariableID })
+                    .ToList();
+
+                var stocks = StockService.Instance.getProductVariableQuantities(stockFilter);
+
                 // Get info variable of product
                 var infoVariable = data
                     .GroupJoin(
@@ -348,13 +361,25 @@ namespace ann_shop_server.Services
                     .ToList();
 
                 var result = productVariable
-                    .OrderBy(x => x.id)
+                    .GroupJoin(
+                        stocks,
+                        pv => pv.sku,
+                        s => s.sku,
+                        (pv, s) => new { productVariable = pv, stock = s }
+                    )
+                    .SelectMany(
+                        x => x.stock.DefaultIfEmpty(),
+                        (parent, child) => new { productVariable = parent.productVariable, stock = child }
+                    )
                     .Select(x => new ProductRelatedModel()
                     {
-                        name = getVariableName(x.color, x.size),
-                        sku = x.sku,
-                        avatar = Thumbnail.getURL(x.avatar, Thumbnail.Size.Source)
+                        id = x.productVariable.id,
+                        name = getVariableName(x.productVariable.color, x.productVariable.size),
+                        sku = x.productVariable.sku,
+                        avatar = Thumbnail.getURL(x.productVariable.avatar, Thumbnail.Size.Source),
+                        availability = x.stock != null ? x.stock.availability : false
                     })
+                    .OrderBy(x => x.id)
                     .ToList();
 
                 return result;
