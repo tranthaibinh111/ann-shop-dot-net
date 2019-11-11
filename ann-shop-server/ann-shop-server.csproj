@@ -292,6 +292,7 @@
     <Compile Include="Models\common\Order\RequirementKind.cs" />
     <Compile Include="Models\common\Product\ProductStyle.cs" />
     <Compile Include="Models\common\Product\VariableKind.cs" />
+    <Compile Include="Models\common\Stock\StockProductVariableModel.cs" />
     <Compile Include="Models\CronJob.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -327,7 +328,7 @@
     <Compile Include="Models\common\PostModel.cs" />
     <Compile Include="Models\common\ProductCategoryModel.cs" />
     <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderProductModel.cs" />
-    <Compile Include="Models\common\StockModel.cs" />
+    <Compile Include="Models\common\Stock\StockModel.cs" />
     <Compile Include="Models\common\ThumbnailModel.cs" />
     <Compile Include="Models\common\VariableType.cs" />
     <Compile Include="Models\IdentityModels.cs" />

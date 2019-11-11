@@ -80,7 +80,8 @@ namespace ann_shop_server.Services.Pages
                         thumbnails = Thumbnail.getALL(x.product.avatar),
                         regularPrice = x.product.regularPrice,
                         retailPrice = x.product.retailPrice,
-                        slug = x.product.slug
+                        slug = x.product.slug,
+                        availability = x.stock.availability
                     });
 
                 // Lấy tổng số record sản phẩm
