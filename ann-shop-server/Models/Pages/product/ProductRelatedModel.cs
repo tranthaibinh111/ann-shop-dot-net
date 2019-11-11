@@ -11,6 +11,6 @@ namespace ann_shop_server.Models
         public string name { get; set; }
         public string sku { get; set; }
         public string avatar { get; set; }
-        public bool availability { get; set; }
+        public int badge { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ann_shop_server.Models
 {
-    public class ProductCategoryModel
+    public class CategoryModel
     {
         public int id { get; set; }
         public string title { get; set; }

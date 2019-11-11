@@ -19,6 +19,6 @@ namespace ann_shop_server.Models
         public List<string> images { get; set; }
         public List<ProductColorModel> colors { get; set; }
         public List<ProductSizeModel> sizes { get; set; }
-        public bool availability { get; set; }
+        public int badge { get; set; }
     }
 }

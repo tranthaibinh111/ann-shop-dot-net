@@ -7,13 +7,13 @@ using ann_shop_server.Models;
 namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/invoice")]
-    public class InvoiceOrderController : ApiController
+    public class InvoiceOrderPageController : ApiController
     {
-        private InvoiceOrderService _service;
+        private InvoiceOrderPageService _service;
 
-        public InvoiceOrderController()
+        public InvoiceOrderPageController()
         {
-            _service = InvoiceOrderService.Instance;
+            _service = InvoiceOrderPageService.Instance;
         }
 
         /// <summary>

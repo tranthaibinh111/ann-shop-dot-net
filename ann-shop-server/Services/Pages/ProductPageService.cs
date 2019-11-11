@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ann_shop_server.Services
 {
-    public class ProductService : Service<ProductService>
+    public class ProductPageService : Service<ProductPageService>
     {
         #region get
         #region Lấy thông tin sản phẩm theo slug
@@ -65,7 +65,8 @@ namespace ann_shop_server.Services
                             regularPrice = p.Regular_Price.HasValue ? p.Regular_Price.Value : 0,
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
                             content = p.ProductContent,
-                            slug = p.Slug
+                            slug = p.Slug,
+                            preOrder = p.PreOrder
                         }
                     )
                     .OrderBy(x => x.id)
@@ -98,7 +99,13 @@ namespace ann_shop_server.Services
                             images = images,
                             colors = colors,
                             sizes = sizes,
-                            availability = child != null ? child.availability : false,
+                            badge = parent.pro.preOrder ? 
+                                ProductBadge.order : 
+                                (
+                                    child == null ? 
+                                        ProductBadge.stockOut : 
+                                        (child.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
+                                )
                         }
                     )
                     .OrderBy(o => o.id)
@@ -257,14 +264,14 @@ namespace ann_shop_server.Services
             using (var con = new inventorymanagementEntities())
             {
                 // Kiểm tra có sản phẩm không
-                var product = con.tbl_Product.Where(x => x.Slug == slug);
+                var product = con.tbl_Product.Where(x => x.Slug == slug).FirstOrDefault();
 
-                if (product.FirstOrDefault() == null)
+                if (product == null)
                     return null;
 
                 // Returns List of Customer after applying Paging
                 var source = con.tbl_ProductVariable
-                    .Where(x => x.ProductID == product.FirstOrDefault().ID)
+                    .Where(x => x.ProductID == product.ID)
                     .OrderBy(o => o.ID);
 
                 // Display TotalCount to Records to Product
@@ -377,7 +384,13 @@ namespace ann_shop_server.Services
                         name = getVariableName(x.productVariable.color, x.productVariable.size),
                         sku = x.productVariable.sku,
                         avatar = Thumbnail.getURL(x.productVariable.avatar, Thumbnail.Size.Source),
-                        availability = x.stock != null ? x.stock.availability : false
+                        badge = product.PreOrder ? 
+                            ProductBadge.order : 
+                            (
+                                x.stock == null ?
+                                    ProductBadge.stockOut :
+                                    (x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
+                            )
                     })
                     .OrderBy(x => x.id)
                     .ToList();

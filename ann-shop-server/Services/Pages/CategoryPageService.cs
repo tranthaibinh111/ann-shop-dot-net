@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ann_shop_server.Services
 {
-    public class CategoryService : Service<CategoryService>
+    public class CategoryPageService : Service<CategoryPageService>
     {
         #region get
         /// <summary>
@@ -31,67 +31,6 @@ namespace ann_shop_server.Services
                     .FirstOrDefault();
 
                 return parent;
-            }
-        }
-
-        /// <summary>
-        /// Thực thi đệ quy để lấy tất cả category theo nhánh parent
-        /// </summary>
-        /// <param name="con"></param>
-        /// <param name="parent"></param>
-        /// <returns></returns>
-        public List<ProductCategoryModel> getCategoryChild(inventorymanagementEntities con, ProductCategoryModel parent)
-        {
-            var result = new List<ProductCategoryModel>();
-            result.Add(parent);
-
-            var child = con.tbl_Category
-                .Where(x => x.ParentID.Value == parent.id)
-                .Select(x => new ProductCategoryModel() {
-                    id = x.ID,
-                    title = x.CategoryName,
-                    description = x.CategoryDescription,
-                    slug = x.Slug
-                })
-                .ToList();
-
-            if (child.Count > 0)
-            {
-                foreach (var id in child)
-                {
-                    result.AddRange(getCategoryChild(con, id));
-                }
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Tìm các category thuộc nhánh slug
-        /// </summary>
-        /// <param name="slug"></param>
-        /// <returns></returns>
-        public List<ProductCategoryModel> getCategoryChild(string slug)
-        {
-            using (var con = new inventorymanagementEntities())
-            {
-                var parent = con.tbl_Category
-                    .Where(x => 
-                        (!String.IsNullOrEmpty(slug) && x.Slug == slug) || 
-                        (String.IsNullOrEmpty(slug) && x.CategoryLevel == 0)
-                    )
-                    .Select(x => new ProductCategoryModel()
-                    {
-                        id = x.ID,
-                        title = x.CategoryName,
-                        description = x.CategoryDescription,
-                        slug = x.Slug
-                    })
-                    .FirstOrDefault();
-                if (parent != null)
-                    return getCategoryChild(con, parent);
-                else
-                    return null;
             }
         }
 
@@ -126,7 +65,7 @@ namespace ann_shop_server.Services
                 #region Lọc sản phẩm theo category
                 if (!String.IsNullOrEmpty(slug))
                 {
-                    List<ProductCategoryModel> categories = CategoryService.Instance.getCategoryChild(slug);
+                    var categories = CategoryService.Instance.getCategoryChild(slug);
 
                     if (categories == null || categories.Count == 0)
                         return null;
@@ -167,7 +106,8 @@ namespace ann_shop_server.Services
                             materials = p.Materials,
                             webPublish = p.WebPublish.HasValue ? p.WebPublish.Value : false,
                             webUpdate = p.WebUpdate,
-                            slug = p.Slug
+                            slug = p.Slug,
+                            predOrder = p.PreOrder
                         }
                     )
                     .ToList();
@@ -195,7 +135,8 @@ namespace ann_shop_server.Services
                         availability = x.stock != null ? x.stock.availability : x.product.availability,
                         materials = x.product.materials,
                         webUpdate = x.product.webUpdate,
-                        slug = x.product.slug
+                        slug = x.product.slug,
+                        preOrder = x.product.predOrder
                     });
                 #endregion
 
@@ -239,9 +180,9 @@ namespace ann_shop_server.Services
                         thumbnails = x.thumbnails,
                         regularPrice = x.regularPrice,
                         retailPrice = x.retailPrice,
-                        availability = x.availability,
                         materials = x.materials,
-                        slug = x.slug
+                        slug = x.slug,
+                        badge = x.preOrder ? ProductBadge.order : (x.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
                     })
                     .Skip((pagination.currentPage - 1) * pagination.pageSize)
                     .Take(pagination.pageSize)
@@ -300,7 +241,8 @@ namespace ann_shop_server.Services
                             materials = p.Materials,
                             webPublish = p.WebPublish.HasValue ? p.WebPublish.Value : false,
                             webUpdate = p.WebUpdate,
-                            slug = p.Slug
+                            slug = p.Slug,
+                            preOrder = p.PreOrder
                         }
                     )
                     .ToList();
@@ -328,7 +270,8 @@ namespace ann_shop_server.Services
                         availability = x.stock != null ? x.stock.availability : x.product.availability,
                         materials = x.product.materials,
                         webUpdate = x.product.webUpdate,
-                        slug = x.product.slug
+                        slug = x.product.slug,
+                        preOrder = x.product.preOrder
                     });
                 #endregion
 
@@ -372,9 +315,9 @@ namespace ann_shop_server.Services
                         thumbnails = x.thumbnails,
                         regularPrice = x.regularPrice,
                         retailPrice = x.retailPrice,
-                        availability = x.availability,
                         materials = x.materials,
-                        slug = x.slug
+                        slug = x.slug,
+                        badge = x.preOrder ? ProductBadge.order : (x.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
                     })
                     .Skip((pagination.currentPage - 1) * pagination.pageSize)
                     .Take(pagination.pageSize)
