@@ -46,5 +46,6 @@ namespace ann_shop_server.Models
         public string UnSignedTitle { get; set; }
         public string Slug { get; set; }
         public string Color { get; set; }
+        public bool PreOrder { get; set; }
     }
 }

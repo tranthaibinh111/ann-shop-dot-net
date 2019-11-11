@@ -12,13 +12,13 @@ using System.Web.Http;
 namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/home")]
-    public class ANNShopController : ApiController
+    public class HomePageController : ApiController
     {
-        private HomeService _service;
+        private HomePageService _service;
 
-        public ANNShopController()
+        public HomePageController()
         {
-            _service = HomeService.Instance;
+            _service = HomePageService.Instance;
         }
 
         /// <summary>

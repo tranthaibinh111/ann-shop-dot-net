@@ -16,5 +16,6 @@ namespace ann_shop_server.Models
         public bool availability { get; set; }
         public string materials { get; set; }
         public string slug { get; set; }
+        public int badge { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ann_shop_server.Services.Pages
 {
-    public class InvoiceOrderService : Service<InvoiceOrderService>
+    public class InvoiceOrderPageService : Service<InvoiceOrderPageService>
     {
         /// <summary>
         /// Lấy thông tin khách hàng

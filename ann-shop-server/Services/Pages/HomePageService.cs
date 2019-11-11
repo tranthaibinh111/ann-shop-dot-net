@@ -7,7 +7,7 @@ using System.Web;
 
 namespace ann_shop_server.Services.Pages
 {
-    public class HomeService : Service<HomeService>
+    public class HomePageService : Service<HomePageService>
     {
         #region Get
         public List<HomeProductModel> getProducts(string categorySlug, ref PaginationMetadataModel pagination)
@@ -20,7 +20,7 @@ namespace ann_shop_server.Services.Pages
                     return null;
 
                 // Check category có tồn tại hay không
-                List<ProductCategoryModel> categories = CategoryService.Instance.getCategoryChild(categorySlug);
+                var categories = CategoryService.Instance.getCategoryChild(categorySlug);
 
                 if (categories == null || categories.Count == 0)
                     return null;
@@ -54,7 +54,8 @@ namespace ann_shop_server.Services.Pages
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
                             slug = p.Slug,
                             webPublish = p.WebPublish.HasValue ? p.WebPublish.Value : false,
-                            webUpdate = p.WebUpdate
+                            webUpdate = p.WebUpdate,
+                            preOrder = p.PreOrder
                         }
                     )
                     .ToList();
@@ -81,7 +82,7 @@ namespace ann_shop_server.Services.Pages
                         regularPrice = x.product.regularPrice,
                         retailPrice = x.product.retailPrice,
                         slug = x.product.slug,
-                        availability = x.stock.availability
+                        badge = x.product.preOrder ? ProductBadge.order : (x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
                     });
 
                 // Lấy tổng số record sản phẩm

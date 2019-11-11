@@ -8,13 +8,13 @@ using System.Web.Http;
 namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/category")]
-    public class CategoryController : ApiController
+    public class CategoryPageController : ApiController
     {
-        private CategoryService _service;
+        private CategoryPageService _service;
 
-        public CategoryController()
+        public CategoryPageController()
         {
-            _service = CategoryService.Instance;
+            _service = CategoryPageService.Instance;
         }
 
         /// <summary>

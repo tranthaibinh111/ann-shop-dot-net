@@ -713,6 +713,7 @@
           <Property Name="UnSignedTitle" Type="varchar" MaxLength="255" />
           <Property Name="Slug" Type="varchar" MaxLength="255" />
           <Property Name="Color" Type="nchar" MaxLength="30" />
+          <Property Name="PreOrder" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_ProductImage">
           <Key>
@@ -1718,6 +1719,7 @@
           <Property Name="UnSignedTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Slug" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Color" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="PreOrder" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_ProductImage">
           <Key>
@@ -2746,6 +2748,7 @@
           <EntitySetMapping Name="tbl_Product">
             <EntityTypeMapping TypeName="inventorymanagementModel.tbl_Product">
               <MappingFragment StoreEntitySet="tbl_Product">
+                <ScalarProperty Name="PreOrder" ColumnName="PreOrder" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ProductOldID" ColumnName="ProductOldID" />
