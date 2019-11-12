@@ -89,7 +89,7 @@ namespace ann_shop_server.Services
                 #endregion
 
                 #region Xuất thông tin về sản phẩm
-                var products = source
+                var products = source.Where(x => x.CategoryID.HasValue)
                     .Join(
                         con.tbl_Category,
                         pro => pro.CategoryID.Value,
