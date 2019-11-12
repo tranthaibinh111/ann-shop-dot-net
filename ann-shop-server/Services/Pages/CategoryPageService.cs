@@ -60,7 +60,7 @@ namespace ann_shop_server.Services
         {
             using (var con = new inventorymanagementEntities())
             {
-                var source = con.tbl_Product.Where(x => x.WebPublish == true);
+                var source = con.tbl_Product.Where(x => x.PreOrder || x.WebPublish == true);
 
                 #region Lọc sản phẩm theo category
                 if (!String.IsNullOrEmpty(slug))
@@ -89,7 +89,7 @@ namespace ann_shop_server.Services
                 #endregion
 
                 #region Xuất thông tin về sản phẩm
-                var products = source.Where(x => x.CategoryID.HasValue)
+                var products = source
                     .Join(
                         con.tbl_Category,
                         pro => pro.CategoryID.Value,
@@ -107,7 +107,7 @@ namespace ann_shop_server.Services
                             webPublish = p.WebPublish.HasValue ? p.WebPublish.Value : false,
                             webUpdate = p.WebUpdate,
                             slug = p.Slug,
-                            predOrder = p.PreOrder
+                            preOrder = p.PreOrder
                         }
                     )
                     .ToList();
@@ -123,7 +123,14 @@ namespace ann_shop_server.Services
                         x => x.info.DefaultIfEmpty(),
                         (parent, child) => new { product = parent.pro, stock = child }
                     )
-                    .Where(x => x.product.webPublish && x.stock != null && x.stock.quantity >= 5)
+                    .Where(x =>
+                        x.product.preOrder ||
+                        (
+                            x.product.webPublish &&
+                            x.stock != null &&
+                            x.stock.quantity >= 5
+                        )
+                    )
                     .Select(x => new
                     {
                         productID = x.product.productID,
@@ -136,7 +143,7 @@ namespace ann_shop_server.Services
                         materials = x.product.materials,
                         webUpdate = x.product.webUpdate,
                         slug = x.product.slug,
-                        preOrder = x.product.predOrder
+                        preOrder = x.product.preOrder
                     });
                 #endregion
 
@@ -209,7 +216,7 @@ namespace ann_shop_server.Services
         {
             using (var con = new inventorymanagementEntities())
             {
-                var source = con.tbl_Product.Where(x => x.WebPublish == true);
+                var source = con.tbl_Product.Where(x => x.PreOrder || x.WebPublish == true);
 
                 #region Tính toán số lượng có trong kho hàng
                 var stockFilter = con.tbl_StockManager
@@ -258,7 +265,14 @@ namespace ann_shop_server.Services
                         x => x.info.DefaultIfEmpty(),
                         (parent, child) => new { product = parent.pro, stock = child }
                     )
-                    .Where(x => x.product.webPublish && x.stock != null && x.stock.availability)
+                    .Where(x =>
+                        x.product.preOrder ||
+                        (
+                            x.product.webPublish &&
+                            x.stock != null &&
+                            x.stock.quantity >= 5
+                        )
+                    )
                     .Select(x => new
                     {
                         productID = x.product.productID,
