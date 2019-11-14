@@ -54,13 +54,14 @@ namespace ann_shop_server.Services
         /// Lấy tất cả sản phẩm thuộc nhánh slug
         /// </summary>
         /// <param name="slug"></param>
+        /// <param name="sort"></param>
         /// <param name="pagination"></param>
         /// <returns></returns>
         public List<CategoryProductModel> getProduct(string slug, int sort, ref PaginationMetadataModel pagination)
         {
             using (var con = new inventorymanagementEntities())
             {
-                var source = con.tbl_Product.Where(x => x.PreOrder || x.WebPublish == true);
+                var source = con.tbl_Product.Where(x => x.WebPublish == true);
 
                 #region Lọc sản phẩm theo category
                 if (!String.IsNullOrEmpty(slug))
@@ -126,7 +127,6 @@ namespace ann_shop_server.Services
                     .Where(x =>
                         x.product.preOrder ||
                         (
-                            x.product.webPublish &&
                             x.stock != null &&
                             x.stock.quantity >= 5
                         )
@@ -216,7 +216,7 @@ namespace ann_shop_server.Services
         {
             using (var con = new inventorymanagementEntities())
             {
-                var source = con.tbl_Product.Where(x => x.PreOrder || x.WebPublish == true);
+                var source = con.tbl_Product.Where(x => x.WebPublish == true);
 
                 #region Tính toán số lượng có trong kho hàng
                 var stockFilter = con.tbl_StockManager
@@ -268,7 +268,6 @@ namespace ann_shop_server.Services
                     .Where(x =>
                         x.product.preOrder ||
                         (
-                            x.product.webPublish &&
                             x.stock != null &&
                             x.stock.quantity >= 5
                         )

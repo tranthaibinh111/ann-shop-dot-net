@@ -14,7 +14,7 @@ namespace ann_shop_server.Services.Pages
         {
             using (var con = new inventorymanagementEntities())
             {
-                var source = con.tbl_Product.Where(x => x.PreOrder || x.WebPublish == true);
+                var source = con.tbl_Product.Where(x => x.WebPublish == true);
 
                 if (String.IsNullOrEmpty(categorySlug))
                     return null;
@@ -74,7 +74,6 @@ namespace ann_shop_server.Services.Pages
                     .Where(x => 
                         x.product.preOrder ||
                         (
-                            x.product.webPublish && 
                             x.stock != null &&
                             x.stock.quantity >= 5
                         )
