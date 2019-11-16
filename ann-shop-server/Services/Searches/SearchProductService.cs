@@ -176,6 +176,18 @@ namespace ann_shop_server.Services.Searches
                         x.ProductTitle.StartsWith(search) ||
                         x.UnSignedTitle.StartsWith(search)
                     );
+
+                if (source.Count() == 0)
+                {
+                    source = con.tbl_ProductVariable
+                        .Where(x => x.SKU.StartsWith(search))
+                        .Join(
+                            con.tbl_Product,
+                            pv => pv.ProductID,
+                            p => p.ID,
+                            (pv, p) => p
+                        );
+                }
                 #endregion
 
                 #region Tính toán số lượng có trong kho hàng

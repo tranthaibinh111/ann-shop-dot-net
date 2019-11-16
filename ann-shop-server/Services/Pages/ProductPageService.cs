@@ -383,7 +383,7 @@ namespace ann_shop_server.Services
                         id = x.productVariable.id,
                         name = getVariableName(x.productVariable.color, x.productVariable.size),
                         sku = x.productVariable.sku,
-                        avatar = Thumbnail.getURL(x.productVariable.avatar, Thumbnail.Size.Source),
+                        avatar = Thumbnail.getURL(x.productVariable.avatar, Thumbnail.Size.Micro),
                         badge = product.PreOrder ? 
                             ProductBadge.order : 
                             (
