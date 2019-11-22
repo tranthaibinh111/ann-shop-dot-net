@@ -129,7 +129,7 @@ namespace ann_shop_server.Services
         {
             using (var con = new inventorymanagementEntities())
             {
-                var source = con.tbl_Product.Where(x => x.WebPublish == true)
+                var source = con.tbl_Product
                     .Select(x => new {
                         categoryID = x.CategoryID.HasValue ? x.CategoryID.Value : 0,
                         productID = x.ID,
@@ -149,18 +149,23 @@ namespace ann_shop_server.Services
                     });
 
                 #region Lọc sản phẩm
-                #region Lấy theo category slug
-                if (!String.IsNullOrEmpty(filter.categorySlug))
+                #region Lọc sản phẩm theo text search
+                if (!String.IsNullOrEmpty(filter.productSearch))
                 {
-                    var categories = CategoryService.Instance.getCategoryChild(filter.categorySlug);
-
-                    if (categories == null || categories.Count == 0)
-                        return null;
-
-                    var categoryIDs = categories.Select(x => x.id).OrderByDescending(o => o).ToList();
-                    source = source.Where(x => categoryIDs.Contains(x.categoryID));
+                    source = source
+                        .Where(x =>
+                            x.sku.Trim().ToLower().StartsWith(filter.productSearch.Trim().ToLower()) ||
+                            x.title.Trim().ToLower().StartsWith(filter.productSearch.Trim().ToLower()) ||
+                            x.unSignedTitle.Trim().ToLower().StartsWith(filter.productSearch.Trim().ToLower())
+                        );
+                }
+                else
+                {
+                    // Trường hợp không phải là search thì kiểm tra điều web public
+                    source = source.Where(x => x.webPublish == true);
                 }
                 #endregion
+
 
                 #region Lấy theo preOrder (hang-co-san | hang-order)
                 if (!String.IsNullOrEmpty(filter.preOrder))
@@ -179,15 +184,16 @@ namespace ann_shop_server.Services
                 }
                 #endregion
 
-                #region Lọc sản phẩm theo text search
-                if (!String.IsNullOrEmpty(filter.productSearch))
+                #region Lấy theo category slug
+                if (!String.IsNullOrEmpty(filter.categorySlug))
                 {
-                    source = source
-                        .Where(x =>
-                            x.sku.StartsWith(filter.productSearch) ||
-                            x.title.StartsWith(filter.productSearch) ||
-                            x.unSignedTitle.StartsWith(filter.productSearch)
-                        );
+                    var categories = CategoryService.Instance.getCategoryChild(filter.categorySlug);
+
+                    if (categories == null || categories.Count == 0)
+                        return null;
+
+                    var categoryIDs = categories.Select(x => x.id).OrderByDescending(o => o).ToList();
+                    source = source.Where(x => categoryIDs.Contains(x.categoryID));
                 }
                 #endregion
 
@@ -216,14 +222,19 @@ namespace ann_shop_server.Services
                         x => x.info.DefaultIfEmpty(),
                         (parent, child) => new { product = parent.pro, stock = child }
                     )
-                    .Where(x =>
+                    .Select(x => new { x.product, x.stock });
+
+                // Trường hợp không phải là search thì kiểm tra điều kiện stock
+                if (String.IsNullOrEmpty(filter.productSearch))
+                {
+                    data = data.Where(x =>
                         x.product.preOrder ||
                         (
                             x.stock != null &&
                             x.stock.quantity >= (x.product.categoryID == 44 ? 1 : 5)
                         )
-                    )
-                    .Select(x => new { x.product, x.stock });
+                    );
+                }
                 #endregion
                 #endregion
 
@@ -266,7 +277,9 @@ namespace ann_shop_server.Services
                         name = x.product.title,
                         slug = x.product.slug,
                         materials = x.product.materials,
-                        badge = x.product.preOrder ? ProductBadge.order : (x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut),
+                        badge = x.product.preOrder ? 
+                            ProductBadge.order : 
+                            (x.stock != null && x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut),
                         availability = x.stock != null ? x.stock.availability : x.product.availability,
                         thumbnails = Thumbnail.getALL(x.product.avatar),
                         regularPrice = x.product.regularPrice,

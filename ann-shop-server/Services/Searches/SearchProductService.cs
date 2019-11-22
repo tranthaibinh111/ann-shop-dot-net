@@ -158,7 +158,7 @@ namespace ann_shop_server.Services.Searches
         /// <returns></returns>
         public List<ProductCardModel> getProductBySearchSort(string search, int sort, ref PaginationMetadataModel pagination)
         {
-            return this.getProductBySearchSort(search, sort, ref pagination);
+            return ProductService.Instance.getProductListBySearchSort(search, sort, ref pagination);
         }
         #endregion
     }
