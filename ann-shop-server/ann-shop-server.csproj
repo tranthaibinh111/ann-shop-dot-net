@@ -291,8 +291,14 @@
     <Compile Include="Models\Common\Category\CategoryModel.cs" />
     <Compile Include="Models\Common\Order\OrderType.cs" />
     <Compile Include="Models\Common\Order\RequirementKind.cs" />
+    <Compile Include="Models\Common\Product\ColorModel.cs" />
     <Compile Include="Models\Common\Product\ProductBadge.cs" />
+    <Compile Include="Models\Common\Product\ProductCardModel.cs" />
+    <Compile Include="Models\Common\Product\ProductFilterModel.cs" />
+    <Compile Include="Models\Common\Product\ProductSortKind.cs" />
     <Compile Include="Models\Common\Product\ProductStyle.cs" />
+    <Compile Include="Models\Common\Product\SizeModel.cs" />
+    <Compile Include="Models\Common\Product\ProductSortModel.cs" />
     <Compile Include="Models\Common\Product\VariableKind.cs" />
     <Compile Include="Models\Common\Stock\StockProductVariableModel.cs" />
     <Compile Include="Models\CronJob.cs">
@@ -316,10 +322,6 @@
     <Compile Include="Models\FeeType.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Pages\Category\CategoryCategoryModel.cs" />
-    <Compile Include="Models\Pages\Category\CategoryProductModel.cs" />
-    <Compile Include="Models\Pages\Category\CategorySortModel.cs" />
-    <Compile Include="Models\Pages\Home\HomeProductModel.cs" />
     <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderCustomerModel.cs" />
     <Compile Include="Models\Common\LoginModel.cs" />
     <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderFeeOtherModel.cs" />
@@ -334,12 +336,9 @@
     <Compile Include="Models\Common\VariableType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderRefundModel.cs" />
-    <Compile Include="Models\Pages\product\ProductColorModel.cs" />
-    <Compile Include="Models\Pages\product\ProductSizeModel.cs" />
     <Compile Include="Models\post\PostPageModel.cs" />
-    <Compile Include="Models\Pages\product\ProductProductModel.cs" />
-    <Compile Include="Models\Pages\product\ProductRelatedModel.cs" />
-    <Compile Include="Models\Pages\product\ProductSortModel.cs" />
+    <Compile Include="Models\Common\Product\ProductModel.cs" />
+    <Compile Include="Models\Common\Product\ProductRelatedModel.cs" />
     <Compile Include="Models\ReceivedProductHistory.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -349,9 +348,7 @@
     <Compile Include="Models\RegisterProduct.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Search\SearchProductProductModel.cs" />
     <Compile Include="Models\Search\SearchProductOrderedModel.cs" />
-    <Compile Include="Models\Search\SearchProductSortModel.cs" />
     <Compile Include="Models\Session.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -479,6 +476,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Services\Common\CategoryService.cs" />
+    <Compile Include="Services\Common\ProductService.cs" />
     <Compile Include="Services\Pages\HomePageService.cs" />
     <Compile Include="Services\Pages\InvoiceOrderPageService.cs" />
     <Compile Include="Services\Common\PostService.cs" />

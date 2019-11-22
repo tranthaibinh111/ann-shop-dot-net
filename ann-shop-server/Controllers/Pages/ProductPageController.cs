@@ -28,13 +28,13 @@ namespace ann_shop_server.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{slug}")]
-        public IHttpActionResult Get(string slug)
+        public IHttpActionResult GetProductByCategory(string slug)
         {
-            var prod = _service.getProduct(slug);
+            var prod = _service.getProductByCategory(slug);
 
             if (prod != null)
             {
-                return Ok<ProductProductModel>(prod);
+                return Ok<ProductModel>(prod);
             }
             else
             {
@@ -50,7 +50,7 @@ namespace ann_shop_server.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{slug}/related")]
-        public IHttpActionResult GetProductRelated(string slug, [FromUri]PagingParameterModel pagingParameterModel)
+        public IHttpActionResult GetProductRelatedBySlug(string slug, [FromUri]PagingParameterModel pagingParameterModel)
         {
             var pagination = new PaginationMetadataModel()
             {
@@ -58,7 +58,7 @@ namespace ann_shop_server.Controllers
                 pageSize = pagingParameterModel.pageSize
             };
 
-            var productrelateds = _service.getProductRelated(slug, ref pagination);
+            var productrelateds = _service.getProductRelatedBySlug(slug, ref pagination);
 
             if (productrelateds.Count > 0)
             {

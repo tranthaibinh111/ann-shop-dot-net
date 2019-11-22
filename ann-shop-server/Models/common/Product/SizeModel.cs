@@ -5,8 +5,9 @@ using System.Web;
 
 namespace ann_shop_server.Models
 {
-    public class ProductColorModel
+    public class SizeModel
     {
+        public int productID { get; set; }
         public int id { get; set; }
         public string name { get; set; }
     }

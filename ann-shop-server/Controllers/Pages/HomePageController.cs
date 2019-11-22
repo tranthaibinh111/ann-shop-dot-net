@@ -29,14 +29,14 @@ namespace ann_shop_server.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("category/{*slug}")]
-        public IHttpActionResult GetProducts(string slug, [FromUri]PagingParameterModel pagingParameterModel)
+        public IHttpActionResult GetProductListByCategory(string slug, [FromUri]PagingParameterModel pagingParameterModel)
         {
             var pagination = new PaginationMetadataModel()
             {
                 currentPage = pagingParameterModel.pageNumber,
                 pageSize = pagingParameterModel.pageSize
             };
-            var products = _service.getProducts(slug, ref pagination);
+            var products = _service.getProductListByCategory(slug, ref pagination);
 
             if (products == null)
                 return NotFound();
@@ -46,7 +46,7 @@ namespace ann_shop_server.Controllers
             HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(pagination));
 
             // Returing List of product Collections
-            return Ok<List<HomeProductModel>>(products);
+            return Ok<List<ProductCardModel>>(products);
         }
     }
 }
