@@ -44,14 +44,14 @@ namespace ann_shop_server.Controllers.Searches
         /// <returns></returns>
         [HttpGet]
         [Route("search-product/sort")]
-        public IHttpActionResult GetSortSearchProduct()
+        public IHttpActionResult GetProductSort()
         {
-            var sorts = _service.getSearchProductSort();
+            var sorts = _service.getProductSort();
 
             if (sorts == null)
                 return NotFound();
             else
-                return Ok<List<SearchProductSortModel>>(sorts);
+                return Ok<List<ProductSortModel>>(sorts);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace ann_shop_server.Controllers.Searches
         /// <returns></returns>
         [HttpGet]
         [Route("search-product/{search}")]
-        public IHttpActionResult GetProductSearchProduct(string search, [FromUri]PagingParameterModel pagingParameterModel, int sort = (int)CategorySort.ProductNew)
+        public IHttpActionResult GetProductBySearchSort(string search, [FromUri]PagingParameterModel pagingParameterModel, int sort = (int)ProductSortKind.ProductNew)
         {
             if (String.IsNullOrEmpty(search))
             {
@@ -74,7 +74,7 @@ namespace ann_shop_server.Controllers.Searches
                 currentPage = pagingParameterModel.pageNumber,
                 pageSize = pagingParameterModel.pageSize
             };
-            var products = _service.getSearchProductProduct(search, sort, ref pagination);
+            var products = _service.getProductBySearchSort(search, sort, ref pagination);
 
             if (products == null || products.Count == 0)
                 return NotFound();
@@ -84,7 +84,7 @@ namespace ann_shop_server.Controllers.Searches
             HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(pagination));
 
             // Returing List of product Collections
-            return Ok<List<CategoryProductModel>>(products);
+            return Ok<List<ProductCardModel>>(products);
         }
         #endregion
     }

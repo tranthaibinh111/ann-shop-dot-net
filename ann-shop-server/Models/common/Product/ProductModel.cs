@@ -2,7 +2,7 @@
 
 namespace ann_shop_server.Models
 {
-    public class ProductProductModel
+    public class ProductModel
     {
         public int id { get; set; }
         public string categoryName { get; set; }
@@ -17,8 +17,8 @@ namespace ann_shop_server.Models
         public string content { get; set; }
         public string slug { get; set; }
         public List<string> images { get; set; }
-        public List<ProductColorModel> colors { get; set; }
-        public List<ProductSizeModel> sizes { get; set; }
+        public List<ColorModel> colors { get; set; }
+        public List<SizeModel> sizes { get; set; }
         public int badge { get; set; }
     }
 }

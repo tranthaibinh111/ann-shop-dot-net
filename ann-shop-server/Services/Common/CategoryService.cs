@@ -8,13 +8,14 @@ namespace ann_shop_server.Services
 {
     public class CategoryService : Service<CategoryService>
     {
+        #region Lấy danh sách dạnh mục con dựa theo danh mục cha
         /// <summary>
         /// Thực thi đệ quy để lấy tất cả category theo nhánh parent
         /// </summary>
         /// <param name="con"></param>
         /// <param name="parent"></param>
         /// <returns></returns>
-        public List<CategoryModel> getCategoryChild(inventorymanagementEntities con, CategoryModel parent)
+        private List<CategoryModel> getCategoryChild(inventorymanagementEntities con, CategoryModel parent)
         {
             var result = new List<CategoryModel>();
             result.Add(parent);
@@ -24,7 +25,7 @@ namespace ann_shop_server.Services
                 .Select(x => new CategoryModel()
                 {
                     id = x.ID,
-                    title = x.CategoryName,
+                    name = x.CategoryName,
                     description = x.CategoryDescription,
                     slug = x.Slug
                 })
@@ -58,7 +59,7 @@ namespace ann_shop_server.Services
                     .Select(x => new CategoryModel()
                     {
                         id = x.ID,
-                        title = x.CategoryName,
+                        name = x.CategoryName,
                         description = x.CategoryDescription,
                         slug = x.Slug
                     })
@@ -69,5 +70,35 @@ namespace ann_shop_server.Services
                     return null;
             }
         }
+        #endregion
+
+        #region Lấy thông tin về danh mục
+        /// <summary>
+        /// Lấy thông tin category theo slug
+        /// </summary>
+        /// <param name="slug"></param>
+        /// <returns></returns>
+        public CategoryModel getCategoryBySlug(string slug)
+        {
+            using (var con = new inventorymanagementEntities())
+            {
+                var parent = con.tbl_Category
+                    .Where(x =>
+                        (!String.IsNullOrEmpty(slug) && x.Slug == slug) ||
+                        (String.IsNullOrEmpty(slug) && x.CategoryLevel == 0)
+                    )
+                    .Select(x => new CategoryModel()
+                    {
+                        id = x.ID,
+                        name = x.CategoryName,
+                        slug = x.Slug,
+                        description = x.CategoryDescription
+                    })
+                    .FirstOrDefault();
+
+                return parent;
+            }
+        }
+        #endregion
     }
 }

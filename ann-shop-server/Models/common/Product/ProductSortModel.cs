@@ -5,9 +5,9 @@ using System.Web;
 
 namespace ann_shop_server.Models
 {
-    public class CategoryCategoryModel
+    public class ProductSortModel
     {
+        public string key { get; set; }
         public string name { get; set; }
-        public string slug { get; set; }
     }
 }
