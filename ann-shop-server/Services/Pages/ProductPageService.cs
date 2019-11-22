@@ -131,18 +131,18 @@ namespace ann_shop_server.Services
                     .Select(x => new { image = x.ProductImage })
                     .ToList();
                 // Lấy hình ảnh đại diện của các sản phẩm con
-                var imageProductVariable = con.tbl_ProductVariable
-                    .Where(x => x.ProductID == productID)
-                    .Where(x => !String.IsNullOrEmpty(x.Image))
-                    .Select(x => new { image = x.Image })
-                    .ToList();
+                //var imageProductVariable = con.tbl_ProductVariable
+                //    .Where(x => x.ProductID == productID)
+                //    .Where(x => !String.IsNullOrEmpty(x.Image))
+                //    .Select(x => new { image = x.Image })
+                //    .ToList();
                 // Lấy hình anh trong bảng image
                 var imageSource = con.tbl_ProductImage.Where(x => x.ProductID == productID)
                     .Select(x => new { image = x.ProductImage })
                     .ToList();
 
                 var images = imageProduct
-                    .Union(imageProductVariable)
+                    //.Union(imageProductVariable)
                     .Union(imageSource)
                     .Select(x => x.image)
                     .Distinct()

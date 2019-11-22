@@ -116,6 +116,7 @@ namespace ann_shop_server.Services
                         cat => cat.ID,
                         (p, c) => new
                         {
+                            categoryID = p.CategoryID,
                             productID = p.ID,
                             title = p.ProductTitle,
                             sku = p.ProductSKU,
@@ -147,7 +148,7 @@ namespace ann_shop_server.Services
                         x.product.preOrder ||
                         (
                             x.stock != null &&
-                            x.stock.quantity >= 5
+                            x.stock.quantity >= (x.product.categoryID == 44 ? 1 : 5)
                         )
                     )
                     .Select(x => new
