@@ -142,6 +142,7 @@ namespace ann_shop_server.Services
                         availability = false,
                         avatar = x.ProductImage,
                         regularPrice = x.Regular_Price.HasValue ? x.Regular_Price.Value : 0,
+                        oldPrice = x.Old_Price.HasValue ? x.Old_Price.Value : 0,
                         retailPrice = x.Retail_Price.HasValue ? x.Retail_Price.Value : 0,
                         content = x.ProductContent,
                         webPublish = x.WebPublish.HasValue ? x.WebPublish.Value : false,
@@ -168,15 +169,18 @@ namespace ann_shop_server.Services
 
 
                 #region Lấy theo preOrder (hang-co-san | hang-order)
-                if (!String.IsNullOrEmpty(filter.preOrder))
+                if (!String.IsNullOrEmpty(filter.productBadge))
                 {
-                    switch (filter.preOrder)
+                    switch (filter.productBadge)
                     {
                         case "hang-co-san":
                             source = source.Where(x => x.preOrder == false);
                             break;
                         case "hang-order":
                             source = source.Where(x => x.preOrder == true);
+                            break;
+                        case "hang-sale":
+                            source = source.Where(x => x.oldPrice > 0);
                             break;
                         default:
                             break;
@@ -277,12 +281,16 @@ namespace ann_shop_server.Services
                         name = x.product.title,
                         slug = x.product.slug,
                         materials = x.product.materials,
-                        badge = x.product.preOrder ? 
-                            ProductBadge.order : 
-                            (x.stock != null && x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut),
+                        badge = x.product.oldPrice > 0 ? ProductBadge.sale :
+                            (
+                                x.product.preOrder ? ProductBadge.order :
+                                   (x.stock != null && x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
+                            )
+                        ,
                         availability = x.stock != null ? x.stock.availability : x.product.availability,
                         thumbnails = Thumbnail.getALL(x.product.avatar),
                         regularPrice = x.product.regularPrice,
+                        oldPrice = x.product.oldPrice,
                         retailPrice = x.product.retailPrice,
                         content = x.product.content
                     })
@@ -314,13 +322,13 @@ namespace ann_shop_server.Services
         #endregion
 
         #region Phân trang sản phẩm theo category slug and preOrder (hang-co-san | hang-order) and sort
-        public List<ProductCardModel> getProductListByCategoryPreOrderSort(string categorySlug, string preOrder, int sort, ref PaginationMetadataModel pagination)
+        public List<ProductCardModel> getProductListByCategoryPreOrderSort(string categorySlug, string productBadge, int sort, ref PaginationMetadataModel pagination)
         {
 
             var filter = new ProductFilterModel()
             {
                 categorySlug = categorySlug,
-                preOrder = preOrder,
+                productBadge = productBadge,
                 productSort = (int)ProductSortKind.ProductNew
             };
 
@@ -379,12 +387,12 @@ namespace ann_shop_server.Services
         #endregion
 
         #region Phân trang sản phẩm theo preOrder (hang-co-san | hang-order) and sort
-        public List<ProductCardModel> getProductListByPreOrderSort(string preOrder, int sort, ref PaginationMetadataModel pagination)
+        public List<ProductCardModel> getProductListByPreOrderSort(string productBadge, int sort, ref PaginationMetadataModel pagination)
         {
 
             var filter = new ProductFilterModel()
             {
-                preOrder = preOrder,
+                productBadge = productBadge,
                 productSort = (int)ProductSortKind.ProductNew
             };
 
@@ -524,6 +532,7 @@ namespace ann_shop_server.Services
                             avatar = p.ProductImage,
                             materials = p.Materials,
                             regularPrice = p.Regular_Price.HasValue ? p.Regular_Price.Value : 0,
+                            oldPrice = p.Old_Price.HasValue ? p.Old_Price.Value : 0,
                             retailPrice = p.Retail_Price.HasValue ? p.Retail_Price.Value : 0,
                             content = p.ProductContent,
                             slug = p.Slug,
@@ -554,18 +563,22 @@ namespace ann_shop_server.Services
                             thumbnails = Thumbnail.getALL(parent.pro.avatar),
                             materials = parent.pro.materials,
                             regularPrice = parent.pro.regularPrice,
+                            oldPrice = parent.pro.oldPrice,
                             retailPrice = parent.pro.retailPrice,
                             content = parent.pro.content,
                             slug = parent.pro.slug,
                             images = images,
                             colors = colors,
                             sizes = sizes,
-                            badge = parent.pro.preOrder ?
-                                ProductBadge.order :
+                            badge = parent.pro.oldPrice > 0 ? ProductBadge.sale :
                                 (
-                                    child == null ?
-                                        ProductBadge.stockOut :
-                                        (child.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
+                                    parent.pro.preOrder ?
+                                    ProductBadge.order :
+                                    (
+                                        child == null ?
+                                            ProductBadge.stockOut :
+                                            (child.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
+                                    )
                                 )
                         }
                     )
@@ -733,12 +746,13 @@ namespace ann_shop_server.Services
                         name = getVariableName(x.productVariable.color, x.productVariable.size),
                         sku = x.productVariable.sku,
                         avatar = Thumbnail.getURL(x.productVariable.avatar, Thumbnail.Size.Source),
-                        badge = product.PreOrder ?
-                            ProductBadge.order :
+                        badge = product.Old_Price.HasValue && product.Old_Price.Value > 0 ? ProductBadge.sale :
                             (
-                                x.stock == null ?
-                                    ProductBadge.stockOut :
-                                    (x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
+                                product.PreOrder ? ProductBadge.order :
+                                (
+                                    x.stock == null ? ProductBadge.stockOut :
+                                        (x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
+                                )
                             )
                     })
                     .OrderBy(x => x.id)

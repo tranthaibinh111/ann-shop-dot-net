@@ -54,25 +54,25 @@ namespace ann_shop_server.Services
         /// Lấy tất cả sản phẩm order theo slug category
         /// </summary>
         /// <param name="slug"></param>
-        /// <param name="preOrder"></param>
+        /// <param name="productBadge"></param>
         /// <param name="sort"></param>
         /// <param name="pagination"></param>
         /// <returns></returns>
-        public List<ProductCardModel> getProductListByCategoryPreOrderSort(string categorySlug, string preOrder, int sort, ref PaginationMetadataModel pagination)
+        public List<ProductCardModel> getProductListByCategoryPreOrderSort(string categorySlug, string productBadge, int sort, ref PaginationMetadataModel pagination)
         {
-            return ProductService.Instance.getProductListByCategoryPreOrderSort(categorySlug, preOrder, sort, ref pagination);
+            return ProductService.Instance.getProductListByCategoryPreOrderSort(categorySlug, productBadge, sort, ref pagination);
         }
 
         /// <summary>
         /// Lấy tất cả sản phẩm order
         /// </summary>
-        /// <param name="preOrder"></param>
+        /// <param name="productBadge"></param>
         /// <param name="sort"></param>
         /// <param name="pagination"></param>
         /// <returns></returns>
-        public List<ProductCardModel> getProductListByPreOrderSort(string preOrder, int sort, ref PaginationMetadataModel pagination)
+        public List<ProductCardModel> getProductListByPreOrderSort(string productBadge, int sort, ref PaginationMetadataModel pagination)
         {
-            return ProductService.Instance.getProductListByPreOrderSort(preOrder, sort, ref pagination);
+            return ProductService.Instance.getProductListByPreOrderSort(productBadge, sort, ref pagination);
         }
     }
 }
