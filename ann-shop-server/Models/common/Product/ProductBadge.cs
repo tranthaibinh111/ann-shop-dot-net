@@ -10,5 +10,6 @@ namespace ann_shop_server.Models
         public const int stockIn = 1;
         public const int stockOut = 2;
         public const int order = 3;
+        public const int sale = 4;
     }
 }

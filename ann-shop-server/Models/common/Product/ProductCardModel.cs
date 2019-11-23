@@ -18,6 +18,7 @@ namespace ann_shop_server.Models
         public bool availability { get; set; }
         public List<ThumbnailModel> thumbnails { get; set; }
         public double regularPrice { get; set; }
+        public double oldPrice { get; set; }
         public double retailPrice { get; set; }
         public string content { get; set; }
     }

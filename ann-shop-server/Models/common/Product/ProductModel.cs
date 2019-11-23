@@ -13,6 +13,7 @@ namespace ann_shop_server.Models
         public List<ThumbnailModel> thumbnails { get; set; }
         public string materials { get; set; }
         public double regularPrice { get; set; }
+        public double oldPrice { get; set; }
         public double retailPrice { get; set; }
         public string content { get; set; }
         public string slug { get; set; }

@@ -47,5 +47,6 @@ namespace ann_shop_server.Models
         public string Slug { get; set; }
         public string Color { get; set; }
         public bool PreOrder { get; set; }
+        public Nullable<double> Old_Price { get; set; }
     }
 }
