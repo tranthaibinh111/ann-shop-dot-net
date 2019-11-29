@@ -62,7 +62,7 @@ namespace ann_shop_server.Controllers.Searches
         /// <returns></returns>
         [HttpGet]
         [Route("search-product/{search}")]
-        public IHttpActionResult GetProductBySearchSort(string search, [FromUri]PagingParameterModel pagingParameterModel, int sort = (int)ProductSortKind.ProductNew)
+        public IHttpActionResult GetProductBySearchSort(string search, [FromUri]SearchProductParameterModel parameter)
         {
             if (String.IsNullOrEmpty(search))
             {
@@ -71,10 +71,16 @@ namespace ann_shop_server.Controllers.Searches
 
             var pagination = new PaginationMetadataModel()
             {
-                currentPage = pagingParameterModel.pageNumber,
-                pageSize = pagingParameterModel.pageSize
+                currentPage = parameter.pageNumber,
+                pageSize = parameter.pageSize
             };
-            var products = _service.getProductBySearchSort(search, sort, ref pagination);
+            var filter = new SearchProductFilterModel()
+            {
+                search = search,
+                sort = parameter.sort
+            };
+
+            var products = _service.getProducts(filter, ref pagination);
 
             if (products == null || products.Count == 0)
                 return NotFound();

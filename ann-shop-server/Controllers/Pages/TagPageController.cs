@@ -59,14 +59,19 @@ namespace ann_shop_server.Controllers.Pages
         /// <returns></returns>
         [HttpGet]
         [Route("{slug}/product")]
-        public IHttpActionResult GetProductByCategory(string slug, [FromUri]PagingParameterModel pagingParameterModel, int sort = (int)ProductSortKind.ProductNew)
+        public IHttpActionResult GetProductByCategory(string slug, [FromUri]TagPageParameterModel parameter)
         {
             var pagination = new PaginationMetadataModel()
             {
-                currentPage = pagingParameterModel.pageNumber,
-                pageSize = pagingParameterModel.pageSize
+                currentPage = parameter.pageNumber,
+                pageSize = parameter.pageSize
             };
-            var products = _service.getProductListByTagSort(slug, sort, ref pagination);
+            var filter = new TagPageFilterModel()
+            {
+                tagSlug = slug,
+                sort = parameter.sort
+            };
+            var products = _service.getProducts(filter, ref pagination);
 
 
             if (products == null || products.Count == 0)

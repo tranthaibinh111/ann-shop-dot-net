@@ -125,7 +125,7 @@ namespace ann_shop_server.Services
         #endregion
 
         #region Lấy danh sách sản phẩm theo điều kiện filter
-        private List<ProductCardModel> getProductList(ProductFilterModel filter, ref PaginationMetadataModel pagination)
+        private List<ProductCardModel> getProducts(ProductFilterModel filter, ref PaginationMetadataModel pagination)
         {
             using (var con = new inventorymanagementEntities())
             {
@@ -189,7 +189,6 @@ namespace ann_shop_server.Services
                 }
                 #endregion
 
-
                 #region Lấy theo preOrder (hang-co-san | hang-order)
                 if (!String.IsNullOrEmpty(filter.productBadge))
                 {
@@ -210,6 +209,17 @@ namespace ann_shop_server.Services
                 }
                 #endregion
 
+                #region Lấy theo wholesale price
+                if (filter.priceMin > 0)
+                {
+                    source = source.Where(x => x.regularPrice >= filter.priceMin);
+                }
+                if (filter.priceMax > 0)
+                {
+                    source = source.Where(x => x.regularPrice <= filter.priceMax);
+                }
+                #endregion
+
                 #region Lấy theo category slug
                 if (!String.IsNullOrEmpty(filter.categorySlug))
                 {
@@ -219,6 +229,29 @@ namespace ann_shop_server.Services
                         return null;
 
                     var categoryIDs = categories.Select(x => x.id).OrderByDescending(o => o).ToList();
+                    source = source.Where(x => categoryIDs.Contains(x.categoryID));
+                }
+                #endregion
+
+                #region Lấy theo category slug
+                if (filter.categorySlugList != null && filter.categorySlugList.Count > 0)
+                {
+                    var categories = new List<CategoryModel>();
+
+                    foreach (var categorySlug in filter.categorySlugList)
+                    {
+                        var categoryChilds = CategoryService.Instance.getCategoryChild(categorySlug);
+
+                        if (categoryChilds == null || categoryChilds.Count == 0)
+                            continue;
+
+                        categories.AddRange(categoryChilds);
+                    }
+
+                    if (categories == null || categories.Count == 0)
+                        return null;
+
+                    var categoryIDs = categories.Select(x => x.id).Distinct().OrderByDescending(o => o).ToList();
                     source = source.Where(x => categoryIDs.Contains(x.categoryID));
                 }
                 #endregion
@@ -343,109 +376,83 @@ namespace ann_shop_server.Services
         }
         #endregion
 
-        #region Phân trang sản phẩm theo category slug and preOrder (hang-co-san | hang-order) and sort
-        public List<ProductCardModel> getProductListByCategoryPreOrderSort(string categorySlug, string productBadge, int sort, ref PaginationMetadataModel pagination)
-        {
-
-            var filter = new ProductFilterModel()
-            {
-                categorySlug = categorySlug,
-                productBadge = productBadge,
-                productSort = (int)ProductSortKind.ProductNew
-            };
-
-            return getProductList(filter, ref pagination);
-        }
-        #endregion
-
-        #region Phân trang sản phẩm theo category slug and sort
-        public List<ProductCardModel> getProductListByCategorySort(string categorySlug, int sort, ref PaginationMetadataModel pagination)
-        {
-
-            var filter = new ProductFilterModel()
-            {
-                categorySlug = categorySlug,
-                productSort = (int)ProductSortKind.ProductNew
-            };
-
-            return getProductList(filter, ref pagination);
-        }
-        #endregion
-
-        #region Phân trang sản phẩm theo category slug
+        #region Phân trang sản phẩm theo filter của trang category
         /// <summary>
-        /// Phân trang sản phẩm theo category slug
+        /// Phân trang sản phẩm theo filter của trang category 
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="pagination"></param>
+        /// <returns></returns>
+        public List<ProductCardModel> getProducts(CategoryPageFilterModel category, ref PaginationMetadataModel pagination)
+        {
+            var filter = new ProductFilterModel()
+            {
+                categorySlug = category.categorySlug,
+                productBadge = category.productBadge,
+                productSort = category.sort,
+                priceMin = category.priceMin,
+                priceMax = category.priceMax
+            };
+
+            return getProducts(filter, ref pagination);
+        }
+        #endregion
+
+        #region Phân trang sản phẩm theo filter của trang home
+        /// <summary>
+        /// Phân trang sản phẩm theo filter của trang home
+        /// </summary>
+        /// <param name="home"></param>
+        /// <param name="pagination"></param>
+        /// <returns></returns>
+        public List<ProductCardModel> getProducts(HomePageFilterModel home, ref PaginationMetadataModel pagination)
+        {
+            var filter = new ProductFilterModel()
+            {
+                categorySlug = home.categorySlug,
+                categorySlugList = home.categorySlugList,
+                productSort = home.sort
+            };
+
+            return getProducts(filter, ref pagination);
+        }
+        #endregion
+
+        #region Phân trang sản phẩm theo filter của trang tìm kiếm sản phẩm
+        /// <summary>
+        /// Phân trang sản phẩm theo filter của trang tìm kiếm sản phẩm
+        /// </summary>
+        /// <param name="searchProduct"></param>
+        /// <param name="pagination"></param>
+        /// <returns></returns>
+        public List<ProductCardModel> getProducts(SearchProductFilterModel searchProduct, ref PaginationMetadataModel pagination)
+        {
+            var filter = new ProductFilterModel()
+            {
+                productSearch = searchProduct.search,
+                productSort = searchProduct.sort
+            };
+
+            return getProducts(filter, ref pagination);
+        }
+        #endregion
+
+        #region Phân trang sản phẩm theo filter của trang tag
+        /// <summary>
+        /// Phân trang sản phẩm theo filter của trang tag
         /// </summary>
         /// <param name="categorySlug"></param>
         /// <param name="pagination"></param>
         /// <returns></returns>
-        public List<ProductCardModel> getProductListByCategory(string categorySlug, ref PaginationMetadataModel pagination)
+        public List<ProductCardModel> getProducts(TagPageFilterModel tag, ref PaginationMetadataModel pagination)
         {
-            if (String.IsNullOrEmpty(categorySlug))
-                return null;
-
             var filter = new ProductFilterModel()
             {
-                categorySlug = categorySlug,
-                productSort = (int)ProductSortKind.ProductNew
+                tagSlug = tag.tagSlug,
+                productSort = tag.sort
             };
 
-            return getProductList(filter, ref pagination);
-        }
-        #endregion
-
-        #region Phân trang sản phẩm theo product search and sort
-        public List<ProductCardModel> getProductListBySearchSort(string search, int sort, ref PaginationMetadataModel pagination)
-        {
-
-            var filter = new ProductFilterModel()
-            {
-                productSearch = search,
-                productSort = (int)ProductSortKind.ProductNew
-            };
-
-            return getProductList(filter, ref pagination);
-        }
-        #endregion
-
-        #region Phân trang sản phẩm theo preOrder (hang-co-san | hang-order) and sort
-        public List<ProductCardModel> getProductListByPreOrderSort(string productBadge, int sort, ref PaginationMetadataModel pagination)
-        {
-
-            var filter = new ProductFilterModel()
-            {
-                productBadge = productBadge,
-                productSort = (int)ProductSortKind.ProductNew
-            };
-
-            return getProductList(filter, ref pagination);
-        }
-        #endregion
-
-        #region Phân trang sản phẩm theo sort
-        public List<ProductCardModel> getProductListBySort(int sort, ref PaginationMetadataModel pagination)
-        {
-
-            var filter = new ProductFilterModel()
-            {
-                productSort = (int)ProductSortKind.ProductNew
-            };
-
-            return getProductList(filter, ref pagination);
-        }
-        #endregion
-
-        #region Phân trang sản phẩm theo product tag and sort
-        public List<ProductCardModel> getProductListByTagSort(string tagSlug, int sort, ref PaginationMetadataModel pagination)
-        {
-
-            var filter = new ProductFilterModel()
-            {
-                tagSlug = tagSlug,
-                productSort = sort
-            };
-
-            return getProductList(filter, ref pagination);
+            return getProducts(filter, ref pagination);
         }
         #endregion
         #endregion

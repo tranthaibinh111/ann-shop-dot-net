@@ -25,15 +25,14 @@ namespace ann_shop_server.Services
         }
 
         /// <summary>
-        /// Lấy tất cả sản phẩm theo slug category
+        /// Lấy tất cả sản phẩm theo filter
         /// </summary>
-        /// <param name="slug"></param>
-        /// <param name="sort"></param>
+        /// <param name="filter"></param>
         /// <param name="pagination"></param>
         /// <returns></returns>
-        public List<ProductCardModel> getProductListByTagSort(string tagSlug, int sort, ref PaginationMetadataModel pagination)
+        public List<ProductCardModel> getProducts(TagPageFilterModel filter, ref PaginationMetadataModel pagination)
         {
-            return ProductService.Instance.getProductListByTagSort(tagSlug, sort, ref pagination);
+            return ProductService.Instance.getProducts(filter, ref pagination);
         }
     }
 }

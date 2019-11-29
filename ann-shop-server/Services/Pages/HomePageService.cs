@@ -9,9 +9,15 @@ namespace ann_shop_server.Services.Pages
 {
     public class HomePageService : Service<HomePageService>
     {
-        public List<ProductCardModel> getProductListByCategory(string categorySlug, ref PaginationMetadataModel pagination)
+        /// <summary>
+        /// Lấy producttheo bộ lọc
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="pagination"></param>
+        /// <returns></returns>
+        public List<ProductCardModel> getProducts(HomePageFilterModel filter, ref PaginationMetadataModel pagination)
         {
-            return ProductService.Instance.getProductListByCategory(categorySlug, ref pagination);
+            return ProductService.Instance.getProducts(filter, ref pagination);
         }
     }
 }

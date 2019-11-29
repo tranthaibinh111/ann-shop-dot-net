@@ -25,51 +25,14 @@ namespace ann_shop_server.Services
         }
 
         /// <summary>
-        /// Lấy tất cả sản phẩm theo slug category
+        /// Lấy tất cả sản phẩm theo bộ lọc
         /// </summary>
-        /// <param name="slug"></param>
-        /// <param name="sort"></param>
+        /// <param name="filter"></param>
         /// <param name="pagination"></param>
         /// <returns></returns>
-        public List<ProductCardModel> getProductListByCategorySort(string categorySlug, int sort, ref PaginationMetadataModel pagination)
+        public List<ProductCardModel> getProducts(CategoryPageFilterModel filter, ref PaginationMetadataModel pagination)
         {
-            return ProductService.Instance.getProductListByCategorySort(categorySlug, sort, ref pagination);
-        }
-
-        /// <summary>
-        /// Lấy tất cả sản phẩm có chứa từ khóa
-        /// </summary>
-        /// <param name="sort"></param>
-        /// <param name="pagination"></param>
-        /// <returns></returns>
-        public List<ProductCardModel> getProductListBySort(int sort, ref PaginationMetadataModel pagination)
-        {
-            return ProductService.Instance.getProductListBySort(sort, ref pagination);
-        }
-
-        /// <summary>
-        /// Lấy tất cả sản phẩm order theo slug category
-        /// </summary>
-        /// <param name="slug"></param>
-        /// <param name="productBadge"></param>
-        /// <param name="sort"></param>
-        /// <param name="pagination"></param>
-        /// <returns></returns>
-        public List<ProductCardModel> getProductListByCategoryPreOrderSort(string categorySlug, string productBadge, int sort, ref PaginationMetadataModel pagination)
-        {
-            return ProductService.Instance.getProductListByCategoryPreOrderSort(categorySlug, productBadge, sort, ref pagination);
-        }
-
-        /// <summary>
-        /// Lấy tất cả sản phẩm order
-        /// </summary>
-        /// <param name="productBadge"></param>
-        /// <param name="sort"></param>
-        /// <param name="pagination"></param>
-        /// <returns></returns>
-        public List<ProductCardModel> getProductListByPreOrderSort(string productBadge, int sort, ref PaginationMetadataModel pagination)
-        {
-            return ProductService.Instance.getProductListByPreOrderSort(productBadge, sort, ref pagination);
+            return ProductService.Instance.getProducts(filter, ref pagination);
         }
     }
 }
