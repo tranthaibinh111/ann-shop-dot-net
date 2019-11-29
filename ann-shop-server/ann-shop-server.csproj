@@ -254,6 +254,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Pages\HomePageController.cs" />
     <Compile Include="Controllers\Pages\InvoiceOrderPageController.cs" />
+    <Compile Include="Controllers\Pages\TagPageController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\Pages\ProductPageController.cs" />
     <Compile Include="Controllers\Pages\CategoryPageController.cs" />
@@ -299,6 +300,7 @@
     <Compile Include="Models\Common\Product\ProductStyle.cs" />
     <Compile Include="Models\Common\Product\SizeModel.cs" />
     <Compile Include="Models\Common\Product\ProductSortModel.cs" />
+    <Compile Include="Models\Common\Product\TagModel.cs" />
     <Compile Include="Models\Common\Product\VariableKind.cs" />
     <Compile Include="Models\Common\Stock\StockProductVariableModel.cs" />
     <Compile Include="Models\CronJob.cs">
@@ -339,6 +341,9 @@
     <Compile Include="Models\post\PostPageModel.cs" />
     <Compile Include="Models\Common\Product\ProductModel.cs" />
     <Compile Include="Models\Common\Product\ProductRelatedModel.cs" />
+    <Compile Include="Models\ProductTag.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ReceivedProductHistory.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -353,6 +358,9 @@
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Shipper.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tag.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Account.cs">
@@ -477,11 +485,13 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Services\Common\CategoryService.cs" />
     <Compile Include="Services\Common\ProductService.cs" />
+    <Compile Include="Services\Common\TagService.cs" />
     <Compile Include="Services\Pages\HomePageService.cs" />
     <Compile Include="Services\Pages\InvoiceOrderPageService.cs" />
     <Compile Include="Services\Common\PostService.cs" />
     <Compile Include="Services\Pages\CategoryPageService.cs" />
     <Compile Include="Services\Pages\ProductPageService.cs" />
+    <Compile Include="Services\Pages\TagPageService.cs" />
     <Compile Include="Services\Searches\SearchProductService.cs" />
     <Compile Include="Services\Common\Service.cs" />
     <Compile Include="Services\Common\StockService.cs" />

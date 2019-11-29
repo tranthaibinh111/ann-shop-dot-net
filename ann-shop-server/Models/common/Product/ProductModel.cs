@@ -21,5 +21,6 @@ namespace ann_shop_server.Models
         public List<ColorModel> colors { get; set; }
         public List<SizeModel> sizes { get; set; }
         public int badge { get; set; }
+        public List<TagModel> tags { get; set; }
     }
 }
