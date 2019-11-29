@@ -11,5 +11,6 @@ namespace ann_shop_server.Models
         public string productBadge { get; set; }
         public string productSearch { get; set; }
         public int productSort { get; set; }
+        public string tagSlug { get; set; }
     }
 }

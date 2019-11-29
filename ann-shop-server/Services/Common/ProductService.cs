@@ -167,6 +167,28 @@ namespace ann_shop_server.Services
                 }
                 #endregion
 
+                #region Lọc sản phẩm theo tag slug
+                if (!String.IsNullOrEmpty(filter.tagSlug))
+                {
+                    var tags = con.Tags.Where(x => x.Slug == filter.tagSlug.Trim().ToLower());
+                    var prodTags = con.ProductTags
+                        .Join(
+                            tags,
+                            pt => pt.TagID,
+                            t => t.ID,
+                            (pt, t) => pt
+                        );
+
+                    source = source
+                        .Join(
+                            prodTags,
+                            p => p.productID,
+                            t => t.ProductID,
+                            (p, t) => p
+                        );
+                }
+                #endregion
+
 
                 #region Lấy theo preOrder (hang-co-san | hang-order)
                 if (!String.IsNullOrEmpty(filter.productBadge))
@@ -412,6 +434,20 @@ namespace ann_shop_server.Services
             return getProductList(filter, ref pagination);
         }
         #endregion
+
+        #region Phân trang sản phẩm theo product tag and sort
+        public List<ProductCardModel> getProductListByTagSort(string tagSlug, int sort, ref PaginationMetadataModel pagination)
+        {
+
+            var filter = new ProductFilterModel()
+            {
+                tagSlug = tagSlug,
+                productSort = sort
+            };
+
+            return getProductList(filter, ref pagination);
+        }
+        #endregion
         #endregion
 
         #region Lấy thông tin sản phẩm
@@ -478,6 +514,38 @@ namespace ann_shop_server.Services
         }
         #endregion
 
+        #region Lấy danh sách tag của sản phẩm
+        /// <summary>
+        /// Lấy danh sách tag của sản phẩm
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
+        private List<TagModel> getTagListByProduct(int productID)
+        {
+            using (var con = new inventorymanagementEntities())
+            {
+                // Lấy hình ảnh của sản phẩm cha
+                var tags = con.ProductTags
+                    .Where(x => x.ProductID == productID)
+                    .Where(x => x.ProductVariableID == 0)
+                    .Join(
+                        con.Tags,
+                        pt => pt.TagID,
+                        t => t.ID,
+                        (pt, t) => new TagModel()
+                        {
+                            id = t.ID,
+                            name = t.Name,
+                            slug = t.Slug
+                        }
+                    )
+                    .ToList();
+
+                return tags;
+            }
+        }
+        #endregion
+
         #region Lấy thông tin sản phẩm theo slug
         /// <summary>
         /// Lấy thông tin sản phẩm theo slug
@@ -515,6 +583,9 @@ namespace ann_shop_server.Services
 
                 // Get images of product
                 var images = getImageListByProduct(id);
+
+                // Get tags of product
+                var tags = getTagListByProduct(id);
 
                 // Xuất thông tin cơ bản của sản phẩm
                 var products = data.Where(x => x.CategoryID.HasValue)
@@ -579,7 +650,8 @@ namespace ann_shop_server.Services
                                             ProductBadge.stockOut :
                                             (child.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
                                     )
-                                )
+                                ),
+                            tags = tags
                         }
                     )
                     .OrderBy(o => o.id)
