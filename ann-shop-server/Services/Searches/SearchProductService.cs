@@ -150,15 +150,14 @@ namespace ann_shop_server.Services.Searches
         }
 
         /// <summary>
-        /// Lấy tất cả sản phẩm có chứa từ khóa
+        /// Lấy tất cả sản phẩm theo từ khóa
         /// </summary>
-        /// <param name="search"></param>
-        /// <param name="sort"></param>
+        /// <param name="filter"></param>
         /// <param name="pagination"></param>
         /// <returns></returns>
-        public List<ProductCardModel> getProductBySearchSort(string search, int sort, ref PaginationMetadataModel pagination)
+        public List<ProductCardModel> getProducts(SearchProductFilterModel filter, ref PaginationMetadataModel pagination)
         {
-            return ProductService.Instance.getProductListBySearchSort(search, sort, ref pagination);
+            return ProductService.Instance.getProducts(filter, ref pagination);
         }
         #endregion
     }

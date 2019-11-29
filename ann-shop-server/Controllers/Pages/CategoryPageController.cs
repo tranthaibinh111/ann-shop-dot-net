@@ -51,29 +51,22 @@ namespace ann_shop_server.Controllers
                 return Ok<List<ProductSortModel>>(sorts);
         }
 
-        private IHttpActionResult getProduct(string slug, string productBadge, int sort, [FromUri]PagingParameterModel pagingParameterModel)
+        private IHttpActionResult getProduct(string slug, string productBadge, [FromUri]CategoryPageParameterModel parameter)
         {
             var pagination = new PaginationMetadataModel()
             {
-                currentPage = pagingParameterModel.pageNumber,
-                pageSize = pagingParameterModel.pageSize
+                currentPage = parameter.pageNumber,
+                pageSize = parameter.pageSize
             };
-            List<ProductCardModel> products;
-
-            if (!String.IsNullOrEmpty(slug))
+            var filter = new CategoryPageFilterModel()
             {
-                if (!String.IsNullOrEmpty(productBadge))
-                    products = _service.getProductListByCategoryPreOrderSort(slug, productBadge, sort, ref pagination);
-                else
-                    products = _service.getProductListByCategorySort(slug, sort, ref pagination);
-            }
-            else
-            {
-                if (!String.IsNullOrEmpty(productBadge))
-                    products = _service.getProductListByPreOrderSort(productBadge, sort, ref pagination);
-                else
-                    products = _service.getProductListBySort(sort, ref pagination);
-            }
+                categorySlug = slug,
+                productBadge = productBadge,
+                priceMin = parameter.priceMin,
+                priceMax = parameter.priceMax,
+                sort = parameter.sort
+            };
+            var products = _service.getProducts(filter, ref pagination);
 
             if (products == null || products.Count == 0)
                 return NotFound();
@@ -91,26 +84,24 @@ namespace ann_shop_server.Controllers
         /// Lấy sản phẩm theo danh mục
         /// </summary>
         /// <param name="slug"></param>
-        /// <param name="pagingParameterModel"></param>
-        /// <param name="sort"></param>
+        /// <param name="parameter"></param>
         /// <returns></returns>
         [HttpGet]
         [Route("{slug}/product")]
-        public IHttpActionResult GetProductByCategory(string slug, [FromUri]PagingParameterModel pagingParameterModel, int sort = (int)ProductSortKind.ProductNew)
+        public IHttpActionResult GetProductByCategory(string slug, [FromUri]CategoryPageParameterModel parameter)
         {
-            return this.getProduct(slug, String.Empty, sort, pagingParameterModel);
+            return this.getProduct(slug, String.Empty, parameter);
         }
 
         /// <summary>
         /// Lấy tất cả sản phẩm
         /// </summary>
-        /// <param name="pagingParameterModel"></param>
-        /// <param name="sort"></param>
+        /// <param name="parameter"></param>
         /// <returns></returns>
         [Route("product")]
-        public IHttpActionResult GetProductAll([FromUri]PagingParameterModel pagingParameterModel, int sort = (int)ProductSortKind.ProductNew)
+        public IHttpActionResult GetProductAll([FromUri]CategoryPageParameterModel parameter)
         {
-            return this.getProduct(String.Empty, String.Empty, sort, pagingParameterModel);
+            return this.getProduct(String.Empty, String.Empty, parameter);
         }
 
         /// <summary>
@@ -118,27 +109,25 @@ namespace ann_shop_server.Controllers
         /// </summary>
         /// <param name="slug"></param>
         /// <param name="productBadge"></param>
-        /// <param name="pagingParameterModel"></param>
-        /// <param name="sort"></param>
+        /// <param name="parameter"></param>
         /// <returns></returns>
         [HttpGet]
         [Route("{slug}/product/{productBadge}")]
-        public IHttpActionResult GetProductOrderByCategory(string slug, string productBadge, [FromUri]PagingParameterModel pagingParameterModel, int sort = (int)ProductSortKind.ProductNew)
+        public IHttpActionResult GetProductOrderByCategory(string slug, string productBadge, [FromUri]CategoryPageParameterModel parameter)
         {
-            return this.getProduct(slug, productBadge, sort, pagingParameterModel);
+            return this.getProduct(slug, productBadge, parameter);
         }
 
         /// <summary>
         /// Lấy sản phẩm order
         /// </summary>
         /// <param name="productBadge"></param>
-        /// <param name="pagingParameterModel"></param>
-        /// <param name="sort"></param>
+        /// <param name="parameter"></param>
         /// <returns></returns>
         [Route("product/{productBadge}")]
-        public IHttpActionResult GetProductOrderAll(string productBadge, [FromUri]PagingParameterModel pagingParameterModel,int sort = (int)ProductSortKind.ProductNew)
+        public IHttpActionResult GetProductOrderAll(string productBadge, [FromUri]CategoryPageParameterModel parameter)
         {
-            return this.getProduct(String.Empty, productBadge, sort, pagingParameterModel);
+            return this.getProduct(String.Empty, productBadge, parameter);
         }
     }
 }

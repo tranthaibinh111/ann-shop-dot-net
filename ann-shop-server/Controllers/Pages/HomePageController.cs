@@ -36,8 +36,20 @@ namespace ann_shop_server.Controllers
                 currentPage = pagingParameterModel.pageNumber,
                 pageSize = pagingParameterModel.pageSize
             };
-            var products = _service.getProductListByCategory(slug, ref pagination);
+            var filter = new HomePageFilterModel();
 
+            if (slug.Contains("|"))
+            {
+                filter.categorySlug = String.Empty;
+                filter.categorySlugList = slug.Split('|').Distinct().ToList();
+            }
+            else
+            {
+                filter.categorySlug = slug;
+                filter.categorySlugList = new List<string>();
+            }
+
+            var products = _service.getProducts(filter, ref pagination);
             if (products == null)
                 return NotFound();
 
