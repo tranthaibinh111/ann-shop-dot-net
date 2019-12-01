@@ -21,15 +21,7 @@ namespace ann_shop_server.Controllers
             _service = HomePageService.Instance;
         }
 
-        /// <summary>
-        /// Lấy sản phẩm theo slug category
-        /// </summary>
-        /// <param name="slug"></param>
-        /// <param name="pagingParameterModel"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("category/{*slug}")]
-        public IHttpActionResult GetProductListByCategory(string slug, [FromUri]PagingParameterModel pagingParameterModel)
+        private IHttpActionResult GetProducts(string slug, string[] slugList, PagingParameterModel pagingParameterModel)
         {
             var pagination = new PaginationMetadataModel()
             {
@@ -38,10 +30,10 @@ namespace ann_shop_server.Controllers
             };
             var filter = new HomePageFilterModel();
 
-            if (slug.Contains("|"))
+            if (String.IsNullOrEmpty(slug) && slugList != null && slugList.Length > 0)
             {
                 filter.categorySlug = String.Empty;
-                filter.categorySlugList = slug.Split('|').Distinct().ToList();
+                filter.categorySlugList = slugList.ToList();
             }
             else
             {
@@ -59,6 +51,32 @@ namespace ann_shop_server.Controllers
 
             // Returing List of product Collections
             return Ok<List<ProductCardModel>>(products);
+        }
+
+        /// <summary>
+        /// Lấy sản phẩm theo slug category
+        /// </summary>
+        /// <param name="slug"></param>
+        /// <param name="pagingParameterModel"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("category/{*slug}")]
+        public IHttpActionResult GetProductListByCategory(string slug, [FromUri]PagingParameterModel pagingParameterModel)
+        {
+            return GetProducts(slug, null, pagingParameterModel);
+        }
+
+        /// <summary>
+        /// Lấy sản phẩm theo slug category
+        /// </summary>
+        /// <param name="slug"></param>
+        /// <param name="pagingParameterModel"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("category")]
+        public IHttpActionResult GetProductListByCategoryList([FromUri]string[] slugList, [FromUri]PagingParameterModel pagingParameterModel)
+        {
+            return GetProducts(String.Empty, slugList, pagingParameterModel);
         }
     }
 }
