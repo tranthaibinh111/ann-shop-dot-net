@@ -449,6 +449,8 @@ namespace ann_shop_server.Services
             var filter = new ProductFilterModel()
             {
                 tagSlug = tag.tagSlug,
+                priceMin = tag.priceMin,
+                priceMax = tag.priceMax,
                 productSort = tag.sort
             };
 

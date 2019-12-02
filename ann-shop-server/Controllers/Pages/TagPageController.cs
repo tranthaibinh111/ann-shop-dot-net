@@ -69,6 +69,8 @@ namespace ann_shop_server.Controllers.Pages
             var filter = new TagPageFilterModel()
             {
                 tagSlug = slug,
+                priceMin = parameter.priceMin,
+                priceMax = parameter.priceMax,
                 sort = parameter.sort
             };
             var products = _service.getProducts(filter, ref pagination);
