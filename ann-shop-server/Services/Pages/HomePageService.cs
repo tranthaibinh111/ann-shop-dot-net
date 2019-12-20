@@ -10,7 +10,7 @@ namespace ann_shop_server.Services.Pages
     public class HomePageService : Service<HomePageService>
     {
         /// <summary>
-        /// Lấy producttheo bộ lọc
+        /// Lấy product theo bộ lọc
         /// </summary>
         /// <param name="filter"></param>
         /// <param name="pagination"></param>

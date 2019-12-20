@@ -466,7 +466,7 @@ namespace ann_shop_server.Services
         /// </summary>
         /// <param name="productID"></param>
         /// <returns></returns>
-        private List<ColorModel> getColors(int productID)
+        public List<ColorModel> getColors(int productID)
         {
             return getColors(new List<int>() { productID });
         }
@@ -478,7 +478,7 @@ namespace ann_shop_server.Services
         /// </summary>
         /// <param name="productID"></param>
         /// <returns></returns>
-        private List<SizeModel> getSizes(int productID)
+        public List<SizeModel> getSizes(int productID)
         {
             return getSizes(new List<int>() { productID });
         }
@@ -853,6 +853,9 @@ namespace ann_shop_server.Services
         /// <returns></returns>
         public string getImageWithVariable(int productID, int color, int size)
         {
+            if (color == 0 && size == 0)
+                return null;
+
             using (var con = new inventorymanagementEntities())
             {
                 var productVariable = con.tbl_ProductVariable
