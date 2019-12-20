@@ -380,6 +380,7 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar(max)" />
           <Property Name="Slug" Type="nvarchar" MaxLength="100" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="tbl_CheckWarehouse">
           <Key>
@@ -620,6 +621,8 @@
           <Property Name="UserHelp" Type="nvarchar(max)" />
           <Property Name="VerifiedCOD" Type="bit" Nullable="false" />
           <Property Name="VerifiedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CouponID" Type="int" />
+          <Property Name="CouponValue" Type="money" />
         </EntityType>
         <EntityType Name="tbl_OrderDetail">
           <Key>
@@ -1389,6 +1392,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Slug" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_CheckWarehouse">
           <Key>
@@ -1629,6 +1633,8 @@
           <Property Name="UserHelp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="VerifiedCOD" Type="Boolean" Nullable="false" />
           <Property Name="VerifiedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CouponID" Type="Int32" />
+          <Property Name="CouponValue" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="tbl_OrderDetail">
           <Key>
@@ -2446,6 +2452,7 @@
           <EntitySetMapping Name="tbl_Category">
             <EntityTypeMapping TypeName="inventorymanagementModel.tbl_Category">
               <MappingFragment StoreEntitySet="tbl_Category">
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
@@ -2668,6 +2675,8 @@
           <EntitySetMapping Name="tbl_Order">
             <EntityTypeMapping TypeName="inventorymanagementModel.tbl_Order">
               <MappingFragment StoreEntitySet="tbl_Order">
+                <ScalarProperty Name="CouponValue" ColumnName="CouponValue" />
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="AgentID" ColumnName="AgentID" />
                 <ScalarProperty Name="OrderType" ColumnName="OrderType" />
