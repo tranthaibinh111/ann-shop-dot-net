@@ -490,7 +490,7 @@ namespace ann_shop_server.Services
         /// </summary>
         /// <param name="productID"></param>
         /// <returns></returns>
-        private List<string> getImageListByProduct(int productID)
+        public List<string> getImageListByProduct(int productID, Thumbnail.Size size = Thumbnail.Size.Source)
         {
             using (var con = new inventorymanagementEntities())
             {
@@ -513,11 +513,11 @@ namespace ann_shop_server.Services
 
                 if (images.Count == 0)
                 {
-                    return new List<string>() { Thumbnail.getURL(String.Empty, Thumbnail.Size.Source) };
+                    return new List<string>() { Thumbnail.getURL(String.Empty, size) };
                 }
                 else
                 {
-                    return images.Select(x => Thumbnail.getURL(x, Thumbnail.Size.Source)).ToList();
+                    return images.Select(x => Thumbnail.getURL(x, size)).ToList();
                 }
             }
         }

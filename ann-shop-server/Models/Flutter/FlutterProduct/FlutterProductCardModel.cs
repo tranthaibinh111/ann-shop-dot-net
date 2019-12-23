@@ -15,6 +15,7 @@ namespace ann_shop_server.Models
         public int badge { get; set; }
         public bool availability { get; set; }
         public string avatar { get; set; }
+        public List<string> images { get; set; }
         public double regularPrice { get; set; }
         public double oldPrice { get; set; }
         public double retailPrice { get; set; }
