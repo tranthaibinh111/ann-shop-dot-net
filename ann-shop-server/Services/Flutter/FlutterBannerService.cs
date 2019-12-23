@@ -45,7 +45,7 @@ namespace ann_shop_server.Services
             {
                 new FlutterBannerModel()
                 {
-                    type = "newsletter",
+                    type = "post",
                     name = "Bao lì xì tết",
                     value = "bao-li-xi-tet",
                     image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
@@ -54,7 +54,7 @@ namespace ann_shop_server.Services
                 },
                 new FlutterBannerModel()
                 {
-                    type = "newsletter",
+                    type = "post",
                     name = "Nước hoa",
                     value = "nuoc-hoa",
                     image = "https://khohangsiann.com/wp-content/uploads/si-nuoc-hoa-gia-re-1.png",
