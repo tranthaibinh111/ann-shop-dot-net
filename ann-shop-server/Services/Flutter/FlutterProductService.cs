@@ -247,7 +247,8 @@ namespace ann_shop_server.Services
                             )
                         ,
                         availability = x.stock != null ? x.stock.availability : x.product.availability,
-                        avatar = Thumbnail.getURL(x.product.avatar, Thumbnail.Size.Source),
+                        avatar = Thumbnail.getURL(x.product.avatar, Thumbnail.Size.Small),
+                        
                         regularPrice = x.product.regularPrice,
                         oldPrice = x.product.oldPrice,
                         retailPrice = x.product.retailPrice
@@ -255,6 +256,12 @@ namespace ann_shop_server.Services
                     .Skip((pagination.currentPage - 1) * pagination.pageSize)
                     .Take(pagination.pageSize)
                     .ToList();
+
+                result = result.Select(x =>
+                {
+                    x.images = ProductService.Instance.getImageListByProduct(x.productID, Thumbnail.Size.Micro);
+                    return x;
+                }).ToList();
 
                 // if CurrentPage is greater than 1 means it has previousPage
                 pagination.previousPage = pagination.currentPage > 1 ? "Yes" : "No";
@@ -301,37 +308,6 @@ namespace ann_shop_server.Services
                     tags = data.tags,
                     content = data.content,
                 };
-
-                var images = new List<String>();
-
-                if (!String.IsNullOrEmpty(product.content))
-                {
-                    var matches = Regex.Matches(product.content, @"<img[\w\W]+?>");
-
-                    foreach (Match match in matches)
-                    {
-                        var rgx = Regex.Match(match.Value, @"\/[a-zA-Z0-9\/\-\.]+\w");
-                        if (rgx.Success)
-                            images.Add(String.Format("http://xuongann.com{0}", rgx.Value));
-                    }
-
-                    product.content = Regex.Replace(product.content, @"<img[\w\W]+?>", String.Empty).Trim();
-                    product.content += String.IsNullOrEmpty(product.content) ? String.Empty : "<br>";
-                }
-                else
-                {
-                    product.content = String.Empty;
-                }
-
-                foreach (var item in product.images)
-                {
-                    images.Add(String.Format("http://xuongann.com{0}", item));
-                }
-                images = images.Distinct().ToList();
-                foreach (var item in images)
-                {
-                    product.content += String.Format("<img src='{0}' alt='{1}' >", item, product.name);
-                }
 
                 return product;
             }

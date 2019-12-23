@@ -251,8 +251,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Flutter\FlutterBannerController.cs" />
     <Compile Include="Controllers\Flutter\FlutterBlockProductController.cs" />
     <Compile Include="Controllers\Flutter\FlutterCategoryController.cs" />
+    <Compile Include="Controllers\Flutter\FlutterNotificationController.cs" />
     <Compile Include="Controllers\Flutter\FlutterProductController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Pages\HomePageController.cs" />
@@ -327,6 +329,7 @@
     <Compile Include="Models\FeeType.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Flutter\FlutterBanner\FlutterBannerModel.cs" />
     <Compile Include="Models\Flutter\FlutterBlockProduct\FlutterBlockProductModel.cs" />
     <Compile Include="Models\Flutter\FlutterProduct\FlutterProductCardModel.cs" />
     <Compile Include="Models\Flutter\FlutterProduct\FlutterProductModel.cs" />
@@ -501,8 +504,10 @@
     <Compile Include="Services\Common\CategoryService.cs" />
     <Compile Include="Services\Common\ProductService.cs" />
     <Compile Include="Services\Common\TagService.cs" />
+    <Compile Include="Services\Flutter\FlutterBannerService.cs" />
     <Compile Include="Services\Flutter\FlutterBlockProductService.cs" />
     <Compile Include="Services\Flutter\FlutterCategoryService.cs" />
+    <Compile Include="Services\Flutter\FlutterNotificationService.cs" />
     <Compile Include="Services\Flutter\FlutterProductService.cs" />
     <Compile Include="Services\Pages\HomePageService.cs" />
     <Compile Include="Services\Pages\InvoiceOrderPageService.cs" />
