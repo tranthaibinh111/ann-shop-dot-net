@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ann_shop_server.Models
 {
-    public class FlutterCategoryModel
+    public class FlutterCategoryModel: ICloneable
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -16,5 +16,10 @@ namespace ann_shop_server.Models
 
 
         public List<FlutterCategoryModel> children { get; set; }
+
+        public virtual object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }
