@@ -17,15 +17,15 @@ namespace ann_shop_server.Services
             var blockProducts = new List<FlutterBlockProductModel>();
 
             #region Bao lì xì tết
-            var block1 = FlutterCategoryService.Instance.getCategoryBySlug("bao-li-xi-tet");
+            var block1 = FlutterCategoryService.Instance.createCategoryBlockProduct("bao-li-xi-tet");
             if (block1 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
                     banner = new FlutterBannerModel() {
-                        type = "category",
+                        action = "category",
                         name = "Bao lì xì tết",
-                        value = "bao-li-xi-tet",
+                        actionValue = "bao-li-xi-tet",
                         image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                         createdDate = DateTime.Now
                     },
@@ -35,16 +35,16 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Váy đầm
-            var block2 = FlutterCategoryService.Instance.getCategoryBySlug("vay-dam");
+            var block2 = FlutterCategoryService.Instance.createCategoryBlockProduct("vay-dam");
             if (block2 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
                     banner = new FlutterBannerModel()
                     {
-                        type = "category",
+                        action = "category",
                         name = "Váy đầm",
-                        value = "vay-dam",
+                        actionValue = "vay-dam",
                         image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                         createdDate = DateTime.Now
                     },
@@ -54,16 +54,16 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Đồ bộ nữ
-            var block3 = FlutterCategoryService.Instance.getCategoryBySlug("do-bo-nu");
+            var block3 = FlutterCategoryService.Instance.createCategoryBlockProduct("do-bo-nu");
             if (block3 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
                     banner = new FlutterBannerModel()
                     {
-                        type = "category",
+                        action = "category",
                         name = "Đồ bộ nữ",
-                        value = "do-bo-nu",
+                        actionValue = "do-bo-nu",
                         image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                         createdDate = DateTime.Now
                     },
@@ -73,16 +73,16 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Áo dài cách tân
-            var block4 = FlutterCategoryService.Instance.getCategoryBySlug("ao-dai-cach-tan");
+            var block4 = FlutterCategoryService.Instance.createCategoryBlockProduct("ao-dai-cach-tan");
             if (block4 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
                     banner = new FlutterBannerModel()
                     {
-                        type = "category",
+                        action = "category",
                         name = "Áo dài cách tân",
-                        value = "ao-dai-cach-tan",
+                        actionValue = "ao-dai-cach-tan",
                         image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                         createdDate = DateTime.Now
                     },
@@ -100,9 +100,9 @@ namespace ann_shop_server.Services
             {
                 banner = new FlutterBannerModel()
                 {
-                    type = "category",
+                    action = "category",
                     name = "Áo thung nữ - Sơ mi nữ",
-                    value = "ao-thun-nu",
+                    actionValue = "ao-thun-nu",
                     image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                     createdDate = DateTime.Now
                 },
@@ -111,16 +111,16 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Áo khoác nữ
-            var block6 = FlutterCategoryService.Instance.getCategoryBySlug("ao-khoac-nu");
+            var block6 = FlutterCategoryService.Instance.createCategoryBlockProduct("ao-khoac-nu");
             if (block6 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
                     banner = new FlutterBannerModel()
                     {
-                        type = "category",
+                        action = "category",
                         name = "Áo khoác nữ",
-                        value = "ao-khoac-nu",
+                        actionValue = "ao-khoac-nu",
                         image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                         createdDate = DateTime.Now
                     },
@@ -138,9 +138,9 @@ namespace ann_shop_server.Services
             {
                 banner = new FlutterBannerModel()
                 {
-                    type = "category",
+                    action = "category",
                     name = "Quần nữ - Đồ lót nữ",
-                    value = "quan-nu",
+                    actionValue = "quan-nu",
                     image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                     createdDate = DateTime.Now
                 },
@@ -149,16 +149,16 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Áo thung nam
-            var block8 = FlutterCategoryService.Instance.getCategoryBySlug("ao-thun-nam");
+            var block8 = FlutterCategoryService.Instance.createCategoryBlockProduct("ao-thun-nam");
             if (block8 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
                     banner = new FlutterBannerModel()
                     {
-                        type = "category",
+                        action = "category",
                         name = "Áo thung nam",
-                        value = "ao-thun-nam",
+                        actionValue = "ao-thun-nam",
                         image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                         createdDate = DateTime.Now
                     },
@@ -176,9 +176,9 @@ namespace ann_shop_server.Services
             {
                 banner = new FlutterBannerModel()
                 {
-                    type = "category",
+                    action = "category",
                     name = "Quần nam - Quần lót nam",
-                    value = "quan-nam",
+                    actionValue = "quan-nam",
                     image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                     createdDate = DateTime.Now
                 },

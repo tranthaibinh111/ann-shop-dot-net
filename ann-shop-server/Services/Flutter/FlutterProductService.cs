@@ -94,17 +94,17 @@ namespace ann_shop_server.Services
                 #endregion
 
                 #region Lấy theo preOrder (hang-co-san | hang-order)
-                if (!String.IsNullOrEmpty(filter.productBadge))
+                if (filter.productBadge > 0)
                 {
                     switch (filter.productBadge)
                     {
-                        case "hang-co-san":
+                        case (int)ProductBadge.stockIn:
                             source = source.Where(x => x.preOrder == false);
                             break;
-                        case "hang-order":
+                        case (int)ProductBadge.order:
                             source = source.Where(x => x.preOrder == true);
                             break;
-                        case "hang-sale":
+                        case (int)ProductBadge.sale:
                             source = source.Where(x => x.oldPrice > 0);
                             break;
                         default:
@@ -259,7 +259,7 @@ namespace ann_shop_server.Services
 
                 result = result.Select(x =>
                 {
-                    x.images = ProductService.Instance.getImageListByProduct(x.productID, Thumbnail.Size.Micro);
+                    x.images = ProductService.Instance.getImageListByProduct(x.productID, Thumbnail.Size.Large).Skip(0).Take(8).ToList();
                     return x;
                 }).ToList();
 

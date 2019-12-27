@@ -24,10 +24,21 @@ namespace ann_shop_server.Controllers.Flutter
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("~/api/flutter/home/categories")]
+        public IHttpActionResult GetHomeCategories()
+        {
+            return Ok<List<FlutterCategoryModel>>(_service.getHomeCategories());
+        }
+
+        /// <summary>
+        /// Lấy danh sách category cho trang home
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         [Route("~/api/flutter/categories")]
         public IHttpActionResult GetCategories()
         {
-            return Ok<List<FlutterCategoryModel>>(_service.getCategories()); ;
+            return Ok<List<FlutterCategoryModel>>(_service.getCategories());
         }
     }
 }

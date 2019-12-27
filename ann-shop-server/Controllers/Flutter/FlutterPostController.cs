@@ -9,27 +9,27 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
-namespace ann_shop_server.Controllers.Flutter
+namespace ann_shop_server.Controllers
 {
-    [RoutePrefix("api/flutter/notification")]
-    public class FlutterNotificationController : ApiController
+    [RoutePrefix("api/flutter/post")]
+    public class FlutterPostController : ApiController
     {
-        private FlutterNotificationService _service;
+        private FlutterPostService _service;
 
-        public FlutterNotificationController()
+        public FlutterPostController()
         {
-            _service = FlutterNotificationService.Instance;
+            _service = FlutterPostService.Instance;
         }
 
         /// <summary>
-        /// Lấy thông báo dạng HTML cho trang Home
+        /// Lấy danh sách banner tại đầu trang home
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("~/api/flutter/home/notifications")]
-        public IHttpActionResult GetHomeBanners()
+        [Route("~/api/flutter/home/posts")]
+        public IHttpActionResult GetHomePosts()
         {
-            return Ok<List<FlutterBannerModel>>(_service.getHomeNotification());
+            return Ok<List<FlutterBannerModel>>(_service.getHomePosts());
         }
 
         /// <summary>
@@ -37,12 +37,9 @@ namespace ann_shop_server.Controllers.Flutter
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("~/api/flutter/notifications")]
-        public IHttpActionResult GetNotifications([FromUri]FlutterNotificationFilterModel filter, [FromUri] PagingParameterModel paging)
+        [Route("~/api/flutter/posts")]
+        public IHttpActionResult GetPosts([FromUri] PagingParameterModel paging)
         {
-            if (filter == null)
-                filter = new FlutterNotificationFilterModel();
-
             if (paging == null)
                 paging = new PagingParameterModel();
 
@@ -52,13 +49,13 @@ namespace ann_shop_server.Controllers.Flutter
                 pageSize = paging.pageSize
             };
 
-            var notifications = _service.getNotifications(filter, ref pagination);
+            var posts = _service.getPosts(ref pagination);
 
             // Setting Header
             HttpContext.Current.Response.Headers.Add("Access-Control-Expose-Headers", "X-Paging-Headers");
             HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(pagination));
 
-            return Ok<List<FlutterNotificationCardModel>>(notifications);
+            return Ok<List<FlutterPostCardModel>>(posts);
         }
 
         /// <summary>
@@ -67,9 +64,9 @@ namespace ann_shop_server.Controllers.Flutter
         /// <returns></returns>
         [HttpGet]
         [Route("{*slug}")]
-        public IHttpActionResult GetNotificationBySlug(string slug)
+        public IHttpActionResult GetPostBySlug(string slug)
         {
-            return Ok<FlutterNotificationModel>(_service.getNotificationBySlug(slug));
+            return Ok<FlutterPostModel>(_service.getPostBySlug(slug));
         }
     }
 }

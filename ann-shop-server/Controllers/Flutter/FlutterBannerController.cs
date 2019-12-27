@@ -29,16 +29,5 @@ namespace ann_shop_server.Controllers
         {
             return Ok<List<FlutterBannerModel>>(_service.getHomeBanners());
         }
-
-        /// <summary>
-        /// Lấy danh sách banner tại đầu trang home
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("~/api/flutter/home/posts")]
-        public IHttpActionResult GetHomePosts()
-        {
-            return Ok<List<FlutterBannerModel>>(_service.getHomePosts());
-        }
     }
 }
