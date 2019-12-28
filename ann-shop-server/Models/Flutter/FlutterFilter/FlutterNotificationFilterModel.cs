@@ -8,6 +8,5 @@ namespace ann_shop_server.Models
     public class FlutterNotificationFilterModel
     {
         public string kind { get; set; }
-        public string slug { get; set; }
     }
 }

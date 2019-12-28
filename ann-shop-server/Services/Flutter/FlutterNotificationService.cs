@@ -32,7 +32,8 @@ namespace ann_shop_server.Services
             {
                 kind = "notification",
                 title = "Thông báo đổi hàng cuối năm",
-                slug = "doi-hang-cuoi-nam",
+                action = "view_more",
+                actionValue = "doi-hang-cuoi-nam",
                 avatar = "/uploads/doi-hang-cuoi-nam/doi-hang-cuoi-nam-3.png",
                 summary = summary,
                 content = content.ToString(),
@@ -49,12 +50,12 @@ namespace ann_shop_server.Services
             var summary = String.Empty;
             summary += "Chúng tôi xin thông báo thời gian làm việc để có thể phục vụ khách hàng tốt hơn";
 
-
             return new NotificationModel()
             {
                 kind = "news",
                 title = "Thông báo thời gian làm việc",
-                slug = "doi-hang-cuoi-nam",
+                action = "view_more",
+                actionValue = "doi-hang-cuoi-nam",
                 avatar = "https://khohangsiann.com/wp-content/uploads/thoi-gian-lam-viec-tet-small.png",
                 summary = summary,
                 content = summary,
@@ -77,11 +78,12 @@ namespace ann_shop_server.Services
             return new NotificationModel()
             {
                 kind = "promotion",
-                title = "Thông báo khuyến mãi tri ân khách hàng",
-                slug = "thoi-gian-lam-viec",
+                title = "Thông báo thời gian làm việc",
+                action = "show_web",
+                actionValue = "http://xuongann.com",
                 avatar = "https://ann.com.vn/wp-content/uploads/quan-ao-tet-2020.jpg",
                 summary = summary,
-                content = summary,
+                content = String.Empty,
                 createdDate = DateTime.Now
             };
         }
@@ -95,10 +97,9 @@ namespace ann_shop_server.Services
             var notification1 = getNotification1();
             result.Add(new FlutterBannerModel()
             {
-                action = "category",
-                category = notification1.kind,
+                action = notification1.action,
                 name = notification1.title,
-                actionValue = notification1.slug,
+                actionValue = notification1.actionValue,
                 image = notification1.avatar,
                 message = notification1.summary,
                 createdDate = notification1.createdDate
@@ -108,10 +109,9 @@ namespace ann_shop_server.Services
             var notification2 = getNotification2();
             result.Add(new FlutterBannerModel()
             {
-                action = "category",
-                category = notification2.kind,
+                action = notification2.action,
                 name = notification2.title,
-                actionValue = notification2.slug,
+                actionValue = notification2.actionValue,
                 image = notification2.avatar,
                 message = notification2.summary,
                 createdDate = notification2.createdDate
@@ -121,10 +121,9 @@ namespace ann_shop_server.Services
             var notification3 = getNotification3();
             result.Add(new FlutterBannerModel()
             {
-                action = "category",
-                category = notification3.kind,
+                action = notification3.action,
                 name = notification3.title,
-                actionValue = notification3.slug,
+                actionValue = notification3.actionValue,
                 image = notification3.avatar,
                 message = notification3.summary,
                 createdDate = notification3.createdDate
@@ -141,27 +140,12 @@ namespace ann_shop_server.Services
                 getNotification2(),
                 getNotification3()
             }
-            .Select(x => new FlutterNotificationCardModel()
-            {
-                kind = x.kind,
-                title = x.title,
-                slug = x.slug,
-                avatar = x.avatar,
-                summary = x.summary,
-                createdDate = x.createdDate
-            })
             .ToList();
 
             // Lọc theo thể lại thông báo
             if (!String.IsNullOrEmpty(filter.kind))
             {
                 data = data.Where(x => x.kind.Trim().ToLower() == filter.kind.Trim().ToLower()).ToList();
-            }
-
-            // Lọc theo slug thông báo
-            if (!String.IsNullOrEmpty(filter.slug))
-            {
-                data = data.Where(x => x.slug == filter.slug).ToList();
             }
 
             // Lấy tổng số record sản phẩm
@@ -171,6 +155,15 @@ namespace ann_shop_server.Services
             pagination.totalPages = (int)Math.Ceiling(pagination.totalCount / (double)pagination.pageSize);
 
             var result = data
+                .Select(x => new FlutterNotificationCardModel()
+                {
+                    action = x.action,
+                    name = x.title,
+                    actionValue = x.actionValue,
+                    image = x.avatar,
+                    message = x.summary,
+                    createdDate = x.createdDate
+                })
                 .Skip((pagination.currentPage - 1) * pagination.pageSize)
                 .Take(pagination.pageSize)
                 .ToList();
@@ -196,16 +189,17 @@ namespace ann_shop_server.Services
                 getNotification2(),
                 getNotification3()
             }
+            .Where(x => x.action == "view_more")
+            .Where(x => x.actionValue == slug)
             .Select(x => new FlutterNotificationModel()
             {
                 title = x.title,
-                slug = x.slug,
                 content = x.content,
                 createdDate = x.createdDate
             })
-            .ToList();
+            .FirstOrDefault();
 
-            return data.Where(x => x.slug == slug).FirstOrDefault();
+            return data;
         }
     }
 }
