@@ -23,6 +23,7 @@ namespace ann_shop_server.Models
         public double retailPrice { get; set; }
         public int badge { get; set; }
         public List<TagModel> tags { get; set; }
+        public List<FlutterDiscountModel> discounts { get; set; }
         public string content { get; set; }
     }
 }

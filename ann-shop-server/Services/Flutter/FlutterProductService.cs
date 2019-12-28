@@ -306,6 +306,15 @@ namespace ann_shop_server.Services
                     retailPrice = data.retailPrice,
                     badge = data.badge,
                     tags = data.tags,
+                    discounts = new List<FlutterDiscountModel>()
+                    {
+                        new FlutterDiscountModel() { name = "Dưới 30 cái", price = data.regularPrice },
+                        new FlutterDiscountModel() { name = "Từ 30 cái", price = data.regularPrice - 3000},
+                        new FlutterDiscountModel() { name = "Từ 50 cái", price = data.regularPrice - 5000},
+                        new FlutterDiscountModel() { name = "Từ 70 cái", price = data.regularPrice - 7000},
+                        new FlutterDiscountModel() { name = "Từ 100 cái", price = data.regularPrice - 10000},
+                        new FlutterDiscountModel() { name = "Từ 200 cái", price = data.regularPrice - 12000},
+                    },
                     content = data.content,
                 };
 
