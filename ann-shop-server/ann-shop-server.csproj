@@ -339,6 +339,7 @@
     <Compile Include="Models\Flutter\FlutterPost\FlutterPostCardModel.cs" />
     <Compile Include="Models\Flutter\FlutterPost\FlutterPostModel.cs" />
     <Compile Include="Models\Flutter\FlutterPost\NewsModel.cs" />
+    <Compile Include="Models\Flutter\FlutterProduct\FlutterDiscountModel.cs" />
     <Compile Include="Models\Flutter\FlutterProduct\FlutterProductCardModel.cs" />
     <Compile Include="Models\Flutter\FlutterProduct\FlutterProductModel.cs" />
     <Compile Include="Models\Flutter\FlutterCategory\FlutterCategoryModel.cs" />

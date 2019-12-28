@@ -7,9 +7,7 @@ namespace ann_shop_server.Models
 {
     public class FlutterCategoryModel: ICloneable
     {
-        public int id { get; set; }
         public string name { get; set; }
-        public string slug { get; set; }
         public string icon { get; set; }
         public string description { get; set; }
         public FlutterProductFilterModel filter { get; set; }

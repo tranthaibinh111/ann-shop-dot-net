@@ -306,7 +306,7 @@ namespace ann_shop_server.Services
         public FlutterCategoryModel getPerfume()
         {
             // Đồ bộ nữ
-            var perfume = createCategoryBySlug("do-bo-nu");
+            var perfume = createCategoryBySlug("nuoc-hoa");
             if (perfume == null)
                 return null;
 
@@ -472,9 +472,7 @@ namespace ann_shop_server.Services
             #region Hàng có sẵn mới về
             var productStockInNews = new FlutterCategoryModel()
             {
-                id = 0,
                 name = "Hàng có sẵn mới về",
-                slug = String.Empty,
                 icon = "/assets/images/categories/new-product.png",
                 description = "Hàng có sẳn ở kho",
                 filter = new FlutterProductFilterModel() { productBadge = (int)ProductBadge.stockIn, productSort = (int)ProductSortKind.ProductNew }
@@ -484,9 +482,7 @@ namespace ann_shop_server.Services
             #region Hàng order mới về
             var productOrderNews = new FlutterCategoryModel()
             {
-                id = 0,
                 name = "Hàng order mới về",
-                slug = String.Empty,
                 icon = "/assets/images/categories/order-product.png",
                 description = "Không có sẳn ở kho",
                 filter = new FlutterProductFilterModel() { productBadge = (int)ProductBadge.order, productSort = (int)ProductSortKind.ProductNew }
@@ -496,9 +492,7 @@ namespace ann_shop_server.Services
             #region Hàng sale
             var productSale = new FlutterCategoryModel()
             {
-                id = 0,
                 name = "Hàng sale",
-                slug = String.Empty,
                 icon = "/assets/images/categories/sale-product.png",
                 description = "Tất cả hàng sale",
                 filter = new FlutterProductFilterModel() { productBadge = (int)ProductBadge.sale, productSort = (int)ProductSortKind.ProductNew },
@@ -533,9 +527,7 @@ namespace ann_shop_server.Services
             // Hàng mới về
             var productNews = new FlutterCategoryModel()
             {
-                id = 0,
                 name = "Hàng mới về",
-                slug = String.Empty,
                 icon = "/assets/images/categories/new-product.png",
                 description = "Tất cả hàng mới về",
                 filter = new FlutterProductFilterModel() { productSort = (int)ProductSortKind.ProductNew },
@@ -589,14 +581,12 @@ namespace ann_shop_server.Services
                         (!String.IsNullOrEmpty(slug) && x.Slug == slug) ||
                         (String.IsNullOrEmpty(slug) && x.CategoryLevel == 0)
                     )
-                    .Select(x => new FlutterCategoryModel()
-                    {
+                    .Select(x => new {
                         id = x.ID,
                         name = x.CategoryName,
                         slug = x.Slug,
                         icon = x.Icon,
-                        description = x.CategoryDescription,
-                        filter = new FlutterProductFilterModel() { categorySlug = x.Slug, productSort = (int)ProductSortKind.ProductNew }
+                        description = x.CategoryDescription
                     })
                     .FirstOrDefault();
 
@@ -604,26 +594,33 @@ namespace ann_shop_server.Services
                 {
                     var children = con.tbl_Category
                         .Where(x => x.ParentID == parent.id)
+                        .OrderBy(o => o.ID)
                         .Select(x => new FlutterCategoryModel()
                         {
-                            id = x.ID,
                             name = x.CategoryName,
-                            slug = x.Slug,
                             icon = x.Icon,
                             description = x.CategoryDescription,
                             filter = new FlutterProductFilterModel() { categorySlug = x.Slug, productSort = (int)ProductSortKind.ProductNew }
                         })
-                        .OrderBy(o => o.id)
                         .ToList();
 
-                    if (children.Count > 0)
+                    var result = new FlutterCategoryModel()
                     {
-                        parent.children = new List<FlutterCategoryModel>();
-                        parent.children.AddRange(children);
-                    }
+                        name = parent.name,
+                        icon = parent.icon,
+                        description = parent.description,
+                        filter = new FlutterProductFilterModel()
+                        {
+                            categorySlug = parent.slug,
+                            productSort = (int)ProductSortKind.ProductNew
+                        },
+                        children = children.Count > 0 ? children : null
+                    };
+
+                    return result;
                 }
 
-                return parent;
+                return null;
             }
         }
 
@@ -637,9 +634,7 @@ namespace ann_shop_server.Services
         {
             var result = new FlutterCategoryModel()
             {
-                id = 0,
                 name = title,
-                slug = String.Empty,
                 icon = String.Empty,
                 description = String.Empty,
                 filter = new FlutterProductFilterModel() { categorySlugList = slugs, productSort = (int)ProductSortKind.ProductNew },
@@ -653,12 +648,14 @@ namespace ann_shop_server.Services
                 if (child != null)
                     children.Add(new FlutterCategoryModel()
                     {
-                        id = child.id,
                         name = child.name,
-                        slug = child.slug,
                         icon = child.icon,
                         description = child.description,
-                        filter = new FlutterProductFilterModel() { categorySlug = child.slug, productSort = (int)ProductSortKind.ProductNew }
+                        filter = new FlutterProductFilterModel()
+                        {
+                            categorySlug = child.filter.categorySlug,
+                            productSort = (int)ProductSortKind.ProductNew
+                        }
                     });
             }
             
@@ -672,9 +669,7 @@ namespace ann_shop_server.Services
         {
             return new FlutterCategoryModel()
             {
-                id = 0,
                 name = title,
-                slug = String.Empty,
                 icon = icon,
                 description = String.Empty,
                 filter = new FlutterProductFilterModel()
@@ -705,9 +700,7 @@ namespace ann_shop_server.Services
 
                 return new FlutterCategoryModel()
                 {
-                    id = category.ID,
                     name = category.CategoryName,
-                    slug = category.Slug,
                     icon = category.Icon,
                     description = category.CategoryDescription,
                     filter = new FlutterProductFilterModel()

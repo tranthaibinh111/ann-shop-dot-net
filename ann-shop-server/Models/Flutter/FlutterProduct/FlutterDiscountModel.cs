@@ -5,8 +5,9 @@ using System.Web;
 
 namespace ann_shop_server.Models
 {
-    public class FlutterNotificationFilterModel
+    public class FlutterDiscountModel
     {
-        public string kind { get; set; }
+        public string name { get; set; }
+        public double price { get; set; }
     }
 }

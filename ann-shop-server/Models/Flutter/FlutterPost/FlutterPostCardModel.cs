@@ -7,10 +7,11 @@ namespace ann_shop_server.Models
 {
     public class FlutterPostCardModel
     {
-        public string title { get; set; }
-        public string slug { get; set; }
-        public string avatar { get; set; }
-        public string summary { get; set; }
+        public string action { get; set; }
+        public string name { get; set; }
+        public string actionValue { get; set; }
+        public string image { get; set; }
+        public string message { get; set; }
         public DateTime createdDate { get; set; }
     }
 }

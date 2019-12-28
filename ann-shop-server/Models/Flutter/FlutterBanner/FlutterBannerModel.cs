@@ -8,7 +8,6 @@ namespace ann_shop_server.Models
     public class FlutterBannerModel
     {
         public string action { get; set; }
-        public string category { get; set; }
         public string name { get; set; }
         public string actionValue { get; set; }
         public string image { get; set; }
