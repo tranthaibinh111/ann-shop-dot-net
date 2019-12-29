@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ann_shop_server.Models
 {
-    public class FlutterProductFilterModel
+    public class FlutterProductFilterModel: ICloneable
     {
         public string categorySlug { get; set; }
         public List<string> categorySlugList { get; set; }
@@ -15,5 +15,15 @@ namespace ann_shop_server.Models
         public string tagSlug { get; set; }
         public int priceMin { get; set; }
         public int priceMax { get; set; }
+
+        public virtual object Clone()
+        {
+            var clone = (FlutterProductFilterModel)this.MemberwiseClone();
+
+            if (categorySlugList != null)
+                clone.categorySlugList = new List<string>(categorySlugList);
+
+            return clone;
+        }
     }
 }

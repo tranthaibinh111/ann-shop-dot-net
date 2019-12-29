@@ -22,7 +22,7 @@ namespace ann_shop_server.Services
             summary += "👉 Mọi năm thì tháng cuối năm ANN không nhận đổi trả hàng và qua năm mới không nhận đổi hàng của năm cũ. Nhưng năm nay ANN 'chơi lớn' thật rồi... ông giáo ạ, à không quý khách ạ! 😜";
 
             var content = new StringBuilder();
-            content.AppendLine("<p style='text-align: center;'><img alt='Đổi hàng cuối năm' src='/uploads/doi-hang-cuoi-nam/doi-hang-cuoi-nam-2.png'></p>");
+            content.AppendLine("<p style='text-align: center;'><img alt='Đổi hàng cuối năm' src='http://xuongann.com/uploads/doi-hang-cuoi-nam/doi-hang-cuoi-nam-2.png'></p>");
             content.AppendLine("<p> 😻 Nói thẳng luôn, chỉ có ANN mới dám làm điều này!</p>");
             content.AppendLine("<p> 🌼🌸🌺 Bên kho em nhận đổi trả hàng đến ngày nghỉ tết luôn (15h ngày 21/1/2020) và qua Tết vẫn nhận đổi trả hàng của năm nay luôn nhé mọi người!</p>");
             content.AppendLine("<p> 👉 Mọi năm thì tháng cuối năm ANN không nhận đổi trả hàng và qua năm mới không nhận đổi hàng của năm cũ. Nhưng năm nay ANN 'chơi lớn' thật rồi... ông giáo ạ, à không quý khách ạ! 😜</p><p ☘ Vẫn là quy định đổi hàng trong 30 ngày kể từ ngày mua hàng (bao gồm ngày nghĩ tết).</p><p 🤝 ANN đã chấp nhận 'chơi lớn' với khách hàng rồi thì mọi người vui lòng 'chơi đẹp' giúp bên em nha! Hàng gì bán chậm hoặc bị lỗi thì tranh thủ đổi càng sớm càng tốt, chứ đừng 'ngâm' quá hạn là bên em không nhận được đâu á!</p>");
@@ -33,7 +33,7 @@ namespace ann_shop_server.Services
                 kind = "notification",
                 title = "Thông báo đổi hàng cuối năm",
                 action = "view_more",
-                actionValue = "doi-hang-cuoi-nam",
+                actionValue = "notification/doi-hang-cuoi-nam",
                 avatar = "/uploads/doi-hang-cuoi-nam/doi-hang-cuoi-nam-3.png",
                 summary = summary,
                 content = content.ToString(),
@@ -54,9 +54,9 @@ namespace ann_shop_server.Services
             {
                 kind = "news",
                 title = "Thông báo thời gian làm việc",
-                action = "view_more",
-                actionValue = "doi-hang-cuoi-nam",
-                avatar = "https://khohangsiann.com/wp-content/uploads/thoi-gian-lam-viec-tet-small.png",
+                action = "show_web",
+                actionValue = "http://xuongann.com",
+                avatar = String.Empty,
                 summary = summary,
                 content = summary,
                 createdDate = DateTime.Now
@@ -157,6 +157,7 @@ namespace ann_shop_server.Services
             var result = data
                 .Select(x => new FlutterNotificationCardModel()
                 {
+                    kind = x.kind,
                     action = x.action,
                     name = x.title,
                     actionValue = x.actionValue,
@@ -190,7 +191,7 @@ namespace ann_shop_server.Services
                 getNotification3()
             }
             .Where(x => x.action == "view_more")
-            .Where(x => x.actionValue == slug)
+            .Where(x => x.actionValue == "notification/" + slug)
             .Select(x => new FlutterNotificationModel()
             {
                 title = x.title,

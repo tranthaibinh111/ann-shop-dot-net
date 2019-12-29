@@ -7,6 +7,7 @@ namespace ann_shop_server.Models
 {
     public class FlutterNotificationCardModel
     {
+        public string kind { get; set; }
         public string action { get; set; }
         public string name { get; set; }
         public string actionValue { get; set; }
