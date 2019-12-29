@@ -60,8 +60,8 @@ namespace ann_shop_server.Services
                     source = source
                         .Where(x =>
                             x.sku.Trim().ToLower().StartsWith(filter.productSearch.Trim().ToLower()) ||
-                            x.title.Trim().ToLower().StartsWith(filter.productSearch.Trim().ToLower()) ||
-                            x.unSignedTitle.Trim().ToLower().StartsWith(filter.productSearch.Trim().ToLower())
+                            x.title.Trim().ToLower().Contains(filter.productSearch.Trim().ToLower()) ||
+                            x.unSignedTitle.Trim().ToLower().Contains(filter.productSearch.Trim().ToLower())
                         );
                 }
                 else
