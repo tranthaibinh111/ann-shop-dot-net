@@ -159,7 +159,6 @@ namespace ann_shop_server.Services
         {
             // Quần áo nữ
             var womenClothes = createCategoryBySlug("quan-ao-nu");
-            
 
             // Quần áo nữ có sẵn
             var stockIn = (FlutterCategoryModel)womenClothes.Clone();
@@ -538,6 +537,7 @@ namespace ann_shop_server.Services
                     productSale
                 }
             };
+            result.Add(productNews);
 
             // Hàng sale
             result.Add(productSale);

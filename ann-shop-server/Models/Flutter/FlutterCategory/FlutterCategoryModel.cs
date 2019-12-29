@@ -17,7 +17,19 @@ namespace ann_shop_server.Models
 
         public virtual object Clone()
         {
-            return this.MemberwiseClone();
+            var clone = (FlutterCategoryModel)this.MemberwiseClone();
+
+            if (filter != null)
+            {
+                clone.filter = (FlutterProductFilterModel)filter.Clone();
+            }
+
+            if (children != null)
+            {
+                clone.children = new List<FlutterCategoryModel>(clone.children);
+            }
+
+            return clone;
         }
     }
 }
