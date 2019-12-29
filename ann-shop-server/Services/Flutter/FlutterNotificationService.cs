@@ -48,12 +48,12 @@ namespace ann_shop_server.Services
         private NotificationModel getNotification2()
         {
             var summary = String.Empty;
-            summary += "Chúng tôi xin thông báo thời gian làm việc để có thể phục vụ khách hàng tốt hơn";
+            summary += "Chúng tôi xin hướng dẫn cách share sản phẩm lên Facebook";
 
             return new NotificationModel()
             {
                 kind = "news",
-                title = "Thông báo thời gian làm việc",
+                title = "Hướng share sản phẩm lên Facebook",
                 action = "show_web",
                 actionValue = "http://xuongann.com",
                 avatar = String.Empty,
@@ -78,7 +78,7 @@ namespace ann_shop_server.Services
             return new NotificationModel()
             {
                 kind = "promotion",
-                title = "Thông báo thời gian làm việc",
+                title = "Thông báo khuyến mãi",
                 action = "show_web",
                 actionValue = "http://xuongann.com",
                 avatar = "https://ann.com.vn/wp-content/uploads/quan-ao-tet-2020.jpg",
