@@ -31,7 +31,7 @@ namespace ann_shop_server.Controllers.Flutter
         }
 
         /// <summary>
-        /// Lấy danh sách category cho trang home
+        /// Lấy tất cả danh sách category
         /// </summary>
         /// <returns></returns>
         [HttpGet]

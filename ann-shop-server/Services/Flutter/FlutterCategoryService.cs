@@ -458,7 +458,7 @@ namespace ann_shop_server.Services
         }
 
         /// <summary>
-        /// Lấy danh sách các danh mục jome
+        /// Lấy danh sách các danh mục home
         /// </summary>
         /// <returns></returns>
         public List<FlutterCategoryModel> getCategories()

@@ -38,8 +38,11 @@ namespace ann_shop_server.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("~/api/flutter/posts")]
-        public IHttpActionResult GetPosts([FromUri] PagingParameterModel paging)
+        public IHttpActionResult GetPosts([FromUri]FlutterPostFilterModel filter, [FromUri] PagingParameterModel paging)
         {
+            if (filter == null)
+                filter = new FlutterPostFilterModel();
+
             if (paging == null)
                 paging = new PagingParameterModel();
 
@@ -49,13 +52,29 @@ namespace ann_shop_server.Controllers
                 pageSize = paging.pageSize
             };
 
-            var posts = _service.getPosts(ref pagination);
+            var posts = _service.getPosts(filter, ref pagination);
 
             // Setting Header
             HttpContext.Current.Response.Headers.Add("Access-Control-Expose-Headers", "X-Paging-Headers");
             HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(pagination));
 
             return Ok<List<FlutterPostCardModel>>(posts);
+        }
+
+        /// <summary>
+        /// Lấy các viết về chính sách
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("policies")]
+        public IHttpActionResult GetPolicies([FromUri] PagingParameterModel paging)
+        {
+            var filter = new FlutterPostFilterModel()
+            {
+                categorySlug = "chinh-sach"
+            };
+
+            return GetPosts(filter, paging);
         }
 
         /// <summary>

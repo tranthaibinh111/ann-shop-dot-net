@@ -12,6 +12,6 @@ namespace ann_shop_server.Models
         public string actionValue { get; set; }
         public string image { get; set; }
         public string message { get; set; }
-        public DateTime createdDate { get; set; }
+        public Nullable<DateTime> createdDate { get; set; }
     }
 }
