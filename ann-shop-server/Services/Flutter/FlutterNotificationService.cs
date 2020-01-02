@@ -33,7 +33,7 @@ namespace ann_shop_server.Services
                 kind = "notification",
                 title = "Thông báo đổi hàng cuối năm",
                 action = "view_more",
-                actionValue = "notification/doi-hang-cuoi-nam",
+                actionValue = "doi-hang-cuoi-nam",
                 avatar = "/uploads/doi-hang-cuoi-nam/doi-hang-cuoi-nam-3.png",
                 summary = summary,
                 content = content.ToString(),
@@ -129,7 +129,12 @@ namespace ann_shop_server.Services
                 createdDate = notification3.createdDate
             });
 
-            return result;
+            return result.Select(x => {
+                if (x.action == "view_more")
+                    x.actionValue = "notification/" + x.actionValue;
+
+                return x;
+            }).ToList(); ;
         }
 
         public List<FlutterNotificationCardModel> getNotifications(FlutterNotificationFilterModel filter, ref PaginationMetadataModel pagination)
@@ -160,7 +165,7 @@ namespace ann_shop_server.Services
                     kind = x.kind,
                     action = x.action,
                     name = x.title,
-                    actionValue = x.actionValue,
+                    actionValue = x.action == "view_more" ? "notification/" + x.actionValue : x.actionValue,
                     image = x.avatar,
                     message = x.summary,
                     createdDate = x.createdDate
@@ -191,7 +196,7 @@ namespace ann_shop_server.Services
                 getNotification3()
             }
             .Where(x => x.action == "view_more")
-            .Where(x => x.actionValue == "notification/" + slug)
+            .Where(x => x.actionValue == slug)
             .Select(x => new FlutterNotificationModel()
             {
                 title = x.title,

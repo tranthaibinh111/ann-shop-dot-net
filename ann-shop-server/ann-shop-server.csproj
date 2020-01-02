@@ -255,8 +255,10 @@
     <Compile Include="Controllers\Flutter\FlutterBlockProductController.cs" />
     <Compile Include="Controllers\Flutter\FlutterCategoryController.cs" />
     <Compile Include="Controllers\Flutter\FlutterNotificationController.cs" />
+    <Compile Include="Controllers\Flutter\FlutterPostCategoryController.cs" />
     <Compile Include="Controllers\Flutter\FlutterPostController.cs" />
     <Compile Include="Controllers\Flutter\FlutterProductController.cs" />
+    <Compile Include="Controllers\Flutter\FlutterSearchController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Pages\HomePageController.cs" />
     <Compile Include="Controllers\Pages\InvoiceOrderPageController.cs" />
@@ -333,9 +335,11 @@
     <Compile Include="Models\Flutter\FlutterBanner\FlutterBannerModel.cs" />
     <Compile Include="Models\Flutter\FlutterBlockProduct\FlutterBlockProductModel.cs" />
     <Compile Include="Models\Flutter\FlutterFilter\FlutterNotificationFilterModel.cs" />
+    <Compile Include="Models\Flutter\FlutterFilter\FlutterPostFilterModel.cs" />
     <Compile Include="Models\Flutter\FlutterNotification\FlutterNotificationCardModel.cs" />
     <Compile Include="Models\Flutter\FlutterNotification\FlutterNotificationModel.cs" />
     <Compile Include="Models\Flutter\FlutterNotification\NotificationModel.cs" />
+    <Compile Include="Models\Flutter\FlutterPostCategory\FlutterPostCategoryModel.cs" />
     <Compile Include="Models\Flutter\FlutterPost\FlutterPostCardModel.cs" />
     <Compile Include="Models\Flutter\FlutterPost\FlutterPostModel.cs" />
     <Compile Include="Models\Flutter\FlutterPost\NewsModel.cs" />
@@ -517,8 +521,10 @@
     <Compile Include="Services\Flutter\FlutterBlockProductService.cs" />
     <Compile Include="Services\Flutter\FlutterCategoryService.cs" />
     <Compile Include="Services\Flutter\FlutterNotificationService.cs" />
+    <Compile Include="Services\Flutter\FlutterPostCategoryService.cs" />
     <Compile Include="Services\Flutter\FlutterPostService.cs" />
     <Compile Include="Services\Flutter\FlutterProductService.cs" />
+    <Compile Include="Services\Flutter\FlutterSearchService.cs" />
     <Compile Include="Services\Pages\HomePageService.cs" />
     <Compile Include="Services\Pages\InvoiceOrderPageService.cs" />
     <Compile Include="Services\Common\PostService.cs" />

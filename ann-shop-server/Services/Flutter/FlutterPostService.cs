@@ -84,16 +84,16 @@ namespace ann_shop_server.Services
 
             return new NewsModel()
             {
+                categorySlug = "buon-ban",
                 title = "Buôn bán quần áo nữ online cần lưu ý những gì?",
                 action = "view_more",
-                actionValue = "post/buon-ban-quan-ao-nu-online-can-luu-y-nhung-gi",
+                actionValue = "buon-ban-quan-ao-nu-online-can-luu-y-nhung-gi",
                 avatar = "https://ann.com.vn/wp-content/uploads/23.png",
                 summary = summary,
                 content = content.ToString(),
                 createdDate = DateTime.Now
             };
         }
-
 
         /// <summary>
         /// Thông báo thời gian làm việc
@@ -106,12 +106,144 @@ namespace ann_shop_server.Services
 
             return new NewsModel()
             {
+                categorySlug = "kinh-nghiem",
                 title = "Kinh nghiệm mở shop quần áo nam online ít vốn cho người mới bắt đầu",
                 action = "show_web",
                 actionValue = "https://ann.com.vn/kinh-nghiem-mo-shop-quan-ao-nam-online-it-von-cho-nguoi-moi-bat-dau.html",
                 avatar = "https://ann.com.vn/wp-content/uploads/2b.png",
                 summary = summary,
                 content = String.Empty,
+                createdDate = DateTime.Now
+            };
+        }
+
+        /// <summary>
+        /// Chính sách bán sỉ
+        /// </summary>
+        /// <returns></returns>
+        private NewsModel getWholesalePolicy()
+        {
+            var content = new StringBuilder();
+            content.AppendLine("<img alt='Chính sách bỏ sỉ quần áo' src='http://xuongann.com/uploads/ban-hang/2-chinh-sach.png?v=09092019'>");
+            content.AppendLine("<img alt='Chính sách chiết khấu' src='http://xuongann.com/uploads/ban-hang/3-chiet-khau.png?v=09092019'>");
+
+            return new NewsModel()
+            {
+                categorySlug = "chinh-sach",
+                title = "Chính sách bán sỉ",
+                action = "view_more",
+                actionValue = "chinh-sach-ban-si",
+                avatar = String.Empty,
+                summary = String.Empty,
+                content = content.ToString(),
+                createdDate = DateTime.Now
+            };
+        }
+
+        /// <summary>
+        /// Chính sách vận chuyển
+        /// </summary>
+        /// <returns></returns>
+        private NewsModel getDeliveryPolicy()
+        {
+            var content = new StringBuilder();
+            content.AppendLine("<img alt='Chính sách vận chuyển' src='http://xuongann.com/uploads/ban-hang/5-ship.png?v=09092019'>");
+
+            return new NewsModel()
+            {
+                categorySlug = "chinh-sach",
+                title = "Chính sách vẫn chuyển",
+                action = "view_more",
+                actionValue = "chinh-sach-van-chuyen",
+                avatar = String.Empty,
+                summary = String.Empty,
+                content = content.ToString(),
+                createdDate = DateTime.Now
+            };
+        }
+
+        /// <summary>
+        /// Chính sách đổi trả
+        /// </summary>
+        /// <returns></returns>
+        private NewsModel getRefundPolicy()
+        {
+            var content = new StringBuilder();
+            content.AppendLine("<img alt='Quy định đổi trả' src='http://xuongann.com/uploads/ban-hang/6-doi-tra.png?v=09092019'>");
+
+            return new NewsModel()
+            {
+                categorySlug = "chinh-sach",
+                title = "Chính sách đổi trả",
+                action = "view_more",
+                actionValue = "chinh-sach-doi-tra",
+                avatar = String.Empty,
+                summary = String.Empty,
+                content = content.ToString(),
+                createdDate = DateTime.Now
+            };
+        }
+
+        /// <summary>
+        /// Chính sách bảo mật thông tin
+        /// </summary>
+        /// <returns></returns>
+        private NewsModel getInformationSecurityPolicy()
+        {
+            var content = new StringBuilder();
+            content.AppendLine("<h3>a) Mục đích thu thập thông tin khách hàng</h3>");
+            content.AppendLine("<p>Để sử dụng được các dịch vụ của <strong>ann.com.vn (Hộ kinh doanh ANN)</strong>, Quý khách phải đăng ký tài khoản và cung cấp một số thông tin như: <span style='color: #ff0000;'>họ tên, số điện thoại, địa chỉ và một số thông tin khác</span>. Phần thủ tục đăng k‎ý này nhằm giúp chúng tôi xác định phần thanh toán và giao hàng chính xác cho người nhận. Bạn có thể chọn không cung cấp cho chúng tôi một số thông tin nhất định (email, số điện thoại khác), nhưng khi đó bạn sẽ không thể hưởng được một số tiện ích mà những tính năng của chúng tôi cung cấp.</p>");
+            content.AppendLine("<p>Chúng tôi cũng lưu trữ bất kỳ thông tin nào bạn nhập trên website hoặc gửi đến <strong>ann.com.vn</strong>. Những thông tin đó sẽ được sử dụng cho mục đích phản hồi yêu cầu của khách hàng, đưa ra những gợi ý‎&nbsp;phù hợp cho từng khách hàng khi mua sắm tại ann.com.vn, giao hàng đến địa chỉ của khách hàng, nâng cao chất lượng hàng hóa dịch vụ và liên lạc với bạn khi cần.</p>");
+            content.AppendLine("<h3>b) Phạm vi sử dụng thông tin</h3>");
+            content.AppendLine("<p>Mục đích của việc thu thập thông tin là nhằm xây dựng <strong>ann.com.vn</strong> trở thành một website thương mại điện tử bán hàng mang lại nhiều tiện ích nhất cho khách hàng. Vì thế, việc sử dụng thông tin sẽ phục vụ những hoạt động sau:</p>");
+            content.AppendLine("<ul>");
+            content.AppendLine("<li>Giao hàng đến địa chỉ cho quý khách đã đặt hàng trên website</li>");
+            content.AppendLine("<li>Cung cấp&nbsp;thông tin liên quan đến sản phẩm</li>");
+            content.AppendLine("<li>Nâng cao chất lượng dịch vụ khách hàng của <strong>ann.com.vn</strong></li>");
+            content.AppendLine("<li>Giải quyết các vấn đề phát sinh liên quan đến việc sử dụng sản phẩm</li>");
+            content.AppendLine("</ul>");
+            content.AppendLine("<h3>c) Thời gian lưu trữ thông tin</h3>");
+            content.AppendLine("<p>Thông tin của khách hàng sẽ được lưu trữ 2 năm trừ khi có yêu cầu khác của cơ quan nhà nước. Mọi thông tin chúng tôi cam kết sẽ bảo mật hoàn toàn, chỉ sử dụng trong phạm vi đã nêu ở mục b.</p>");
+            content.AppendLine("<h3>d) Những người hoặc tổ chức có thể được tiếp cận với thông tin bảo mật</h3>");
+            content.AppendLine("<ul>");
+            content.AppendLine("<li>Các bộ phận của Hộ kinh doanh ANN liên quan đến việc hỗ trợ và thực hiện tạo hóa đơn cho khách hàng.</li>");
+            content.AppendLine("<li>Trong trường hợp có yêu cầu của pháp luật: Chúng tôi có trách nhiệm hợp tác cung cấp thông tin cá nhân khách hàng khi có yêu cầu từ cơ quan tư pháp.</li>");
+            content.AppendLine("</ul>");
+            content.AppendLine("<h3>e) Địa chỉ của đơn vị thu thập và quản lý thông tin</h3>");
+            content.AppendLine("<p><strong>Hộ kinh doanh ANN</strong></p>");
+            content.AppendLine("<p><em>Địa chỉ: 68 Đường C12, Phường 13, Tân Bình, TP. HCM</em></p>");
+            content.AppendLine("<p><em>Điện thoại: 0914615408</em></p>");
+            content.AppendLine("<p><em>Email: tranyenngoc9x@gmail.com</em></p>");
+            content.AppendLine("<h3>f) Phương thức và công cụ để người tiêu dùng tiếp cận và chỉnh sửa dữ liệu</h3>");
+            content.AppendLine("<p>Khách hàng có quyền tự kiểm tra, cập nhật, điều chỉnh hoặc hủy bỏ thông tin cá nhân của mình bằng cách liên hệ với Ban quản trị website (cụ thể là chủ hộ kinh doanh ANN) thực hiện việc này.</p>");
+            content.AppendLine("<p>Khách hàng có quyền gửi khiếu nại về nội dung bảo mật thông tin đề nghị liên hệ Ban quản trị của website. Khi tiếp nhận những phản hồi này, chúng tôi sẽ xác nhận lại thông tin, trường hợp đúng như phản ánh của thành viên tùy theo mức độ, chúng tôi sẽ có những biện pháp xử lý kịp thời.</p>");
+            content.AppendLine("<h3>g) Cơ chế tiếp nhận và giải quyết khiếu nại của người tiêu dùng</h3>");
+            content.AppendLine("<p>Khi phát hiện thông tin cá nhân của mình bị sử dụng sai mục đích hoặc phạm vi, người dùng có quyền gởi email khiếu nại đến <em>tranyenngoc9x@gmail.com</em> với các thông tin, chứng cứ liên quan tới việc này. Chúng tôi cam kết sẽ phản hồi ngay lập tức trong vòng 48 tiếng để cùng Người dùng thống nhất phương án giải quyết.</p>");
+            content.AppendLine("<p>– Quy trình giải quyết tranh chấp, khiếu nại:</p>");
+            content.AppendLine("<p>+ Mọi tranh chấp phát sinh giữa Hộ kinh doanh ANN và khách hàng sẽ được giải quyết trên cơ sở thương lượng. Trường hợp không đạt được thỏa thuận như mong muốn, một trong hai bên có quyền đưa vụ việc ra Tòa án nhân dân có thẩm quyền để giải quyết.</p>");
+            content.AppendLine("<p>+ Khi không giải quyết được qua thương lượng, hòa giải như trên, bên bị vi phạm tập hợp các chứng cứ như email, tin nhắn … và liên lạc với Hộ kinh doanh ANN, Chúng tôi sẽ liên lạc lại với người khiếu nại để giải quyết.</p>");
+            content.AppendLine("<p>+ Nếu vụ việc vượt quá thẩm quyền của mình, Hộ kinh doanh ANN sẽ đề nghị chuyển vụ việc cho các cơ quan chức năng có thẩm quyền. Trong trường hợp này, Hộ kinh doanh ANN vẫn phối hợp hỗ trợ để bảo vệ tốt nhất bên bị vi phạm.</p>");
+            content.AppendLine("<p><strong>Dưới đây là quy trình giải quyết tranh chấp, khiếu nại cụ thể:</strong></p>");
+            content.AppendLine("<p>Khi phát sinh tranh chấp hoặc khiếu nại, trước hết bên bị vi phạm sẽ liên lạc bên kia để khiếu nại, trao đổi và tìm ra phương pháp tự giải quyết trên cơ sở thương lượng, hòa giải.</p>");
+            content.AppendLine("<p>ann.com.vn có trách nhiệm tiếp nhận khiếu nại và hỗ trợ khách hàng liên quan đến giao dịch tại Website. Khi phát sinh tranh chấp, ann.com.vn đề cao giải pháp thương lượng, hòa giải giữa các bên nhằm duy trì sự tin cậy của khách hàng vào chất lượng của chúng tôi và thực hiện theo các bước sau:</p>");
+            content.AppendLine("<p><strong>Bước 1:</strong> Khách hàng khiếu nại về hàng hóa qua email: <em>tranyenngoc9x@gmail.com</em>, khách hàng có thể phản ánh trực tiếp đến đến ban quản trị.</p>");
+            content.AppendLine("<p><strong>Bước 2:</strong> ann.com.vn sẽ tiếp nhận các khiếu nại của khách hàng, tùy theo tính chất và mức độ của khiếu nại thì bên Website sẽ có những biện pháp cụ thể hộ trợ khách hàng để giải quyết.</p>");
+            content.AppendLine("<p><strong>Bước 3:</strong> Trong trường nằm ngoài khả năng và thẩm quyền của Website thì ban quản trị sẽ yêu cầu người mua đưa vụ việc này ra cơ quan nhà nước có thẩm quyền giải quyết theo pháp luật</p>");
+            content.AppendLine("<p>Người mua gửi khiếu nại tại địa chỉ:</p>");
+            content.AppendLine("<p><strong>Hộ kinh doanh ANN</strong></p>");
+            content.AppendLine("<p><em>Địa chỉ: 68 Đường C12, Phường 13, Tân Bình, TP. HCM</em></p>");
+            content.AppendLine("<p><em>Điện thoại: 0914615408</em></p>");
+            content.AppendLine("<p><em>Email: tranyenngoc9x@gmail.com</em></p>");
+
+            return new NewsModel()
+            {
+                categorySlug = "chinh-sach",
+                title = "Chính sách bảo mật thông tin",
+                action = "view_more",
+                actionValue = "chinh-sach-bao-mat-thong-tin",
+                avatar = String.Empty,
+                summary = String.Empty,
+                content = content.ToString(),
                 createdDate = DateTime.Now
             };
         }
@@ -149,21 +281,49 @@ namespace ann_shop_server.Services
                 createdDate = post2.createdDate
             });
 
-            return result;
+            return result.Select(x => {
+                if (x.action == "view_more")
+                    x.actionValue = "post/" + x.actionValue;
+
+                return x;
+            }).ToList();
         }
 
-        public List<FlutterPostCardModel> getPosts(ref PaginationMetadataModel pagination)
+        public List<FlutterPostCardModel> getPosts(FlutterPostFilterModel filter, ref PaginationMetadataModel pagination)
         {
-            var data = new List<NewsModel>()
+            var posts = new List<NewsModel>()
             {
                 getPost1(),
-                getPost2()
+                getPost2(),
+                getWholesalePolicy(),
+                getDeliveryPolicy(),
+                getRefundPolicy(),
+                getInformationSecurityPolicy()
             }
+            .ToList();
+
+            if (!String.IsNullOrEmpty(filter.categorySlug))
+            {
+                // Trường hợp lấy cá bài viết
+                if (filter.categorySlug != "chinh-sach")
+                    posts = posts
+                        .Where(x => x.categorySlug != "chinh-sach")
+                        .Where(x => x.categorySlug.Trim().ToLower() == filter.categorySlug.Trim().ToLower())
+                        .ToList();
+                else
+                    posts = posts.Where(x => x.categorySlug.Trim().ToLower() == filter.categorySlug.Trim().ToLower()).ToList();
+            }
+            else
+            {
+                posts = posts.Where(x => x.categorySlug != "chinh-sach").ToList();
+            }
+
+            var data = posts
             .Select(x => new FlutterPostCardModel()
             {
                 action = x.action,
                 name = x.title,
-                actionValue = x.actionValue,
+                actionValue = x.action == "view_more" ? "post/" + x.actionValue : x.actionValue,
                 image = x.avatar,
                 message = x.summary,
                 createdDate = x.createdDate
@@ -199,10 +359,14 @@ namespace ann_shop_server.Services
             var data = new List<NewsModel>()
             {
                 getPost1(),
-                getPost2()
+                getPost2(),
+                getWholesalePolicy(),
+                getDeliveryPolicy(),
+                getRefundPolicy(),
+                getInformationSecurityPolicy()
             }
             .Where(x => x.action == "view_more")
-            .Where(x => x.actionValue == "post/" + slug)
+            .Where(x => x.actionValue == slug)
             .Select(x => new FlutterPostModel()
             {
                 title = x.title,

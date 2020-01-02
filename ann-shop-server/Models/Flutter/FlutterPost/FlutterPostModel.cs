@@ -9,6 +9,6 @@ namespace ann_shop_server.Models
     {
         public string title { get; set; }
         public string content { get; set; }
-        public DateTime createdDate { get; set; }
+        public Nullable<DateTime> createdDate { get; set; }
     }
 }
