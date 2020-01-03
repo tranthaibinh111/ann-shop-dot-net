@@ -334,6 +334,7 @@
     </Compile>
     <Compile Include="Models\Flutter\FlutterBanner\FlutterBannerModel.cs" />
     <Compile Include="Models\Flutter\FlutterBlockProduct\FlutterBlockProductModel.cs" />
+    <Compile Include="Models\Flutter\FlutterFilter\FlutterBannerFilterModel.cs" />
     <Compile Include="Models\Flutter\FlutterFilter\FlutterNotificationFilterModel.cs" />
     <Compile Include="Models\Flutter\FlutterFilter\FlutterPostFilterModel.cs" />
     <Compile Include="Models\Flutter\FlutterNotification\FlutterNotificationCardModel.cs" />

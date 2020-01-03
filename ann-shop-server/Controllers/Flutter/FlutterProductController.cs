@@ -63,17 +63,6 @@ namespace ann_shop_server.Controllers.Flutter
         }
 
         /// <summary>
-        /// Lấy danh sách banner tại sản phẩm
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("banners")]
-        public IHttpActionResult GetProductBanners(string position)
-        {
-            return Ok<List<FlutterBannerModel>>(_service.getProductBanners(position));
-        }
-
-        /// <summary>
         /// Lấy thông tin sản phẩm
         /// </summary>
         /// <param name="slug">slug của sản phẩm</param>
