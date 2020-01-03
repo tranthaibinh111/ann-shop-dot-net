@@ -430,32 +430,5 @@ namespace ann_shop_server.Services
         }
         #endregion
         #endregion
-
-        #region Lấy banner cho sản phẩm
-        /// <summary>
-        /// Lấy danh sách banner tại đầu trang home
-        /// </summary>
-        /// <returns></returns>
-        public List<FlutterBannerModel> getProductBanners(string position)
-        {
-            return new List<FlutterBannerModel>()
-            {
-                new FlutterBannerModel()
-                {
-                    action = "category",
-                    name = position == "header" ? "Áo thun nam" : "Váy đầm",
-                    actionValue = position == "header" ? "ao-thun-nam" : "vay-dam",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png"
-                },
-                new FlutterBannerModel()
-                {
-                    action = "category",
-                    name = position == "header" ? "Quần jean nam" : "Quần jean nữ",
-                    actionValue = position == "header" ? "quan-jeans-nam" : "quan-jeans-nu",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-nuoc-hoa-gia-re-1.png"
-                },
-            };
-        }
-        #endregion
     }
 }
