@@ -1,7 +1,9 @@
 ﻿using ann_shop_server.Models;
 using ann_shop_server.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,26 +26,39 @@ namespace ann_shop_server.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("~/api/flutter/sendSMS")]
-        public IHttpActionResult register(SMSModel sms)
+        public IHttpActionResult register(SendOTPModel sms)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                WebClient w = new WebClient();
-                string message = HttpUtility.UrlEncode(String.Format("OTP cua ban la: {0}. Ma se het han trong vong 1p", sms.otp));
-                string brandname = HttpUtility.UrlEncode("ann.com.vn");
-                string ret = w.DownloadString(String.Format(
-                    "http://brandsms.vn:8018/VMGAPI.asmx/BulkSendSms?msisdn={0}&alias={1}&message={2}&sendTime=&authenticateUser={3}&authenticatePass={4}",
-                    sms.phone,
-                    brandname,
-                    message,
-                    "hkdann",
-                    "@HoangAnh123"
-                    ));
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://brandsms.vn:8018/vmgApi");
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
 
-                return Ok(ret);
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = JsonConvert.SerializeObject(new {
+                        cmdCode = "BulkSendSms",
+                        alias = "ann.com.vn",
+                        message = String.Format("OTP cua ban la: {0}. Ma se het han trong vong 1p", sms.otp),
+                        sendTime = String.Empty,
+                        authenticateUser = "hkdann",
+                        authenticatePass = "Vmg@123456",
+                        msisdn = sms.phone
+                    });
+
+                    streamWriter.Write(json);
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = JsonConvert.DeserializeObject<RespondOTPModel>(streamReader.ReadToEnd());
+
+                    return Ok<RespondOTPModel>(result);
+                }
             }
             catch (Exception ex)
             {

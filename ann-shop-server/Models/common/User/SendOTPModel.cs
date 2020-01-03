@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ann_shop_server.Models
 {
-    public class SMSModel
+    public class SendOTPModel
     {
         [Required]
         [StringLength(15, MinimumLength = 10, ErrorMessage = "phone must be mininum 10 charaters")]

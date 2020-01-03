@@ -317,7 +317,8 @@
     <Compile Include="Models\Common\Product\TagModel.cs" />
     <Compile Include="Models\Common\Product\VariableKind.cs" />
     <Compile Include="Models\Common\Stock\StockProductVariableModel.cs" />
-    <Compile Include="Models\Common\User\SMSModel.cs" />
+    <Compile Include="Models\Common\User\RespondOTPModel.cs" />
+    <Compile Include="Models\Common\User\SendOTPModel.cs" />
     <Compile Include="Models\Common\User\UserForgetPasswordModel.cs" />
     <Compile Include="Models\Common\User\UserInfoModel.cs" />
     <Compile Include="Models\Common\User\UserRegisterModel.cs" />
