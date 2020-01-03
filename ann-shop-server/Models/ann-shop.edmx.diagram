@@ -61,6 +61,7 @@
         <EntityTypeShape EntityType="inventorymanagementModel.CustomerEditOrder" Width="1.5" PointX="5.375" PointY="22.75" />
         <EntityTypeShape EntityType="inventorymanagementModel.ProductTag" Width="1.5" PointX="17.375" PointY="22.75" />
         <EntityTypeShape EntityType="inventorymanagementModel.Tag" Width="1.5" PointX="23.375" PointY="8.75" />
+        <EntityTypeShape EntityType="inventorymanagementModel.User" Width="1.5" PointX="23.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

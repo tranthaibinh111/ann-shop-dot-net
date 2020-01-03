@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace ann_shop_server.Controllers.Flutter
+namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/flutter/category")]
     public class FlutterCategoryController : ApiController
