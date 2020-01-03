@@ -9,8 +9,9 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
-namespace ann_shop_server.Controllers.Flutter
+namespace ann_shop_server.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/flutter/product")]
     public class FlutterProductController : ApiController
     {

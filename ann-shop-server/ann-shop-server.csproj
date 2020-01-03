@@ -93,6 +93,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.1.0\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -184,9 +192,6 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
@@ -251,6 +256,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Flutter\FlutterUserController.cs" />
     <Compile Include="Controllers\Flutter\FlutterBannerController.cs" />
     <Compile Include="Controllers\Flutter\FlutterBlockProductController.cs" />
     <Compile Include="Controllers\Flutter\FlutterCategoryController.cs" />
@@ -311,6 +317,11 @@
     <Compile Include="Models\Common\Product\TagModel.cs" />
     <Compile Include="Models\Common\Product\VariableKind.cs" />
     <Compile Include="Models\Common\Stock\StockProductVariableModel.cs" />
+    <Compile Include="Models\Common\User\RespondOTPModel.cs" />
+    <Compile Include="Models\Common\User\SendOTPModel.cs" />
+    <Compile Include="Models\Common\User\UserForgetPasswordModel.cs" />
+    <Compile Include="Models\Common\User\UserInfoModel.cs" />
+    <Compile Include="Models\Common\User\UserRegisterModel.cs" />
     <Compile Include="Models\CronJob.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -512,12 +523,16 @@
     <Compile Include="Models\tbl_WhiteDomain.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Services\Common\CategoryService.cs" />
     <Compile Include="Services\Common\ProductService.cs" />
     <Compile Include="Services\Common\TagService.cs" />
+    <Compile Include="Services\Common\UserService.cs" />
     <Compile Include="Services\Flutter\FlutterBannerService.cs" />
     <Compile Include="Services\Flutter\FlutterBlockProductService.cs" />
     <Compile Include="Services\Flutter\FlutterCategoryService.cs" />

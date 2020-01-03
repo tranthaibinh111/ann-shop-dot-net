@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace ann_shop_server.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/flutter/post")]
     public class FlutterPostController : ApiController
     {
