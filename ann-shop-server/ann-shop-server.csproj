@@ -256,6 +256,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Common\SMSController.cs" />
     <Compile Include="Controllers\Flutter\FlutterUserController.cs" />
     <Compile Include="Controllers\Flutter\FlutterBannerController.cs" />
     <Compile Include="Controllers\Flutter\FlutterBlockProductController.cs" />
@@ -317,8 +318,8 @@
     <Compile Include="Models\Common\Product\TagModel.cs" />
     <Compile Include="Models\Common\Product\VariableKind.cs" />
     <Compile Include="Models\Common\Stock\StockProductVariableModel.cs" />
-    <Compile Include="Models\Common\User\RespondOTPModel.cs" />
-    <Compile Include="Models\Common\User\SendOTPModel.cs" />
+    <Compile Include="Models\Common\SMS\RespondOTPModel.cs" />
+    <Compile Include="Models\Common\SMS\SendOTPModel.cs" />
     <Compile Include="Models\Common\User\UserForgetPasswordModel.cs" />
     <Compile Include="Models\Common\User\UserInfoModel.cs" />
     <Compile Include="Models\Common\User\UserRegisterModel.cs" />
