@@ -13,15 +13,15 @@ namespace ann_shop_server.Services
     {
         public User register(UserRegisterModel data)
         {
+            if (checkUser(data.phone.Trim()))
+                return null;
+
             using (var con = new inventorymanagementEntities())
             {
-                if (con.Users.Where(x => x.Phone == data.phone.Trim()).FirstOrDefault() != null)
-                    throw new Exception("Số điện thoại này đã tồn tại");
-
                 var now = DateTime.Now;
                 var userNew = new User()
                 {
-                    Phone = data.phone,
+                    Phone = data.phone.Trim(),
                     Password = Security.Encrypt(data.password),
                     CreatedDate = now,
                     ModifiedDate = now
@@ -34,11 +34,12 @@ namespace ann_shop_server.Services
             }
         }
 
-        public User getUser(string phone)
+        public User getUser(UserRegisterModel login)
         {
             using (var con = new inventorymanagementEntities())
             {
-                var user = con.Users.Where(x => x.Phone == phone).FirstOrDefault();
+                var sha256 = Security.Encrypt(login.password);
+                var user = con.Users.Where(x => x.Phone == login.phone && x.Password == sha256).FirstOrDefault();
 
                 return user;
             }
@@ -68,68 +69,92 @@ namespace ann_shop_server.Services
             {
                 var user = con.Users.Where(x => x.Phone == info.phone).FirstOrDefault();
 
-                if (user != null)
-                {
-                    var textInfo = new CultureInfo("vi-VN", false).TextInfo;
+                if (user == null)
+                    return null;
 
-                    user.FullName = textInfo.ToTitleCase(info.fullName.Trim());
-                    user.BirthDay = info.birthday.Date;
-                    if (info.gender.Trim() == "M" || info.gender.Trim() == "F")
-                        user.Gender = info.gender.Trim();
-                    user.Address = info.address.Trim();
-                    user.City = info.city.Trim();
-                    user.ModifiedDate = DateTime.Now;
-                    con.SaveChanges();
+                var textInfo = new CultureInfo("vi-VN", false).TextInfo;
 
-                    return user;
-                }
-                else
-                {
-                    throw new Exception(String.Format("Số điện thoại này {0} không tồn tại.", info.phone));
-                }
+                user.FullName = textInfo.ToTitleCase(info.fullName.Trim());
+                user.BirthDay = info.birthday.Date;
+                if (info.gender.Trim() == "M" || info.gender.Trim() == "F")
+                    user.Gender = info.gender.Trim();
+                user.Address = info.address.Trim();
+                user.City = info.city.Trim();
+                user.ModifiedDate = DateTime.Now;
+                con.SaveChanges();
+
+                return user;
             }
         }
 
-        public string changePassword(UserRegisterModel user)
+        public string createPassword(string phone, string passwordOld, string passwordNew)
         {
             using (var con = new inventorymanagementEntities())
             {
-                var userOld = con.Users.Where(x => x.Phone == user.phone).FirstOrDefault();
+                passwordOld = Security.Encrypt(passwordOld);
 
-                if (userOld != null)
-                {
-                    userOld.Password = Security.Encrypt(user.password);
-                    userOld.ModifiedDate = DateTime.Now;
-                    con.SaveChanges();
+                var userOld = con.Users
+                    .Where(x => x.Phone == phone)
+                    .Where(x => x.Password == passwordOld)
+                    .FirstOrDefault();
 
-                    return user.password;
-                }
-                else
-                {
-                    throw new Exception(String.Format("Số điện thoại này {0} không tồn tại.", user.phone));
-                }
+                if (userOld == null)
+                    return null;
+
+                userOld.Password = Security.Encrypt(passwordNew);
+                userOld.ModifiedDate = DateTime.Now;
+                con.SaveChanges();
+
+                return passwordNew;
             }
         }
 
-        public string passwordNew(UserPhoneModel user)
+        public string changePassword(string phone, string passwordNew)
         {
             using (var con = new inventorymanagementEntities())
             {
-                var userOld = con.Users.Where(x => x.Phone == user.phone).FirstOrDefault();
+                var userOld = con.Users.Where(x => x.Phone == phone).FirstOrDefault();
 
-                if (userOld != null)
-                {
-                    var password = Security.CreatePassword(6);
-                    userOld.Password = Security.Encrypt(password);
-                    userOld.ModifiedDate = DateTime.Now;
-                    con.SaveChanges();
+                if (userOld == null)
+                    return null;
 
-                    return password;
-                }
-                else
-                {
-                    throw new Exception(String.Format("Số điện thoại này {0} không tồn tại.", user.phone));
-                }
+                userOld.Password = Security.Encrypt(passwordNew);
+                userOld.ModifiedDate = DateTime.Now;
+                con.SaveChanges();
+
+                return passwordNew;
+            }
+        }
+
+        public bool checkUser(string phone)
+        {
+            using (var con = new inventorymanagementEntities())
+            {
+                var user = con.Users.Where(x => x.Phone == phone).FirstOrDefault();
+
+                return user != null;
+            }
+        }
+
+        public string passwordNewByBirthday(string phone, DateTime birthday, string passwordNew)
+        {
+            using (var con = new inventorymanagementEntities())
+            {
+                birthday = birthday.Date;
+
+                var user = con.Users
+                    .Where(x => x.Phone == phone)
+                    .Where(x => x.BirthDay.HasValue && x.BirthDay.Value == birthday)
+                    .FirstOrDefault();
+
+                if (user == null)
+                    return null;
+
+                user.Password = Security.Encrypt(passwordNew);
+                user.ModifiedDate = DateTime.Now;
+                con.SaveChanges();
+
+                return passwordNew;
             }
         }
     }

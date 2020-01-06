@@ -320,9 +320,12 @@
     <Compile Include="Models\Common\Stock\StockProductVariableModel.cs" />
     <Compile Include="Models\Common\SMS\RespondOTPModel.cs" />
     <Compile Include="Models\Common\SMS\SendOTPModel.cs" />
-    <Compile Include="Models\Common\User\UserForgetPasswordModel.cs" />
-    <Compile Include="Models\Common\User\UserInfoModel.cs" />
+    <Compile Include="Models\Common\Token\TokenModel.cs" />
     <Compile Include="Models\Common\User\UserRegisterModel.cs" />
+    <Compile Include="Models\Flutter\FlutterUser\FlutterCreatePasswordModel.cs" />
+    <Compile Include="Models\Flutter\FlutterUser\FlutterPasswordNewBithdayModel.cs" />
+    <Compile Include="Models\Common\User\UserInfoModel.cs" />
+    <Compile Include="Models\Common\User\ConfirmOTPModel.cs" />
     <Compile Include="Models\CronJob.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -361,6 +364,7 @@
     <Compile Include="Models\Flutter\FlutterProduct\FlutterProductModel.cs" />
     <Compile Include="Models\Flutter\FlutterCategory\FlutterCategoryModel.cs" />
     <Compile Include="Models\Flutter\FlutterFilter\FlutterProductFilterModel.cs" />
+    <Compile Include="Models\Flutter\FlutterUser\FlutterUserModel.cs" />
     <Compile Include="Models\Pages\CategoryPage\CategoryPageFilterModel.cs" />
     <Compile Include="Models\Pages\CategoryPage\CategoryPageParameterModel.cs" />
     <Compile Include="Models\Pages\Home\HomePageFilterModel.cs" />
@@ -532,6 +536,7 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Services\Common\CategoryService.cs" />
     <Compile Include="Services\Common\ProductService.cs" />
+    <Compile Include="Services\Common\SMSService.cs" />
     <Compile Include="Services\Common\TagService.cs" />
     <Compile Include="Services\Common\UserService.cs" />
     <Compile Include="Services\Flutter\FlutterBannerService.cs" />
@@ -542,6 +547,7 @@
     <Compile Include="Services\Flutter\FlutterPostService.cs" />
     <Compile Include="Services\Flutter\FlutterProductService.cs" />
     <Compile Include="Services\Flutter\FlutterSearchService.cs" />
+    <Compile Include="Services\Flutter\FlutterUserService.cs" />
     <Compile Include="Services\Pages\HomePageService.cs" />
     <Compile Include="Services\Pages\InvoiceOrderPageService.cs" />
     <Compile Include="Services\Common\PostService.cs" />
@@ -552,6 +558,7 @@
     <Compile Include="Services\Common\Service.cs" />
     <Compile Include="Services\Common\StockService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\Phone.cs" />
     <Compile Include="Utils\Security.cs" />
     <Compile Include="Utils\Thumbnail.cs" />
   </ItemGroup>

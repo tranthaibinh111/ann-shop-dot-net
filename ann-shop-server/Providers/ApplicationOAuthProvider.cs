@@ -41,6 +41,7 @@ namespace ann_shop_server.Providers
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim("Phone", user.Phone));
             identity.AddClaim(new Claim("Password", user.Password));
+            identity.AddClaim(new Claim("LoggedOn", DateTime.Now.ToString()));
 
             var props = new AuthenticationProperties(new Dictionary<string, string>
             {
