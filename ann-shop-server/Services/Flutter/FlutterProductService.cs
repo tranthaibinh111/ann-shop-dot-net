@@ -11,6 +11,8 @@ namespace ann_shop_server.Services
 {
     public class FlutterProductService : Service<FlutterProductService>
     {
+        private ProductService _service = ProductService.Instance;
+
         #region Thông tin sort sản phẩm
         /// <summary>
         /// Cung cấp các trường hợp sắp xếp sản phẩm
@@ -18,7 +20,7 @@ namespace ann_shop_server.Services
         /// <returns></returns>
         public List<ProductSortModel> getProductSort()
         {
-            return ProductService.Instance.getProductSort();
+            return _service.getProductSort();
         }
         #endregion
 
@@ -259,7 +261,7 @@ namespace ann_shop_server.Services
 
                 result = result.Select(x =>
                 {
-                    x.images = ProductService.Instance.getImageListByProduct(x.productID, Thumbnail.Size.Large).Skip(0).Take(8).ToList();
+                    x.images = _service.getImageListByProduct(x.productID, Thumbnail.Size.Large).Skip(0).Take(8).ToList();
                     return x;
                 }).ToList();
 
@@ -284,19 +286,19 @@ namespace ann_shop_server.Services
         /// <returns></returns>
         public FlutterProductModel getProductByCategory(string slug)
         {
-            var data = ProductService.Instance.getProductByCategory(slug);
+            var data = _service.getProductByCategory(slug);
             
             if (data != null)
             {
                 var product = new FlutterProductModel()
                 {
-                    id = data.id,
+                    productID = data.id,
                     categoryName = data.categoryName,
                     categorySlug = data.categorySlug,
                     name = data.name,
                     slug = data.slug,
                     sku = data.sku,
-                    avatar = data.avatar,
+                    avatar = Thumbnail.getURL(data.avatar, Thumbnail.Size.Source),
                     images = data.images,
                     colors = data.colors,
                     sizes = data.sizes,
@@ -334,7 +336,7 @@ namespace ann_shop_server.Services
         /// <returns></returns>
         public List<ProductRelatedModel> getProductRelatedBySlug(string slug, ref PaginationMetadataModel pagination)
         {
-            var products = ProductService.Instance.getProductRelatedBySlug(slug, ref pagination);
+            var products = _service.getProductRelatedBySlug(slug, ref pagination);
 
             return products;
         }
@@ -349,7 +351,7 @@ namespace ann_shop_server.Services
         /// <returns></returns>
         public string getImageWithVariable(int productID, int color, int size)
         {
-            return ProductService.Instance.getImageWithVariable(productID, color, size);
+            return _service.getImageWithVariable(productID, color, size);
         }
         #endregion
 
@@ -361,7 +363,7 @@ namespace ann_shop_server.Services
         /// <returns></returns>
         public List<string> getAdvertisementImages(int productID)
         {
-            return ProductService.Instance.getAdvertisementImages(productID);
+            return _service.getAdvertisementImages(productID);
         }
         #endregion
 
@@ -391,7 +393,7 @@ namespace ann_shop_server.Services
                 content.AppendLine();
                 content.AppendLine(String.Format("🔖 {0}", String.IsNullOrEmpty(product.ProductContent) ? String.Empty : Regex.Replace(product.ProductContent, @"<img[a-zA-Z0-9\s\=\""\-\/\.]+\/>", String.Empty)));
 
-                var colors = ProductService.Instance.getColors(productID);
+                var colors = _service.getColors(productID);
                 if (colors.Count > 0)
                 {
                     var strColor = String.Empty;
@@ -408,7 +410,7 @@ namespace ann_shop_server.Services
                     }
                 }
                 
-                var size = ProductService.Instance.getSizes(productID);
+                var size = _service.getSizes(productID);
                 if (size.Count > 0)
                 {
                     var strSize = String.Empty;

@@ -7,7 +7,7 @@ namespace ann_shop_server.Models
 {
     public class FlutterProductModel
     {
-        public int id { get; set; }
+        public int productID { get; set; }
         public string categoryName { get; set; }
         public string categorySlug { get; set; }
         public string name { get; set; }
