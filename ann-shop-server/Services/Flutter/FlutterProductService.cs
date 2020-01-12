@@ -302,7 +302,7 @@ namespace ann_shop_server.Services
                         {
                             origin = Thumbnail.getURL(imageOrigin, Thumbnail.Size.Source),
                             feature = Thumbnail.getURL(imageOrigin, Thumbnail.Size.Large),
-                            thumbnail = Thumbnail.getURL(imageOrigin, Thumbnail.Size.Small),
+                            thumbnail = Thumbnail.getURL(imageOrigin, Thumbnail.Size.Micro),
                         });
                     }
                 }
@@ -316,7 +316,7 @@ namespace ann_shop_server.Services
                     slug = data.slug,
                     sku = data.sku,
                     avatar = Thumbnail.getURL(data.avatar, Thumbnail.Size.Source),
-                    images = images.Count > 0 ? images : null,
+                    carousel = images.Count > 0 ? images : null,
                     colors = data.colors,
                     sizes = data.sizes,
                     materials = data.materials,
@@ -390,7 +390,7 @@ namespace ann_shop_server.Services
         /// </summary>
         /// <param name="productID"></param>
         /// <returns></returns>
-        public string getAdvertisementContent(int productID)
+        public string getAdvertisementContent(int productID, FlutterCopyModel setting)
         {
             using (var con = new inventorymanagementEntities())
             {
@@ -402,9 +402,14 @@ namespace ann_shop_server.Services
                 // Khởi tạo nội dung quảng cáo
                 var content = new StringBuilder();
 
-                content.AppendLine(String.Format("{0} - {1}", product.ProductSKU, product.ProductTitle));
+                if (setting.showSKU && setting.showProductName)
+                    content.AppendLine(String.Format("{0} - {1}", product.ProductSKU, product.ProductTitle));
+                else if(setting.showSKU && !setting.showProductName)
+                    content.AppendLine(String.Format("{0}", product.ProductSKU));
+                else if (!setting.showSKU && setting.showProductName)
+                    content.AppendLine(String.Format("{0}", product.ProductTitle));
                 content.AppendLine();
-                content.AppendLine(String.Format("📌 {0:N0}", product.Retail_Price));
+                content.AppendLine(String.Format("📌 {0:N0}K", (product.Retail_Price.HasValue ? product.Retail_Price.Value + setting.increntPrice : setting.increntPrice) / 100));
                 content.AppendLine();
                 content.AppendLine(String.Format("🔖 {0}", product.Materials));
                 content.AppendLine();
@@ -442,6 +447,19 @@ namespace ann_shop_server.Services
                         content.AppendLine(String.Format("📚 Size: {0}", strSize));
                         content.AppendLine();
                     }
+                }
+
+                if (!String.IsNullOrEmpty(setting.shopPhone))
+                {
+                    content.AppendLine();
+                    content.AppendLine(String.Format("📌 {0}", setting.shopPhone));
+                    content.AppendLine();
+                }
+
+                if (!String.IsNullOrEmpty(setting.shopAddress))
+                {
+                    content.AppendLine(String.Format("📌 {0}", setting.shopAddress));
+                    content.AppendLine();
                 }
 
                 return content.ToString();

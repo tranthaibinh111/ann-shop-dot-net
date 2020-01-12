@@ -323,6 +323,7 @@
     <Compile Include="Models\Common\Product\Token\TokenModel.cs" />
     <Compile Include="Models\Common\User\UserRegisterModel.cs" />
     <Compile Include="Models\Flutter\FlutterProduct\FlutterCarouselModel.cs" />
+    <Compile Include="Models\Flutter\FlutterProduct\FlutterCopyModel.cs" />
     <Compile Include="Models\Flutter\FlutterUser\FlutterCreatePasswordModel.cs" />
     <Compile Include="Models\Flutter\FlutterUser\FlutterPasswordNewBithdayModel.cs" />
     <Compile Include="Models\Common\User\UserInfoModel.cs" />
