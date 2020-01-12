@@ -135,11 +135,14 @@ namespace ann_shop_server.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Route("{id:int}/advertisement-content")]
-        public IHttpActionResult GetAdvertisementContent(int id)
+        public IHttpActionResult GetAdvertisementContent(int id, FlutterCopyModel setting)
         {
-            return Ok<string>(_service.getAdvertisementContent(id));
+            if (setting == null)
+                setting = new FlutterCopyModel();
+
+            return Ok<string>(_service.getAdvertisementContent(id, setting));
         }
     }
 }

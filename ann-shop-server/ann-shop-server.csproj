@@ -320,8 +320,10 @@
     <Compile Include="Models\Common\Stock\StockProductVariableModel.cs" />
     <Compile Include="Models\Common\SMS\RespondOTPModel.cs" />
     <Compile Include="Models\Common\SMS\SendOTPModel.cs" />
-    <Compile Include="Models\Common\Token\TokenModel.cs" />
+    <Compile Include="Models\Common\Product\Token\TokenModel.cs" />
     <Compile Include="Models\Common\User\UserRegisterModel.cs" />
+    <Compile Include="Models\Flutter\FlutterProduct\FlutterCarouselModel.cs" />
+    <Compile Include="Models\Flutter\FlutterProduct\FlutterCopyModel.cs" />
     <Compile Include="Models\Flutter\FlutterUser\FlutterCreatePasswordModel.cs" />
     <Compile Include="Models\Flutter\FlutterUser\FlutterPasswordNewBithdayModel.cs" />
     <Compile Include="Models\Common\User\UserInfoModel.cs" />
@@ -558,6 +560,7 @@
     <Compile Include="Services\Common\Service.cs" />
     <Compile Include="Services\Common\StockService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\ANNImage.cs" />
     <Compile Include="Utils\Phone.cs" />
     <Compile Include="Utils\Security.cs" />
     <Compile Include="Utils\Thumbnail.cs" />

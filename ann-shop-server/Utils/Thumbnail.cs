@@ -48,6 +48,21 @@ namespace ann_shop_server.Utils
             return String.Format("/uploads/images{0}/{1}", directory, image);
         }
 
+        public static List<string> getURLs(List<string> images, Size size)
+        {
+            var result = new List<string>();
+
+            foreach (var item in images)
+            {
+                var image = getURL(item, size);
+
+                if (!String.IsNullOrEmpty(image))
+                    result.Add(image);
+            }
+
+            return result;
+        }
+
         public static List<ThumbnailModel> getALL(string image)
         {
             var thumbnails = new List<ThumbnailModel>();
