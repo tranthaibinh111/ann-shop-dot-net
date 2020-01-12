@@ -290,6 +290,23 @@ namespace ann_shop_server.Services
             
             if (data != null)
             {
+                var images = new List<FlutterCarouselModel>();
+
+                foreach (var url in data.images)
+                {
+                    var imageOrigin = ANNImage.extractImage(url);
+
+                    if (!String.IsNullOrEmpty(imageOrigin))
+                    {
+                        images.Add(new FlutterCarouselModel()
+                        {
+                            origin = Thumbnail.getURL(imageOrigin, Thumbnail.Size.Source),
+                            feature = Thumbnail.getURL(imageOrigin, Thumbnail.Size.Large),
+                            thumbnail = Thumbnail.getURL(imageOrigin, Thumbnail.Size.Small),
+                        });
+                    }
+                }
+
                 var product = new FlutterProductModel()
                 {
                     productID = data.id,
@@ -299,7 +316,7 @@ namespace ann_shop_server.Services
                     slug = data.slug,
                     sku = data.sku,
                     avatar = Thumbnail.getURL(data.avatar, Thumbnail.Size.Source),
-                    images = data.images,
+                    images = images.Count > 0 ? images : null,
                     colors = data.colors,
                     sizes = data.sizes,
                     materials = data.materials,

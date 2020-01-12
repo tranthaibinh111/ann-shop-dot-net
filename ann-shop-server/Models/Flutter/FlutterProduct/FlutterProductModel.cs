@@ -14,7 +14,7 @@ namespace ann_shop_server.Models
         public string slug { get; set; }
         public string sku { get; set; }
         public string avatar { get; set; }
-        public List<string> images { get; set; }
+        public List<FlutterCarouselModel> images { get; set; }
         public List<ColorModel> colors { get; set; }
         public List<SizeModel> sizes { get; set; }
         public string materials { get; set; }
