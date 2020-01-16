@@ -22,13 +22,13 @@ namespace ann_shop_server.Services
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
-                    banner = new FlutterBannerModel() {
-                        action = "category",
-                        name = "Bao lì xì tết",
-                        actionValue = "bao-li-xi-tet",
-                        image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                        createdDate = DateTime.Now
-                    },
+                    //banner = new FlutterBannerModel() {
+                    //    action = "category",
+                    //    name = "Bao lì xì tết",
+                    //    actionValue = "bao-li-xi-tet",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                    //    createdDate = DateTime.Now
+                    //},
                     category = block1
                 });
             }
@@ -40,14 +40,14 @@ namespace ann_shop_server.Services
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
-                    banner = new FlutterBannerModel()
-                    {
-                        action = "category",
-                        name = "Váy đầm",
-                        actionValue = "vay-dam",
-                        image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                        createdDate = DateTime.Now
-                    },
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = "category",
+                    //    name = "Váy đầm",
+                    //    actionValue = "vay-dam",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                    //    createdDate = DateTime.Now
+                    //},
                     category = block2
                 });
             }
@@ -59,14 +59,14 @@ namespace ann_shop_server.Services
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
-                    banner = new FlutterBannerModel()
-                    {
-                        action = "category",
-                        name = "Đồ bộ nữ",
-                        actionValue = "do-bo-nu",
-                        image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                        createdDate = DateTime.Now
-                    },
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = "category",
+                    //    name = "Đồ bộ nữ",
+                    //    actionValue = "do-bo-nu",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                    //    createdDate = DateTime.Now
+                    //},
                     category = block3
                 });
             }
@@ -78,14 +78,14 @@ namespace ann_shop_server.Services
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
-                    banner = new FlutterBannerModel()
-                    {
-                        action = "category",
-                        name = "Áo dài cách tân",
-                        actionValue = "ao-dai-cach-tan",
-                        image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                        createdDate = DateTime.Now
-                    },
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = "category",
+                    //    name = "Áo dài cách tân",
+                    //    actionValue = "ao-dai-cach-tan",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                    //    createdDate = DateTime.Now
+                    //},
                     category = block4
                 });
             }
@@ -98,14 +98,14 @@ namespace ann_shop_server.Services
             );
             blockProducts.Add(new FlutterBlockProductModel()
             {
-                banner = new FlutterBannerModel()
-                {
-                    action = "category",
-                    name = "Áo thung nữ - Sơ mi nữ",
-                    actionValue = "ao-thun-nu",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                    createdDate = DateTime.Now
-                },
+                //banner = new FlutterBannerModel()
+                //{
+                //    action = "category",
+                //    name = "Áo thung nữ - Sơ mi nữ",
+                //    actionValue = "ao-thun-nu",
+                //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                //    createdDate = DateTime.Now
+                //},
                 category = block5
             });
             #endregion
@@ -116,14 +116,14 @@ namespace ann_shop_server.Services
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
-                    banner = new FlutterBannerModel()
-                    {
-                        action = "category",
-                        name = "Áo khoác nữ",
-                        actionValue = "ao-khoac-nu",
-                        image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                        createdDate = DateTime.Now
-                    },
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = "category",
+                    //    name = "Áo khoác nữ",
+                    //    actionValue = "ao-khoac-nu",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                    //    createdDate = DateTime.Now
+                    //},
                     category = block6
                 });
             }
@@ -136,14 +136,14 @@ namespace ann_shop_server.Services
             );
             blockProducts.Add(new FlutterBlockProductModel()
             {
-                banner = new FlutterBannerModel()
-                {
-                    action = "category",
-                    name = "Quần nữ - Đồ lót nữ",
-                    actionValue = "quan-nu",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                    createdDate = DateTime.Now
-                },
+                //banner = new FlutterBannerModel()
+                //{
+                //    action = "category",
+                //    name = "Quần nữ - Đồ lót nữ",
+                //    actionValue = "quan-nu",
+                //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                //    createdDate = DateTime.Now
+                //},
                 category = block7
             });
             #endregion
@@ -154,14 +154,14 @@ namespace ann_shop_server.Services
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
-                    banner = new FlutterBannerModel()
-                    {
-                        action = "category",
-                        name = "Áo thung nam",
-                        actionValue = "ao-thun-nam",
-                        image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                        createdDate = DateTime.Now
-                    },
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = "category",
+                    //    name = "Áo thung nam",
+                    //    actionValue = "ao-thun-nam",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                    //    createdDate = DateTime.Now
+                    //},
                     category = block8
                 });
             }
@@ -174,14 +174,14 @@ namespace ann_shop_server.Services
             );
             blockProducts.Add(new FlutterBlockProductModel()
             {
-                banner = new FlutterBannerModel()
-                {
-                    action = "category",
-                    name = "Quần nam - Quần lót nam",
-                    actionValue = "quan-nam",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                    createdDate = DateTime.Now
-                },
+                //banner = new FlutterBannerModel()
+                //{
+                //    action = "category",
+                //    name = "Quần nam - Quần lót nam",
+                //    actionValue = "quan-nam",
+                //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                //    createdDate = DateTime.Now
+                //},
                 category = block9
             });
             #endregion

@@ -155,7 +155,16 @@ namespace ann_shop_server.Services
                 {
                     source = source
                         .Where(x =>
-                            x.sku.Trim().ToLower().StartsWith(filter.productSearch.Trim().ToLower()) ||
+                            (
+                                (
+                                    x.sku.Trim().Length >= filter.productSearch.Trim().Length &&
+                                    x.sku.Trim().ToLower().StartsWith(filter.productSearch.Trim().ToLower())
+                                ) ||
+                                (
+                                    x.sku.Trim().Length < filter.productSearch.Trim().Length &&
+                                    filter.productSearch.Trim().ToLower().StartsWith(x.sku.Trim().ToLower())
+                                )
+                            ) ||
                             x.title.Trim().ToLower().Contains(filter.productSearch.Trim().ToLower()) ||
                             x.unSignedTitle.Trim().ToLower().Contains(filter.productSearch.Trim().ToLower())
                         );

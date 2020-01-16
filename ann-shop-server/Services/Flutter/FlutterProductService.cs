@@ -57,11 +57,33 @@ namespace ann_shop_server.Services
 
                 #region Lọc sản phẩm
                 #region Lọc sản phẩm theo text search
-                if (!String.IsNullOrEmpty(filter.productSearch))
+                if (!String.IsNullOrEmpty(filter.productSKU))
+                {
+                    source = source.Where(x => 
+                        (
+                            x.sku.Trim().Length >= filter.productSKU.Trim().Length &&
+                            x.sku.Trim().ToLower().StartsWith(filter.productSKU.Trim().ToLower())
+                        ) ||
+                        (
+                             x.sku.Trim().Length < filter.productSKU.Trim().Length  &&
+                            filter.productSKU.Trim().ToLower().StartsWith(x.sku.Trim().ToLower())
+                        )
+                    );
+                }
+                else if (!String.IsNullOrEmpty(filter.productSearch))
                 {
                     source = source
                         .Where(x =>
-                            x.sku.Trim().ToLower().StartsWith(filter.productSearch.Trim().ToLower()) ||
+                            (
+                                (
+                                    x.sku.Trim().Length >= filter.productSearch.Trim().Length &&
+                                    x.sku.Trim().ToLower().StartsWith(filter.productSearch.Trim().ToLower())
+                                ) ||
+                                (
+                                     x.sku.Trim().Length < filter.productSearch.Trim().Length &&
+                                    filter.productSearch.Trim().ToLower().StartsWith(x.sku.Trim().ToLower())
+                                )
+                            ) ||
                             x.title.Trim().ToLower().Contains(filter.productSearch.Trim().ToLower()) ||
                             x.unSignedTitle.Trim().ToLower().Contains(filter.productSearch.Trim().ToLower())
                         );
@@ -190,7 +212,7 @@ namespace ann_shop_server.Services
                     .Select(x => new { x.product, x.stock });
 
                 // Trường hợp không phải là search thì kiểm tra điều kiện stock
-                if (String.IsNullOrEmpty(filter.productSearch))
+                if (String.IsNullOrEmpty(filter.productSKU) && String.IsNullOrEmpty(filter.productSearch))
                 {
                     data = data.Where(x =>
                         x.product.preOrder ||
@@ -409,7 +431,7 @@ namespace ann_shop_server.Services
                 else if (!setting.showSKU && setting.showProductName)
                     content.AppendLine(String.Format("{0}", product.ProductTitle));
                 content.AppendLine();
-                content.AppendLine(String.Format("📌 {0:N0}K", (product.Retail_Price.HasValue ? product.Retail_Price.Value + setting.increntPrice : setting.increntPrice) / 100));
+                content.AppendLine(String.Format("📌 {0:N0}K", (product.Retail_Price.HasValue ? product.Retail_Price.Value + setting.increntPrice : setting.increntPrice) / 1000));
                 content.AppendLine();
                 content.AppendLine(String.Format("🔖 {0}", product.Materials));
                 content.AppendLine();

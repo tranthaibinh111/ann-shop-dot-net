@@ -30,7 +30,8 @@ namespace ann_shop_server.Controllers
         [Route("~/api/flutter/home/notifications")]
         public IHttpActionResult GetHomeBanners()
         {
-            return Ok<List<FlutterBannerModel>>(_service.getHomeNotification());
+            return Ok<List<FlutterBannerModel>>(null);
+            //return Ok<List<FlutterBannerModel>>(_service.getHomeNotification());
         }
 
         /// <summary>
@@ -41,25 +42,27 @@ namespace ann_shop_server.Controllers
         [Route("~/api/flutter/notifications")]
         public IHttpActionResult GetNotifications([FromUri]FlutterNotificationFilterModel filter, [FromUri] PagingParameterModel paging)
         {
-            if (filter == null)
-                filter = new FlutterNotificationFilterModel();
+            return Ok<List<FlutterNotificationCardModel>>(null);
 
-            if (paging == null)
-                paging = new PagingParameterModel();
+            //if (filter == null)
+            //    filter = new FlutterNotificationFilterModel();
 
-            var pagination = new PaginationMetadataModel()
-            {
-                currentPage = paging.pageNumber,
-                pageSize = paging.pageSize
-            };
+            //if (paging == null)
+            //    paging = new PagingParameterModel();
 
-            var notifications = _service.getNotifications(filter, ref pagination);
+            //var pagination = new PaginationMetadataModel()
+            //{
+            //    currentPage = paging.pageNumber,
+            //    pageSize = paging.pageSize
+            //};
 
-            // Setting Header
-            HttpContext.Current.Response.Headers.Add("Access-Control-Expose-Headers", "X-Paging-Headers");
-            HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(pagination));
+            //var notifications = _service.getNotifications(filter, ref pagination);
 
-            return Ok<List<FlutterNotificationCardModel>>(notifications);
+            //// Setting Header
+            //HttpContext.Current.Response.Headers.Add("Access-Control-Expose-Headers", "X-Paging-Headers");
+            //HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(pagination));
+
+            //return Ok<List<FlutterNotificationCardModel>>(notifications);
         }
 
         /// <summary>
@@ -70,7 +73,8 @@ namespace ann_shop_server.Controllers
         [Route("{*slug}")]
         public IHttpActionResult GetNotificationBySlug(string slug)
         {
-            return Ok<FlutterNotificationModel>(_service.getNotificationBySlug(slug));
+            return Ok<FlutterNotificationModel>(null);
+            //return Ok<FlutterNotificationModel>(_service.getNotificationBySlug(slug));
         }
     }
 }

@@ -30,7 +30,8 @@ namespace ann_shop_server.Controllers
         [Route("~/api/flutter/home/posts")]
         public IHttpActionResult GetHomePosts()
         {
-            return Ok<List<FlutterBannerModel>>(_service.getHomePosts());
+            return Ok<List<FlutterBannerModel>>(null);
+            //return Ok<List<FlutterBannerModel>>(_service.getHomePosts());
         }
 
         /// <summary>
@@ -52,6 +53,9 @@ namespace ann_shop_server.Controllers
                 currentPage = paging.pageNumber,
                 pageSize = paging.pageSize
             };
+
+            if (!(!String.IsNullOrEmpty(filter.categorySlug) && filter.categorySlug == "chinh-sach"))
+                return Ok<List<FlutterPostCardModel>>(null);
 
             var posts = _service.getPosts(filter, ref pagination);
 
