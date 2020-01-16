@@ -34,17 +34,17 @@ namespace ann_shop_server.Controllers
             if (filter.page == "home")
                 return Ok<List<FlutterBannerModel>>(_service.getHomeBanners());
 
-            if (filter.page == "category")
-                return Ok<List<FlutterBannerModel>>(_service.getCategoryBanners(filter.slug));
+            //if (filter.page == "category")
+            //    return Ok<List<FlutterBannerModel>>(_service.getCategoryBanners(filter.slug));
 
-            if (filter.page == "tag")
-                return Ok<List<FlutterBannerModel>>(_service.getTagBanners(filter.slug));
+            //if (filter.page == "tag")
+            //    return Ok<List<FlutterBannerModel>>(_service.getTagBanners(filter.slug));
 
-            if (filter.page == "search")
-                return Ok<List<FlutterBannerModel>>(_service.getSearchBanners());
+            //if (filter.page == "search")
+            //    return Ok<List<FlutterBannerModel>>(_service.getSearchBanners());
 
-            if (filter.page == "product")
-                return Ok<List<FlutterBannerModel>>(_service.getProductBanners(filter.slug, filter.position));
+            //if (filter.page == "product")
+            //    return Ok<List<FlutterBannerModel>>(_service.getProductBanners(filter.slug, filter.position));
 
             return Ok<List<FlutterBannerModel>>(null);
         }

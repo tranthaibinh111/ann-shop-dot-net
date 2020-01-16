@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 
@@ -137,12 +138,16 @@ namespace ann_shop_server.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("{id:int}/advertisement-content")]
-        public IHttpActionResult GetAdvertisementContent(int id, FlutterCopyModel setting)
+        public HttpResponseMessage GetAdvertisementContent(int id, FlutterCopyModel setting)
         {
             if (setting == null)
                 setting = new FlutterCopyModel();
 
-            return Ok<string>(_service.getAdvertisementContent(id, setting));
+            var response = new HttpResponseMessage();
+            response.Content = new StringContent(_service.getAdvertisementContent(id, setting));
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
+
+            return response;
         }
     }
 }
