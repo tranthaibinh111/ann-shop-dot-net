@@ -143,25 +143,21 @@ namespace ann_shop_server.Controllers
         [Route("change-password")]
         public IHttpActionResult changePassword(string passwordNew)
         {
-            var identity = (ClaimsIdentity)User.Identity;
-            var phone = identity.Claims.FirstOrDefault(x => x.Type == "Phone").Value;
-
-            if (String.IsNullOrEmpty(phone))
-                return BadRequest("Không tìm thấy số điện thoại trong token");
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             try
             {
+                var phone = _service.getPhoneByToken(this);
+
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
                 return Ok(new { password = _service.changePassword(phone, passwordNew) });
             }
             catch (Exception ex)
             {
+
                 return BadRequest(ex.Message);
             }
         }
-
 
         [AllowAnonymous]
         [HttpGet]
