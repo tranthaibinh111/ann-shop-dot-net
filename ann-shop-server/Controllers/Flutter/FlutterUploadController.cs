@@ -29,7 +29,7 @@ namespace ann_shop_server.Controllers.Flutter
         /// <returns></returns>
         [HttpGet]
         [Route("app-review-evidence")]
-        public IHttpActionResult getAppReviewEvidence(int userID)
+        public IHttpActionResult getAppReviewEvidence()
         {
             try
             {
