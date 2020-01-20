@@ -468,13 +468,13 @@ namespace ann_shop_server.Services
                     content.AppendLine();
                 }
 
-                content.AppendLine(String.Format("📌 #{0:N0}k", (product.Retail_Price.HasValue ? product.Retail_Price.Value + setting.increntPrice : setting.increntPrice) / 1000));
+                content.AppendLine(String.Format("📌 #{0:N0}k", (product.Regular_Price.HasValue ? product.Regular_Price.Value + setting.increntPrice : setting.increntPrice) / 1000));
                 content.AppendLine();
                 content.AppendLine();
-                content.AppendLine(String.Format("🔖 {0}", product.Materials));
+                content.AppendLine(String.Format("☘ {0}", product.Materials));
                 content.AppendLine();
                 content.AppendLine();
-                content.AppendLine(String.Format("🔖 {0}", String.IsNullOrEmpty(product.ProductContent) ? String.Empty : Regex.Replace(product.ProductContent, @"<.*?>", String.Empty)));
+                content.AppendLine(String.Format("☘ {0}", String.IsNullOrEmpty(product.ProductContent) ? String.Empty : Regex.Replace(product.ProductContent, @"<.*?>", String.Empty)));
 
                 var colors = _service.getColors(productID);
                 if (colors.Count > 0)
@@ -493,8 +493,6 @@ namespace ann_shop_server.Services
                         content.AppendLine(String.Format("📚 Màu: {0}", strColor));
                     }
                 }
-
-                
 
                 var size = _service.getSizes(productID);
                 if (size.Count > 0)
@@ -518,7 +516,7 @@ namespace ann_shop_server.Services
                 {
                     content.AppendLine();
                     content.AppendLine();
-                    content.AppendLine(String.Format("📌 {0}", setting.shopPhone));
+                    content.AppendLine(String.Format("📞 {0}", setting.shopPhone));
                     
                 }
 
@@ -526,7 +524,7 @@ namespace ann_shop_server.Services
                 {
                     content.AppendLine();
                     content.AppendLine();
-                    content.AppendLine(String.Format("📌 {0}", setting.shopAddress));
+                    content.AppendLine(String.Format("🏠 {0}", setting.shopAddress));
                 }
 
                 content.AppendLine();
