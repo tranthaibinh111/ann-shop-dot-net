@@ -450,17 +450,31 @@ namespace ann_shop_server.Services
                 var content = new StringBuilder();
 
                 if (setting.showSKU && setting.showProductName)
+                {
                     content.AppendLine(String.Format("{0} - {1}", product.ProductSKU, product.ProductTitle));
+                    content.AppendLine();
+                    content.AppendLine();
+                }
                 else if(setting.showSKU && !setting.showProductName)
+                {
                     content.AppendLine(String.Format("{0}", product.ProductSKU));
+                    content.AppendLine();
+                    content.AppendLine();
+                }
                 else if (!setting.showSKU && setting.showProductName)
+                {
                     content.AppendLine(String.Format("{0}", product.ProductTitle));
+                    content.AppendLine();
+                    content.AppendLine();
+                }
+
+                content.AppendLine(String.Format("📌 #{0:N0}k", (product.Retail_Price.HasValue ? product.Retail_Price.Value + setting.increntPrice : setting.increntPrice) / 1000));
                 content.AppendLine();
-                content.AppendLine(String.Format("📌 {0:N0}K", (product.Retail_Price.HasValue ? product.Retail_Price.Value + setting.increntPrice : setting.increntPrice) / 1000));
                 content.AppendLine();
                 content.AppendLine(String.Format("🔖 {0}", product.Materials));
                 content.AppendLine();
-                content.AppendLine(String.Format("🔖 {0}", String.IsNullOrEmpty(product.ProductContent) ? String.Empty : Regex.Replace(product.ProductContent, @"<img[a-zA-Z0-9\s\=\""\-\/\.]+\/>", String.Empty)));
+                content.AppendLine();
+                content.AppendLine(String.Format("🔖 {0}", String.IsNullOrEmpty(product.ProductContent) ? String.Empty : Regex.Replace(product.ProductContent, @"<.*?>", String.Empty)));
 
                 var colors = _service.getColors(productID);
                 if (colors.Count > 0)
@@ -474,11 +488,14 @@ namespace ann_shop_server.Services
 
                     if (!String.IsNullOrEmpty(strColor))
                     {
-                        content.AppendLine(String.Format("📚 Màu: {0}", strColor));
                         content.AppendLine();
+                        content.AppendLine();
+                        content.AppendLine(String.Format("📚 Màu: {0}", strColor));
                     }
                 }
+
                 
+
                 var size = _service.getSizes(productID);
                 if (size.Count > 0)
                 {
@@ -491,23 +508,28 @@ namespace ann_shop_server.Services
 
                     if (!String.IsNullOrEmpty(strSize))
                     {
-                        content.AppendLine(String.Format("📚 Size: {0}", strSize));
                         content.AppendLine();
+                        content.AppendLine();
+                        content.AppendLine(String.Format("📚 Size: {0}", strSize));
                     }
                 }
 
                 if (!String.IsNullOrEmpty(setting.shopPhone))
                 {
                     content.AppendLine();
-                    content.AppendLine(String.Format("📌 {0}", setting.shopPhone));
                     content.AppendLine();
+                    content.AppendLine(String.Format("📌 {0}", setting.shopPhone));
+                    
                 }
 
                 if (!String.IsNullOrEmpty(setting.shopAddress))
                 {
-                    content.AppendLine(String.Format("📌 {0}", setting.shopAddress));
                     content.AppendLine();
+                    content.AppendLine();
+                    content.AppendLine(String.Format("📌 {0}", setting.shopAddress));
                 }
+
+                content.AppendLine();
 
                 return content.ToString();
             }
