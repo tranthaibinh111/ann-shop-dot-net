@@ -59,16 +59,41 @@ namespace ann_shop_server.Services
                 #region Lọc sản phẩm theo text search
                 if (!String.IsNullOrEmpty(filter.productSKU))
                 {
-                    source = source.Where(x => 
-                        (
-                            x.sku.Trim().Length >= filter.productSKU.Trim().Length &&
-                            x.sku.Trim().ToLower().StartsWith(filter.productSKU.Trim().ToLower())
-                        ) ||
-                        (
-                             x.sku.Trim().Length < filter.productSKU.Trim().Length  &&
-                            filter.productSKU.Trim().ToLower().StartsWith(x.sku.Trim().ToLower())
+                    // Lọc trước những sản phẩm con có chứa productSKU
+                    var variableFilter = con.tbl_ProductVariable.Where(x =>
+                            x.SKU.Trim().ToLower().StartsWith(filter.productSKU.Trim().ToLower())
                         )
-                    );
+                        .Select(x => new {
+                            productID = x.ProductID.Value,
+                            sku = x.SKU
+                        });
+
+                    var productFilter = source.Select(x => new {
+                            productID = x.productID,
+                            sku = x.sku
+                        })
+                        .GroupJoin(
+                            variableFilter,
+                            p => p.productID,
+                            v => v.productID,
+                            (p, v) => new { product = p, variable = v }
+                        )
+                        .SelectMany(
+                            x => x.variable.DefaultIfEmpty(),
+                            (parent, child) => new {
+                                productID = parent.product.productID,
+                                productSKU = parent.product.sku,
+                                variableSKU = child != null ? child.sku : ""
+                            }
+                        )
+                        .Where(x => 
+                            x.productSKU.Trim().ToLower() == filter.productSKU.Trim().ToLower() ||
+                            x.variableSKU.Trim().ToLower() == filter.productSKU.Trim().ToLower()
+                        )
+                        .Select(x => new { productID = x.productID, sku = x.productSKU })
+                        .Distinct();
+
+                    source = source.Join(productFilter, s => s.productID, f => f.productID, (s, f) => s);
                 }
                 else if (!String.IsNullOrEmpty(filter.productSearch))
                 {

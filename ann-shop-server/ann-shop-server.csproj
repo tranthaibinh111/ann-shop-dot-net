@@ -105,11 +105,40 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ServiceStack.Common, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Common.5.8.0\lib\net45\ServiceStack.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Interfaces.5.8.0\lib\net45\ServiceStack.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Redis.5.8.0\lib\net45\ServiceStack.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Text.5.8.0\lib\net45\ServiceStack.Text.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard1.1\System.Memory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Security" />
@@ -257,6 +286,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Common\SMSController.cs" />
+    <Compile Include="Controllers\Flutter\FlutterUploadController.cs" />
     <Compile Include="Controllers\Flutter\FlutterShopController.cs" />
     <Compile Include="Controllers\Flutter\FlutterUserController.cs" />
     <Compile Include="Controllers\Flutter\FlutterBannerController.cs" />
@@ -281,6 +311,7 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ann-shop-redis.cs" />
     <Compile Include="Models\ann-shop.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -296,6 +327,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ann-shop.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnnShopRedis\RedisAppReviewEvidence.cs" />
     <Compile Include="Models\Bank.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
@@ -325,6 +357,7 @@
     <Compile Include="Models\Common\User\UserRegisterModel.cs" />
     <Compile Include="Models\Flutter\FlutterProduct\FlutterCarouselModel.cs" />
     <Compile Include="Models\Flutter\FlutterProduct\FlutterCopyModel.cs" />
+    <Compile Include="Models\Flutter\FlutterUpload\FlutterAppReviewEvidenceModel.cs" />
     <Compile Include="Models\Flutter\FlutterUser\FlutterCreatePasswordModel.cs" />
     <Compile Include="Models\Flutter\FlutterUser\FlutterPasswordNewBithdayModel.cs" />
     <Compile Include="Models\Common\User\UserInfoModel.cs" />
@@ -537,6 +570,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Services\Redis\RedisAppReviewEvidence.cs" />
     <Compile Include="Services\Common\CategoryService.cs" />
     <Compile Include="Services\Common\ProductService.cs" />
     <Compile Include="Services\Common\SMSService.cs" />

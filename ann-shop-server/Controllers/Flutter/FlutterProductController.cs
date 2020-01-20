@@ -38,6 +38,7 @@ namespace ann_shop_server.Controllers
         /// Lấy danh sách sản phẩm theo filter
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
         [Route("~/api/flutter/products")]
         public IHttpActionResult getProducts([FromUri]FlutterProductFilterModel filter, [FromUri] PagingParameterModel paging)
