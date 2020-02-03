@@ -12,7 +12,6 @@ using System.Web.Http;
 
 namespace ann_shop_server.Controllers
 {
-    [Authorize]
     [RoutePrefix("api/flutter/product")]
     public class FlutterProductController : ApiController
     {
@@ -124,6 +123,7 @@ namespace ann_shop_server.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpGet]
         [Route("{id:int}/advertisement-image")]
         public IHttpActionResult GetAdvertisementImages(int id)
@@ -136,6 +136,7 @@ namespace ann_shop_server.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpPost]
         [Route("{id:int}/advertisement-content")]
         public HttpResponseMessage GetAdvertisementContent(int id, FlutterCopyModel setting)
