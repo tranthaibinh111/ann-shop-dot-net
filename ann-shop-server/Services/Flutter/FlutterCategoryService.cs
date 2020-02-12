@@ -94,6 +94,7 @@ namespace ann_shop_server.Services
         {
             // Váy đầm nữ
             var womenDresses = createCategoryBySlug("vay-dam");
+            womenDresses.name = "Váy đầm";
 
             // Váy đầm có sẵn
             var stockIn = (FlutterCategoryModel)womenDresses.Clone();
@@ -159,6 +160,7 @@ namespace ann_shop_server.Services
         {
             // Quần áo nữ
             var womenClothes = createCategoryBySlug("quan-ao-nu");
+            womenClothes.name = "Quần áo nữ";
 
             // Quần áo nữ có sẵn
             var stockIn = (FlutterCategoryModel)womenClothes.Clone();
@@ -198,7 +200,7 @@ namespace ann_shop_server.Services
                     "ao-so-mi-nu",
                     "do-lot-nu",
                     "ao-khoac-nu",
-                    "ao-dai-cach-tan"
+                    //"ao-dai-cach-tan"
                 })
             );
             // Quần áo nữ có sẵn
@@ -214,7 +216,7 @@ namespace ann_shop_server.Services
         
         #region Danh mục Quần áo nam
         /// <summary>
-        /// Lấy category Áo thung nam
+        /// Lấy category Áo thun nam
         /// </summary>
         /// <returns></returns>
         public FlutterCategoryModel getMenTShirt()
@@ -255,6 +257,7 @@ namespace ann_shop_server.Services
         {
             // Quần áo nam
             var menClothes = createCategoryBySlug("quan-ao-nam");
+            menClothes.name = "Quần áo nam";
 
             // Quần áo nam có sẵn
             var stockIn = (FlutterCategoryModel)menClothes.Clone();
@@ -361,134 +364,13 @@ namespace ann_shop_server.Services
         }
         #endregion
 
-        /// <summary>
-        /// Lấy danh sách các danh mục home
-        /// </summary>
-        /// <returns></returns>
-        public List<FlutterCategoryModel> getHomeCategories()
-        {
-            var result = new List<FlutterCategoryModel>();
-
-            // Bao lì xì
-            var redEnvelop = createCategoryBySlug("bao-li-xi-tet");
-            if (redEnvelop != null)
-                result.Add(redEnvelop);
-
-            // Đồ bộ nữ
-            var womenOutfit = getWomenOutfit();
-            if (womenOutfit != null)
-                result.Add(womenOutfit);
-
-            // Váy đầm
-            var womenDresses = getWomenDresses();
-            if (womenDresses != null)
-                result.Add(womenDresses);
-
-            // Áo thun nữ, Áo sơ mi nữ, Áo dài cách tân, Quần nữ, Đồ lót nữ, Áo khoác nữ
-            result.AddRange(
-                createCategoryBySlugs(new List<string>() {
-                    "ao-thun-nu",
-                    "ao-so-mi-nu",
-                    "ao-dai-cach-tan",
-                    "quan-nu",
-                    "do-lot-nu",
-                    "ao-khoac-nu"
-                })
-            );
-
-            // Quần áo nữ order / sale
-            var womenClothes = getWomenClothes();
+        #region Hàng sale
+        public FlutterCategoryModel getProductSale(FlutterCategoryModel womenClothes = null, FlutterCategoryModel menClothes = null) {
             if (womenClothes != null)
-            {
-                // Order
-                var womenClothesOrder = (FlutterCategoryModel)womenClothes.Clone();
-                womenClothesOrder.name = String.Format("{0} (hàng order)", womenClothesOrder.name);
-                womenClothesOrder.description = String.Empty;
-                womenClothesOrder.filter.productBadge = (int)ProductBadge.order;
-                result.Add(womenClothesOrder);
-                // Sale
-                var womenClothesSale = (FlutterCategoryModel)womenClothes.Clone();
-                womenClothesSale.name = String.Format("{0} (hàng sale)", womenClothesSale.name);
-                womenClothesSale.description = String.Empty;
-                womenClothesSale.filter.productBadge = (int)ProductBadge.sale;
-                result.Add(womenClothesSale);
-            }
-
-            var menTShirt = getMenTShirt();
-            if (menTShirt != null)
-                result.Add(menTShirt);
-
-            // Sơ mi nam, Áo khoác nam, Quần nam, Quần lót nam, Set bộ nam
-            result.AddRange(
-                createCategoryBySlugs(new List<string>() {
-                    "ao-so-mi-nam",
-                    "ao-khoac-nam",
-                    "quan-nam",
-                    "quan-lot-nam",
-                    "do-lot-nu",
-                    "ao-khoac-nu",
-                    "set-bo-nam"
-                })
-            );
-
-            // Quần áo nữ order / sale
-            var menClothes = getMenClothes();
+                womenClothes = getWomenClothes();
             if (menClothes != null)
-            {
-                // Order
-                var menClothesOrder = (FlutterCategoryModel)menClothes.Clone();
-                menClothesOrder.name = String.Format("{0} (hàng order)", menClothesOrder.name);
-                menClothesOrder.description = String.Empty;
-                menClothesOrder.filter.productBadge = (int)ProductBadge.order;
-                result.Add(menClothesOrder);
-                // Sale
-                var menClothesSale = (FlutterCategoryModel)menClothes.Clone();
-                menClothesSale.name = String.Format("{0} (hàng sale)", menClothesSale.name);
-                menClothesSale.description = String.Empty;
-                menClothesSale.filter.productBadge = (int)ProductBadge.sale;
-                result.Add(menClothesSale);
-            }
+                menClothes = getMenClothes();
 
-            var perfume = getPerfume();
-
-            if (perfume != null)
-                result.Add(perfume);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Lấy danh sách các danh mục home
-        /// </summary>
-        /// <returns></returns>
-        public List<FlutterCategoryModel> getCategories()
-        {
-            var result = new List<FlutterCategoryModel>();
-
-            var womenClothes = getWomenClothes();
-            var menClothes = getMenClothes();
-
-            #region Hàng có sẵn mới về
-            var productStockInNews = new FlutterCategoryModel()
-            {
-                name = "Hàng có sẵn mới về",
-                icon = "/assets/images/categories/new-product.png",
-                description = "Hàng có sẳn ở kho",
-                filter = new FlutterProductFilterModel() { productBadge = (int)ProductBadge.stockIn, productSort = (int)ProductSortKind.ProductNew }
-            };
-            #endregion
-
-            #region Hàng order mới về
-            var productOrderNews = new FlutterCategoryModel()
-            {
-                name = "Hàng order mới về",
-                icon = "/assets/images/categories/order-product.png",
-                description = "Không có sẳn ở kho",
-                filter = new FlutterProductFilterModel() { productBadge = (int)ProductBadge.order, productSort = (int)ProductSortKind.ProductNew }
-            };
-            #endregion
-
-            #region Hàng sale
             var productSale = new FlutterCategoryModel()
             {
                 name = "Hàng sale",
@@ -521,9 +403,14 @@ namespace ann_shop_server.Services
 
                 productSale.children.Add(menClothesSale);
             }
-            #endregion
 
-            // Hàng mới về
+            return productSale;
+        }
+        #endregion
+
+        #region Hàng mới về
+        public FlutterCategoryModel getProductNew(FlutterCategoryModel productSale = null) {
+            // Khởi tạo hàng mới về
             var productNews = new FlutterCategoryModel()
             {
                 name = "Hàng mới về",
@@ -531,16 +418,139 @@ namespace ann_shop_server.Services
                 description = "Tất cả hàng mới về",
                 filter = new FlutterProductFilterModel() { productSort = (int)ProductSortKind.ProductNew },
                 children = new List<FlutterCategoryModel>()
-                {
-                    productStockInNews,
-                    productOrderNews,
-                    productSale
-                }
             };
-            result.Add(productNews);
+
+           // Hàng có sẵn mới về
+            var productStockInNews = new FlutterCategoryModel()
+            {
+                name = "Hàng có sẵn mới về",
+                icon = "/assets/images/categories/new-product.png",
+                description = "Hàng có sẳn ở kho",
+                filter = new FlutterProductFilterModel() { productBadge = (int)ProductBadge.stockIn, productSort = (int)ProductSortKind.ProductNew }
+            };
+
+            if (productStockInNews != null)
+                productNews.children.Add(productStockInNews);
+
+            // Hàng order mới về
+            var productOrderNews = new FlutterCategoryModel()
+            {
+                name = "Hàng order mới về",
+                icon = "/assets/images/categories/order-product.png",
+                description = "Không có sẳn ở kho",
+                filter = new FlutterProductFilterModel() { productBadge = (int)ProductBadge.order, productSort = (int)ProductSortKind.ProductNew }
+            };
+
+            if (productOrderNews != null)
+                productNews.children.Add(productOrderNews);
 
             // Hàng sale
-            result.Add(productSale);
+            if (productSale != null)
+                productNews.children.Add(productSale);
+
+            return productNews;
+        }
+        #endregion
+        
+        /// <summary>
+        /// Lấy danh sách các danh mục home
+        /// </summary>
+        /// <returns></returns>
+        public List<FlutterCategoryModel> getHomeCategories()
+        {
+            var result = new List<FlutterCategoryModel>();
+
+            // Bao lì xì
+            //var redEnvelop = createCategoryBySlug("bao-li-xi-tet");
+            //if (redEnvelop != null)
+            //    result.Add(redEnvelop);
+
+            // Quần áo nữ
+            var womenClothes = getWomenClothes();
+            if (womenClothes != null)
+                result.Add(womenClothes);
+
+            // Quần áo nam
+            var menClothes = getMenClothes();
+            if (menClothes != null)
+                result.Add(menClothes);
+
+            // Đồ bộ nữ
+            var womenOutfit = getWomenOutfit();
+            if (womenOutfit != null)
+                result.Add(womenOutfit);
+
+            // Áo thun nam
+            var menTShirt = getMenTShirt();
+            if (menTShirt != null)
+                result.Add(menTShirt);
+
+            // Váy đầm
+            var womenDresses = getWomenDresses();
+            if (womenDresses != null)
+                result.Add(womenDresses);
+
+            // Áo sơ mi nam, Áo thun nữ, Quần nam, Áo khoác nữ, Áo khoác nam, Quần nữ, Quần lót nam, Đồ lót nữ, Set bộ nam, Áo sơ mi nữ
+            result.AddRange(
+                createCategoryBySlugs(new List<string>() {
+                    "ao-so-mi-nam",
+                    "ao-thun-nu",
+                    "quan-nam",
+                    "ao-khoac-nu",
+                    "ao-khoac-nam",
+                    "quan-nu",
+                    "quan-lot-nam",
+                    "do-lot-nu",
+                    "set-bo-nam",
+                    "ao-so-mi-nu",
+                })
+            );
+
+            // Nước hoa
+            var perfume = getPerfume();
+
+            if (perfume != null)
+                result.Add(perfume);
+
+            // Mỹ phẩm
+            var cosmetics = createCategoryBySlug("my-pham");
+
+            if (cosmetics != null)
+                result.Add(cosmetics);
+
+            // Tất cả sản phẩm
+            var productSale = getProductSale(womenClothes, menClothes);
+            var productAll = getProductNew(productSale);
+
+            if (productAll != null)
+            {
+                productAll.name = "Tất cả sản phẩm";
+                result.Add(productAll);
+            }
+                
+            return result;
+        }
+
+        /// <summary>
+        /// Lấy danh sách các danh mục menu
+        /// </summary>
+        /// <returns></returns>
+        public List<FlutterCategoryModel> getCategories()
+        {
+            var result = new List<FlutterCategoryModel>();
+
+            var womenClothes = getWomenClothes();
+            var menClothes = getMenClothes();
+            var productSale = getProductSale(womenClothes, menClothes);
+            var productNews = getProductNew(productSale);
+
+            // Hàng mới về
+            if (productNews != null)
+                result.Add(productNews);
+
+            // Hàng sale
+            if (productSale != null)
+                result.Add(productSale);
 
             // Quần áo nữ
             if (womenClothes != null)
@@ -557,10 +567,16 @@ namespace ann_shop_server.Services
                 result.Add(perfume);
 
             // Bao lì xì
-            var redEnvelope = createCategoryBySlug("bao-li-xi-tet");
+            //var redEnvelope = createCategoryBySlug("bao-li-xi-tet");
 
-            if (redEnvelope != null)
-                result.Add(redEnvelope);
+            //if (redEnvelope != null)
+            //    result.Add(redEnvelope);
+
+            // Mỹ phẩm
+            var cosmetics = createCategoryBySlug("my-pham");
+
+            if (cosmetics != null)
+                result.Add(cosmetics);
 
             return result;
         }

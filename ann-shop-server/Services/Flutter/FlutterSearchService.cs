@@ -12,22 +12,34 @@ namespace ann_shop_server.Services
         {
             var result = new List<FlutterCategoryModel>();
 
-            // Bao lì xì
-            var redEnvelop = new FlutterCategoryModel()
+            // Đồ bộ nữ
+            var key01 = new FlutterCategoryModel()
             {
-                name = "Bao lì xì",
+                name = "đồ bộ nữ",
                 filter = new FlutterProductFilterModel()
                 {
-                    categorySlug = "bao-li-xi-tet",
+                    categorySlug = "do-bo-nu",
                     productSort = (int)ProductSortKind.ProductNew
                 }
             };
-            result.Add(redEnvelop);
+            result.Add(key01);
+
+            // Kem
+            var cosmetic = new FlutterCategoryModel()
+            {
+                name = "mỹ phẩm",
+                filter = new FlutterProductFilterModel()
+                {
+                    categorySlug = "my-pham",
+                    productSort = (int)ProductSortKind.ProductNew
+                }
+            };
+            result.Add(cosmetic);
 
             // Nước hoa
             var perfume = new FlutterCategoryModel()
             {
-                name = "Nước hoa",
+                name = "nước hoa",
                 filter = new FlutterProductFilterModel()
                 {
                     categorySlug = "nuoc-hoa",
@@ -36,10 +48,22 @@ namespace ann_shop_server.Services
             };
             result.Add(perfume);
 
+            // Áo thun nam
+            var menTShirt = new FlutterCategoryModel()
+            {
+                name = "áo thun nam",
+                filter = new FlutterProductFilterModel()
+                {
+                    categorySlug = "ao-thun-nam",
+                    productSort = (int)ProductSortKind.ProductNew
+                }
+            };
+            result.Add(menTShirt);
+
             // Áo thun nữ
             var womenTShirt = new FlutterCategoryModel()
             {
-                name = "Áo thun nữ",
+                name = "áo thun nữ",
                 filter = new FlutterProductFilterModel()
                 {
                     categorySlug = "ao-thun-nu",
@@ -51,7 +75,7 @@ namespace ann_shop_server.Services
             // Quần Jean Nam
             var menJean = new FlutterCategoryModel()
             {
-                name = "Quần jean nam",
+                name = "quần jean nam",
                 filter = new FlutterProductFilterModel()
                 {
                     categorySlug = "quan-jeans-nam",

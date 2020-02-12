@@ -117,6 +117,154 @@ namespace ann_shop_server.Services
             };
         }
 
+
+        /// <summary>
+        /// May áo thun đồng phục
+        /// </summary>
+        /// <returns></returns>
+        private NewsModel getPost3()
+        {
+            var content = new StringBuilder();
+            content.AppendLine("<p><strong>Xưởng Áo Thun ANN</strong>&nbsp;nhận đặt may áo thun đồng phục giá rẻ chất lượng tốt (thực chất là giá sỉ). Sản phẩm áo thun đồng phục giá rẻ của chúng tôi rất phù hợp cho cửa hàng, văn phòng công sở, trường học, các hoạt động du lịch, vui chơi, giải trí,…</p>");
+            content.AppendLine("<p>Quý khách có nhu cầu may áo thun đồng phục, hãy liên hệ ngay Xưởng sỉ áo thun ANN nhé!</p>");
+            content.AppendLine("<p>Chúng tôi nhận đặt may đồng phục số lượng từ 30 cái – 5.000 cái, <strong>ANN</strong> sẽ may theo mẫu của quý khách và trả hàng trong vòng 10 ngày (đơn từ 1.000 cái thời gian sẽ lâu hơn).</p>");
+            content.AppendLine("<p><span style='color: #ff0000;'>Lưu ý, Xưởng mình chỉ nhận đặt may áo thun, không nhận các loại áo khác (như sơ mi, áo khoác, quần, áo bảo hộ…).</span></p>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-ca-sau-co-co.jpg' alt='Xưởng may áo thun đồng phục giá rẻ tại TPHCM - Xưởng Sỉ Áo Thun ANN'>");
+            content.AppendLine("<h2>Tại sao nên đặt may áo thun đồng phục tại Xưởng may áo thun ANN?</h2>");
+            content.AppendLine("<p>So với việc đặt làm áo thun đồng phục tại các công ty may đồng phục khác, thì chúng tôi có lợi thế là <strong>cung cấp áo thun giá sỉ</strong> cho quý khách (xin nhắc lại là giá sỉ). Bởi vì ngoài áo thun đồng phục ra thì chúng tôi cung cấp hàng nghìn mặt hàng thời trang giá sỉ nam nữ trên toàn quốc. Chắc chắn là sẽ có giá tận gốc đi kèm với chất lượng đảm bảo.</p>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/may-ao-thun-dong-phuc-co-co.jpg'>");
+            content.AppendLine("<p>Ngoài ra, chúng tôi tính riêng giá áo nam và áo nữ, so với các địa chỉ khác luôn tính chung giá áo nam nữ. Hơn nữa, nếu quý khách đặt may áo thun đồng phục giá rẻ số lượng lớn thì sẽ được chiết khấu theo bảng chiết khấu trên giá sỉ của chúng tôi. Ưu đãi thật hấp dẫn đúng không nào?</p>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/o-dong-phuc-nhan-vien-samsung-viet-nam-tphcm-tan-binh.jpg' alt='Áo thun đồng phục giá sỉ tận gốc xưởng may áo thun ANN'>");
+            content.AppendLine("<p><strong>ANN.COM.VN</strong> chuyên cung cấp áo thun vải thun cá sấu (chất liệu 65% cotton, 35% Poli) và vải thun cá mập (100% cotton). Hai loại vải này rất được ưa chuộng để may áo đồng phục, vì nó có độ dày vừa phải, độ co giãn 4 chiều, thấm hút mồ hôi tốt.</p>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/chon-chat-lieu-cho-ao-thun-dong-phuc-1.jpg' alt='Vải thun cá mập 100% cotton'>");
+            content.AppendLine("<p>ANN chuyên thêu vi tính logo, chữ, hình ảnh trên áo, vì vải cá sấu (hoặc cá mập) phù hợp với thêu hơn so với in. Chúng tôi sẽ tính giá thêu riêng so với giá áo.</p>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/vai-thun-ca-sau-cotton.jpg' alt='Áo đồng phục vải thun cá sấu 65% cotton, co giãn 4 chiều'>");
+            content.AppendLine("<h3>Bảng giá áo đồng phục và giá thêu vi tính:</h3>");
+            content.AppendLine("<p>Giá áo thun vải cá sấu 65% cotton (giá áo trơn, chưa tính tiền logo):</p>");
+            content.AppendLine("<ul>");
+            content.AppendLine("<li>Dưới 30 cái: chúng tôi chỉ bán áo thun thành phẩm, có logo thương hiệu thời trang quốc tế,… xem thêm mẫu và giá sỉ&nbsp;<a href='https://bosiquanao.net/c/quan-ao-nam/ao-thun-nam/ao-thun-nam-ca-sau/' target='_blank' rel='noopener noreferrer'>tại đây</a>.</li>");
+            content.AppendLine("<li><span style='color: #ff0000;'>30 cái: áo nam 85.000đ – áo nữ 65.000đ.</span></li>");
+            content.AppendLine("<li><span style='color: #ff0000;'>100 cái: áo nam 82.000đ – áo nữ 62.000đ.</span></li>");
+            content.AppendLine("<li><span style='color: #ff0000;'>500 cái: áo nam 78.000đ – áo nữ 58.000đ.</span></li>");
+            content.AppendLine("<li><span style='color: #ff0000;'>1.000 cái: áo nam 76.000đ – áo nữ 56.000đ.</span></li>");
+            content.AppendLine("</ul>");
+            content.AppendLine("<p>Giá áo thun vải cá mập 100% cotton (giá áo trơn, chưa tính tiền logo):</p>");
+            content.AppendLine("<ul>");
+            content.AppendLine("<li><span style='color: #ff0000;'>30 cái: áo nam 120.000đ – áo nữ 110.000đ.</span></li>");
+            content.AppendLine("<li><span style='color: #ff0000;'>100 cái: áo nam 115.000đ – áo nữ 105.000đ.</span></li>");
+            content.AppendLine("<li><span style='color: #ff0000;'>500 cái: áo nam 110.000đ – áo nữ 100.000đ.</span></li>");
+            content.AppendLine("<li><span style='color: #ff0000;'>1.000 cái: áo nam 105.000đ – áo nữ 95.000đ.</span></li>");
+            content.AppendLine("</ul>");
+            content.AppendLine("<p>Giá thêu logo: liên hệ để được báo giá chi tiết</p>");
+            content.AppendLine("<p>Lưu ý, bảng giá này chưa bao gồm 10% thuế VAT và chỉ áo dụng cho 1 đơn hàng đặt 1 lần, không cộng dồn nhiều lần.</p>");
+            content.AppendLine("<h3>Quy trình đặt may áo thun đồng phục giá rẻ</h3>");
+            content.AppendLine("<p>Bước 1: quý khách gửi mẫu áo đồng phục, số lượng từng size, yêu cầu thiết kế,… cho chúng tôi.</p>");
+            content.AppendLine("<p>Bước 2: chúng tôi thiết kế, chốt yêu cầu của quý khách và gửi hóa đơn thanh toán cho quý khách.</p>");
+            content.AppendLine("<p>Bước 3: quý khách đặt cọc 50% hóa đơn, chúng tôi sẽ tiến hành may và báo thời gian hoàn thành đơn hàng cho quý khách.</p>");
+            content.AppendLine("<p>Bước 4: sau khi đơn hàng thành công, quý khách thanh toán 50% hóa đơn còn lại. ANN sẽ gửi hàng đến địa chỉ của quý khách (miễn phí giao nội ô TP.HCM).</p>");
+            content.AppendLine("<h3>Thông tin liên hệ đặt hàng</h3>");
+            content.AppendLine("<p>Địa chỉ: 68 Đường C12, Phường 13, Tân Bình, TP. HCM <a title='Xem bản đồ' rel='nofollow' href='https://khohangsiann.com/lien-he'>(xem bản đồ)</a></p>");
+            content.AppendLine("<p>Zalo: <a href='https://zalo.me/0918567409' class='zalo-0918567409' id='zalonow' target='_blank' rel='nofollow'>0918567409</a> - <a href='https://zalo.me/0913268406' class='zalo-0913268406' id='zalonow' target='_blank' rel='nofollow'>0913268406</a> - <a href='https://zalo.me/0936786404' class='zalo-0936786404' id='zalonow' target='_blank' rel='nofollow'>0936786404</a> - <a href='https://zalo.me/0918569400' class='zalo-0918569400' id='zalonow' target='_blank' rel='nofollow'>0918569400</a></p>");
+            content.AppendLine("<p>Facebook: <a href='https://m.me/bosiquanao.net' target='_blank' rel='nofollow'>bấm vào đây</a></p>");
+            content.AppendLine("<p>Làm việc: 8h30 - 19h30 (Thứ 2 - Thứ 7) ; 8h30 - 17h (Chủ Nhật) </p>");
+            content.AppendLine("<p>Nếu quý khách còn phân vân nơi nào nhận đặt may áo thun đồng phục giá rẻ và tốt nhất TP. HCM thì không cần phải tìm kiếm nữa. <strong>ANN.COM.VN</strong> chính là nơi thích hợp cho quý khách nhất. Ngoài áo thun đồng phục giá rẻ, chúng tôi còn rất nhiều sản phẩm quần áo giá sỉ khác, quý khách tha hồ lựa chọn nhé!</p>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao_thun_dong_phuc_31_master.jpg' alt='Áo thun đồng phục có cổ'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao_thun_dong_phuc_42_master.jpg' alt='Áo thun đồng phục có cổ'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao_thun_dong_phuc_44_master.jpg' alt='Áo thun đồng phục có cổ'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao_thun_dong_phuc_45.jpg' alt='Áo thun đồng phục có cổ'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao_thun_dong_phuc_55_master.jpg' alt='Xưởng may áo thun đồng phục'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/dong-phuc-ao-thun-66.jpg' alt='Xưởng may áo thun đồng phục'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/dong-phuc-ao-thun-70.jpg' alt='Xưởng may áo thun đồng phục'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/dong-phuc-ao-thun-52.jpg' alt='Đặt may áo thun đồng phục cá sấu'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-cong-ty-lenovo-mat-truoc.jpg'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-spa.jpg' alt='Đặt may áo thun đồng phục cá sấu'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-gia-re.jpg' alt='Đặt may áo thun đồng phục cá sấu'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-gia-re-2.jpg' alt='Đặt may áo thun đồng phục cá sấu'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-cong-ty-b2be-mat-truoc1.jpg' alt='Làm áo thun đồng phục công ty'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-cua-hang-lotteria-mat-truoc.jpg' alt='Làm áo thun đồng phục công ty'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-xe-vespa-mat-truoc.jpg' alt='Làm áo thun đồng phục công ty'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-ngan-hang-ocean-bank-mat-truoc.jpg' alt='Làm áo thun đồng phục công ty'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-cong-ty-wondo-mat-truoc.jpg' alt='Áo thun đồng phục giá rẻ'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-cong-ty-damco-truoc.jpg'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-cong-ty-king-pro-mat-truoc.jpg' alt='Áo thun đồng phục giá rẻ'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-cong-ty-takira-mat-truoc.jpg' alt='Áo thun đồng phục tphcm'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-cong-ty-aia-mat-truoc.jpg' alt='Áo thun đồng phục tphcm'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-cong-ty-hls-mat-truoc.jpg' alt='Áo thun đồng phục tphcm'>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/ao-thun-dong-phuc-cong-ty-mercedes-benz-mat-truoc.jpg' alt='Áo thun đồng phục tphcm'>");
+            content.AppendLine("<p>Chân thành cảm ơn quý khách!</p>");
+
+            return new NewsModel()
+            {
+                categorySlug = "buon-ban",
+                title = "May áo thun đồng phục",
+                action = "view_more",
+                actionValue = "may-ao-thun-dong-phuc",
+                avatar = String.Empty,
+                summary = String.Empty,
+                content = content.ToString(),
+                createdDate = new DateTime(2020, 02, 06),
+            };
+        }
+
+        /// <summary>
+        /// Sỉ gel rửa tay khô 24h
+        /// </summary>
+        /// <returns></returns>
+        private NewsModel getPost4()
+        {
+            var content = new StringBuilder();
+            content.AppendLine("<p><span style='color: #ff0000;'><strong>♻️ Cập nhật ngày 7/2/2020:</strong> hơn <strong>85.000</strong> sản phẩm đã được phân phối ra thị trường. Hiện nay, nguồn hàng đang dần cạn kiệt và đang được gấp rút sản xuất. Quý khách sỉ và các đại lý lên đơn sớm để được ưu tiên nhập hàng ạ!</span></p>");
+            content.AppendLine("<p>☎ Mọi chi tiết vui lòng liên hệ hotline <strong><span style='color: #ff0000;'>0913268406 – 0918567409</span> </strong>hoặc các kênh đặt hàng bên dưới!</p>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h-1.jpg' alt='Sỉ gel rửa tay khô 24h Thiên Nhiên Việt' />");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h-2.jpg' alt='Sỉ nước rửa tay khô 24h Thiên Nhiên Việt' />");
+            content.AppendLine("<p>✌️ Xin chào!</p>");
+            content.AppendLine("<p>💢 Như mọi người đã thấy, tình hình dịch cúm viêm phổi Corona ngày càng diễn biến phức tạp. Ngoài trang bị cho mình những chiếc khẩu trang y tế, thì mọi người cần phải vệ sinh cá nhân cho sạch sẽ, nhất là đôi tay của chúng ta. Vì vậy một sản phẩm dung dịch vệ sinh tay là rất cần thiết.</p>");
+            content.AppendLine("<p>👉 <strong>Gel rửa tay khô khử trùng 24h Thiên Nhiên Việt</strong> – là sản phẩm hiệu quả mà chúng tôi muốn giới thiệu cho các bạn.</p>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/z1729132506426_913cedef50777ad41c3a77fc0d7b451b.jpg' alt='Gel rửa tay khử trùng 24h thương hiệu Thiên Nhiên Việt'>");
+            content.AppendLine("<p>☘ Gel rửa tay khô khử trùng 24h có xuất xứ Việt Nam.</p>");
+            content.AppendLine("<p>☘ Sản phẩm có kích thước nhỏ gọn – di động, rất thích hợp mang theo bên người.</p>");
+            content.AppendLine("<p>☘ Với thành phần chính từ thiên nhiên như: nha đam, gừng, sả, chanh, hành tây, tỏi… Gel rửa tay khô khử trùng có khả năng <strong>loại bỏ 99,99% vi khuẩn</strong> và các tác nhân gây bệnh bám trên da tay.</p>");
+            content.AppendLine("<p>☘&nbsp;Một sự tiện lợi vô cùng trong cách sử dụng là bạn chỉ cần xoa gel trên tay trong <strong>1 – 2 phút</strong>, mà không cần rửa lại với nước hay xà phòng. Đảm bảo hiệu quả tức thời và tiện dụng.</p>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/z1729132497068_9baba2d7a536f0c17ceb02a69ae34b26.jpg' alt='Nước rửa tay khô 24h - Diệt khuẩn 99,99%'>");
+            content.AppendLine("<p>💕 Với mong muốn đưa sản phẩm đến tay người tiêu dùng càng nhiều càng tốt, vì vậy chúng tôi định giá sản phẩm rất hợp lý.</p>");
+            content.AppendLine("<p>💕 Giá bán lẻ bình ổn chỉ <span style='color: #ff0000;'><strong>65.000đ/chai</strong></span>. Dung tích 120ml, bạn có thể dùng liên tục trong 10 – 14 ngày.</p>");
+            content.AppendLine("<p>🍀 Chúng tôi là Tổng phân phối sỉ chính thức, khách nhập hàng vui lòng liên hệ để biết giá sỉ tận gốc.</p>");
+            content.AppendLine("<p>☘ Chúng tôi không bán lẻ, chỉ phân phối sỉ.</p>");
+            content.AppendLine("<p>☘ Bán sỉ đơn đầu từ 10 chai. Đơn sau lấy từ 5 chai có ngay giá sỉ. Liên hệ để biết giá sỉ gel rửa tay khô!</p>");
+            content.AppendLine("<p><img src='https://khohangsiann.com/wp-content/uploads/camketchatluong.jpg'></p>");
+            content.AppendLine("<p>☎ Mọi chi tiết vui lòng liên hệ hotline <strong><span style='color: #ff0000;'>0913268406 – 0918567409</span> </strong>hoặc các kênh đặt hàng bên dưới:</p>");
+            content.AppendLine("<p><a href='https://m.me/bosiquanao.net' class='add-btn facebook-btn' id='messengernow' target='_blank' rel='nofollow'><span class='icon-span'><i class='icon-btn icon-facebook'></i></span>Kết bạn Facebook</a></p>");
+            content.AppendLine("<p><a href='https://zalo.me/0936786404' class='add-btn zalo-btn' id='zalonow' target='_blank' rel='nofollow'><span class='icon-span'><i class='icon-btn icon-zalo'></i></span>Kết bạn Zalo 1: 0936786404</a></p>");
+            content.AppendLine("<p><a href='https://zalo.me/0913268406' class='add-btn zalo-btn' id='zalonow' target='_blank' rel='nofollow'><span class='icon-span'><i class='icon-btn icon-zalo'></i></span>Kết bạn Zalo 2: 0913268406</a></p>");
+            content.AppendLine("<p><a href='https://zalo.me/0918567409' class='add-btn zalo-btn' id='zalonow' target='_blank' rel='nofollow'><span class='icon-span'><i class='icon-btn icon-zalo'></i></span>Kết bạn Zalo 3: 0918567409</a></p>");
+            content.AppendLine("<p><a href='https://zalo.me/0918569400' class='add-btn zalo-btn' id='zalonow' target='_blank' rel='nofollow'><span class='icon-span'><i class='icon-btn icon-zalo'></i></span>Kết bạn Zalo 4: 0918569400</a></p>");
+            content.AppendLine("<br>");
+            content.AppendLine("<p>Địa chỉ: 68 Đường C12, Phường 13, Tân Bình, TP. HCM <a title='Xem bản đồ' rel='nofollow' href='https://khohangsiann.com/lien-he'>(xem bản đồ)</a></p>");
+            content.AppendLine("<p>Làm việc: 8h30 - 19h30 (Thứ 2 - Thứ 7) ; 8h30 - 17h (Chủ Nhật) </p>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/corona158061058270159249636.jpg'>");
+            content.AppendLine("<h3>Nước rửa tay khô đang cực kỳ khan hiếm trên toàn quốc</h3>");
+            content.AppendLine("<p>– Hiện nay nhu cầu của người dân về nước rửa tay khô diệt khuẩn đang ngày càng cao độ và được dự báo trong những ngày sắp tới nó còn diễn ra nguy cấp hơn khi nước ta vào tâm dịch bùng phát.</p>");
+            content.AppendLine("<img src='https://khohangsiann.com/wp-content/uploads/vna_potal_tp_ho_chi_minh_chu_dong_phong_chong_benh_viem_duong_ho_hap_cap_do_chung_moi_cua_virus_corona_224628171_stand_1.jpg'>");
+            content.AppendLine("<p>– Những ngày vừa qua công ty đã phải huy động thêm rất nhiều nhân lực để tăng ca đẩy nhanh tiến độ sản xuất nước rửa tay khô nhưng vẫn không đủ để đáp ứng được nhu cầu của người dân ngày càng nhiều.</p>");
+            content.AppendLine("<p><img src='https://khohangsiann.com/wp-content/uploads/nuocruatay15807213334371296547800.jpg'></p>");
+            content.AppendLine("<p>– Theo tìm hiểu, được biết hiện nay hơn 90% các hiệu thuoc đang cháy hoặc không có hàng nước rửa tay diệt khuẩn để bán và cung cấp cho người dân.</p>");
+            content.AppendLine("<p><img src='https://khohangsiann.com/wp-content/uploads/philippinescorona1580616169956789234225.jpg'></p>");
+            content.AppendLine("<p>Tin nhắn Khuyến cáo của Bộ Y Tế:</p>");
+            content.AppendLine("<p><img src='https://khohangsiann.com/wp-content/uploads/z1729404590457_c8907bcd366de1c7c857987086c4f1cc.jpg'></p>");
+
+            return new NewsModel()
+            {
+                categorySlug = "buon-ban",
+                title = "Sỉ gel rửa tay khô 24h",
+                action = "view_more",
+                actionValue = "si-gel-rua-tay-kho-24h",
+                avatar = String.Empty,
+                summary = String.Empty,
+                content = content.ToString(),
+                createdDate = new DateTime(2020, 02, 07),
+            };
+        }
+
         /// <summary>
         /// Chính sách bán sỉ
         /// </summary>
@@ -125,7 +273,6 @@ namespace ann_shop_server.Services
         {
             var content = new StringBuilder();
             content.AppendLine("<img alt='Chính sách bỏ sỉ quần áo' src='http://xuongann.com/uploads/ban-hang/2-chinh-sach.png?v=09092019'>");
-            content.AppendLine("<img alt='Chính sách chiết khấu' src='http://xuongann.com/uploads/ban-hang/3-chiet-khau.png?v=09092019'>");
 
             return new NewsModel()
             {
@@ -136,7 +283,29 @@ namespace ann_shop_server.Services
                 avatar = String.Empty,
                 summary = String.Empty,
                 content = content.ToString(),
-                createdDate = DateTime.Now
+                createdDate = new DateTime(2020, 02, 06),
+            };
+        }
+
+        /// <summary>
+        /// Chính sách chiết khấu
+        /// </summary>
+        /// <returns></returns>
+        private NewsModel getDiscountPolicy()
+        {
+            var content = new StringBuilder();
+            content.AppendLine("<img alt='Chính sách chiết khấu' src='http://xuongann.com/uploads/ban-hang/3-chiet-khau.png?v=09092019'>");
+
+            return new NewsModel()
+            {
+                categorySlug = "chinh-sach",
+                title = "Chính sách chiết khấu",
+                action = "view_more",
+                actionValue = "chinh-sach-chiet-khau",
+                avatar = String.Empty,
+                summary = String.Empty,
+                content = content.ToString(),
+                createdDate = new DateTime(2020, 02, 06),
             };
         }
 
@@ -152,13 +321,13 @@ namespace ann_shop_server.Services
             return new NewsModel()
             {
                 categorySlug = "chinh-sach",
-                title = "Chính sách vẫn chuyển",
+                title = "Chính sách vận chuyển",
                 action = "view_more",
                 actionValue = "chinh-sach-van-chuyen",
                 avatar = String.Empty,
                 summary = String.Empty,
                 content = content.ToString(),
-                createdDate = DateTime.Now
+                createdDate = new DateTime(2020, 02, 06),
             };
         }
 
@@ -180,7 +349,7 @@ namespace ann_shop_server.Services
                 avatar = String.Empty,
                 summary = String.Empty,
                 content = content.ToString(),
-                createdDate = DateTime.Now
+                createdDate = new DateTime(2020, 02, 06),
             };
         }
 
@@ -192,7 +361,7 @@ namespace ann_shop_server.Services
         {
             var content = new StringBuilder();
             content.AppendLine("<h3>a) Mục đích thu thập thông tin khách hàng</h3>");
-            content.AppendLine("<p>Để sử dụng được các dịch vụ của <strong>ann.com.vn (Hộ kinh doanh ANN)</strong>, Quý khách phải đăng ký tài khoản và cung cấp một số thông tin như: <span style='color: #ff0000;'>họ tên, số điện thoại, địa chỉ và một số thông tin khác</span>. Phần thủ tục đăng k‎ý này nhằm giúp chúng tôi xác định phần thanh toán và giao hàng chính xác cho người nhận. Bạn có thể chọn không cung cấp cho chúng tôi một số thông tin nhất định (email, số điện thoại khác), nhưng khi đó bạn sẽ không thể hưởng được một số tiện ích mà những tính năng của chúng tôi cung cấp.</p>");
+            content.AppendLine("<p>Để sử dụng được các dịch vụ của <strong>ANN.COM.VN (Hộ kinh doanh ANN)</strong>, Quý khách phải đăng ký tài khoản và cung cấp một số thông tin như: <span style='color: #ff0000;'>họ tên, số điện thoại, địa chỉ và một số thông tin khác</span>. Phần thủ tục đăng k‎ý này nhằm giúp chúng tôi xác định phần thanh toán và giao hàng chính xác cho người nhận. Bạn có thể chọn không cung cấp cho chúng tôi một số thông tin nhất định (email, số điện thoại khác), nhưng khi đó bạn sẽ không thể hưởng được một số tiện ích mà những tính năng của chúng tôi cung cấp.</p>");
             content.AppendLine("<p>Chúng tôi cũng lưu trữ bất kỳ thông tin nào bạn nhập trên website hoặc gửi đến <strong>ann.com.vn</strong>. Những thông tin đó sẽ được sử dụng cho mục đích phản hồi yêu cầu của khách hàng, đưa ra những gợi ý‎&nbsp;phù hợp cho từng khách hàng khi mua sắm tại ann.com.vn, giao hàng đến địa chỉ của khách hàng, nâng cao chất lượng hàng hóa dịch vụ và liên lạc với bạn khi cần.</p>");
             content.AppendLine("<h3>b) Phạm vi sử dụng thông tin</h3>");
             content.AppendLine("<p>Mục đích của việc thu thập thông tin là nhằm xây dựng <strong>ann.com.vn</strong> trở thành một website thương mại điện tử bán hàng mang lại nhiều tiện ích nhất cho khách hàng. Vì thế, việc sử dụng thông tin sẽ phục vụ những hoạt động sau:</p>");
@@ -244,7 +413,7 @@ namespace ann_shop_server.Services
                 avatar = String.Empty,
                 summary = String.Empty,
                 content = content.ToString(),
-                createdDate = DateTime.Now
+                createdDate = new DateTime(2020, 02, 06),
             };
         }
         #endregion
@@ -295,7 +464,10 @@ namespace ann_shop_server.Services
             {
                 getPost1(),
                 getPost2(),
+                getPost3(),
+                getPost4(),
                 getWholesalePolicy(),
+                getDiscountPolicy(),
                 getDeliveryPolicy(),
                 getRefundPolicy(),
                 getInformationSecurityPolicy()
@@ -360,10 +532,13 @@ namespace ann_shop_server.Services
             {
                 getPost1(),
                 getPost2(),
-                getWholesalePolicy(),
-                getDeliveryPolicy(),
+                getPost3(),
+                getPost4(),
+                getInformationSecurityPolicy(),
                 getRefundPolicy(),
-                getInformationSecurityPolicy()
+                getDeliveryPolicy(),
+                getDiscountPolicy(),
+                getWholesalePolicy()
             }
             .Where(x => x.action == "view_more")
             .Where(x => x.actionValue == slug)

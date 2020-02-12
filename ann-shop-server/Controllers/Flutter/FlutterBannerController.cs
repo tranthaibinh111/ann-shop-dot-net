@@ -30,8 +30,10 @@ namespace ann_shop_server.Controllers
             if (String.IsNullOrEmpty(filter.page))
                 return Ok<List<FlutterBannerModel>>(null);
 
+            var result = new List<FlutterBannerModel>();
+
             if (filter.page == "home")
-                return Ok<List<FlutterBannerModel>>(_service.getHomeBanners());
+                result.AddRange(_service.getHomeBanners());
 
             //if (filter.page == "category")
             //    return Ok<List<FlutterBannerModel>>(_service.getCategoryBanners(filter.slug));
@@ -45,7 +47,17 @@ namespace ann_shop_server.Controllers
             //if (filter.page == "product")
             //    return Ok<List<FlutterBannerModel>>(_service.getProductBanners(filter.slug, filter.position));
 
-            return Ok<List<FlutterBannerModel>>(null);
+            result = result.Select(x => {
+                if (x.action == "view_more")
+                    x.actionValue = "post/" + x.actionValue;
+
+                return x;
+            }).ToList();
+
+            if (result.Count > 0)
+                return Ok<List<FlutterBannerModel>>(result);
+            else
+                return Ok<List<FlutterBannerModel>>(null);
         }
     }
 }

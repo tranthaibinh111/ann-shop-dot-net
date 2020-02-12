@@ -18,10 +18,10 @@ namespace ann_shop_server.Services
             {
                 new FlutterBannerModel()
                 {
-                    action = "category",
-                    name = "Bao lì xì tết",
-                    actionValue = "bao-li-xi-tet",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png"
+                    action = "view_more",
+                    name = "Sỉ gel rửa tay khô 24h",
+                    actionValue = "si-gel-rua-tay-kho-24h",
+                    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
                 },
                 new FlutterBannerModel()
                 {
@@ -29,6 +29,13 @@ namespace ann_shop_server.Services
                     name = "Nước hoa",
                     actionValue = "nuoc-hoa",
                     image = "https://khohangsiann.com/wp-content/uploads/si-nuoc-hoa-gia-re-1.png"
+                },
+                new FlutterBannerModel()
+                {
+                    action = "view_more",
+                    name = "May áo thun đồng phục",
+                    actionValue = "may-ao-thun-dong-phuc",
+                    image = "https://khohangsiann.com/banner/xuong-may-ao-thun-dong-phuc-gia-re-ann.jpg"
                 },
             };
         }
@@ -105,7 +112,7 @@ namespace ann_shop_server.Services
                 new FlutterBannerModel()
                 {
                     action = "category",
-                    name = "Áo thung cá sấu",
+                    name = "Áo thun cá sấu",
                     actionValue ="ao-thun-ca-sau",
                     image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png"
                 },
