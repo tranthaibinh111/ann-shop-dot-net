@@ -529,7 +529,7 @@ namespace ann_shop_server.Services
 
                 content.AppendLine();
 
-                return content.ToString();
+                return HttpUtility.HtmlDecode(content.ToString());
             }
         }
         #endregion

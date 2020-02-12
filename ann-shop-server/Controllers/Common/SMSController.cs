@@ -29,7 +29,7 @@ namespace ann_shop_server.Controllers
                 return BadRequest(ModelState);
 
             var error = String.Empty;
-            var message = String.Format("OTP cua ban la: {0}. Ma se het han trong vong 1p", sms.otp);
+            var message = String.Format("ANN.COM.VN - Ma OTP cua ban la: {0}. Ma se het han trong vong 5 phut. Cam on!", sms.otp);
 
             try
             {

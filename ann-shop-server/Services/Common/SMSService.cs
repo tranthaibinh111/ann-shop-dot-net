@@ -38,11 +38,11 @@ namespace ann_shop_server.Services
                 string json = JsonConvert.SerializeObject(new
                 {
                     cmdCode = "BulkSendSms",
-                    alias = "ann.com.vn",
+                    alias = VMGBRAND,
                     message = message,
                     sendTime = String.Empty,
-                    authenticateUser = "hkdann",
-                    authenticatePass = "Vmg@123456",
+                    authenticateUser = VMGACCOUNT,
+                    authenticatePass = VMGPASSWORD,
                     msisdn = phone
                 });
 
