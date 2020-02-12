@@ -167,13 +167,21 @@ namespace ann_shop_server.Controllers
             var message = String.Empty;
 
             if (!Phone.isNumberMobilePhone(phone, out message))
-                throw new Exception(message);
+                return BadRequest(message);
 
             try
             {
-                var exists = _service.checkUser(phone);
+                var existUser = _service.checkUser(phone);
+                message = String.Format("Số điện thoại {0} chưa đăng ký. Bạn có muốn đăng ký?", phone);
 
-                return Ok(new { exists = exists });
+                if (existUser)
+                    message = String.Format("Số điện thoại {0} đã đăng ký.", phone);
+
+                return Ok(new
+                {
+                    exists = existUser,
+                    message = message
+                });
             }
             catch (Exception ex)
             {

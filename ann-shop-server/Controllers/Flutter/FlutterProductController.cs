@@ -145,8 +145,9 @@ namespace ann_shop_server.Controllers
                 setting = new FlutterCopyModel();
 
             var response = new HttpResponseMessage();
-            response.Content = new StringContent(_service.getAdvertisementContent(id, setting));
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
+            var content = _service.getAdvertisementContent(id, setting);
+            response.Content = new StringContent(String.IsNullOrEmpty(content) ? String.Empty : content);
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
 
             return response;
         }

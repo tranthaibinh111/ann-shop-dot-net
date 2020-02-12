@@ -82,5 +82,7 @@ namespace ann_shop_server.Models
         public virtual DbSet<ProductTag> ProductTags { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Coupon> Coupons { get; set; }
+        public virtual DbSet<CustomerCoupon> CustomerCoupons { get; set; }
     }
 }
