@@ -9,20 +9,20 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterProductService : Service<FlutterProductService>
+    public class FlutterProductService : ProductService
     {
-        private ProductService _service = ProductService.Instance;
-
-        #region Thông tin sort sản phẩm
-        /// <summary>
-        /// Cung cấp các trường hợp sắp xếp sản phẩm
-        /// </summary>
-        /// <returns></returns>
-        public List<ProductSortModel> getProductSort()
+        public static new FlutterProductService Instance
         {
-            return _service.getProductSort();
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new FlutterProductService();
+                }
+
+                return (FlutterProductService)_instance;
+            }
         }
-        #endregion
 
         #region Lấy danh sách sản phẩm
         /// <summary>
@@ -308,7 +308,7 @@ namespace ann_shop_server.Services
 
                 result = result.Select(x =>
                 {
-                    x.images = _service.getImageListByProduct(x.productID, Thumbnail.Size.Large).Skip(0).Take(8).ToList();
+                    x.images = getImageListByProduct(x.productID, Thumbnail.Size.Large).Skip(0).Take(8).ToList();
                     return x;
                 }).ToList();
 
@@ -331,9 +331,9 @@ namespace ann_shop_server.Services
         /// </summary>
         /// <param name="slug"></param>
         /// <returns></returns>
-        public FlutterProductModel getProductByCategory(string slug)
+        public new FlutterProductModel getProductByCategory(string slug)
         {
-            var data = _service.getProductByCategory(slug);
+            var data = base.getProductByCategory(slug);
             
             if (data != null)
             {
@@ -391,46 +391,6 @@ namespace ann_shop_server.Services
         }
         #endregion
 
-        #region Lấy thông tin các sản phẩm con
-        /// <summary>
-        /// Lấy thông tin các sản phẩm con
-        /// </summary>
-        /// <param name="parentID"></param>
-        /// <param name="pagination"></param>
-        /// <returns></returns>
-        public List<ProductRelatedModel> getProductRelatedBySlug(string slug, ref PaginationMetadataModel pagination)
-        {
-            var products = _service.getProductRelatedBySlug(slug, ref pagination);
-
-            return products;
-        }
-        #endregion
-
-        #region Trà về hình ảnh tưởng chưng cho biến thể
-        /// <summary>
-        /// Trà về hình ảnh tưởng chưng cho biến thể
-        /// </summary>
-        /// <param name="productID"></param>
-        /// <param name="variables"></param>
-        /// <returns></returns>
-        public string getImageWithVariable(int productID, int color, int size)
-        {
-            return _service.getImageWithVariable(productID, color, size);
-        }
-        #endregion
-
-        #region Lấy danh sách hình ảnh của sản phẩm dùng cho download image
-        /// <summary>
-        /// Lấy danh sách hình ảnh của sản phẩm dùng cho download image
-        /// </summary>
-        /// <param name="productID"></param>
-        /// <returns></returns>
-        public List<string> getAdvertisementImages(int productID)
-        {
-            return _service.getAdvertisementImages(productID);
-        }
-        #endregion
-
         #region Lấy thông tin quảng cáo sản phẩm
         /// <summary>
         /// Lấy thông tin quảng cáo sản phẩm
@@ -476,7 +436,7 @@ namespace ann_shop_server.Services
                 content.AppendLine();
                 content.AppendLine(String.Format("☘ {0}", String.IsNullOrEmpty(product.ProductContent) ? String.Empty : Regex.Replace(product.ProductContent, @"<.*?>", String.Empty)));
 
-                var colors = _service.getColors(productID);
+                var colors = getColors(productID);
                 if (colors.Count > 0)
                 {
                     var strColor = String.Empty;
@@ -494,7 +454,7 @@ namespace ann_shop_server.Services
                     }
                 }
 
-                var size = _service.getSizes(productID);
+                var size = getSizes(productID);
                 if (size.Count > 0)
                 {
                     var strSize = String.Empty;

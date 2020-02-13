@@ -339,7 +339,7 @@
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Common\Category\CategoryModel.cs" />
-    <Compile Include="Models\Common\Coupon\CouponService.cs" />
+    <Compile Include="Services\Common\CouponService.cs" />
     <Compile Include="Models\Common\Order\OrderType.cs" />
     <Compile Include="Models\Common\Order\RequirementKind.cs" />
     <Compile Include="Models\Common\Product\ColorModel.cs" />
