@@ -9,7 +9,7 @@ namespace ann_shop_server.Services
 {
     public class Service<T> where T : new()
     {
-        private static T _instance;
+        protected static T _instance;
 
         public static T Instance
         {
