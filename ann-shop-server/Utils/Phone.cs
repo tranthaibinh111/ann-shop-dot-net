@@ -23,8 +23,15 @@ namespace ann_shop_server.Utils
             phone = phone.Trim();
             if (phone.Length != 10)
             {
-                message = "Số điện thoại phải 10 số";
-                return false;
+                if (phone.Length == 11 && phone.Substring(0, 2) == "84")
+                {
+                    phone = String.Format("0{0}", phone.Remove(0, 2));
+                }
+                else
+                {
+                    message = "Số điện thoại phải 10 số";
+                    return false;
+                }
             }
 
             // Check đầu số điện thoại Việt Nam

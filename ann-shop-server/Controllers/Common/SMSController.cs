@@ -20,6 +20,11 @@ namespace ann_shop_server.Controllers
             _service = SMSService.Instance;
         }
 
+        /// <summary>
+        /// Số điện thoại thêm 84
+        /// </summary>
+        /// <param name="sms"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [Route("otp")]
