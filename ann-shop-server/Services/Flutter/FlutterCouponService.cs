@@ -6,20 +6,9 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterCouponService : CouponService
+    public class FlutterCouponService : Service<FlutterCouponService>
     {
-        public static new FlutterCouponService Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new FlutterCouponService();
-                }
-
-                return (FlutterCouponService)_instance;
-            }
-        }
+        private CouponService _service = CouponService.Instance;
 
         /// <summary>
         /// Lấy danh sách các trường trình đăng chạy khuyến mãi
@@ -57,7 +46,7 @@ namespace ann_shop_server.Services
         /// <returns></returns>
         public new List<FlutterCouponModel> getCustomerCoupon(string phone)
         {
-            var coupons = base.getCustomerCoupon(phone);
+            var coupons = _service.getCustomerCoupon(phone);
 
             if (coupons != null && coupons.Count > 0)
             {
@@ -98,7 +87,7 @@ namespace ann_shop_server.Services
 
             using (var con = new inventorymanagementEntities())
             {
-                var promotion = getCoupon(code);
+                var promotion = _service.getCoupon(code);
 
                 if (promotion == null)
                 {
@@ -107,13 +96,13 @@ namespace ann_shop_server.Services
                 }
 
                 // Kiểm tra xem khách hàng đã lấy mã coupon chưa
-                if (existCustomerCoupon(promotion.ID, phone))
+                if (_service.existCustomerCoupon(promotion.ID, phone))
                 {
                     message = "Bạn đã được cấp mã khuyến mãi rồi.";
                     return null;
                 }
 
-                if (!checkExpired(promotion))
+                if (!_service.checkExpired(promotion))
                 {
                     message = "Chương trình đã hết thời gian khuyến mãi";
                     return null;
@@ -132,7 +121,7 @@ namespace ann_shop_server.Services
                     CreatedDate = now,
                     ModifiedDate = now
                 };
-                createCustomerCoupon(customerCoupon);
+                _service.createCustomerCoupon(customerCoupon);
 
                 return new FlutterCouponModel()
                 {

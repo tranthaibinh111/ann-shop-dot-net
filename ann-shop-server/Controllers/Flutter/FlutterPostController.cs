@@ -70,6 +70,7 @@ namespace ann_shop_server.Controllers
         /// Lấy các viết về chính sách
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
         [Route("policies")]
         public IHttpActionResult GetPolicies([FromUri] PagingParameterModel paging)
@@ -86,6 +87,7 @@ namespace ann_shop_server.Controllers
         /// Lấy chi tiết thông báo theo slug
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
         [Route("{*slug}")]
         public IHttpActionResult GetPostBySlug(string slug)
