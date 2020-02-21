@@ -84,5 +84,14 @@ namespace ann_shop_server.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<CustomerCoupon> CustomerCoupons { get; set; }
+        public virtual DbSet<GroupNotifyPromotion> GroupNotifyPromotions { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<NotifyNew> NotifyNews { get; set; }
+        public virtual DbSet<NotifyPromotion> NotifyPromotions { get; set; }
+        public virtual DbSet<NotifyUser> NotifyUsers { get; set; }
+        public virtual DbSet<UserNotifyPromotion> UserNotifyPromotions { get; set; }
+        public virtual DbSet<NotificationCategory> NotificationCategories { get; set; }
+        public virtual DbSet<PostCategory> PostCategories { get; set; }
+        public virtual DbSet<PostPublic> PostPublics { get; set; }
     }
 }

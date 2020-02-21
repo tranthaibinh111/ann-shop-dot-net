@@ -30,8 +30,7 @@ namespace ann_shop_server.Controllers
         [Route("~/api/flutter/home/posts")]
         public IHttpActionResult GetHomePosts()
         {
-            return Ok<List<FlutterBannerModel>>(null);
-            //return Ok<List<FlutterBannerModel>>(_service.getHomePosts());
+            return Ok<List<FlutterBannerModel>>(_service.getHomePosts());
         }
 
         /// <summary>
@@ -54,9 +53,6 @@ namespace ann_shop_server.Controllers
                 pageSize = paging.pageSize
             };
 
-            if (!(!String.IsNullOrEmpty(filter.categorySlug) && filter.categorySlug == "chinh-sach"))
-                return Ok<List<FlutterPostCardModel>>(null);
-
             var posts = _service.getPosts(filter, ref pagination);
 
             // Setting Header
@@ -64,6 +60,17 @@ namespace ann_shop_server.Controllers
             HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(pagination));
 
             return Ok<List<FlutterPostCardModel>>(posts);
+        }
+
+        /// <summary>
+        /// Lấy chi tiết thông báo theo slug
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{*slug}")]
+        public IHttpActionResult GetPostBySlug(string slug)
+        {
+            return Ok<FlutterPostModel>(_service.getPostBySlug(slug));
         }
 
         /// <summary>
@@ -77,11 +84,13 @@ namespace ann_shop_server.Controllers
         {
             var filter = new FlutterPostFilterModel()
             {
-                categorySlug = "chinh-sach"
+                categorySlug = "chinh-sach",
+                isPolicy = true
             };
 
             return GetPosts(filter, paging);
         }
+
 
         /// <summary>
         /// Lấy chi tiết thông báo theo slug
@@ -89,8 +98,8 @@ namespace ann_shop_server.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
-        [Route("{*slug}")]
-        public IHttpActionResult GetPostBySlug(string slug)
+        [Route("~/api/flutter/policy/{*slug}")]
+        public IHttpActionResult GetPolicyBySlug(string slug)
         {
             return Ok<FlutterPostModel>(_service.getPostBySlug(slug));
         }

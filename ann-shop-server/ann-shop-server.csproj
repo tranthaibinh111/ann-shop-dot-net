@@ -339,6 +339,40 @@
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Common\Category\CategoryModel.cs" />
+    <Compile Include="Models\Common\NotificationCategory\NotificationCategoryModel.cs" />
+    <Compile Include="Models\Common\Notification\NotificationKind.cs" />
+    <Compile Include="Models\Common\PostCategory\PostCategoryModel.cs" />
+    <Compile Include="Models\Flutter\FlutterPageNavigation.cs" />
+    <Compile Include="Models\GroupNotifyPromotion.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Notification.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NotificationCategory.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NotifyNew.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NotifyPromotion.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NotifyUser.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PostCategory.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PostPublic.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserNotifyPromotion.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Common\NotificationCategoryService.cs" />
+    <Compile Include="Services\Common\NotificationService.cs" />
+    <Compile Include="Services\Common\PostCategoryService .cs" />
     <Compile Include="Services\Common\CouponService.cs" />
     <Compile Include="Models\Common\Order\OrderType.cs" />
     <Compile Include="Models\Common\Order\RequirementKind.cs" />
@@ -421,7 +455,7 @@
     <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderOrderModel.cs" />
     <Compile Include="Models\Common\PaginationMetadataModel.cs" />
     <Compile Include="Models\Common\PagingParameterModel.cs" />
-    <Compile Include="Models\Common\PostModel.cs" />
+    <Compile Include="Models\Common\Post\PostModel.cs" />
     <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderProductModel.cs" />
     <Compile Include="Models\Common\Stock\StockModel.cs" />
     <Compile Include="Models\Common\ThumbnailModel.cs" />

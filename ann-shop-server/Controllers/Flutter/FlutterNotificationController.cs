@@ -30,8 +30,7 @@ namespace ann_shop_server.Controllers
         [Route("~/api/flutter/home/notifications")]
         public IHttpActionResult GetHomeBanners()
         {
-            return Ok<List<FlutterBannerModel>>(null);
-            //return Ok<List<FlutterBannerModel>>(_service.getHomeNotification());
+            return Ok<List<FlutterBannerModel>>(_service.getHomeNotification());
         }
 
         /// <summary>
@@ -40,41 +39,88 @@ namespace ann_shop_server.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("~/api/flutter/notifications")]
-        public IHttpActionResult GetNotifications([FromUri]FlutterNotificationFilterModel filter, [FromUri] PagingParameterModel paging)
+        public IHttpActionResult GetNotifications([FromUri] PagingParameterModel paging, string kind = "")
         {
-            return Ok<List<FlutterNotificationCardModel>>(null);
+            try
+            {
+                
+                if (paging == null)
+                    paging = new PagingParameterModel();
 
-            //if (filter == null)
-            //    filter = new FlutterNotificationFilterModel();
+                var phone = _service.getPhoneByToken(this);
+                var filter = new FlutterNotificationFilterModel()
+                {
+                    kind = kind,
+                    categorySlug = String.Empty,
+                    phone = phone
+                };
+                var pagination = new PaginationMetadataModel()
+                {
+                    currentPage = paging.pageNumber,
+                    pageSize = paging.pageSize
+                };
 
-            //if (paging == null)
-            //    paging = new PagingParameterModel();
+                var notifications = _service.getNotifications(filter, ref pagination);
 
-            //var pagination = new PaginationMetadataModel()
-            //{
-            //    currentPage = paging.pageNumber,
-            //    pageSize = paging.pageSize
-            //};
+                // Setting Header
+                HttpContext.Current.Response.Headers.Add("Access-Control-Expose-Headers", "X-Paging-Headers");
+                HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(pagination));
 
-            //var notifications = _service.getNotifications(filter, ref pagination);
-
-            //// Setting Header
-            //HttpContext.Current.Response.Headers.Add("Access-Control-Expose-Headers", "X-Paging-Headers");
-            //HttpContext.Current.Response.Headers.Add("X-Paging-Headers", JsonConvert.SerializeObject(pagination));
-
-            //return Ok<List<FlutterNotificationCardModel>>(notifications);
+                return Ok<List<FlutterNotificationCardModel>>(notifications);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
-        /// Lấy chi tiết thông báo theo slug
+        /// Lấy chi tiết thông báo khuyến mãi theo slug
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("{*slug}")]
-        public IHttpActionResult GetNotificationBySlug(string slug)
+        [Route("promotion/{*slug}")]
+        public IHttpActionResult GetNotifyPromotionBySlug(string slug)
         {
-            return Ok<FlutterNotificationModel>(null);
-            //return Ok<FlutterNotificationModel>(_service.getNotificationBySlug(slug));
+            try
+            {
+                var phone = _service.getPhoneByToken(this);
+                return Ok<FlutterNotificationModel>(_service.getNotifyPromotionBySlug(phone, slug));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Lấy chi tiết thông báo hoạt động user theo slug
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("user/{*slug}")]
+        public IHttpActionResult GetNotifyUserBySlug(string slug)
+        {
+            try
+            {
+                var phone = _service.getPhoneByToken(this);
+                return Ok<FlutterNotificationModel>(_service.getNotifyUserBySlug(phone, slug));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Lấy chi tiết thông báo tin tức theo slug
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("news/{*slug}")]
+        public IHttpActionResult GetNotifyNewsBySlug(string slug)
+        {
+            return Ok<FlutterNotificationModel>(_service.getNotifyNewsBySlug(slug));
         }
     }
 }

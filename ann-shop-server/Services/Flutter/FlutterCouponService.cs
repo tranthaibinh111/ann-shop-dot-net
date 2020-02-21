@@ -14,29 +14,17 @@ namespace ann_shop_server.Services
         /// Lấy danh sách các trường trình đăng chạy khuyến mãi
         /// </summary>
         /// <returns></returns>
-        public List<FlutterPromotionModel> getPromotions()
+        public List<FlutterPromotionModel> getPromotions(string phone)
         {
-            var promotion1 = new FlutterPromotionModel()
-            {
-                name = "Nhận mã khuyến mãi cho khách hàng mới",
-                code = "NEWUSER",
-                startDate = new DateTime(2020, 2, 1),
-                endDate = new DateTime(2020, 5, 31)
-            };
-
-            var promotion2 = new FlutterPromotionModel()
-            {
-                name = "Nhận mã khuyến mãi cho khách hàng review app",
-                code = "REVIEWAPP",
-                startDate = new DateTime(2020, 2, 1),
-                endDate = new DateTime(2020, 5, 31)
-            };
-
-            var promitons = new List<FlutterPromotionModel>();
-            promitons.Add(promotion1);
-            promitons.Add(promotion2);
-
-            return promitons;
+            return _service.getCoupons(phone)
+                .Select(x => new FlutterPromotionModel()
+                {
+                    name = x.Name,
+                    code = x.Code,
+                    startDate = x.StartDate,
+                    endDate = x.EndDate
+                })
+                .ToList();
         }
 
         /// <summary>
@@ -44,7 +32,7 @@ namespace ann_shop_server.Services
         /// </summary>
         /// <param name="phone"></param>
         /// <returns></returns>
-        public new List<FlutterCouponModel> getCustomerCoupon(string phone)
+        public List<FlutterCouponModel> getCustomerCoupon(string phone)
         {
             var coupons = _service.getCustomerCoupon(phone);
 

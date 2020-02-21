@@ -8,40 +8,43 @@ namespace ann_shop_server.Services
 {
     public class FlutterPostCategoryService : Service<FlutterPostCategoryService>
     {
+        private PostCategoryService _service = PostCategoryService.Instance;
+
         public List<FlutterPostCategoryModel> getCategories()
         {
-            var result = new List<FlutterPostCategoryModel>();
+            var postCategories = _service.getPostCategoryAtPost();
 
-            // Blog Tất cả
-            var allBlog = new FlutterPostCategoryModel()
+            if (postCategories != null && postCategories.Count > 0)
             {
-                name = "Tất cả"
-            };
-            result.Add(allBlog);
+                var result = new List<FlutterPostCategoryModel>();
 
-            // Blog buôn bán
-            var saleBlog = new FlutterPostCategoryModel()
-            {
-                name = "Buôn bán",
-                filter = new FlutterPostFilterModel()
+                // Blog Tất cả
+                var allBlog = new FlutterPostCategoryModel()
                 {
-                    categorySlug = "buon-ban"
-                }
-            };
-            result.Add(saleBlog);
+                    name = "Tất cả"
+                };
 
-            // Blog kinh nghiệm
-            var experienceBlog = new FlutterPostCategoryModel()
-            {
-                name = "Kinh nghiệm",
-                filter = new FlutterPostFilterModel()
+                if (postCategories.Count == 1)
                 {
-                    categorySlug = "kinh-nghiem"
+                    result.Add(allBlog);
                 }
-            };
-            result.Add(experienceBlog);
 
-            return result;
+                foreach (var catory in postCategories)
+                {
+                    result.Add(new FlutterPostCategoryModel()
+                    {
+                        name = catory.name,
+                        filter = new FlutterPostFilterModel()
+                        {
+                            categorySlug = catory.slug
+                        }
+                    });
+                }
+
+                return result;
+            }
+
+            return null;
         }
     }
 }

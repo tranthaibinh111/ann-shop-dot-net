@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace ann_shop_server.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/flutter/category")]
     public class FlutterCategoryController : ApiController
     {
