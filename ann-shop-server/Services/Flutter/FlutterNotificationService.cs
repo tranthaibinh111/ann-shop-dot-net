@@ -9,203 +9,493 @@ namespace ann_shop_server.Services
 {
     public class FlutterNotificationService: Service<FlutterNotificationService>
     {
-        #region  Hard code Test
-        /// <summary>
-        /// Thông báo đổi hàng cuối năm
-        /// </summary>
-        /// <returns></returns>
-        private NotificationModel getNotification1()
-        {
-            var summary = String.Empty;
-            summary += "😻 Nói thẳng luôn, chỉ có ANN mới dám làm điều này!\n";
-            summary += "🌼🌸🌺 Bên kho em nhận đổi trả hàng đến ngày nghỉ tết luôn (15h ngày 21/1/2020) và qua Tết vẫn nhận đổi trả hàng của năm nay luôn nhé mọi người!\n";
-            summary += "👉 Mọi năm thì tháng cuối năm ANN không nhận đổi trả hàng và qua năm mới không nhận đổi hàng của năm cũ. Nhưng năm nay ANN 'chơi lớn' thật rồi... ông giáo ạ, à không quý khách ạ! 😜";
-
-            var content = new StringBuilder();
-            content.AppendLine("<p style='text-align: center;'><img alt='Đổi hàng cuối năm' src='http://xuongann.com/uploads/doi-hang-cuoi-nam/doi-hang-cuoi-nam-2.png'></p>");
-            content.AppendLine("<p> 😻 Nói thẳng luôn, chỉ có ANN mới dám làm điều này!</p>");
-            content.AppendLine("<p> 🌼🌸🌺 Bên kho em nhận đổi trả hàng đến ngày nghỉ tết luôn (15h ngày 21/1/2020) và qua Tết vẫn nhận đổi trả hàng của năm nay luôn nhé mọi người!</p>");
-            content.AppendLine("<p> 👉 Mọi năm thì tháng cuối năm ANN không nhận đổi trả hàng và qua năm mới không nhận đổi hàng của năm cũ. Nhưng năm nay ANN 'chơi lớn' thật rồi... ông giáo ạ, à không quý khách ạ! 😜</p><p ☘ Vẫn là quy định đổi hàng trong 30 ngày kể từ ngày mua hàng (bao gồm ngày nghĩ tết).</p><p 🤝 ANN đã chấp nhận 'chơi lớn' với khách hàng rồi thì mọi người vui lòng 'chơi đẹp' giúp bên em nha! Hàng gì bán chậm hoặc bị lỗi thì tranh thủ đổi càng sớm càng tốt, chứ đừng 'ngâm' quá hạn là bên em không nhận được đâu á!</p>");
-            content.AppendLine("<p> 🏵️🌻🌺 Chúc mọi người một mùa Tết bán hàng đắt 'mệt xỉu', và năm mới 'tiền tài danh vọng' điều có đủ hết nha!</p>");
-
-            return new NotificationModel()
-            {
-                kind = "notification",
-                title = "Thông báo đổi hàng cuối năm",
-                action = "view_more",
-                actionValue = "doi-hang-cuoi-nam",
-                avatar = "/uploads/doi-hang-cuoi-nam/doi-hang-cuoi-nam-3.png",
-                summary = summary,
-                content = content.ToString(),
-                createdDate = DateTime.Now
-            };
-        }
+        private NotificationService _service = NotificationService.Instance;
+        private NotificationCategoryService _categoryService = NotificationCategoryService.Instance;
 
         /// <summary>
-        /// Thông báo thời gian làm việc
+        /// Lấy thông báo tin tức mới tại home
         /// </summary>
         /// <returns></returns>
-        private NotificationModel getNotification2()
-        {
-            var summary = String.Empty;
-            summary += "Chúng tôi xin hướng dẫn cách share sản phẩm lên Facebook";
-
-            return new NotificationModel()
-            {
-                kind = "news",
-                title = "Hướng share sản phẩm lên Facebook",
-                action = "show_web",
-                actionValue = "http://xuongann.com",
-                avatar = String.Empty,
-                summary = summary,
-                content = summary,
-                createdDate = DateTime.Now
-            };
-        }
-
-        /// <summary>
-        /// Thông báo thời gian làm việc
-        /// </summary>
-        /// <returns></returns>
-        private NotificationModel getNotification3()
-        {
-            var summary = String.Empty;
-            summary += "Nhằm cảm ơn sụ ủng hộ và quan tâm khách hàng với công ty chúng tôi.\n";
-            summary += "Nay công ty ANN xin đưa ra một loạt các chương trình khuyên mãi siêu khủng.\n";
-            summary += "Nào cùng click vào để xem các chương trình khuyến mãi nè!.\n";
-
-
-            return new NotificationModel()
-            {
-                kind = "promotion",
-                title = "Thông báo khuyến mãi",
-                action = "show_web",
-                actionValue = "http://xuongann.com",
-                avatar = "https://ann.com.vn/wp-content/uploads/quan-ao-tet-2020.jpg",
-                summary = summary,
-                content = String.Empty,
-                createdDate = DateTime.Now
-            };
-        }
-        #endregion
-
         public List<FlutterBannerModel> getHomeNotification()
         {
-            var result = new List<FlutterBannerModel>();
-
-            // Thông báo đổi hàng cuối năm
-            var notification1 = getNotification1();
-            result.Add(new FlutterBannerModel()
-            {
-                action = notification1.action,
-                name = notification1.title,
-                actionValue = notification1.actionValue,
-                image = notification1.avatar,
-                message = notification1.summary,
-                createdDate = notification1.createdDate
-            });
-
-            // Thông báo thời gian làm việc
-            var notification2 = getNotification2();
-            result.Add(new FlutterBannerModel()
-            {
-                action = notification2.action,
-                name = notification2.title,
-                actionValue = notification2.actionValue,
-                image = notification2.avatar,
-                message = notification2.summary,
-                createdDate = notification2.createdDate
-            });
-
-            // Thông báo khuyến mãi tri ân khách hàng
-            var notification3 = getNotification3();
-            result.Add(new FlutterBannerModel()
-            {
-                action = notification3.action,
-                name = notification3.title,
-                actionValue = notification3.actionValue,
-                image = notification3.avatar,
-                message = notification3.summary,
-                createdDate = notification3.createdDate
-            });
-
-            return result.Select(x => {
-                if (x.action == "view_more")
-                    x.actionValue = "notification/" + x.actionValue;
-
-                return x;
-            }).ToList(); ;
-        }
-
-        public List<FlutterNotificationCardModel> getNotifications(FlutterNotificationFilterModel filter, ref PaginationMetadataModel pagination)
-        {
-            var data = new List<NotificationModel>()
-            {
-                getNotification1(),
-                getNotification2(),
-                getNotification3()
-            }
-            .ToList();
-
-            // Lọc theo thể lại thông báo
-            if (!String.IsNullOrEmpty(filter.kind))
-            {
-                data = data.Where(x => x.kind.Trim().ToLower() == filter.kind.Trim().ToLower()).ToList();
-            }
-
-            // Lấy tổng số record sản phẩm
-            pagination.totalCount = data.Count();
-
-            // Calculating Totalpage by Dividing (No of Records / Pagesize)
-            pagination.totalPages = (int)Math.Ceiling(pagination.totalCount / (double)pagination.pageSize);
-
-            var result = data
-                .Select(x => new FlutterNotificationCardModel()
+            var result = _service.getHomeNotification()
+                .Select(x => new FlutterBannerModel()
                 {
-                    kind = x.kind,
-                    action = x.action,
-                    name = x.title,
-                    actionValue = x.action == "view_more" ? "notification/" + x.actionValue : x.actionValue,
-                    image = x.avatar,
-                    message = x.summary,
-                    createdDate = x.createdDate
+                    action = x.Action,
+                    name = x.Title,
+                    actionValue = x.Action == FlutterPageNavigation.ViewMore ? "notification/news/" + x.ActionValue : x.ActionValue,
+                    image = x.Thumbnail,
+                    message = x.Summary,
+                    createdDate = x.CreatedDate
                 })
-                .Skip((pagination.currentPage - 1) * pagination.pageSize)
-                .Take(pagination.pageSize)
                 .ToList();
-
-            // if CurrentPage is greater than 1 means it has previousPage
-            pagination.previousPage = pagination.currentPage > 1 ? "Yes" : "No";
-
-            // if TotalPages is greater than CurrentPage means it has nextPage
-            pagination.nextPage = pagination.currentPage < pagination.totalPages ? "Yes" : "No";
 
             return result;
         }
 
+        /// <summary>
+        /// Lấy thông báo khuyến mải tại bảng NotifyPromition
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="pagination"></param>
+        /// <returns></returns>
+        private List<FlutterNotificationCardModel> getNotifyPromotionList(FlutterNotificationFilterModel filter, ref PaginationMetadataModel pagination)
+        {
+            using (var con = new inventorymanagementEntities())
+            {
+                var notifyPromotions = con.NotifyPromotions.Where(x => 1 == 1);
 
-        public FlutterNotificationModel getNotificationBySlug (string slug)
+                if (!String.IsNullOrEmpty(filter.categorySlug))
+                {
+                    var categories = _categoryService.getPostCategoryChild(filter.categorySlug);
+
+                    if (categories == null || categories.Count == 0)
+                        return null;
+
+                    var categoriesID = categories.Select(x => x.id).ToList();
+                    notifyPromotions = notifyPromotions.Where(x => categoriesID.Contains(x.ID));
+                }
+
+                if (!String.IsNullOrEmpty(filter.phone))
+                {
+                    var groupsNotifyPromotion = _service.getGroupNotifyPromotion(filter.phone);
+
+                    if (groupsNotifyPromotion == null || groupsNotifyPromotion.Count == 0)
+                        return null;
+
+                    var groupsID = groupsNotifyPromotion.Select(x => x.ID).ToList();
+                    notifyPromotions = notifyPromotions.Where(x => groupsID.Contains(x.GroupID));
+                }
+                // Lấy tổng số record sản phẩm
+                pagination.totalCount = notifyPromotions.Count();
+
+                // Calculating Totalpage by Dividing (No of Records / Pagesize)
+                pagination.totalPages = (int)Math.Ceiling(pagination.totalCount / (double)pagination.pageSize);
+
+                var result = notifyPromotions
+                    .OrderByDescending(o => o.ModifiedDate)
+                    .Select(x => new FlutterNotificationCardModel()
+                    {
+                        kind = filter.kind,
+                        action = x.Action,
+                        name = x.Title,
+                        actionValue = x.Action == FlutterPageNavigation.ViewMore ? "notification/promotion/" + x.ActionValue : x.ActionValue,
+                        image = x.Thumbnail,
+                        message = x.Summary,
+                        createdDate = x.CreatedDate
+                    })
+                    .Skip((pagination.currentPage - 1) * pagination.pageSize)
+                    .Take(pagination.pageSize)
+                    .ToList();
+
+                // if CurrentPage is greater than 1 means it has previousPage
+                pagination.previousPage = pagination.currentPage > 1 ? "Yes" : "No";
+
+                // if TotalPages is greater than CurrentPage means it has nextPage
+                pagination.nextPage = pagination.currentPage < pagination.totalPages ? "Yes" : "No";
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Lấy thông báo về các hoạt động của user tại NotifyUser
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="pagination"></param>
+        /// <returns></returns>
+        private List<FlutterNotificationCardModel> getNotifyUserList(FlutterNotificationFilterModel filter, ref PaginationMetadataModel pagination)
+        {
+            using (var con = new inventorymanagementEntities())
+            {
+                var notifyUsers = con.NotifyUsers.Where(x => 1 == 1);
+
+                if (!String.IsNullOrEmpty(filter.categorySlug))
+                {
+                    var categories = _categoryService.getPostCategoryChild(filter.categorySlug);
+
+                    if (categories == null || categories.Count == 0)
+                        return null;
+
+                    var categoriesID = categories.Select(x => x.id).ToList();
+                    notifyUsers = notifyUsers.Where(x => categoriesID.Contains(x.ID));
+                }
+
+                if (!String.IsNullOrEmpty(filter.phone))
+                    notifyUsers = notifyUsers.Where(x => x.Phone == filter.phone);
+                // Lấy tổng số record sản phẩm
+                pagination.totalCount = notifyUsers.Count();
+
+                // Calculating Totalpage by Dividing (No of Records / Pagesize)
+                pagination.totalPages = (int)Math.Ceiling(pagination.totalCount / (double)pagination.pageSize);
+
+                var result = notifyUsers
+                    .OrderByDescending(o => o.ModifiedDate)
+                    .Select(x => new FlutterNotificationCardModel()
+                    {
+                        kind = filter.kind,
+                        action = x.Action,
+                        name = x.Title,
+                        actionValue = x.Action == FlutterPageNavigation.ViewMore ? "notification/user/" + x.ActionValue : x.ActionValue,
+                        image = x.Thumbnail,
+                        message = x.Summary,
+                        createdDate = x.CreatedDate
+                    })
+                    .Skip((pagination.currentPage - 1) * pagination.pageSize)
+                    .Take(pagination.pageSize)
+                    .ToList();
+
+                // if CurrentPage is greater than 1 means it has previousPage
+                pagination.previousPage = pagination.currentPage > 1 ? "Yes" : "No";
+
+                // if TotalPages is greater than CurrentPage means it has nextPage
+                pagination.nextPage = pagination.currentPage < pagination.totalPages ? "Yes" : "No";
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Lấy thông báo về các tin tức mới tại NotifyNews
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="pagination"></param>
+        /// <returns></returns>
+        private List<FlutterNotificationCardModel> getNotifyNewsList(FlutterNotificationFilterModel filter, ref PaginationMetadataModel pagination)
+        {
+            using (var con = new inventorymanagementEntities())
+            {
+                var notifyNews = con.NotifyNews.Where(x => 1 == 1);
+
+                if (!String.IsNullOrEmpty(filter.categorySlug))
+                {
+                    var categories = _categoryService.getPostCategoryChild(filter.categorySlug);
+
+                    if (categories == null || categories.Count == 0)
+                        return null;
+
+                    var categoriesID = categories.Select(x => x.id).ToList();
+                    notifyNews = notifyNews.Where(x => categoriesID.Contains(x.ID));
+                }
+
+                // Lấy tổng số record sản phẩm
+                pagination.totalCount = notifyNews.Count();
+
+                // Calculating Totalpage by Dividing (No of Records / Pagesize)
+                pagination.totalPages = (int)Math.Ceiling(pagination.totalCount / (double)pagination.pageSize);
+
+                var result = notifyNews
+                    .OrderByDescending(o => o.ModifiedDate)
+                    .Select(x => new FlutterNotificationCardModel()
+                    {
+                        kind = filter.kind,
+                        action = x.Action,
+                        name = x.Title,
+                        actionValue = x.Action == FlutterPageNavigation.ViewMore ? "notification/news/" + x.ActionValue : x.ActionValue,
+                        image = x.Thumbnail,
+                        message = x.Summary,
+                        createdDate = x.CreatedDate
+                    })
+                    .Skip((pagination.currentPage - 1) * pagination.pageSize)
+                    .Take(pagination.pageSize)
+                    .ToList();
+
+                // if CurrentPage is greater than 1 means it has previousPage
+                pagination.previousPage = pagination.currentPage > 1 ? "Yes" : "No";
+
+                // if TotalPages is greater than CurrentPage means it has nextPage
+                pagination.nextPage = pagination.currentPage < pagination.totalPages ? "Yes" : "No";
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Lấy tổng hợp các thông báo
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="pagination"></param>
+        /// <returns></returns>
+        public List<FlutterNotificationCardModel> getNotifications(FlutterNotificationFilterModel filter, ref PaginationMetadataModel pagination)
+        {
+            if (String.IsNullOrEmpty(filter.kind))
+            {
+                #region Tổng hợp các thông báo
+                using (var con = new inventorymanagementEntities())
+                {
+                    var notifications = con.Notifications.Where(x => 1 == 1);
+
+                    if (!String.IsNullOrEmpty(filter.phone))
+                    {
+                        notifications = notifications.Where(x =>
+                            (x.Kind == NotificationKind.Promotion && (x.Phone == null || x.Phone == filter.phone)) ||
+                            (x.Kind == NotificationKind.Notification && x.Phone == filter.phone) ||
+                            x.Kind == NotificationKind.News
+                        );
+                    }
+
+                    // Lấy tổng số record sản phẩm
+                    pagination.totalCount = notifications.Count();
+
+                    // Calculating Totalpage by Dividing (No of Records / Pagesize)
+                    pagination.totalPages = (int)Math.Ceiling(pagination.totalCount / (double)pagination.pageSize);
+
+                    var data = notifications
+                        .OrderByDescending(o => o.ModifiedDate)
+                        .Skip((pagination.currentPage - 1) * pagination.pageSize)
+                        .Take(pagination.pageSize);
+
+                    // if CurrentPage is greater than 1 means it has previousPage
+                    pagination.previousPage = pagination.currentPage > 1 ? "Yes" : "No";
+
+                    // if TotalPages is greater than CurrentPage means it has nextPage
+                    pagination.nextPage = pagination.currentPage < pagination.totalPages ? "Yes" : "No";
+
+
+                    #region Lấy thông báo khuyến mãi
+                    var notifyPromotions = data.Where(x => x.Kind == NotificationKind.Promotion)
+                        .Join(
+                            con.NotifyPromotions,
+                            d => d.NotifyID,
+                            p => p.ID,
+                            (d, p) => new {
+                                kind = d.Kind,
+                                notifyID = p.ID,
+                                action = p.Action,
+                                name = p.Title,
+                                actionValue = p.Action == FlutterPageNavigation.ViewMore ? "notification/promotion/" + p.ActionValue : p.ActionValue,
+                                image = p.Thumbnail,
+                                message = p.Summary,
+                                createdDate = p.CreatedDate
+                            }
+                        )
+                        .ToList();
+                    #endregion
+
+                    #region Lấy thông báo hoạt động của user
+                    var notifyUsers = data.Where(x => x.Kind == NotificationKind.Notification)
+                        .Join(
+                            con.NotifyUsers,
+                            d => d.NotifyID,
+                            p => p.ID,
+                            (d, p) => new {
+                                kind = d.Kind,
+                                notifyID = p.ID,
+                                action = p.Action,
+                                name = p.Title,
+                                actionValue = p.Action == FlutterPageNavigation.ViewMore ? "notification/user/" + p.ActionValue : p.ActionValue,
+                                image = p.Thumbnail,
+                                message = p.Summary,
+                                createdDate = p.CreatedDate
+                            }
+                        )
+                        .ToList();
+                    #endregion
+
+                    #region Lấy thông báo tin tức
+                    var notifyNews = data.Where(x => x.Kind == NotificationKind.News)
+                        .Join(
+                            con.NotifyNews,
+                            d => d.NotifyID,
+                            p => p.ID,
+                            (d, p) => new {
+                                kind = d.Kind,
+                                notifyID = p.ID,
+                                action = p.Action,
+                                name = p.Title,
+                                actionValue = p.Action == FlutterPageNavigation.ViewMore ? "notification/news/" + p.ActionValue : p.ActionValue,
+                                image = p.Thumbnail,
+                                message = p.Summary,
+                                createdDate = p.CreatedDate
+                            }
+                        )
+                        .ToList();
+                    #endregion
+
+                    #region Lấy thông tin của tất cả thông báo
+                    var result = data.ToList()
+                        .GroupJoin(
+                            notifyPromotions,
+                            d => new { kind = d.Kind, notifyID = d.NotifyID },
+                            p => new { kind = p.kind, notifyID = p.notifyID },
+                            (d, p) => new { notify = d, promotion = p}
+                        )
+                        .SelectMany(
+                            x => x.promotion.DefaultIfEmpty(),
+                            (parent, child) => new { notify = parent.notify, promotion = child }
+                        )
+                        .GroupJoin(
+                            notifyUsers,
+                            temp => new { kind = temp.notify.Kind, notifyID = temp.notify.NotifyID },
+                            u => new { kind = u.kind, notifyID = u.notifyID },
+                            (temp, u) => new { notify = temp.notify, promotion = temp.promotion, user = u }
+                        )
+                        .SelectMany(
+                            x => x.user.DefaultIfEmpty(),
+                            (parent, child) => new { notify = parent.notify, promotion = parent.promotion, user = child }
+                        )
+                        .GroupJoin(
+                            notifyNews,
+                            temp => new { kind = temp.notify.Kind, notifyID = temp.notify.NotifyID },
+                            n => new { kind = n.kind, notifyID = n.notifyID },
+                            (temp, n) => new { notify = temp.notify, promotion = temp.promotion, user = temp.user, news = n }
+                        )
+                        .SelectMany(
+                            x => x.news.DefaultIfEmpty(),
+                            (parent, child) => new { notify = parent.notify, promotion = parent.promotion, user = parent.user, news = child }
+                        )
+                        .Select(x => {
+                            var kind = x.notify.Kind;
+
+                            if (x.notify.Kind == NotificationKind.Promotion && x.promotion != null)
+                            {
+                                return new FlutterNotificationCardModel()
+                                {
+                                    kind = x.promotion.kind,
+                                    action = x.promotion.action,
+                                    name = x.promotion.name,
+                                    actionValue = x.promotion.actionValue,
+                                    image = x.promotion.image,
+                                    message = x.promotion.message,
+                                    createdDate = x.promotion.createdDate
+                                };
+                            }
+
+                            if (x.notify.Kind == NotificationKind.Notification && x.user != null)
+                            {
+                                return new FlutterNotificationCardModel()
+                                {
+                                    kind = x.user.kind,
+                                    action = x.user.action,
+                                    name = x.user.name,
+                                    actionValue = x.user.actionValue,
+                                    image = x.user.image,
+                                    message = x.user.message,
+                                    createdDate = x.user.createdDate
+                                };
+                            }
+
+                            if (x.notify.Kind == NotificationKind.News && x.news != null)
+                            {
+                                return new FlutterNotificationCardModel()
+                                {
+                                    kind = x.news.kind,
+                                    action = x.news.action,
+                                    name = x.news.name,
+                                    actionValue = x.news.actionValue,
+                                    image = x.news.image,
+                                    message = x.news.message,
+                                    createdDate = x.news.createdDate
+                                };
+                            }
+
+                            return new FlutterNotificationCardModel()
+                            {
+                                kind = x.notify.Kind,
+                                action = String.Empty,
+                                name = String.Empty,
+                                actionValue = String.Empty,
+                                image = String.Empty,
+                                message = String.Empty,
+                                createdDate = DateTime.Now
+                            };
+                        })
+                        .ToList();
+                    #endregion
+
+                    return result;
+                }
+                #endregion
+            }
+            else if (filter.kind == NotificationKind.Promotion)
+            {
+                return getNotifyPromotionList(filter, ref pagination);
+            }
+            else if (filter.kind == NotificationKind.Notification)
+            {
+                return getNotifyUserList(filter, ref pagination);
+            }
+            else if (filter.kind == NotificationKind.News)
+            {
+                return getNotifyNewsList(filter, ref pagination);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// Lấy thông tin khuyến mãi dựa theo số điện thoại và slug
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="slug"></param>
+        /// <returns></returns>
+        public FlutterNotificationModel getNotifyPromotionBySlug(string phone, string slug)
+        {
+            if (String.IsNullOrEmpty(phone) || String.IsNullOrEmpty(slug))
+                return null;
+
+            var promotion = _service.getNotifyPromotionBySlug(phone, slug);
+
+            if (promotion == null)
+                return null;
+
+            return new FlutterNotificationModel()
+            {
+                title = promotion.Title,
+                content = promotion.Content,
+                createdDate = promotion.CreatedDate
+            };
+        }
+
+        /// <summary>
+        /// Lấy thông tin hoạt động dựa theo số điện thoài và slug
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="slug"></param>
+        /// <returns></returns>
+        public FlutterNotificationModel getNotifyUserBySlug(string phone, string slug)
+        {
+            if (String.IsNullOrEmpty(phone) || String.IsNullOrEmpty(slug))
+                return null;
+
+            var notifyUser = _service.getNotifyUserBySlug(phone, slug);
+
+            if (notifyUser == null)
+                return null;
+
+            return new FlutterNotificationModel()
+            {
+                title = notifyUser.Title,
+                content = notifyUser.Content,
+                createdDate = notifyUser.CreatedDate
+            };
+        }
+
+        /// <summary>
+        /// Lấy thông tin tin tức theo slug
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="slug"></param>
+        /// <returns></returns>
+        public FlutterNotificationModel getNotifyNewsBySlug(string slug)
         {
             if (String.IsNullOrEmpty(slug))
                 return null;
 
-            var data = new List<NotificationModel>()
-            {
-                getNotification1(),
-                getNotification2(),
-                getNotification3()
-            }
-            .Where(x => x.action == "view_more")
-            .Where(x => x.actionValue == slug)
-            .Select(x => new FlutterNotificationModel()
-            {
-                title = x.title,
-                content = x.content,
-                createdDate = x.createdDate
-            })
-            .FirstOrDefault();
+            var news = _service.getNotifyNewsBySlug(slug);
 
-            return data;
+            if (news == null)
+                return null;
+
+            return new FlutterNotificationModel()
+            {
+                title = news.Title,
+                content = news.Content,
+                createdDate = news.CreatedDate
+            };
         }
     }
 }

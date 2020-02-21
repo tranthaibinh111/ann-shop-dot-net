@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace ann_shop_server.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/flutter/banner")]
     public class FlutterBannerController : ApiController
     {
@@ -48,7 +49,7 @@ namespace ann_shop_server.Controllers
             //    return Ok<List<FlutterBannerModel>>(_service.getProductBanners(filter.slug, filter.position));
 
             result = result.Select(x => {
-                if (x.action == "view_more")
+                if (x.action == FlutterPageNavigation.ViewMore)
                     x.actionValue = "post/" + x.actionValue;
 
                 return x;

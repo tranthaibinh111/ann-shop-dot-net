@@ -64,6 +64,15 @@
         <EntityTypeShape EntityType="inventorymanagementModel.User" Width="1.5" PointX="23.375" PointY="11.75" />
         <EntityTypeShape EntityType="inventorymanagementModel.Coupon" Width="1.5" PointX="23.375" PointY="15.75" />
         <EntityTypeShape EntityType="inventorymanagementModel.CustomerCoupon" Width="1.5" PointX="23.375" PointY="19.75" />
+        <EntityTypeShape EntityType="inventorymanagementModel.GroupNotifyPromotion" Width="1.5" PointX="23.375" PointY="23.75" />
+        <EntityTypeShape EntityType="inventorymanagementModel.Notification" Width="1.5" PointX="25.375" PointY="0.75" />
+        <EntityTypeShape EntityType="inventorymanagementModel.NotifyNew" Width="1.5" PointX="25.375" PointY="4.75" />
+        <EntityTypeShape EntityType="inventorymanagementModel.NotifyPromotion" Width="1.5" PointX="25.375" PointY="9.75" />
+        <EntityTypeShape EntityType="inventorymanagementModel.NotifyUser" Width="1.5" PointX="25.375" PointY="14.75" />
+        <EntityTypeShape EntityType="inventorymanagementModel.UserNotifyPromotion" Width="1.5" PointX="15.375" PointY="26.75" />
+        <EntityTypeShape EntityType="inventorymanagementModel.NotificationCategory" Width="1.5" PointX="17.375" PointY="26.75" />
+        <EntityTypeShape EntityType="inventorymanagementModel.PostCategory" Width="1.5" PointX="25.375" PointY="19.75" />
+        <EntityTypeShape EntityType="inventorymanagementModel.PostPublic" Width="1.5" PointX="25.375" PointY="24.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

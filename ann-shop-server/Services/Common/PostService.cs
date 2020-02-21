@@ -7,6 +7,7 @@ namespace ann_shop_server.Services
 {
     public class PostService : Service<PostService>
     {
+        private CategoryService _categoryService = CategoryService.Instance;
 
         public PostModel getPostDetail(int id)
         {
@@ -35,6 +36,43 @@ namespace ann_shop_server.Services
                         }
                     )
                     .FirstOrDefault();
+                return post;
+            }
+        }
+
+        /// <summary>
+        /// Lấy danh sách bài viết public thể hiện tại home
+        /// </summary>
+        /// <param name="postSlug"></param>
+        /// <returns></returns>
+        public List<PostPublic> getHomePosts()
+        {
+            using (var con = new inventorymanagementEntities())
+            {
+                var homePosts = con.PostPublics
+                    .Where(x => x.AtHome == true)
+                    .OrderByDescending(o => o.ModifiedDate)
+                    .ToList();
+
+                return homePosts;
+            }
+        }
+
+        /// <summary>
+        /// Lấy bài viết public theo post slug
+        /// </summary>
+        /// <param name="postSlug"></param>
+        /// <returns></returns>
+        public PostPublic getPostPublic(string postSlug)
+        {
+            using (var con = new inventorymanagementEntities())
+            {
+                var post = con.PostPublics.Where(x =>
+                    x.Action.Equals(FlutterPageNavigation.ViewMore) &&
+                    x.ActionValue.Equals(postSlug)
+                )
+                .FirstOrDefault();
+
                 return post;
             }
         }

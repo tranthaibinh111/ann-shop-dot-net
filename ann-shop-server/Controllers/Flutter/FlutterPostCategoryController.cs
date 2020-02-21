@@ -28,8 +28,7 @@ namespace ann_shop_server.Controllers
         [Route("~/api/flutter/post-categories")]
         public IHttpActionResult GetCategories()
         {
-            return Ok<List<FlutterPostCategoryModel>>(null);
-            //return Ok<List<FlutterPostCategoryModel>>(_service.getCategories());
+            return Ok<List<FlutterPostCategoryModel>>(_service.getCategories());
         }
     }
 }

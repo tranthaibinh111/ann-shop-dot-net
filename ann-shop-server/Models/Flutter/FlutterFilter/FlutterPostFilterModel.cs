@@ -8,5 +8,6 @@ namespace ann_shop_server.Models
     public class FlutterPostFilterModel
     {
         public string categorySlug { get; set; }
+        public bool isPolicy { get; set; } = false;
     }
 }

@@ -28,7 +28,15 @@ namespace ann_shop_server.Controllers.Flutter
         [Route("promotions")]
         public IHttpActionResult getPromotions()
         {
-            return Ok<List<FlutterPromotionModel>>(_service.getPromotions());
+            try
+            {
+                var phone = _service.getPhoneByToken(this);
+                return Ok<List<FlutterPromotionModel>>(_service.getPromotions(phone));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
