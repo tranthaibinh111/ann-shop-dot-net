@@ -5,10 +5,8 @@ using System.Linq;
 
 namespace ann_shop_server.Services
 {
-    public class PostService : Service<PostService>
+    public class PostService : IANNService
     {
-        private CategoryService _categoryService = CategoryService.Instance;
-
         public PostModel getPostDetail(int id)
         {
             using (var con = new inventorymanagementEntities())

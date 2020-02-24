@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class StockService : Service<StockService>
+    public class StockService : IANNService
     {
         public List<StockModel> getQuantities(List<tbl_StockManager> stock)
         {

@@ -30,7 +30,7 @@ namespace ann_shop_server.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            User user = await UserService.Instance.getUser(context.UserName, context.Password);
+            User user = await ANNFactoryService.getInstance<UserService>().getUser(context.UserName, context.Password);
 
             if (user == null)
             {

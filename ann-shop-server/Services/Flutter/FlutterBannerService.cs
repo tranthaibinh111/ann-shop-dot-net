@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterBannerService: Service<FlutterBannerService>
+    public class FlutterBannerService: IANNService
     {
         /// <summary>
         /// Lấy danh sách banner tại đầu trang home

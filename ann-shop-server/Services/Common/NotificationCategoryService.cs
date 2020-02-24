@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class NotificationCategoryService: Service<NotificationCategoryService>
+    public class NotificationCategoryService: IANNService
     {
         #region Lấy danh sách dạnh mục post con dựa theo danh mục post cha
         /// <summary>

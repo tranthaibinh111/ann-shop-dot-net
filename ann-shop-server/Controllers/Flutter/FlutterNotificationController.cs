@@ -15,11 +15,13 @@ namespace ann_shop_server.Controllers
     [RoutePrefix("api/flutter/notification")]
     public class FlutterNotificationController : ApiController
     {
+        private TokenService _token;
         private FlutterNotificationService _service;
 
         public FlutterNotificationController()
         {
-            _service = FlutterNotificationService.Instance;
+            _token = ANNFactoryService.getInstance<TokenService>();
+            _service = ANNFactoryService.getInstance<FlutterNotificationService>();
         }
 
         /// <summary>
@@ -47,7 +49,7 @@ namespace ann_shop_server.Controllers
                 if (paging == null)
                     paging = new PagingParameterModel();
 
-                var phone = _service.getPhoneByToken(this);
+                var phone = _token.getPhoneByToken(this);
                 var filter = new FlutterNotificationFilterModel()
                 {
                     kind = kind,
@@ -84,7 +86,7 @@ namespace ann_shop_server.Controllers
         {
             try
             {
-                var phone = _service.getPhoneByToken(this);
+                var phone = _token.getPhoneByToken(this);
                 return Ok<FlutterNotificationModel>(_service.getNotifyPromotionBySlug(phone, slug));
             }
             catch (Exception ex)
@@ -103,7 +105,7 @@ namespace ann_shop_server.Controllers
         {
             try
             {
-                var phone = _service.getPhoneByToken(this);
+                var phone = _token.getPhoneByToken(this);
                 return Ok<FlutterNotificationModel>(_service.getNotifyUserBySlug(phone, slug));
             }
             catch (Exception ex)

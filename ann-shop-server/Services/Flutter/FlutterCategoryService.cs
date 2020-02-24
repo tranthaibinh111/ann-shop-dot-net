@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterCategoryService: Service<FlutterCategoryService>
+    public class FlutterCategoryService: IANNService
     {
         #region Lấy thông tin về danh mục
         #region Danh mục Quần áo nữ

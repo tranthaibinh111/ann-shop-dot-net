@@ -7,8 +7,11 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class ProductService : Service<ProductService>
+    public class ProductService : IANNService
     {
+        protected readonly CategoryService _category = ANNFactoryService.getInstance<CategoryService>();
+        protected readonly StockService _stock = ANNFactoryService.getInstance<StockService>();
+
         #region Product Sort
         /// <summary>
         /// Product Sort
@@ -125,7 +128,7 @@ namespace ann_shop_server.Services
         #endregion
 
         #region Lấy danh sách sản phẩm theo điều kiện filter
-        private List<ProductCardModel> getProducts(ProductFilterModel filter, ref PaginationMetadataModel pagination)
+        public List<ProductCardModel> getProducts(ProductFilterModel filter, ref PaginationMetadataModel pagination)
         {
             using (var con = new inventorymanagementEntities())
             {
@@ -232,7 +235,7 @@ namespace ann_shop_server.Services
                 #region Lấy theo category slug
                 if (!String.IsNullOrEmpty(filter.categorySlug))
                 {
-                    var categories = CategoryService.Instance.getCategoryChild(filter.categorySlug);
+                    var categories = _category.getCategoryChild(filter.categorySlug);
 
                     if (categories == null || categories.Count == 0)
                         return null;
@@ -249,7 +252,7 @@ namespace ann_shop_server.Services
 
                     foreach (var categorySlug in filter.categorySlugList)
                     {
-                        var categoryChilds = CategoryService.Instance.getCategoryChild(categorySlug);
+                        var categoryChilds = _category.getCategoryChild(categorySlug);
 
                         if (categoryChilds == null || categoryChilds.Count == 0)
                             continue;
@@ -274,7 +277,7 @@ namespace ann_shop_server.Services
                         (s, d) => s
                     )
                     .ToList();
-                var stocks = StockService.Instance.getQuantities(stockFilter);
+                var stocks = _stock.getQuantities(stockFilter);
                 #endregion
 
                 #region Lấy sản phẩm đạt yêu cầu
@@ -382,88 +385,6 @@ namespace ann_shop_server.Services
 
                 return result;
             }
-        }
-        #endregion
-
-        #region Phân trang sản phẩm theo filter của trang category
-        /// <summary>
-        /// Phân trang sản phẩm theo filter của trang category 
-        /// </summary>
-        /// <param name="category"></param>
-        /// <param name="pagination"></param>
-        /// <returns></returns>
-        public List<ProductCardModel> getProducts(CategoryPageFilterModel category, ref PaginationMetadataModel pagination)
-        {
-            var filter = new ProductFilterModel()
-            {
-                categorySlug = category.categorySlug,
-                productBadge = category.productBadge,
-                productSort = category.sort,
-                priceMin = category.priceMin,
-                priceMax = category.priceMax
-            };
-
-            return getProducts(filter, ref pagination);
-        }
-        #endregion
-
-        #region Phân trang sản phẩm theo filter của trang home
-        /// <summary>
-        /// Phân trang sản phẩm theo filter của trang home
-        /// </summary>
-        /// <param name="home"></param>
-        /// <param name="pagination"></param>
-        /// <returns></returns>
-        public List<ProductCardModel> getProducts(HomePageFilterModel home, ref PaginationMetadataModel pagination)
-        {
-            var filter = new ProductFilterModel()
-            {
-                categorySlug = home.categorySlug,
-                categorySlugList = home.categorySlugList,
-                productSort = home.sort
-            };
-
-            return getProducts(filter, ref pagination);
-        }
-        #endregion
-
-        #region Phân trang sản phẩm theo filter của trang tìm kiếm sản phẩm
-        /// <summary>
-        /// Phân trang sản phẩm theo filter của trang tìm kiếm sản phẩm
-        /// </summary>
-        /// <param name="searchProduct"></param>
-        /// <param name="pagination"></param>
-        /// <returns></returns>
-        public List<ProductCardModel> getProducts(SearchProductFilterModel searchProduct, ref PaginationMetadataModel pagination)
-        {
-            var filter = new ProductFilterModel()
-            {
-                productSearch = searchProduct.search,
-                productSort = searchProduct.sort
-            };
-
-            return getProducts(filter, ref pagination);
-        }
-        #endregion
-
-        #region Phân trang sản phẩm theo filter của trang tag
-        /// <summary>
-        /// Phân trang sản phẩm theo filter của trang tag
-        /// </summary>
-        /// <param name="categorySlug"></param>
-        /// <param name="pagination"></param>
-        /// <returns></returns>
-        public List<ProductCardModel> getProducts(TagPageFilterModel tag, ref PaginationMetadataModel pagination)
-        {
-            var filter = new ProductFilterModel()
-            {
-                tagSlug = tag.tagSlug,
-                priceMin = tag.priceMin,
-                priceMax = tag.priceMax,
-                productSort = tag.sort
-            };
-
-            return getProducts(filter, ref pagination);
         }
         #endregion
         #endregion
@@ -593,7 +514,7 @@ namespace ann_shop_server.Services
                     )
                     .OrderBy(x => new { x.ParentID, x.ProductID, x.ProductVariableID })
                     .ToList();
-                var stocks = StockService.Instance.getQuantities(stockFilter);
+                var stocks = _stock.getQuantities(stockFilter);
 
                 // Get info variable
                 var colors = getColors(id);
@@ -754,7 +675,7 @@ namespace ann_shop_server.Services
                     .OrderBy(x => new { x.ParentID, x.ProductID, x.ProductVariableID })
                     .ToList();
 
-                var stocks = StockService.Instance.getProductVariableQuantities(stockFilter);
+                var stocks = _stock.getProductVariableQuantities(stockFilter);
 
                 // Get info variable of product
                 var infoVariable = data

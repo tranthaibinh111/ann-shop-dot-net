@@ -6,15 +6,13 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterUserService : Service<FlutterUserService>
+    public class FlutterUserService : UserService
     {
-        private UserService _service = UserService.Instance;
-
         public FlutterUserModel confirmOTP(ConfirmOTPModel data)
         {
             if (!checkUser(data.phone.Trim()))
             {
-                _service.register(new UserRegisterModel() { phone = data.phone.Trim(), password = data.otp });
+                base.register(new UserRegisterModel() { phone = data.phone.Trim(), password = data.otp });
             }
             else
             {
@@ -24,9 +22,9 @@ namespace ann_shop_server.Services
             return getUser(new UserRegisterModel() { phone = data.phone.Trim(), password = data.otp });
         }
 
-        public FlutterUserModel getUser(UserRegisterModel login)
+        public new FlutterUserModel getUser(UserRegisterModel login)
         {
-            var user = _service.getUser(login);
+            var user = base.getUser(login);
 
             if (user != null)
             {
@@ -45,9 +43,9 @@ namespace ann_shop_server.Services
             return null;
         }
 
-        public FlutterUserModel updateInfo(UserInfoModel info)
+        public new FlutterUserModel updateInfo(UserInfoModel info)
         {
-            var user = _service.updateInfo(info);
+            var user = base.updateInfo(info);
 
             if (user == null)
                 throw new Exception(String.Format("Số điện thoại này {0} không tồn tại.", info.phone));
@@ -66,7 +64,7 @@ namespace ann_shop_server.Services
 
         public string createdPassword(FlutterCreatePasswordModel data)
         {
-            var password = _service.createPassword(data.phone, data.otp, data.passwordNew);
+            var password = base.createPassword(data.phone, data.otp, data.passwordNew);
 
             if (password == null)
                 throw new Exception("Số điện thoại hoặc OTP không đúng.");
@@ -74,9 +72,9 @@ namespace ann_shop_server.Services
             return password;
         }
 
-        public string changePassword(string phone, string passwordNew)
+        public new string changePassword(string phone, string passwordNew)
         {
-            var password = _service.changePassword(phone, passwordNew);
+            var password = base.changePassword(phone, passwordNew);
 
             if (password == null)
                 throw new Exception(String.Format("Số điện thoại này {0} không tồn tại.", phone));
@@ -84,9 +82,9 @@ namespace ann_shop_server.Services
             return password;
         }
 
-        public bool checkUser(string phone)
+        public new bool checkUser(string phone)
         {
-            return _service.checkUser(phone);
+            return base.checkUser(phone);
         }
 
         public string passwordNewByBirthday(FlutterPasswordNewBirthdayModel data)
@@ -94,7 +92,7 @@ namespace ann_shop_server.Services
             if (!checkUser(data.phone))
                 throw new Exception(String.Format(String.Format("Số điện thoại này {0} không tồn tại.", data.phone)));
 
-            var password = _service.passwordNewByBirthday(data.phone, data.birthday, data.otp);
+            var password = base.passwordNewByBirthday(data.phone, data.birthday, data.otp);
 
             if (password == null)
                 throw new Exception(String.Format("Ngày sinh {0:dd-MM-yyyy} không chính xác", data.birthday));

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 
 namespace ann_shop_server.Services
 {
-    public class CategoryPageService : Service<CategoryPageService>
+    public class AngularCategoryService : IANNService
     {
+        private readonly CategoryService _category = ANNFactoryService.getInstance<CategoryService>();
+        private readonly ProductService _product = ANNFactoryService.getInstance<ProductService>();
+
         /// <summary>
         /// Lấy thông tin category theo slug
         /// </summary>
@@ -12,7 +15,7 @@ namespace ann_shop_server.Services
         /// <returns></returns>
         public CategoryModel getCategoryBySlug(string slug)
         {
-            return CategoryService.Instance.getCategoryBySlug(slug);
+            return _category.getCategoryBySlug(slug);
         }
 
         /// <summary>
@@ -21,7 +24,7 @@ namespace ann_shop_server.Services
         /// <returns></returns>
         public List<ProductSortModel> getProductSort()
         {
-            return ProductService.Instance.getProductSort();
+            return _product.getProductSort();
         }
 
         /// <summary>
@@ -32,7 +35,16 @@ namespace ann_shop_server.Services
         /// <returns></returns>
         public List<ProductCardModel> getProducts(CategoryPageFilterModel filter, ref PaginationMetadataModel pagination)
         {
-            return ProductService.Instance.getProducts(filter, ref pagination);
+            var productFilter = new ProductFilterModel()
+            {
+                categorySlug = filter.categorySlug,
+                productBadge = filter.productBadge,
+                productSort = filter.sort,
+                priceMin = filter.priceMin,
+                priceMax = filter.priceMax
+            };
+
+            return _product.getProducts(productFilter, ref pagination);
         }
     }
 }

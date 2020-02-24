@@ -7,18 +7,17 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterPostService: Service<FlutterPostService>
+    public class FlutterPostService: PostService
     {
-        private PostService _service = PostService.Instance;
-        private PostCategoryService _category = PostCategoryService.Instance;
+        private readonly PostCategoryService _postCategory = ANNFactoryService.getInstance<PostCategoryService>();
 
         /// <summary>
         /// Lấy danh sách post public tại màn hình home
         /// </summary>
         /// <returns></returns>
-        public List<FlutterBannerModel> getHomePosts()
+        public new List<FlutterBannerModel> getHomePosts()
         {
-            var homePosts = _service.getHomePosts();
+            var homePosts = base.getHomePosts();
 
             if (homePosts == null || homePosts.Count == 0)
                 return null;
@@ -43,7 +42,7 @@ namespace ann_shop_server.Services
 
                 if (!String.IsNullOrEmpty(filter.categorySlug))
                 {
-                    var categories = _category.getPostCategoryChild(filter.categorySlug);
+                    var categories = _postCategory.getPostCategoryChild(filter.categorySlug);
 
                     if (categories == null || categories.Count() == 0)
                         return null;
@@ -91,7 +90,7 @@ namespace ann_shop_server.Services
             if (String.IsNullOrEmpty(slug))
                 return null;
 
-            var post = _service.getPostPublic(slug);
+            var post = base.getPostPublic(slug);
 
             if (post == null)
                 return null;

@@ -18,11 +18,13 @@ namespace ann_shop_server.Controllers
     [RoutePrefix("api/flutter/user")]
     public class FlutterUserController : ApiController
     {
+        private TokenService _token;
         private FlutterUserService _service;
 
         public FlutterUserController()
         {
-            _service = FlutterUserService.Instance;
+            _token = ANNFactoryService.getInstance<TokenService>();
+            _service = ANNFactoryService.getInstance<FlutterUserService>();
         }
 
         [AllowAnonymous]
@@ -145,7 +147,7 @@ namespace ann_shop_server.Controllers
         {
             try
             {
-                var phone = _service.getPhoneByToken(this);
+                var phone = _token.getPhoneByToken(this);
 
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);

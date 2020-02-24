@@ -1,4 +1,4 @@
-﻿using ann_shop_server.Services.Pages;
+﻿using ann_shop_server.Services;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Collections.Generic;
@@ -7,13 +7,13 @@ using ann_shop_server.Models;
 namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/invoice")]
-    public class InvoiceOrderPageController : ApiController
+    public class AngularInvoiceOrderController : ApiController
     {
-        private InvoiceOrderPageService _service;
+        private AngularInvoiceOrderService _service;
 
-        public InvoiceOrderPageController()
+        public AngularInvoiceOrderController()
         {
-            _service = InvoiceOrderPageService.Instance;
+            _service = ANNFactoryService.getInstance<AngularInvoiceOrderService>();
         }
 
         /// <summary>

@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ann_shop_server.Services.Pages
+namespace ann_shop_server.Services
 {
-    public class HomePageService : Service<HomePageService>
+    public class AngularHomeService : IANNService
     {
+        private readonly ProductService _product = ANNFactoryService.getInstance<ProductService>();
+
         /// <summary>
         /// Lấy product theo bộ lọc
         /// </summary>
@@ -17,7 +19,14 @@ namespace ann_shop_server.Services.Pages
         /// <returns></returns>
         public List<ProductCardModel> getProducts(HomePageFilterModel filter, ref PaginationMetadataModel pagination)
         {
-            return ProductService.Instance.getProducts(filter, ref pagination);
+            var productFilter = new ProductFilterModel()
+            {
+                categorySlug = filter.categorySlug,
+                categorySlugList = filter.categorySlugList,
+                productSort = filter.sort
+            };
+
+            return _product.getProducts(productFilter, ref pagination);
         }
     }
 }

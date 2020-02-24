@@ -17,7 +17,7 @@ namespace ann_shop_server.Controllers
 
         public SMSController()
         {
-            _service = SMSService.Instance;
+            _service = ANNFactoryService.getInstance<SMSService>();
         }
 
         /// <summary>

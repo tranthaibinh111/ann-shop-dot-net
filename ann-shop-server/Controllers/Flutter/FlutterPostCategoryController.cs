@@ -17,7 +17,7 @@ namespace ann_shop_server.Controllers
 
         public FlutterPostCategoryController()
         {
-            _service = FlutterPostCategoryService.Instance;
+            _service = ANNFactoryService.getInstance<FlutterPostCategoryService>();
         }
 
         /// <summary>

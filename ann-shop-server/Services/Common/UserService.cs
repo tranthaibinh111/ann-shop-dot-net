@@ -9,7 +9,7 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class UserService: Service<UserService>
+    public class UserService: IANNService
     {
         public User register(UserRegisterModel data)
         {

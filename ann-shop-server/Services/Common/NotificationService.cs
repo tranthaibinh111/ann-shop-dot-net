@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class NotificationService: Service<NotificationService>
+    public class NotificationService: IANNService
     {
         #region Khuyến mãi
         /// <summary>

@@ -6,9 +6,9 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterBlockProductService : Service<FlutterBlockProductService>
+    public class FlutterBlockProductService : IANNService
     {
-        private FlutterCategoryService _categoryService = FlutterCategoryService.Instance;
+        private readonly FlutterCategoryService _category = ANNFactoryService.getInstance<FlutterCategoryService>();
 
         /// <summary>
         /// Lấy danh sách block product cho trang home
@@ -37,7 +37,7 @@ namespace ann_shop_server.Services
             //#endregion
 
             #region Đồ bộ nữ
-            var block3 = _categoryService.createCategoryBlockProduct("do-bo-nu");
+            var block3 = _category.createCategoryBlockProduct("do-bo-nu");
             if (block3 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
@@ -56,7 +56,7 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Váy đầm
-            var block2 = _categoryService.createCategoryBlockProduct("vay-dam");
+            var block2 = _category.createCategoryBlockProduct("vay-dam");
             if (block2 != null)
             {
                 block2.name = "Váy đầm";
@@ -95,7 +95,7 @@ namespace ann_shop_server.Services
             //#endregion
 
             #region Áo thun nữ - Sơ mi nữ
-            var block5 = _categoryService.createCategoryBySlugs(
+            var block5 = _category.createCategoryBySlugs(
                 "Áo thun nữ - Sơ mi nữ",
                 new List<string>() { "ao-thun-nu", "ao-so-mi-nu" }
             );
@@ -114,7 +114,7 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Áo khoác nữ
-            var block6 = _categoryService.createCategoryBlockProduct("ao-khoac-nu");
+            var block6 = _category.createCategoryBlockProduct("ao-khoac-nu");
             if (block6 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
@@ -133,7 +133,7 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Quần nữ - Đồ lót nữ
-            var block7 = _categoryService.createCategoryBySlugs(
+            var block7 = _category.createCategoryBySlugs(
                 "Quần nữ - Đồ lót nữ",
                 new List<string>() { "quan-nu", "do-lot-nu" }
             );
@@ -152,7 +152,7 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Áo thun nam
-            var block8 = _categoryService.createCategoryBlockProduct("ao-thun-nam");
+            var block8 = _category.createCategoryBlockProduct("ao-thun-nam");
             if (block8 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
@@ -171,7 +171,7 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Áo khoác nam - Sơ mi nam
-            var block12 = _categoryService.createCategoryBySlugs(
+            var block12 = _category.createCategoryBySlugs(
                 "Áo khoác nam - Sơ mi nam",
                 new List<string>() { "ao-khoac-nam", "ao-so-mi-nam" }
             );
@@ -190,7 +190,7 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Quần nam - Quần lót nam
-            var block9 = _categoryService.createCategoryBySlugs(
+            var block9 = _category.createCategoryBySlugs(
                 "Quần nam - Quần lót nam",
                 new List<string>() { "quan-nam", "quan-lot-nam" }
             );
@@ -209,7 +209,7 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Nước hoa
-            var block10 = _categoryService.createCategoryBlockProduct("nuoc-hoa");
+            var block10 = _category.createCategoryBlockProduct("nuoc-hoa");
             if (block10 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
@@ -228,7 +228,7 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Mỹ phẩm
-            var block11 = _categoryService.createCategoryBlockProduct("my-pham");
+            var block11 = _category.createCategoryBlockProduct("my-pham");
             if (block11 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()

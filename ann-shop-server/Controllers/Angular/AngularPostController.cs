@@ -7,13 +7,13 @@ using System.Web.Http;
 
 namespace ann_shop_server.Controllers
 {
-    public class PostController : ApiController
+    public class AngularPostController : ApiController
     {
         private PostService _service;
 
-        public PostController()
+        public AngularPostController()
         {
-            _service = PostService.Instance;
+            _service = ANNFactoryService.getInstance<PostService>();
         }
 
         // GET api/post/postID:int

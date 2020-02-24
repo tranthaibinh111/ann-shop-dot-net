@@ -9,13 +9,13 @@ using System.Web.Http;
 namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/category")]
-    public class CategoryPageController : ApiController
+    public class AngularCategoryController : ApiController
     {
-        private CategoryPageService _service;
+        private AngularCategoryService _service;
 
-        public CategoryPageController()
+        public AngularCategoryController()
         {
-            _service = CategoryPageService.Instance;
+            _service = ANNFactoryService.getInstance<AngularCategoryService>();
         }
 
         /// <summary>

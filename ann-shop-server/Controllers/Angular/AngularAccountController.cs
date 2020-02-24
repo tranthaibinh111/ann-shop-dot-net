@@ -8,7 +8,7 @@ using ann_shop_server.Models;
 namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/account")]
-    public class AccountController : ApiController
+    public class AngularAccountController : ApiController
     {
         // Put api/product/id for webpublic
         [Route("login")]
