@@ -12,11 +12,11 @@ using System.Web.Http;
 namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/product")]
-    public class ProductPageController : ApiController
+    public class AngularProductController : ApiController
     {
         private AngularProductService _service;
 
-        public ProductPageController()
+        public AngularProductController()
         {
             _service = ANNFactoryService.getInstance<AngularProductService>();
         }

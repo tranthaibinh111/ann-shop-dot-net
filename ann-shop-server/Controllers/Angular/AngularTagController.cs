@@ -8,11 +8,11 @@ using Newtonsoft.Json;
 namespace ann_shop_server.Controllers.Pages
 {
     [RoutePrefix("api/v1/tag")]
-    public class TagPageController : ApiController
+    public class AngularTagController : ApiController
     {
         private AngularTagService _service;
 
-        public TagPageController()
+        public AngularTagController()
         {
             _service = ANNFactoryService.getInstance<AngularTagService>();
         }

@@ -7,11 +7,11 @@ using ann_shop_server.Models;
 namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/invoice")]
-    public class InvoiceOrderPageController : ApiController
+    public class AngularInvoiceOrderController : ApiController
     {
         private AngularInvoiceOrderService _service;
 
-        public InvoiceOrderPageController()
+        public AngularInvoiceOrderController()
         {
             _service = ANNFactoryService.getInstance<AngularInvoiceOrderService>();
         }

@@ -12,11 +12,11 @@ using System.Web.Http;
 namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/home")]
-    public class HomePageController : ApiController
+    public class AngularHomeController : ApiController
     {
         private AngularHomeService _service;
 
-        public HomePageController()
+        public AngularHomeController()
         {
             _service = ANNFactoryService.getInstance<AngularHomeService>();
         }

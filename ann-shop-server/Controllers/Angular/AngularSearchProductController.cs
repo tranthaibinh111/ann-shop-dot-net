@@ -12,11 +12,11 @@ using System.Web.Http;
 namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/search")]
-    public class SearchProductController : ApiController
+    public class AngularSearchProductController : ApiController
     {
         private AngularSearchProductService _service;
 
-        public SearchProductController()
+        public AngularSearchProductController()
         {
             _service = ANNFactoryService.getInstance<AngularSearchProductService>();
         }
