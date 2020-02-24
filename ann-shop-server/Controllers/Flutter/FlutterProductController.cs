@@ -20,7 +20,7 @@ namespace ann_shop_server.Controllers
 
         public FlutterProductController()
         {
-            _service = FlutterProductService.Instance;
+            _service = ANNFactoryService.getInstance<FlutterProductService>();
         }
 
         /// <summary>

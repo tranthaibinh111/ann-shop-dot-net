@@ -10,11 +10,11 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class SMSService: Service<SMSService>
+    public class SMSService: IANNService
     {
-        private const string VMGBRAND = "ann.com.vn";
-        private const string VMGACCOUNT = "hkdann";
-        private const string VMGPASSWORD = "Vmg@123456";
+        protected const string VMGBRAND = "ann.com.vn";
+        protected const string VMGACCOUNT = "hkdann";
+        protected const string VMGPASSWORD = "Vmg@123456";
 
         public bool bulkSendSms(string phone, string message, out string error)
         {

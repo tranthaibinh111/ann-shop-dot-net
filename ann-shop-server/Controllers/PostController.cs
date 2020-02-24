@@ -13,7 +13,7 @@ namespace ann_shop_server.Controllers
 
         public PostController()
         {
-            _service = PostService.Instance;
+            _service = ANNFactoryService.getInstance<PostService>();
         }
 
         // GET api/post/postID:int

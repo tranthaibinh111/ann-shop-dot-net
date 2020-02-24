@@ -14,11 +14,11 @@ namespace ann_shop_server.Controllers
     [RoutePrefix("api/v1/product")]
     public class ProductPageController : ApiController
     {
-        private ProductPageService _service;
+        private AngularProductService _service;
 
         public ProductPageController()
         {
-            _service = ProductPageService.Instance;
+            _service = ANNFactoryService.getInstance<AngularProductService>();
         }
 
         /// <summary>

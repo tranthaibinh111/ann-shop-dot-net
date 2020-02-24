@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterSearchService: Service<FlutterSearchService>
+    public class FlutterSearchService: IANNService
     {
         public List<FlutterCategoryModel> getHotKey()
         {

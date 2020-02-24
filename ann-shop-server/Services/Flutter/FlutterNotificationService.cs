@@ -7,18 +7,17 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterNotificationService: Service<FlutterNotificationService>
+    public class FlutterNotificationService: NotificationService
     {
-        private NotificationService _service = NotificationService.Instance;
-        private NotificationCategoryService _categoryService = NotificationCategoryService.Instance;
+        private readonly NotificationCategoryService _notifyCategory = ANNFactoryService.getInstance<NotificationCategoryService>();
 
         /// <summary>
         /// Lấy thông báo tin tức mới tại home
         /// </summary>
         /// <returns></returns>
-        public List<FlutterBannerModel> getHomeNotification()
+        public new List<FlutterBannerModel> getHomeNotification()
         {
-            var result = _service.getHomeNotification()
+            var result = base.getHomeNotification()
                 .Select(x => new FlutterBannerModel()
                 {
                     action = x.Action,
@@ -47,7 +46,7 @@ namespace ann_shop_server.Services
 
                 if (!String.IsNullOrEmpty(filter.categorySlug))
                 {
-                    var categories = _categoryService.getPostCategoryChild(filter.categorySlug);
+                    var categories = _notifyCategory.getPostCategoryChild(filter.categorySlug);
 
                     if (categories == null || categories.Count == 0)
                         return null;
@@ -58,7 +57,7 @@ namespace ann_shop_server.Services
 
                 if (!String.IsNullOrEmpty(filter.phone))
                 {
-                    var groupsNotifyPromotion = _service.getGroupNotifyPromotion(filter.phone);
+                    var groupsNotifyPromotion = base.getGroupNotifyPromotion(filter.phone);
 
                     if (groupsNotifyPromotion == null || groupsNotifyPromotion.Count == 0)
                         return null;
@@ -112,7 +111,7 @@ namespace ann_shop_server.Services
 
                 if (!String.IsNullOrEmpty(filter.categorySlug))
                 {
-                    var categories = _categoryService.getPostCategoryChild(filter.categorySlug);
+                    var categories = _notifyCategory.getPostCategoryChild(filter.categorySlug);
 
                     if (categories == null || categories.Count == 0)
                         return null;
@@ -169,7 +168,7 @@ namespace ann_shop_server.Services
 
                 if (!String.IsNullOrEmpty(filter.categorySlug))
                 {
-                    var categories = _categoryService.getPostCategoryChild(filter.categorySlug);
+                    var categories = _notifyCategory.getPostCategoryChild(filter.categorySlug);
 
                     if (categories == null || categories.Count == 0)
                         return null;
@@ -432,12 +431,12 @@ namespace ann_shop_server.Services
         /// <param name="phone"></param>
         /// <param name="slug"></param>
         /// <returns></returns>
-        public FlutterNotificationModel getNotifyPromotionBySlug(string phone, string slug)
+        public new FlutterNotificationModel getNotifyPromotionBySlug(string phone, string slug)
         {
             if (String.IsNullOrEmpty(phone) || String.IsNullOrEmpty(slug))
                 return null;
 
-            var promotion = _service.getNotifyPromotionBySlug(phone, slug);
+            var promotion = base.getNotifyPromotionBySlug(phone, slug);
 
             if (promotion == null)
                 return null;
@@ -456,12 +455,12 @@ namespace ann_shop_server.Services
         /// <param name="phone"></param>
         /// <param name="slug"></param>
         /// <returns></returns>
-        public FlutterNotificationModel getNotifyUserBySlug(string phone, string slug)
+        public new FlutterNotificationModel getNotifyUserBySlug(string phone, string slug)
         {
             if (String.IsNullOrEmpty(phone) || String.IsNullOrEmpty(slug))
                 return null;
 
-            var notifyUser = _service.getNotifyUserBySlug(phone, slug);
+            var notifyUser = base.getNotifyUserBySlug(phone, slug);
 
             if (notifyUser == null)
                 return null;
@@ -480,12 +479,12 @@ namespace ann_shop_server.Services
         /// <param name="phone"></param>
         /// <param name="slug"></param>
         /// <returns></returns>
-        public FlutterNotificationModel getNotifyNewsBySlug(string slug)
+        public new FlutterNotificationModel getNotifyNewsBySlug(string slug)
         {
             if (String.IsNullOrEmpty(slug))
                 return null;
 
-            var news = _service.getNotifyNewsBySlug(slug);
+            var news = base.getNotifyNewsBySlug(slug);
 
             if (news == null)
                 return null;

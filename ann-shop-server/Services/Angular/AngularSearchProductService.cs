@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ann_shop_server.Services.Searches
+namespace ann_shop_server.Services
 {
-    public class SearchProductService : Service<SearchProductService>
+    public class AngularSearchProductService : IANNService
     {
+        private readonly ProductService _product = ANNFactoryService.getInstance<ProductService>();
+
         #region Modal tìm kiếm sản phẩm để đặt hàng
         public List<SearchProductOrderedModel> getProductOrdered(int orderType, string sku)
         {
@@ -146,7 +148,7 @@ namespace ann_shop_server.Services.Searches
         /// <returns></returns>
         public List<ProductSortModel> getProductSort()
         {
-            return ProductService.Instance.getProductSort();
+            return _product.getProductSort();
         }
 
         /// <summary>
@@ -157,7 +159,13 @@ namespace ann_shop_server.Services.Searches
         /// <returns></returns>
         public List<ProductCardModel> getProducts(SearchProductFilterModel filter, ref PaginationMetadataModel pagination)
         {
-            return ProductService.Instance.getProducts(filter, ref pagination);
+            var productFilter = new ProductFilterModel()
+            {
+                productSearch = filter.search,
+                productSort = filter.sort
+            };
+
+            return _product.getProducts(productFilter, ref pagination);
         }
         #endregion
     }

@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ann_shop_server.Services.Pages
+namespace ann_shop_server.Services
 {
-    public class InvoiceOrderPageService : Service<InvoiceOrderPageService>
+    public class AngularInvoiceOrderService : IANNService
     {
         /// <summary>
         /// Lấy thông tin khách hàng

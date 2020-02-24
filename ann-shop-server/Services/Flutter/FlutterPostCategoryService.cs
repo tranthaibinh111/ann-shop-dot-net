@@ -6,13 +6,11 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterPostCategoryService : Service<FlutterPostCategoryService>
+    public class FlutterPostCategoryService : PostCategoryService
     {
-        private PostCategoryService _service = PostCategoryService.Instance;
-
         public List<FlutterPostCategoryModel> getCategories()
         {
-            var postCategories = _service.getPostCategoryAtPost();
+            var postCategories = base.getPostCategoryAtPost();
 
             if (postCategories != null && postCategories.Count > 0)
             {

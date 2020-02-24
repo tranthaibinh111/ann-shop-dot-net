@@ -11,11 +11,11 @@ namespace ann_shop_server.Controllers
     [RoutePrefix("api/v1/category")]
     public class CategoryPageController : ApiController
     {
-        private CategoryPageService _service;
+        private AngularCategoryService _service;
 
         public CategoryPageController()
         {
-            _service = CategoryPageService.Instance;
+            _service = ANNFactoryService.getInstance<AngularCategoryService>();
         }
 
         /// <summary>

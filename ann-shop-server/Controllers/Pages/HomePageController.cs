@@ -1,5 +1,5 @@
 ﻿using ann_shop_server.Models;
-using ann_shop_server.Services.Pages;
+using ann_shop_server.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,11 +14,11 @@ namespace ann_shop_server.Controllers
     [RoutePrefix("api/v1/home")]
     public class HomePageController : ApiController
     {
-        private HomePageService _service;
+        private AngularHomeService _service;
 
         public HomePageController()
         {
-            _service = HomePageService.Instance;
+            _service = ANNFactoryService.getInstance<AngularHomeService>();
         }
 
         private IHttpActionResult GetProducts(string slug, string[] slugList, PagingParameterModel pagingParameterModel)

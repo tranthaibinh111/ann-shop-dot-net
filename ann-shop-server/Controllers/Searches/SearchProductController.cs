@@ -1,5 +1,5 @@
 ﻿using ann_shop_server.Models;
-using ann_shop_server.Services.Searches;
+using ann_shop_server.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,16 +9,16 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
-namespace ann_shop_server.Controllers.Searches
+namespace ann_shop_server.Controllers
 {
     [RoutePrefix("api/v1/search")]
     public class SearchProductController : ApiController
     {
-        private SearchProductService _service;
+        private AngularSearchProductService _service;
 
         public SearchProductController()
         {
-            _service = SearchProductService.Instance;
+            _service = ANNFactoryService.getInstance<AngularSearchProductService>();
         }
 
         #region Modal tìm kiếm sản phẩm để đặt hàng

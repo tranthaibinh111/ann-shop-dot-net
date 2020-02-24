@@ -13,11 +13,13 @@ namespace ann_shop_server.Controllers.Flutter
     [RoutePrefix("api/flutter/coupon")]
     public class FlutterCouponController : ApiController
     {
+        private TokenService _token;
         private FlutterCouponService _service;
 
         public FlutterCouponController()
         {
-            _service = FlutterCouponService.Instance;
+            _token = ANNFactoryService.getInstance<TokenService>();
+            _service = ANNFactoryService.getInstance<FlutterCouponService>();
         }
 
         /// <summary>
@@ -30,7 +32,7 @@ namespace ann_shop_server.Controllers.Flutter
         {
             try
             {
-                var phone = _service.getPhoneByToken(this);
+                var phone = _token.getPhoneByToken(this);
                 return Ok<List<FlutterPromotionModel>>(_service.getPromotions(phone));
             }
             catch (Exception ex)
@@ -49,7 +51,7 @@ namespace ann_shop_server.Controllers.Flutter
         {
             try
             {
-                var phone = _service.getPhoneByToken(this);
+                var phone = _token.getPhoneByToken(this);
                 return Ok<List<FlutterCouponModel>>(_service.getCustomerCoupon(phone));
             }
             catch (Exception ex)
@@ -68,7 +70,7 @@ namespace ann_shop_server.Controllers.Flutter
         {
             try
             {
-                var phone = _service.getPhoneByToken(this);
+                var phone = _token.getPhoneByToken(this);
                 var message = String.Empty;
                 var coupon = _service.getCoupon(code, phone, out message);
 

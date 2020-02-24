@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class CategoryService : Service<CategoryService>
+    public class CategoryService : IANNService
     {
         #region Lấy danh sách dạnh mục con dựa theo danh mục cha
         /// <summary>

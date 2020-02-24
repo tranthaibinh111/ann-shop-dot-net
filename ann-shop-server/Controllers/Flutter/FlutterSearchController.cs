@@ -17,7 +17,7 @@ namespace ann_shop_server.Controllers
 
         public FlutterSearchController()
         {
-            _service = FlutterSearchService.Instance;
+            _service = ANNFactoryService.getInstance<FlutterSearchService>();
         }
 
         /// <summary>

@@ -17,7 +17,7 @@ namespace ann_shop_server.Controllers
 
         public FlutterBannerController()
         {
-            _service = FlutterBannerService.Instance;
+            _service = ANNFactoryService.getInstance<FlutterBannerService>();
         }
 
         /// <summary>

@@ -16,11 +16,13 @@ namespace ann_shop_server.Controllers.Flutter
     [RoutePrefix("api/flutter/upload")]
     public class FlutterUploadController : ApiController
     {
+        private TokenService _token;
         private RedisAppReviewEvidenceService _redisService;
 
         public FlutterUploadController()
         {
-            _redisService = RedisAppReviewEvidenceService.Instance;
+            _token = ANNFactoryService.getInstance<TokenService>();
+            _redisService = ANNFactoryService.getInstance<RedisAppReviewEvidenceService>();
         }
 
         /// <summary>
@@ -33,7 +35,7 @@ namespace ann_shop_server.Controllers.Flutter
         {
             try
             {
-                var phone = _redisService.getPhoneByToken(this);
+                var phone = _token.getPhoneByToken(this);
                 var evidence = _redisService.get(phone);
 
                 return Ok<RedisAppReviewEvidence>(evidence);
@@ -55,7 +57,7 @@ namespace ann_shop_server.Controllers.Flutter
         {
             try
             {
-                var phone = _redisService.getPhoneByToken(this);
+                var phone = _token.getPhoneByToken(this);
                 var data = new RedisAppReviewEvidence()
                 {
                     userPhone = phone,
@@ -87,7 +89,7 @@ namespace ann_shop_server.Controllers.Flutter
 
             try
             {
-                var phone = _redisService.getPhoneByToken(this);
+                var phone = _token.getPhoneByToken(this);
 
                 return Ok<RedisAppReviewEvidence>(_redisService.updateStatus(phone, status));
             }

@@ -8,7 +8,7 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class RedisAppReviewEvidenceService: Service<RedisAppReviewEvidenceService>
+    public class RedisAppReviewEvidenceService: IANNService
     {
         private const string APP_REVIEW_EVIDENCE = "app_review_evidence";
 

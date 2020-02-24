@@ -6,17 +6,15 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterCouponService : Service<FlutterCouponService>
+    public class FlutterCouponService : CouponService
     {
-        private CouponService _service = CouponService.Instance;
-
         /// <summary>
         /// Lấy danh sách các trường trình đăng chạy khuyến mãi
         /// </summary>
         /// <returns></returns>
         public List<FlutterPromotionModel> getPromotions(string phone)
         {
-            return _service.getCoupons(phone)
+            return base.getCoupons(phone)
                 .Select(x => new FlutterPromotionModel()
                 {
                     name = x.Name,
@@ -32,9 +30,9 @@ namespace ann_shop_server.Services
         /// </summary>
         /// <param name="phone"></param>
         /// <returns></returns>
-        public List<FlutterCouponModel> getCustomerCoupon(string phone)
+        public new List<FlutterCouponModel> getCustomerCoupon(string phone)
         {
-            var coupons = _service.getCustomerCoupon(phone);
+            var coupons = base.getCustomerCoupon(phone);
 
             if (coupons != null && coupons.Count > 0)
             {
@@ -75,7 +73,7 @@ namespace ann_shop_server.Services
 
             using (var con = new inventorymanagementEntities())
             {
-                var promotion = _service.getCoupon(code);
+                var promotion = base.getCoupon(code);
 
                 if (promotion == null)
                 {
@@ -84,13 +82,13 @@ namespace ann_shop_server.Services
                 }
 
                 // Kiểm tra xem khách hàng đã lấy mã coupon chưa
-                if (_service.existCustomerCoupon(promotion.ID, phone))
+                if (base.existCustomerCoupon(promotion.ID, phone))
                 {
                     message = "Bạn đã được cấp mã khuyến mãi rồi.";
                     return null;
                 }
 
-                if (!_service.checkExpired(promotion))
+                if (!base.checkExpired(promotion))
                 {
                     message = "Chương trình đã hết thời gian khuyến mãi";
                     return null;
@@ -109,7 +107,7 @@ namespace ann_shop_server.Services
                     CreatedDate = now,
                     ModifiedDate = now
                 };
-                _service.createCustomerCoupon(customerCoupon);
+                base.createCustomerCoupon(customerCoupon);
 
                 return new FlutterCouponModel()
                 {

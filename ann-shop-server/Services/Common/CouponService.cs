@@ -7,7 +7,7 @@ using System.Web;
 
 namespace ann_shop_server.Models
 {
-    public class CouponService: Service<CouponService>
+    public class CouponService: IANNService
     {
         /// <summary>
         /// Lấy các chương trình khuyến mãi còn hiệu lực

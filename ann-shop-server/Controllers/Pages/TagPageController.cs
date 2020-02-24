@@ -10,11 +10,11 @@ namespace ann_shop_server.Controllers.Pages
     [RoutePrefix("api/v1/tag")]
     public class TagPageController : ApiController
     {
-        private TagPageService _service;
+        private AngularTagService _service;
 
         public TagPageController()
         {
-            _service = TagPageService.Instance;
+            _service = ANNFactoryService.getInstance<AngularTagService>();
         }
 
         /// <summary>

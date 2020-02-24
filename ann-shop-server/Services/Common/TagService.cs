@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class TagService : Service<TagService>
+    public class TagService : IANNService
     {
         #region Lấy thông tin về tag
         /// <summary>
