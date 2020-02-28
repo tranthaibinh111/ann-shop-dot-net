@@ -36,6 +36,25 @@ namespace ann_shop_server.Services
             //}
             //#endregion
 
+            #region Mỹ phẩm
+            var block11 = _category.createCategoryBlockProduct("my-pham");
+            if (block11 != null)
+            {
+                blockProducts.Add(new FlutterBlockProductModel()
+                {
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = "category",
+                    //    name = "Áo thun nam",
+                    //    actionValue = "ao-thun-nam",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                    //    createdDate = DateTime.Now
+                    //},
+                    category = block11
+                });
+            }
+            #endregion
+
             #region Đồ bộ nữ
             var block3 = _category.createCategoryBlockProduct("do-bo-nu");
             if (block3 != null)
@@ -223,25 +242,6 @@ namespace ann_shop_server.Services
                     //    createdDate = DateTime.Now
                     //},
                     category = block10
-                });
-            }
-            #endregion
-
-            #region Mỹ phẩm
-            var block11 = _category.createCategoryBlockProduct("my-pham");
-            if (block11 != null)
-            {
-                blockProducts.Add(new FlutterBlockProductModel()
-                {
-                    //banner = new FlutterBannerModel()
-                    //{
-                    //    action = "category",
-                    //    name = "Áo thun nam",
-                    //    actionValue = "ao-thun-nam",
-                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                    //    createdDate = DateTime.Now
-                    //},
-                    category = block11
                 });
             }
             #endregion
