@@ -28,7 +28,18 @@ namespace ann_shop_server.Controllers
         [Route("~/api/flutter/home/blocks")]
         public IHttpActionResult GetHomeBlocks()
         {
-            return Ok<List<FlutterBlockProductModel>>(_service.getHomeBlocks()); ;
+            var homeBlocks = _service.getHomeBlocks();
+
+            if (homeBlocks != null)
+            {
+                foreach (var block in homeBlocks)
+                {
+                    if (block.banner != null && block.banner.action == FlutterPageNavigation.ViewMore)
+                        block.banner.actionValue = "post/" + block.banner.actionValue;
+                }
+            }
+
+            return Ok<List<FlutterBlockProductModel>>(homeBlocks); ;
         }
     }
 }

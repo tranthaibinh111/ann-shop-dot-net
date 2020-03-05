@@ -367,6 +367,7 @@ namespace ann_shop_server.Services
                         new FlutterDiscountModel() { name = "Từ 70 cái", price = data.regularPrice - 7000},
                         new FlutterDiscountModel() { name = "Từ 100 cái", price = data.regularPrice - 10000},
                         new FlutterDiscountModel() { name = "Từ 200 cái", price = data.regularPrice - 12000},
+                        new FlutterDiscountModel() { name = "Từ 500 cái", price = data.regularPrice - 15000},
                     },
                     content = data.content,
                 };

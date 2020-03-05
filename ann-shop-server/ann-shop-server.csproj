@@ -342,6 +342,7 @@
     <Compile Include="Models\Common\NotificationCategory\NotificationCategoryModel.cs" />
     <Compile Include="Models\Common\Notification\NotificationKind.cs" />
     <Compile Include="Models\Common\PostCategory\PostCategoryModel.cs" />
+    <Compile Include="Models\Flutter\FlutterBanner\FlutterBannerProductPosition.cs" />
     <Compile Include="Models\Flutter\FlutterPageNavigation.cs" />
     <Compile Include="Models\GroupNotifyPromotion.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>

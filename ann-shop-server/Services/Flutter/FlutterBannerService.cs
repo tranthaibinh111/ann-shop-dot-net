@@ -26,6 +26,13 @@ namespace ann_shop_server.Services
                 new FlutterBannerModel()
                 {
                     action = "category",
+                    name = "Mỹ phẩm",
+                    actionValue = "my-pham",
+                    image = "https://khohangsiann.com/wp-content/uploads/si-my-pham-lam-dep.png"
+                },
+                new FlutterBannerModel()
+                {
+                    action = "category",
                     name = "Nước hoa",
                     actionValue = "nuoc-hoa",
                     image = "https://khohangsiann.com/wp-content/uploads/si-nuoc-hoa-gia-re-1.png"
@@ -111,17 +118,10 @@ namespace ann_shop_server.Services
             {
                 new FlutterBannerModel()
                 {
-                    action = "category",
-                    name = "Áo thun cá sấu",
-                    actionValue ="ao-thun-ca-sau",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png"
-                },
-                new FlutterBannerModel()
-                {
-                    action = "category",
-                    name = "Đồ bộ nữ",
-                    actionValue = "do-bo-nu",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-nuoc-hoa-gia-re-1.png"
+                    action = FlutterPageNavigation.ViewMore,
+                    name = "Sỉ gel rửa tay khô 24h",
+                    actionValue = "si-gel-rua-tay-kho-24h",
+                    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
                 },
             };
         }
@@ -137,23 +137,50 @@ namespace ann_shop_server.Services
             if (String.IsNullOrEmpty(slug))
                 return null;
 
-            return new List<FlutterBannerModel>()
+            var header = new List<FlutterBannerModel>()
             {
                 new FlutterBannerModel()
                 {
                     action = "category",
-                    name = position == "header" ? "Áo thun nam" : "Váy đầm",
-                    actionValue = position == "header" ? "ao-thun-nam" : "vay-dam",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png"
+                    name = "Mỹ phẩm",
+                    actionValue = "my-pham",
+                    image = "https://khohangsiann.com/wp-content/uploads/si-my-pham-lam-dep.png",
                 },
                 new FlutterBannerModel()
                 {
+                    action = FlutterPageNavigation.ViewMore,
+                    name = "Sỉ gel rửa tay khô 24h",
+                    actionValue = "si-gel-rua-tay-kho-24h",
+                    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
+                },
+            };
+
+            var footer = new List<FlutterBannerModel>()
+            {
+                new FlutterBannerModel()
+                {
                     action = "category",
-                    name = position == "header" ? "Quần jean nam" : "Quần jean nữ",
-                    actionValue = position == "header" ? "quan-jeans-nam" : "quan-jeans-nu",
+                    name = "Nước hoa",
+                    actionValue = "nuoc-hoa",
                     image = "https://khohangsiann.com/wp-content/uploads/si-nuoc-hoa-gia-re-1.png"
                 },
             };
+
+            if (String.IsNullOrEmpty(position))
+            {
+                return header.Union(footer).ToList();
+            }
+            else
+            {
+                if (position == FlutterBannerProductPosition.Header)
+                {
+                    return header;
+                }
+                else
+                {
+                    return footer;
+                }
+            }
         }
         #endregion
     }
