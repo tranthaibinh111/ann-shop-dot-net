@@ -21,37 +21,37 @@ namespace ann_shop_server.Services
             if (womenOutfit == null)
                 return null;
 
-            // Đồ bộ nữ có sẳn
-            var stockIn = (FlutterCategoryModel)womenOutfit.Clone();
-            stockIn.name = "Đồ bộ nữ có sẳn";
-            stockIn.icon = "/assets/images/categories/new-product.png";
-            stockIn.description = "Hàng có sẳn ở kho";
-            stockIn.filter.productBadge = (int)ProductBadge.stockIn;
+            //// Đồ bộ nữ có sẵn
+            //var stockIn = (FlutterCategoryModel)womenOutfit.Clone();
+            //stockIn.name = "Đồ bộ nữ có sẵn";
+            //stockIn.icon = "/assets/images/categories/new-product.png";
+            //stockIn.description = "Hàng có sẵn ở kho";
+            //stockIn.filter.productBadge = (int)ProductBadge.stockIn;
 
-            // Đồ bộ nữ order
-            var order = (FlutterCategoryModel)womenOutfit.Clone();
-            order.name = "Đồ bộ nữ order";
-            order.icon = "/assets/images/categories/order-product.png";
-            order.description = "Không có sẳn ở kho";
-            order.filter.productBadge = (int)ProductBadge.order;
+            //// Đồ bộ nữ order
+            //var order = (FlutterCategoryModel)womenOutfit.Clone();
+            //order.name = "Đồ bộ nữ order";
+            //order.icon = "/assets/images/categories/order-product.png";
+            //order.description = "Không có sẵn ở kho";
+            //order.filter.productBadge = (int)ProductBadge.order;
 
-            // Đồ bộ nữ sale
-            var sale = (FlutterCategoryModel)womenOutfit.Clone();
-            sale.name = "Đồ bộ nữ sale";
-            sale.icon = "/assets/images/categories/sale-product.png";
-            sale.description = "Tất cả đồ bộ nữ sale";
-            sale.filter.productBadge = (int)ProductBadge.sale;
+            //// Đồ bộ nữ sale
+            //var sale = (FlutterCategoryModel)womenOutfit.Clone();
+            //sale.name = "Đồ bộ nữ sale";
+            //sale.icon = "/assets/images/categories/sale-product.png";
+            //sale.description = "Tất cả đồ bộ nữ sale";
+            //sale.filter.productBadge = (int)ProductBadge.sale;
 
             // Đồ bộ sỉ dưới 100k
             var price100 = (FlutterCategoryModel)womenOutfit.Clone();
-            price100.name = "Đồ bộ dưới 100k";
+            price100.name = "Giá sỉ dưới 100k";
             price100.icon = "/assets/images/categories/price-filter.png";
             price100.description = String.Empty;
             price100.filter.priceMax = 99000;
 
             // Đồ bộ sỉ từ 100k - 125k
             var price100_125 = (FlutterCategoryModel)womenOutfit.Clone();
-            price100_125.name = "Đồ bộ từ 100k - 125k";
+            price100_125.name = "Giá sỉ từ 100k - 125k";
             price100_125.icon = "/assets/images/categories/price-filter.png";
             price100_125.description = String.Empty;
             price100_125.filter.priceMin = 100000;
@@ -59,7 +59,7 @@ namespace ann_shop_server.Services
 
             // Đồ bộ sỉ từ 125k - 150k
             var price125_150 = (FlutterCategoryModel)womenOutfit.Clone();
-            price125_150.name = "Đồ bộ từ 125k - 150k";
+            price125_150.name = "Giá sỉ từ 125k - 150k";
             price125_150.icon = "/assets/images/categories/price-filter.png";
             price125_150.description = String.Empty;
             price125_150.filter.priceMin = 126000;
@@ -67,19 +67,34 @@ namespace ann_shop_server.Services
 
             // Đồ bộ sỉ trên 150k
             var price150 = (FlutterCategoryModel)womenOutfit.Clone();
-            price150.name = "Đồ bộ trên 150k";
+            price150.name = "Giá sỉ trên 150k";
             price150.icon = "/assets/images/categories/price-filter.png";
             price150.description = String.Empty;
             price150.filter.priceMin = 151000;
 
             womenOutfit.children = new List<FlutterCategoryModel>()
             {
-                stockIn,
-                order,
-                sale,
-                createCategoryByTag("Đồ bộ quần dài", "/assets/images/categories/tags-filter.png", "do-bo-quan-dai"),
-                createCategoryByTag("Đồ bộ quần lửng", "/assets/images/categories/tags-filter.png", "do-bo-quan-lung"),
-                createCategoryByTag("Đồ bộ quần đùi", "/assets/images/categories/tags-filter.png", "do-bo-quan-dui"),
+                //stockIn,
+                //order,
+                //sale,
+                createCategoryByTag("Quần dài", "/assets/images/categories/tags-filter.png", "do-bo-quan-dai"),
+                createCategoryByTag("Quần lửng", "/assets/images/categories/tags-filter.png", "do-bo-quan-lung"),
+                createCategoryByTag("Quần đùi", "/assets/images/categories/tags-filter.png", "do-bo-quan-dui"),
+                createCategoryByTag("Quần ống rộng", "/assets/images/categories/tags-filter.png", "do-bo-ong-rong"),
+                createCategoryByTag("Jumpsuit", "/assets/images/categories/tags-filter.png", "do-bo-jumpsuit"),
+                createCategoryByTag("Pijama", "/assets/images/categories/tags-filter.png", "do-bo-pijama"),
+                createCategoryByTag("Thun cotton", "/assets/images/categories/tags-filter.png", "do-bo-thun-cotton"),
+                createCategoryByTag("Thun dẻo", "/assets/images/categories/tags-filter.png", "do-bo-thun-deo"),
+                createCategoryByTag("Vải lụa", "/assets/images/categories/tags-filter.png", "do-bo-lua"),
+                createCategoryByTag("Vải tole", "/assets/images/categories/tags-filter.png", "do-bo-tole"),
+                createCategoryByTag("Vải kate", "/assets/images/categories/tags-filter.png", "do-bo-kate"),
+                createCategoryByTag("Vải voan", "/assets/images/categories/tags-filter.png", "do-bo-voan"),
+                createCategoryByTag("Vải satin", "/assets/images/categories/tags-filter.png", "do-bo-satin"),
+                createCategoryByTag("Phi bóng", "/assets/images/categories/tags-filter.png", "do-bo-phi-bong"),
+                createCategoryByTag("Vải đũi", "/assets/images/categories/tags-filter.png", "do-bo-dui"),
+                createCategoryByTag("Vải xô", "/assets/images/categories/tags-filter.png", "do-bo-xo"),
+                createCategoryByTag("Vải gấm", "/assets/images/categories/tags-filter.png", "do-bo-gam"),
+                createCategoryByTag("Thun da cá", "/assets/images/categories/tags-filter.png", "do-bo-da-ca"),
                 price100,
                 price100_125,
                 price125_150,
@@ -99,54 +114,67 @@ namespace ann_shop_server.Services
             var womenDresses = createCategoryBySlug("vay-dam");
             womenDresses.name = "Váy đầm";
 
-            // Váy đầm có sẵn
-            var stockIn = (FlutterCategoryModel)womenDresses.Clone();
-            stockIn.name = "Đầm có sẵn";
-            stockIn.icon = "/assets/images/categories/new-product.png";
-            stockIn.description = "Hàng có sẳn ở kho";
-            stockIn.filter.productBadge = (int)ProductBadge.stockIn;
+            //// Váy đầm có sẵn
+            //var stockIn = (FlutterCategoryModel)womenDresses.Clone();
+            //stockIn.name = "Đầm có sẵn";
+            //stockIn.icon = "/assets/images/categories/new-product.png";
+            //stockIn.description = "Hàng có sẵn ở kho";
+            //stockIn.filter.productBadge = (int)ProductBadge.stockIn;
 
-            // Váy đầm order
-            var order = (FlutterCategoryModel)womenDresses.Clone();
-            order.name = "Đầm order";
-            order.icon = "/assets/images/categories/order-product.png";
-            order.description = "Không có sẳn ở kho";
-            order.filter.productBadge = (int)ProductBadge.order;
+            //// Váy đầm order
+            //var order = (FlutterCategoryModel)womenDresses.Clone();
+            //order.name = "Đầm order";
+            //order.icon = "/assets/images/categories/order-product.png";
+            //order.description = "Không có sẵn ở kho";
+            //order.filter.productBadge = (int)ProductBadge.order;
 
-            // Váy đầm sale
-            var sale = (FlutterCategoryModel)womenDresses.Clone();
-            sale.name = "Đầm sale";
-            sale.icon = "/assets/images/categories/sale-product.png";
-            sale.description = "Tất cả váy đầm sale";
-            sale.filter.productBadge = (int)ProductBadge.sale;
+            //// Váy đầm sale
+            //var sale = (FlutterCategoryModel)womenDresses.Clone();
+            //sale.name = "Đầm sale";
+            //sale.icon = "/assets/images/categories/sale-product.png";
+            //sale.description = "Tất cả váy đầm sale";
+            //sale.filter.productBadge = (int)ProductBadge.sale;
 
             // Váy đầm sỉ dưới 125k
             var price125 = (FlutterCategoryModel)womenDresses.Clone();
-            price125.name = "Đầm dưới 125k";
+            price125.name = "Giá sỉ dưới 120k";
             price125.icon = "/assets/images/categories/price-filter.png";
             price125.description = String.Empty;
-            price125.filter.priceMax = 124000;
+            price125.filter.priceMax = 119000;
 
             // Váy đầm sỉ từ 125k - 150k
             var price125_150 = (FlutterCategoryModel)womenDresses.Clone();
-            price125_150.name = "Đầm từ 125k - 150k";
+            price125_150.name = "Giá sỉ từ 120k - 150k";
             price125_150.icon = "/assets/images/categories/price-filter.png";
             price125_150.description = String.Empty;
-            price125_150.filter.priceMin = 125000;
+            price125_150.filter.priceMin = 120000;
             price125_150.filter.priceMax = 150000;
 
             // Váy đầm sỉ trên 150k
             var price150 = (FlutterCategoryModel)womenDresses.Clone();
-            price150.name = "Đầm trên 150k";
+            price150.name = "Giá sỉ trên 150k";
             price150.icon = "/assets/images/categories/price-filter.png";
             price150.description = String.Empty;
             price150.filter.priceMin = 151000;
 
             womenDresses.children = new List<FlutterCategoryModel>()
             {
-                stockIn,
-                order,
-                sale,
+                //stockIn,
+                //order,
+                //sale,
+                createCategoryByTag("Đầm ôm body", "/assets/images/categories/tags-filter.png", "dam-body"),
+                createCategoryByTag("Đầm suông", "/assets/images/categories/tags-filter.png", "dam-suong"),
+                createCategoryByTag("Đầm maxi", "/assets/images/categories/tags-filter.png", "dam-maxi"),
+                createCategoryByTag("Đầm sơ mi", "/assets/images/categories/tags-filter.png", "dam-so-mi"),
+                createCategoryByTag("Vải thun", "/assets/images/categories/tags-filter.png", "dam-thun"),
+                createCategoryByTag("Vải voan", "/assets/images/categories/tags-filter.png", "dam-voan"),
+                createCategoryByTag("Tuyết mưa", "/assets/images/categories/tags-filter.png", "dam-tuyet-mua"),
+                createCategoryByTag("Vải lụa", "/assets/images/categories/tags-filter.png", "dam-lua"),
+                createCategoryByTag("Vải phi", "/assets/images/categories/tags-filter.png", "dam-phi"),
+                createCategoryByTag("Vải kate", "/assets/images/categories/tags-filter.png", "dam-kate"),
+                createCategoryByTag("Vải gấm", "/assets/images/categories/tags-filter.png", "dam-gam"),
+                createCategoryByTag("Vải satin", "/assets/images/categories/tags-filter.png", "dam-satin"),
+                createCategoryByTag("Vải nhung", "/assets/images/categories/tags-filter.png", "dam-nhung"),
                 price125,
                 price125_150,
                 price150
@@ -211,18 +239,18 @@ namespace ann_shop_server.Services
             womenClothes.name = "Quần áo nữ";
 
             // Quần áo nữ có sẵn
-            var stockIn = (FlutterCategoryModel)womenClothes.Clone();
-            stockIn.name = "Quần áo nữ có sẵn";
-            stockIn.icon = "/assets/images/categories/new-product.png";
-            stockIn.description = String.Empty;
-            stockIn.filter.productBadge = (int)ProductBadge.stockIn;
+            //var stockIn = (FlutterCategoryModel)womenClothes.Clone();
+            //stockIn.name = "Quần áo nữ có sẵn";
+            //stockIn.icon = "/assets/images/categories/new-product.png";
+            //stockIn.description = String.Empty;
+            //stockIn.filter.productBadge = (int)ProductBadge.stockIn;
 
             // Quần áo nữ order
-            var order = (FlutterCategoryModel)womenClothes.Clone();
-            order.name = "Quần áo nữ order";
-            order.icon = "/assets/images/categories/order-product.png";
-            order.description = String.Empty;
-            order.filter.productBadge = (int)ProductBadge.order;
+            //var order = (FlutterCategoryModel)womenClothes.Clone();
+            //order.name = "Quần áo nữ order";
+            //order.icon = "/assets/images/categories/order-product.png";
+            //order.description = String.Empty;
+            //order.filter.productBadge = (int)ProductBadge.order;
 
             // Quần áo nữ sale
             var sale = (FlutterCategoryModel)womenClothes.Clone();
@@ -259,9 +287,9 @@ namespace ann_shop_server.Services
                 })
             );
             // Quần áo nữ có sẵn
-            womenClothes.children.Add(stockIn);
-            // Quần áo nữ order
-            womenClothes.children.Add(order);
+            //womenClothes.children.Add(stockIn);
+            //// Quần áo nữ order
+            //womenClothes.children.Add(order);
             // Quần áo nữ sale
             womenClothes.children.Add(sale);
 
@@ -281,25 +309,19 @@ namespace ann_shop_server.Services
             if (menTShirt == null)
                 return null;
 
-            // Áo thun nam có sẳn
+            // Áo thun nam có sẵn
             var stockIn = (FlutterCategoryModel)menTShirt.Clone();
-            stockIn.name = "Áo thun nam có sẳn";
+            stockIn.name = "Áo thun có sẵn";
             stockIn.icon = "/assets/images/categories/new-product.png";
-            stockIn.description = "Hàng có sẳn ở kho";
+            stockIn.description = "Hàng có sẵn ở kho";
             stockIn.filter.productBadge = (int)ProductBadge.stockIn;
 
             // Áo thun nam order
             var order = (FlutterCategoryModel)menTShirt.Clone();
-            order.name = "Áo thun nam order";
+            order.name = "Áo thun order";
             order.icon = "/assets/images/categories/order-product.png";
-            order.description = "Không có sẳn ở kho";
+            order.description = "Không có sẵn ở kho";
             order.filter.productBadge = (int)ProductBadge.order;
-
-            menTShirt.children = new List<FlutterCategoryModel>()
-            {
-                stockIn,
-                order
-            };
 
             menTShirt.children.AddRange(
                 createCategoryBySlugs(new List<string>() {
@@ -308,6 +330,17 @@ namespace ann_shop_server.Services
                     "ao-thun-soc-ngang"
                 })
             );
+
+            menTShirt.children = new List<FlutterCategoryModel>()
+            {
+                stockIn,
+                order,
+                createCategoryByTag("Áo thun có cổ", "/assets/images/categories/tags-filter.png", "ao-thun-nam-co-co"),
+                createCategoryByTag("Áo thun cổ tròn", "/assets/images/categories/tags-filter.png", "ao-thun-nam-co-tron"),
+                createCategoryByTag("Áo thun ba lỗ", "/assets/images/categories/tags-filter.png", "ao-thun-nam-ba-lo"),
+            };
+
+            
 
             return menTShirt;
         }
@@ -517,7 +550,7 @@ namespace ann_shop_server.Services
             {
                 name = "Hàng có sẵn mới về",
                 icon = "/assets/images/categories/new-product.png",
-                description = "Hàng có sẳn ở kho",
+                description = "Hàng có sẵn ở kho",
                 filter = new FlutterProductFilterModel() { productBadge = (int)ProductBadge.stockIn, productSort = (int)ProductSortKind.ProductNew }
             };
 
@@ -529,7 +562,7 @@ namespace ann_shop_server.Services
             {
                 name = "Hàng order mới về",
                 icon = "/assets/images/categories/order-product.png",
-                description = "Không có sẳn ở kho",
+                description = "Không có sẵn ở kho",
                 filter = new FlutterProductFilterModel() { productBadge = (int)ProductBadge.order, productSort = (int)ProductSortKind.ProductNew }
             };
 
