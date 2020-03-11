@@ -317,9 +317,9 @@ namespace ann_shop_server.Services
         /// </summary>
         /// <param name="slug"></param>
         /// <returns></returns>
-        public new FlutterProductModel getProductByCategory(string slug)
+        public new FlutterProductModel getProductBySlug(string slug)
         {
-            var data = base.getProductByCategory(slug);
+            var data = base.getProductBySlug(slug);
             
             if (data != null)
             {

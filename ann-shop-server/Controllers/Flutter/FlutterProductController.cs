@@ -71,9 +71,9 @@ namespace ann_shop_server.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{slug}")]
-        public IHttpActionResult GetProductByCategory(string slug)
+        public IHttpActionResult GetProductBySlug(string slug)
         {
-            return Ok<FlutterProductModel>(_service.getProductByCategory(slug));
+            return Ok<FlutterProductModel>(_service.getProductBySlug(slug));
         }
 
         /// <summary>

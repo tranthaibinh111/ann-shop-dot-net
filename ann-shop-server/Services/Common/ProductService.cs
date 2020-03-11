@@ -492,7 +492,7 @@ namespace ann_shop_server.Services
         /// </summary>
         /// <param name="slug"></param>
         /// <returns></returns>
-        public ProductModel getProductByCategory(string slug)
+        public ProductModel getProductBySlug(string slug)
         {
             using (var con = new inventorymanagementEntities())
             {
@@ -581,16 +581,10 @@ namespace ann_shop_server.Services
                             images = images,
                             colors = colors,
                             sizes = sizes,
-                            badge = parent.pro.oldPrice > 0 ? ProductBadge.sale :
-                                (
-                                    parent.pro.preOrder ?
-                                    ProductBadge.order :
-                                    (
-                                        child == null ?
-                                            ProductBadge.stockOut :
-                                            (child.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
-                                    )
-                                ),
+                            badge = child == null ? ProductBadge.warehousing :
+                                (parent.pro.oldPrice > 0 ? ProductBadge.sale :
+                                    (parent.pro.preOrder ? ProductBadge.order :
+                                        (child.availability ? ProductBadge.stockIn : ProductBadge.stockOut))),
                             tags = tags
                         }
                     )

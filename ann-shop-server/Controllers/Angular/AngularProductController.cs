@@ -28,9 +28,9 @@ namespace ann_shop_server.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{slug}")]
-        public IHttpActionResult GetProductByCategory(string slug)
+        public IHttpActionResult GetProductBySlug(string slug)
         {
-            var prod = _service.getProductByCategory(slug);
+            var prod = _service.getProductBySlug(slug);
 
             if (prod != null)
             {
