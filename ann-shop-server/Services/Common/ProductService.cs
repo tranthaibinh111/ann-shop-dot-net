@@ -133,7 +133,8 @@ namespace ann_shop_server.Services
             using (var con = new inventorymanagementEntities())
             {
                 var source = con.tbl_Product
-                    .Select(x => new {
+                    .Select(x => new
+                    {
                         categoryID = x.CategoryID.HasValue ? x.CategoryID.Value : 0,
                         productID = x.ID,
                         sku = x.ProductSKU,
@@ -300,10 +301,12 @@ namespace ann_shop_server.Services
                 {
                     data = data.Where(x =>
                         x.product.preOrder ||
+                        x.stock == null ||
                         (
                             x.stock != null &&
                             x.stock.quantity >= (x.product.categoryID == 44 ? 1 : 3)
                         )
+
                     );
                 }
                 #endregion
@@ -348,12 +351,10 @@ namespace ann_shop_server.Services
                         name = x.product.title,
                         slug = x.product.slug,
                         materials = x.product.materials,
-                        badge = x.product.oldPrice > 0 ? ProductBadge.sale :
-                            (
-                                x.product.preOrder ? ProductBadge.order :
-                                   (x.stock != null && x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
-                            )
-                        ,
+                        badge = x.stock == null ? ProductBadge.warehousing :
+                            (x.product.oldPrice > 0 ? ProductBadge.sale :
+                                (x.product.preOrder ? ProductBadge.order :
+                                    (x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut))),
                         availability = x.stock != null ? x.stock.availability : x.product.availability,
                         thumbnails = Thumbnail.getALL(x.product.avatar),
                         regularPrice = x.product.regularPrice,

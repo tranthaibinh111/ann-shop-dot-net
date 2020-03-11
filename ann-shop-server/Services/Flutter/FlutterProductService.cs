@@ -228,6 +228,7 @@ namespace ann_shop_server.Services
                 {
                     data = data.Where(x =>
                         x.product.preOrder ||
+                        x.stock == null ||
                         (
                             x.stock != null &&
                             x.stock.quantity >= (x.product.categoryID == 44 ? 1 : 5)
@@ -276,12 +277,10 @@ namespace ann_shop_server.Services
                         name = x.product.title,
                         slug = x.product.slug,
                         materials = x.product.materials,
-                        badge = x.product.oldPrice > 0 ? ProductBadge.sale :
-                            (
-                                x.product.preOrder ? ProductBadge.order :
-                                   (x.stock != null && x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut)
-                            )
-                        ,
+                        badge = x.stock == null ? ProductBadge.warehousing :
+                            (x.product.oldPrice > 0 ? ProductBadge.sale :
+                                (x.product.preOrder ? ProductBadge.order :
+                                    (x.stock.availability ? ProductBadge.stockIn : ProductBadge.stockOut))),
                         availability = x.stock != null ? x.stock.availability : x.product.availability,
                         avatar = Thumbnail.getURL(x.product.avatar, Thumbnail.Size.Small),
                         

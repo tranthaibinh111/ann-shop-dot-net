@@ -37,7 +37,7 @@ namespace ann_shop_server.Services
             //#endregion
 
             #region Tag Hot
-            var block14 = _category.createCategoryByTag("Đang hot", String.Empty, "hot");
+            var block14 = _category.createCategoryByTag("Đang hot...", String.Empty, "hot");
             if (block14 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
