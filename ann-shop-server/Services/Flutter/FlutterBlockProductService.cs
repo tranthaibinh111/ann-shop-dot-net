@@ -42,14 +42,14 @@ namespace ann_shop_server.Services
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
-                    //banner = new FlutterBannerModel()
-                    //{
-                    //    action = "category",
-                    //    name = "Mỹ phẩm",
-                    //    actionValue = "my-pham",
-                    //    image = "https://khohangsiann.com/wp-content/uploads/si-my-pham-lam-dep.png",
-                    //    createdDate = DateTime.Now
-                    //},
+                    banner = new FlutterBannerModel()
+                    {
+                        action = FlutterPageNavigation.ViewMore,
+                        name = "Sỉ khẩu trang vải thun",
+                        actionValue = "si-khau-trang-vai",
+                        image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang.jpg",
+                        createdDate = DateTime.Now
+                    },
                     category = block14
                 });
             }
