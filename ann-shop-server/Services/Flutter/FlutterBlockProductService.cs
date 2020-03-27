@@ -37,27 +37,46 @@ namespace ann_shop_server.Services
             //#endregion
 
             #region Tag Hot
-            var block14 = _category.createCategoryByTag("Đang hot...", String.Empty, "hot");
-            if (block14 != null)
+            var block1 = _category.createCategoryByTag("Đang hot...", String.Empty, "hot");
+            if (block1 != null)
+            {
+                blockProducts.Add(new FlutterBlockProductModel()
+                {
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = FlutterPageNavigation.ViewMore,
+                    //    name = "Sỉ khẩu trang vải",
+                    //    actionValue = "si-khau-trang-vai",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg",
+                    //    createdDate = DateTime.Now
+                    //},
+                    category = block1
+                });
+            }
+            #endregion
+
+            #region Khẩu trang
+            var block2 = _category.createCategoryBlockProduct("khau-trang");
+            if (block2 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
                     banner = new FlutterBannerModel()
                     {
                         action = FlutterPageNavigation.ViewMore,
-                        name = "Sỉ khẩu trang vải thun",
+                        name = "Sỉ khẩu trang vải",
                         actionValue = "si-khau-trang-vai",
-                        image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang.jpg",
+                        image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg",
                         createdDate = DateTime.Now
                     },
-                    category = block14
+                    category = block2
                 });
             }
             #endregion
 
             #region Mỹ phẩm
-            var block11 = _category.createCategoryBlockProduct("my-pham");
-            if (block11 != null)
+            var block3 = _category.createCategoryBlockProduct("my-pham");
+            if (block3 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
@@ -69,14 +88,14 @@ namespace ann_shop_server.Services
                         image = "https://khohangsiann.com/wp-content/uploads/si-my-pham-lam-dep.png",
                         createdDate = DateTime.Now
                     },
-                    category = block11
+                    category = block3
                 });
             }
             #endregion
 
             #region Đồ bộ nữ
-            var block3 = _category.getWomenOutfit();
-            if (block3 != null)
+            var block4 = _category.getWomenOutfit();
+            if (block4 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
@@ -88,16 +107,16 @@ namespace ann_shop_server.Services
                     //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                     //    createdDate = DateTime.Now
                     //},
-                    category = block3
+                    category = block4
                 });
             }
             #endregion
 
             #region Váy đầm
-            var block2 = _category.getWomenDresses();
-            if (block2 != null)
+            var block5 = _category.getWomenDresses();
+            if (block5 != null)
             {
-                block2.name = "Váy đầm";
+                block5.name = "Váy đầm";
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
                     //banner = new FlutterBannerModel()
@@ -108,7 +127,7 @@ namespace ann_shop_server.Services
                     //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                     //    createdDate = DateTime.Now
                     //},
-                    category = block2
+                    category = block5
                 });
             }
             #endregion
@@ -133,7 +152,7 @@ namespace ann_shop_server.Services
             //#endregion
 
             #region Áo thun nữ
-            var block12 = _category.getWomenTShirts();
+            var block6 = _category.getWomenTShirts();
             blockProducts.Add(new FlutterBlockProductModel()
             {
                 //banner = new FlutterBannerModel()
@@ -144,12 +163,12 @@ namespace ann_shop_server.Services
                 //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                 //    createdDate = DateTime.Now
                 //},
-                category = block12
+                category = block6
             });
             #endregion
 
             #region Áo kiểu nữ - Sơ mi nữ
-            var block5 = _category.createCategoryBySlugs(
+            var block7 = _category.createCategoryBySlugs(
                 "Áo kiểu nữ - Sơ mi nữ",
                 new List<string>() { "ao-kieu-nu", "ao-so-mi-nu" }
             );
@@ -163,13 +182,13 @@ namespace ann_shop_server.Services
                 //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                 //    createdDate = DateTime.Now
                 //},
-                category = block5
+                category = block7
             });
             #endregion
 
             #region Áo khoác nữ
-            var block6 = _category.createCategoryBlockProduct("ao-khoac-nu");
-            if (block6 != null)
+            var block8 = _category.createCategoryBlockProduct("ao-khoac-nu");
+            if (block8 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
@@ -181,13 +200,13 @@ namespace ann_shop_server.Services
                     //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                     //    createdDate = DateTime.Now
                     //},
-                    category = block6
+                    category = block8
                 });
             }
             #endregion
 
             #region Quần nữ - Đồ lót nữ
-            var block7 = _category.createCategoryBySlugs(
+            var block9 = _category.createCategoryBySlugs(
                 "Quần nữ - Đồ lót nữ",
                 new List<string>() { "quan-nu", "quan-jeans-nu", "do-lot-nu" }
             );
@@ -201,13 +220,13 @@ namespace ann_shop_server.Services
                 //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                 //    createdDate = DateTime.Now
                 //},
-                category = block7
+                category = block9
             });
             #endregion
 
             #region Áo thun nam
-            var block8 = _category.getMenTShirt();
-            if (block8 != null)
+            var block10 = _category.getMenTShirt();
+            if (block10 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
@@ -219,13 +238,13 @@ namespace ann_shop_server.Services
                         image = "https://khohangsiann.com/banner/xuong-may-ao-thun-dong-phuc-gia-re-ann.jpg",
                         createdDate = DateTime.Now
                     },
-                    category = block8
+                    category = block10
                 });
             }
             #endregion
 
             #region Áo khoác nam - Sơ mi nam
-            var block13 = _category.createCategoryBySlugs(
+            var block11 = _category.createCategoryBySlugs(
                 "Áo khoác nam - Sơ mi nam",
                 new List<string>() { "ao-khoac-nam", "ao-so-mi-nam" }
             );
@@ -239,12 +258,12 @@ namespace ann_shop_server.Services
                 //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                 //    createdDate = DateTime.Now
                 //},
-                category = block13
+                category = block11
             });
             #endregion
 
             #region Quần nam - Quần lót nam
-            var block9 = _category.createCategoryBySlugs(
+            var block12 = _category.createCategoryBySlugs(
                 "Quần nam - Quần lót nam",
                 new List<string>() { "quan-nam", "quan-jeans-nam", "quan-lot-nam" }
             );
@@ -258,13 +277,13 @@ namespace ann_shop_server.Services
                 //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
                 //    createdDate = DateTime.Now
                 //},
-                category = block9
+                category = block12
             });
             #endregion
 
             #region Nước hoa
-            var block10 = _category.getPerfume();
-            if (block10 != null)
+            var block13 = _category.getPerfume();
+            if (block13 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
@@ -276,7 +295,7 @@ namespace ann_shop_server.Services
                         image = "https://khohangsiann.com/wp-content/uploads/si-nuoc-hoa-gia-re-1.png",
                         createdDate = DateTime.Now
                     },
-                    category = block10
+                    category = block13
                 });
             }
             #endregion

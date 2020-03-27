@@ -93,7 +93,7 @@ namespace ann_shop_server.Services
                     .Where(x => x.AtHome == true)
                     .OrderByDescending(x => x.ModifiedDate)
                     .Skip(0)
-                    .Take(3)
+                    .Take(4)
                     .ToList();
 
                 return homeNews;

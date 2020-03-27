@@ -388,6 +388,8 @@ namespace ann_shop_server.Services
         {
             using (var con = new inventorymanagementEntities())
             {
+                string[] zaloShop = { "0918567409", "0913268406", "0936786404", "0918569400" };
+
                 var product = con.tbl_Product.Where(x => x.ID == productID).FirstOrDefault();
 
                 if (product == null)
@@ -398,24 +400,33 @@ namespace ann_shop_server.Services
 
                 if (setting.showSKU && setting.showProductName)
                 {
-                    content.AppendLine(String.Format("{0} - {1}", product.ProductSKU, product.ProductTitle));
+                    content.AppendLine(String.Format("🔰 {0} - {1}", product.ProductSKU, product.ProductTitle));
                     content.AppendLine();
                     content.AppendLine();
                 }
                 else if(setting.showSKU && !setting.showProductName)
                 {
-                    content.AppendLine(String.Format("{0}", product.ProductSKU));
+                    content.AppendLine(String.Format("🔰 {0}", product.ProductSKU));
                     content.AppendLine();
                     content.AppendLine();
                 }
                 else if (!setting.showSKU && setting.showProductName)
                 {
-                    content.AppendLine(String.Format("{0}", product.ProductTitle));
+                    content.AppendLine(String.Format("🔰 {0}", product.ProductTitle));
                     content.AppendLine();
                     content.AppendLine();
                 }
+                if (!String.IsNullOrEmpty(setting.shopPhone) && zaloShop.Contains(setting.shopPhone))
+                {
+                    content.AppendLine(String.Format("📌 Giá sỉ: {0:N0}k", product.Regular_Price.Value / 1000));
+                    content.AppendLine();
+                    content.AppendLine(String.Format("📌 Giá lẻ: {0:N0}k", product.Retail_Price.Value / 1000));
+                }
+                else
+                {
+                    content.AppendLine(String.Format("📌 #{0:N0}k", (product.Regular_Price.HasValue ? product.Regular_Price.Value + setting.increntPrice : setting.increntPrice) / 1000));
+                }
 
-                content.AppendLine(String.Format("📌 #{0:N0}k", (product.Regular_Price.HasValue ? product.Regular_Price.Value + setting.increntPrice : setting.increntPrice) / 1000));
                 content.AppendLine();
                 content.AppendLine();
                 content.AppendLine(String.Format("☘ {0}", product.Materials));
@@ -459,23 +470,26 @@ namespace ann_shop_server.Services
                     }
                 }
 
-                if (!String.IsNullOrEmpty(setting.shopPhone))
+                if (!String.IsNullOrEmpty(setting.shopPhone) && !zaloShop.Contains(setting.shopPhone))
                 {
                     content.AppendLine();
                     content.AppendLine();
                     content.AppendLine(String.Format("📞 {0}", setting.shopPhone));
-                    
                 }
-
-                if (!String.IsNullOrEmpty(setting.shopAddress))
+                if (!String.IsNullOrEmpty(setting.shopAddress) && !zaloShop.Contains(setting.shopPhone))
                 {
-                    content.AppendLine();
                     content.AppendLine();
                     content.AppendLine(String.Format("🏠 {0}", setting.shopAddress));
                 }
 
-                content.AppendLine();
-
+                if (zaloShop.Contains(setting.shopPhone))
+                {
+                    content.AppendLine();
+                    content.AppendLine();
+                    content.AppendLine(String.Format("📞 Hotline/Zalo: {0}", setting.shopPhone));
+                    content.AppendLine();
+                    content.AppendLine(String.Format("🏠 68 Đường C12, P. 13, Tân Bình, TP.HCM"));
+                }
                 return HttpUtility.HtmlDecode(content.ToString());
             }
         }

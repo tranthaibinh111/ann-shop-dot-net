@@ -81,6 +81,7 @@ namespace ann_shop_server.Services
                 createCategoryByTag("Quần lỡ", "/assets/images/categories/tags-filter.png", "do-bo-quan-lo"),
                 createCategoryByTag("Quần đùi", "/assets/images/categories/tags-filter.png", "do-bo-quan-dui"),
                 createCategoryByTag("Quần ống rộng", "/assets/images/categories/tags-filter.png", "do-bo-ong-rong"),
+                createCategoryByTag("Big size", "/assets/images/categories/tags-filter.png", "do-bo-big-size"),
                 createCategoryByTag("Jumpsuit", "/assets/images/categories/tags-filter.png", "do-bo-jumpsuit"),
                 createCategoryByTag("Pijama", "/assets/images/categories/tags-filter.png", "do-bo-pijama"),
                 createCategoryByTag("Bộ thun cotton", "/assets/images/categories/tags-filter.png", "do-bo-thun-cotton"),
@@ -162,10 +163,14 @@ namespace ann_shop_server.Services
                 //stockIn,
                 //order,
                 //sale,
-                createCategoryByTag("Đầm ôm body", "/assets/images/categories/tags-filter.png", "dam-body"),
+                createCategoryByTag("Đầm body", "/assets/images/categories/tags-filter.png", "dam-body"),
                 createCategoryByTag("Đầm suông", "/assets/images/categories/tags-filter.png", "dam-suong"),
                 createCategoryByTag("Đầm maxi", "/assets/images/categories/tags-filter.png", "dam-maxi"),
+                createCategoryByTag("Đầm xòe", "/assets/images/categories/tags-filter.png", "dam-xoe"),
                 createCategoryByTag("Đầm sơ mi", "/assets/images/categories/tags-filter.png", "dam-so-mi"),
+                createCategoryByTag("Đầm vest", "/assets/images/categories/tags-filter.png", "dam-vest"),
+                createCategoryByTag("Đầm trễ vai", "/assets/images/categories/tags-filter.png", "dam-tre-vai"),
+                createCategoryByTag("Đầm caro", "/assets/images/categories/tags-filter.png", "dam-caro"),
                 createCategoryByTag("Đầm thun", "/assets/images/categories/tags-filter.png", "dam-thun"),
                 createCategoryByTag("Đầm voan", "/assets/images/categories/tags-filter.png", "dam-voan"),
                 createCategoryByTag("Đầm tuyết mưa", "/assets/images/categories/tags-filter.png", "dam-tuyet-mua"),
@@ -180,6 +185,7 @@ namespace ann_shop_server.Services
                 createCategoryByTag("Đầm đũi", "/assets/images/categories/tags-filter.png", "dam-dui"),
                 createCategoryByTag("Đầm cotton lạnh", "/assets/images/categories/tags-filter.png", "dam-cotton-lanh"),
                 createCategoryByTag("Đầm pc gen", "/assets/images/categories/tags-filter.png", "dam-pc-gen"),
+                createCategoryByTag("Đầm cát nhật", "/assets/images/categories/tags-filter.png", "dam-cat-nhat"),
                 price125,
                 price125_150,
                 price150
@@ -592,6 +598,11 @@ namespace ann_shop_server.Services
             //if (redEnvelop != null)
             //    result.Add(redEnvelop);
 
+            // Khẩu trang
+            var faceMask = createCategoryBySlug("khau-trang");
+            if (faceMask != null)
+                result.Add(faceMask);
+
             // Quần áo nữ
             var womenClothes = getWomenClothes();
             if (womenClothes != null)
@@ -691,7 +702,6 @@ namespace ann_shop_server.Services
             var menClothes = getMenClothes();
             var productSale = getProductSale(womenClothes, menClothes);
             var productNews = getProductNew(productSale);
-            
 
             // Hàng mới về
             if (productNews != null)
@@ -700,6 +710,16 @@ namespace ann_shop_server.Services
             // Hàng sale
             if (productSale != null)
                 result.Add(productSale);
+
+            // Đang hot
+            var hot = createCategoryByTag("Đang hot...", "/assets/images/categories/order-product.png", "hot");
+            if (hot != null)
+                result.Add(hot);
+
+            // Khẩu trang
+            var faceMask = createCategoryBySlug("khau-trang");
+            if (faceMask != null)
+                result.Add(faceMask);
 
             // Quần áo nữ
             if (womenClothes != null)
@@ -711,7 +731,6 @@ namespace ann_shop_server.Services
 
             // Nước hoa
             var perfume = getPerfume();
-
             if (perfume != null)
                 result.Add(perfume);
 

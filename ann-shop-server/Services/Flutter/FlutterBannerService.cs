@@ -19,16 +19,16 @@ namespace ann_shop_server.Services
                 new FlutterBannerModel()
                 {
                     action = FlutterPageNavigation.ViewMore,
-                    name = "Sỉ gel rửa tay khô 24h",
-                    actionValue = "si-gel-rua-tay-kho-24h",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
+                    name = "Sỉ khẩu trang vải",
+                    actionValue = "si-khau-trang-vai",
+                    image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg"
                 },
                 new FlutterBannerModel()
                 {
                     action = FlutterPageNavigation.ViewMore,
-                    name = "Sỉ khẩu trang vải thun",
-                    actionValue = "si-khau-trang-vai",
-                    image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang.jpg"
+                    name = "Sỉ gel rửa tay khô 24h",
+                    actionValue = "si-gel-rua-tay-kho-24h",
+                    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
                 },
                 new FlutterBannerModel()
                 {
@@ -126,6 +126,13 @@ namespace ann_shop_server.Services
                 new FlutterBannerModel()
                 {
                     action = FlutterPageNavigation.ViewMore,
+                    name = "Sỉ khẩu trang vải",
+                    actionValue = "si-khau-trang-vai",
+                    image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg"
+                },
+                new FlutterBannerModel()
+                {
+                    action = FlutterPageNavigation.ViewMore,
                     name = "Sỉ gel rửa tay khô 24h",
                     actionValue = "si-gel-rua-tay-kho-24h",
                     image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
@@ -148,18 +155,19 @@ namespace ann_shop_server.Services
             {
                 new FlutterBannerModel()
                 {
+                    action = FlutterPageNavigation.ViewMore,
+                    name = "Sỉ khẩu trang vải",
+                    actionValue = "si-khau-trang-vai",
+                    image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg"
+                },
+                new FlutterBannerModel()
+                {
                     action = "category",
                     name = "Mỹ phẩm",
                     actionValue = "my-pham",
                     image = "https://khohangsiann.com/wp-content/uploads/si-my-pham-lam-dep.png",
                 },
-                new FlutterBannerModel()
-                {
-                    action = FlutterPageNavigation.ViewMore,
-                    name = "Sỉ gel rửa tay khô 24h",
-                    actionValue = "si-gel-rua-tay-kho-24h",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
-                },
+                
             };
 
             var footer = new List<FlutterBannerModel>()
@@ -170,6 +178,13 @@ namespace ann_shop_server.Services
                     name = "Nước hoa",
                     actionValue = "nuoc-hoa",
                     image = "https://khohangsiann.com/wp-content/uploads/si-nuoc-hoa-gia-re-1.png"
+                },
+                new FlutterBannerModel()
+                {
+                    action = FlutterPageNavigation.ViewMore,
+                    name = "Sỉ gel rửa tay khô 24h",
+                    actionValue = "si-gel-rua-tay-kho-24h",
+                    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
                 },
             };
 

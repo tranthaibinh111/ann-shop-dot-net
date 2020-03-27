@@ -26,7 +26,7 @@ namespace ann_shop_server.Controllers
                 urlFB = "fb://profile/100012594165130",
                 urlWebsite = "http://xuongann.com/",
                 phone = new List<string>() { "0918569400", "0918567409", "0913268406", "0936786404" },
-                timeWork = "8h30 - 20h30 (Chủ Nhật 8h30 - 18h30)"
+                timeWork = "8h30 - 19h30 (Chủ Nhật 8h30 - 17h00)"
             });
         }
     }
