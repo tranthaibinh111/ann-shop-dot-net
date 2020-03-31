@@ -348,6 +348,18 @@ warning 6002: The table/view 'inventorymanagement.dbo.NotificationCategory' does
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="PostPublicImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostID" Type="int" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar(max)" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="ProductTag">
           <Key>
             <PropertyRef Name="ID" />
@@ -1221,6 +1233,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.NotificationCategory' does
           <EntitySet Name="NotifyUser" EntityType="Self.NotifyUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostCategory" EntityType="Self.PostCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostPublic" EntityType="Self.PostPublic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostPublicImage" EntityType="Self.PostPublicImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductTag" EntityType="Self.ProductTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReceivedProductHistory" EntityType="Self.ReceivedProductHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Register" EntityType="Self.Register" Schema="dbo" store:Type="Tables" />
@@ -2308,6 +2321,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.NotificationCategory' does
           <EntitySet Name="NotificationCategories" EntityType="inventorymanagementModel.NotificationCategory" />
           <EntitySet Name="PostCategories" EntityType="inventorymanagementModel.PostCategory" />
           <EntitySet Name="PostPublics" EntityType="inventorymanagementModel.PostPublic" />
+          <EntitySet Name="PostPublicImages" EntityType="inventorymanagementModel.PostPublicImage" />
         </EntityContainer>
         <EntityType Name="CustomerEditOrder">
           <Key>
@@ -2552,6 +2566,18 @@ warning 6002: The table/view 'inventorymanagement.dbo.NotificationCategory' does
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsPolicy" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostPublicImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostID" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3808,6 +3834,19 @@ warning 6002: The table/view 'inventorymanagement.dbo.NotificationCategory' does
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="CategorySlug" ColumnName="CategorySlug" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostPublicImages">
+            <EntityTypeMapping TypeName="inventorymanagementModel.PostPublicImage">
+              <MappingFragment StoreEntitySet="PostPublicImage">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

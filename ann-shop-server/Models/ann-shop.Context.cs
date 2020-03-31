@@ -93,5 +93,6 @@ namespace ann_shop_server.Models
         public virtual DbSet<NotificationCategory> NotificationCategories { get; set; }
         public virtual DbSet<PostCategory> PostCategories { get; set; }
         public virtual DbSet<PostPublic> PostPublics { get; set; }
+        public virtual DbSet<PostPublicImage> PostPublicImages { get; set; }
     }
 }

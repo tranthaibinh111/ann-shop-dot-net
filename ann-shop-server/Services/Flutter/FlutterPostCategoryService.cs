@@ -22,7 +22,7 @@ namespace ann_shop_server.Services
                     name = "Tất cả"
                 };
 
-                if (postCategories.Count == 1)
+                if (postCategories.Count > 1)
                 {
                     result.Add(allBlog);
                 }

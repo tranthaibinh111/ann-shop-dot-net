@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ann_shop_server.Services
 {
@@ -70,6 +71,15 @@ namespace ann_shop_server.Services
                     x.ActionValue.Equals(postSlug)
                 )
                 .FirstOrDefault();
+                var images = con.PostPublicImages.Where(x => x.PostID == post.ID).Select(x => x.Image).ToList();
+                var reg = new Regex(@"^http");
+
+                post.Content = String.Format("<p><img src=\"{0}\"></p>", reg.IsMatch(post.Thumbnail) ? post.Thumbnail : "http://xuongann.com" + post.Thumbnail) + post.Content;
+
+                foreach (var item in images)
+                {
+                    post.Content += String.Format("<p><img src=\"{0}\"></p>", reg.IsMatch(item) ? item : "http://xuongann.com" + item);
+                }
 
                 return post;
             }
