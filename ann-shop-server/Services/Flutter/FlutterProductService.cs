@@ -482,7 +482,7 @@ namespace ann_shop_server.Services
                     content.AppendLine(String.Format("🏠 {0}", setting.shopAddress));
                 }
 
-                if (zaloShop.Contains(setting.shopPhone))
+                if (zaloShop.Contains(setting.shopPhone) && product.ID % 5 == 0)
                 {
                     content.AppendLine();
                     content.AppendLine();

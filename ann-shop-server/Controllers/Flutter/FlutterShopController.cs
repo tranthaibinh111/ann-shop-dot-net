@@ -21,7 +21,7 @@ namespace ann_shop_server.Controllers
         {
             return Ok(new
             {
-                address = "68 Đường C12, Phường 13, Quận Tân Bình, TP.HCM",
+                address = "68 Đường C12, Phường 13, Tân Bình, TP.HCM",
                 urlMap = "https://www.google.com/maps?cid=5068651584244638837&hl=vi",
                 urlFB = "fb://profile/100012594165130",
                 urlWebsite = "http://xuongann.com/",

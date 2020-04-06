@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace ann_shop_server.Services
@@ -46,12 +47,14 @@ namespace ann_shop_server.Services
                     return null;
 
                 var groupsNotifyID = getGroupNotifyPromotion(phone).Select(x => x.ID).Distinct().ToList();
-
                 var notifyPromotion = con.NotifyPromotions
                     .Where(x => x.Action == FlutterPageNavigation.ViewMore)
                     .Where(x => x.ActionValue == slug)
                     .Where(x => groupsNotifyID.Contains(x.GroupID))
                     .FirstOrDefault();
+                var reg = new Regex(@"^http");
+
+                notifyPromotion.Content = String.Format("<p><img src=\"{0}\"></p>", reg.IsMatch(notifyPromotion.Thumbnail) ? notifyPromotion.Thumbnail : "http://xuongann.com" + notifyPromotion.Thumbnail) + notifyPromotion.Content;
 
                 return notifyPromotion;
             }
@@ -74,6 +77,9 @@ namespace ann_shop_server.Services
                     .Where(x => x.ActionValue == slug)
                     .Where(x => x.Phone == phone)
                     .FirstOrDefault();
+                var reg = new Regex(@"^http");
+
+                notifyUser.Content = String.Format("<p><img src=\"{0}\"></p>", reg.IsMatch(notifyUser.Thumbnail) ? notifyUser.Thumbnail : "http://xuongann.com" + notifyUser.Thumbnail) + notifyUser.Content;
 
                 return notifyUser;
             }
@@ -113,6 +119,9 @@ namespace ann_shop_server.Services
                     .Where(x => x.Action == FlutterPageNavigation.ViewMore)
                     .Where(x => x.ActionValue == slug)
                     .FirstOrDefault();
+                var reg = new Regex(@"^http");
+
+                notifyNews.Content = String.Format("<p><img src=\"{0}\"></p>", reg.IsMatch(notifyNews.Thumbnail) ? notifyNews.Thumbnail : "http://xuongann.com" + notifyNews.Thumbnail) + notifyNews.Content;
 
                 return notifyNews;
             }
