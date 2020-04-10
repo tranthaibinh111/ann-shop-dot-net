@@ -97,7 +97,7 @@ namespace ann_shop_server.Services
             {
                 var homeNews = con.NotifyNews
                     .Where(x => x.AtHome == true)
-                    .OrderByDescending(x => x.ModifiedDate)
+                    .OrderByDescending(x => x.AppUpdate)
                     .Skip(0)
                     .Take(4)
                     .ToList();
