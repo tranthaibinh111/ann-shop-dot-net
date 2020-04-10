@@ -184,7 +184,7 @@ namespace ann_shop_server.Services
                 pagination.totalPages = (int)Math.Ceiling(pagination.totalCount / (double)pagination.pageSize);
 
                 var result = notifyNews
-                    .OrderByDescending(o => o.ModifiedDate)
+                    .OrderByDescending(o => o.AppUpdate)
                     .Select(x => new FlutterNotificationCardModel()
                     {
                         kind = filter.kind,

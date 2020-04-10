@@ -28,5 +28,6 @@ namespace ann_shop_server.Models
         public System.DateTime ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
         public bool AtHome { get; set; }
+        public Nullable<System.DateTime> AppUpdate { get; set; }
     }
 }
