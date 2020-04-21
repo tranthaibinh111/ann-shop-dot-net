@@ -702,6 +702,7 @@
     <Content Include="Models\ann-shop.edmx.diagram">
       <DependentUpon>ann-shop.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\ANNAppBackend.pubxml" />
     <None Include="Properties\PublishProfiles\back-end.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
