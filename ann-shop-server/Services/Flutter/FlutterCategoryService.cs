@@ -6,9 +6,34 @@ using System.Web;
 
 namespace ann_shop_server.Services
 {
-    public class FlutterCategoryService: IANNService
+    public class FlutterCategoryService : IANNService
     {
         #region Lấy thông tin về danh mục
+        #region Danh mục giày dép nữ
+        /// <summary>
+        /// Lấy category Giày dép nữ
+        /// </summary>
+        /// <returns></returns>
+        public FlutterCategoryModel getWomenShoes()
+        {
+            // Giày dép nữ
+            var womenShoes = createCategoryBySlug("giay-dep-nu");
+            if (womenShoes == null)
+                return null;
+
+            womenShoes.children = new List<FlutterCategoryModel>();
+
+            womenShoes.children.AddRange(
+                createCategoryBySlugs(new List<string>() {
+                    "dep-kieu-nu",
+                    "giay-cao-got",
+                    "giay-nu"
+                })
+            );
+
+            return womenShoes;
+        }
+        #endregion
         #region Danh mục Quần áo nữ
         /// <summary>
         /// Lấy category Đồ bộ nữ
@@ -307,7 +332,7 @@ namespace ann_shop_server.Services
             return womenClothes;
         }
         #endregion
-        
+
         #region Danh mục Quần áo nam
         /// <summary>
         /// Lấy category Áo thun nam
@@ -498,7 +523,8 @@ namespace ann_shop_server.Services
         #endregion
 
         #region Hàng sale
-        public FlutterCategoryModel getProductSale(FlutterCategoryModel womenClothes = null, FlutterCategoryModel menClothes = null) {
+        public FlutterCategoryModel getProductSale(FlutterCategoryModel womenClothes = null, FlutterCategoryModel menClothes = null)
+        {
             if (womenClothes != null)
                 womenClothes = getWomenClothes();
             if (menClothes != null)
@@ -542,7 +568,8 @@ namespace ann_shop_server.Services
         #endregion
 
         #region Hàng mới về
-        public FlutterCategoryModel getProductNew(FlutterCategoryModel productSale = null) {
+        public FlutterCategoryModel getProductNew(FlutterCategoryModel productSale = null)
+        {
             // Khởi tạo hàng mới về
             var productNews = new FlutterCategoryModel()
             {
@@ -553,7 +580,7 @@ namespace ann_shop_server.Services
                 children = new List<FlutterCategoryModel>()
             };
 
-           // Hàng có sẵn mới về
+            // Hàng có sẵn mới về
             var productStockInNews = new FlutterCategoryModel()
             {
                 name = "Hàng có sẵn mới về",
@@ -584,7 +611,7 @@ namespace ann_shop_server.Services
             return productNews;
         }
         #endregion
-        
+
         /// <summary>
         /// Lấy danh sách các danh mục home
         /// </summary>
@@ -602,6 +629,11 @@ namespace ann_shop_server.Services
             var faceMask = createCategoryBySlug("khau-trang");
             if (faceMask != null)
                 result.Add(faceMask);
+
+            // Giày dép nữ
+            var womenShoes = getWomenShoes();
+            if (womenShoes != null)
+                result.Add(womenShoes);
 
             // Quần áo nữ
             var womenClothes = getWomenClothes();
@@ -686,7 +718,7 @@ namespace ann_shop_server.Services
                 productAll.name = "Tất cả sản phẩm";
                 result.Add(productAll);
             }
-                
+
             return result;
         }
 
@@ -720,6 +752,11 @@ namespace ann_shop_server.Services
             var faceMask = createCategoryBySlug("khau-trang");
             if (faceMask != null)
                 result.Add(faceMask);
+
+            // Giày dép nữ
+            var womenShoes = getWomenShoes();
+            if (womenShoes != null)
+                result.Add(womenShoes);
 
             // Quần áo nữ
             if (womenClothes != null)
@@ -900,7 +937,7 @@ namespace ann_shop_server.Services
                         }
                     });
             }
-            
+
             if (children.Count > 0)
                 result.children = children;
 

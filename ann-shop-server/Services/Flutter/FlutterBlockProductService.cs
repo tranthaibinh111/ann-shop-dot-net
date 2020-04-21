@@ -93,6 +93,25 @@ namespace ann_shop_server.Services
             }
             #endregion
 
+            #region Giày dép nữ
+            var block14 = _category.getWomenShoes();
+            if (block14 != null)
+            {
+                blockProducts.Add(new FlutterBlockProductModel()
+                {
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = "category",
+                    //    name = "Mỹ phẩm",
+                    //    actionValue = "my-pham",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-my-pham-lam-dep.png",
+                    //    createdDate = DateTime.Now
+                    //},
+                    category = block14
+                });
+            }
+            #endregion
+
             #region Đồ bộ nữ
             var block4 = _category.getWomenOutfit();
             if (block4 != null)
