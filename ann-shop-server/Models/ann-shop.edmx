@@ -65,6 +65,7 @@
           <Property Name="ProductNumber" Type="int" Nullable="false" />
           <Property Name="PriceMin" Type="money" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Publish" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="CronJob">
           <Key>
@@ -654,6 +655,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.NotificationCategory' does
           <Property Name="CustomerPhoneBackup" Type="nvarchar" MaxLength="15" />
           <Property Name="UnSignedNick" Type="varchar" MaxLength="255" />
           <Property Name="UnSignedName" Type="varchar" MaxLength="255" />
+          <Property Name="DistrictID" Type="int" />
+          <Property Name="WardID" Type="int" />
         </EntityType>
         <EntityType Name="tbl_CustomerLevel">
           <Key>
@@ -1721,6 +1724,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.NotificationCategory' does
           <Property Name="CustomerPhoneBackup" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="UnSignedNick" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="UnSignedName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DistrictID" Type="Int32" />
+          <Property Name="WardID" Type="Int32" />
         </EntityType>
         <EntityType Name="tbl_CustomerLevel">
           <Key>
@@ -2393,6 +2398,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.NotificationCategory' does
           <Property Name="ProductNumber" Type="Int32" Nullable="false" />
           <Property Name="PriceMin" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Publish" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CustomerCoupon">
           <Key>
@@ -3001,6 +3007,8 @@ warning 6002: The table/view 'inventorymanagement.dbo.NotificationCategory' does
           <EntitySetMapping Name="tbl_Customer">
             <EntityTypeMapping TypeName="inventorymanagementModel.tbl_Customer">
               <MappingFragment StoreEntitySet="tbl_Customer">
+                <ScalarProperty Name="WardID" ColumnName="WardID" />
+                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nick" ColumnName="Nick" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
@@ -3650,6 +3658,7 @@ warning 6002: The table/view 'inventorymanagement.dbo.NotificationCategory' does
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="inventorymanagementModel.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="Publish" ColumnName="Publish" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="PriceMin" ColumnName="PriceMin" />
                 <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />

@@ -40,5 +40,7 @@ namespace ann_shop_server.Models
         public string CustomerPhoneBackup { get; set; }
         public string UnSignedNick { get; set; }
         public string UnSignedName { get; set; }
+        public Nullable<int> DistrictID { get; set; }
+        public Nullable<int> WardID { get; set; }
     }
 }

@@ -25,5 +25,6 @@ namespace ann_shop_server.Models
         public int ProductNumber { get; set; }
         public decimal PriceMin { get; set; }
         public string Name { get; set; }
+        public string Publish { get; set; }
     }
 }

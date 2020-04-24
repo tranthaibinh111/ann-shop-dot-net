@@ -23,15 +23,19 @@ namespace ann_shop_server.Models
                 var receivededCouponID = con.CustomerCoupons
                     .Where(x => x.Phone == phone)
                     .Select(x => x.CouponID)
+                    .Distinct()
                     .ToList();
 
                 var coupons = con.Coupons
+                    .Where(x => x.Publish == "App")
                     .Where(x => x.Active == true)
-                    .Where(x => x.EndDate >= currentDate);
+                    .Where(x => x.EndDate >= currentDate)
+                    .ToList();
 
                 if (receivededCouponID != null || receivededCouponID.Count > 0)
                 {
-                    coupons = coupons.Where(x => receivededCouponID.Contains(x.ID));
+                    var couponUSED = coupons.Where(x => receivededCouponID.Contains(x.ID)).ToList();
+                    coupons = coupons.Except(couponUSED).ToList();
                 }
 
                 return coupons.OrderBy(o => o.EndDate).ToList();
