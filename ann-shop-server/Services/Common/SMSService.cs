@@ -29,21 +29,24 @@ namespace ann_shop_server.Services
                 return false;
             }
 
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://brandsms.vn:8018/vmgApi");
+            // Init token
+            var headers = new WebHeaderCollection();
+            headers.Add("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c24iOiJoa2Rhbm4iLCJzaWQiOiJmNzdlYTcyZC1iMzFhLTRkNzYtYjA5Ny03NjkxMTRiYjM3NDkiLCJvYnQiOiIiLCJvYmoiOiIiLCJuYmYiOjE1ODg4NDU5NDksImV4cCI6MTU4ODg0OTU0OSwiaWF0IjoxNTg4ODQ1OTQ5fQ.CQWgHqxBqgs1Ikq29DbqD2MQrDjrfCf0FDzcn8pyf4A");
+            // Execute API
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://api.brandsms.vn:8018/api/SMSBrandname");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
+            httpWebRequest.Headers = headers;
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-                string json = JsonConvert.SerializeObject(new
+                string json = JsonConvert.SerializeObject(new SMSBrandNameSendMessageModel()
                 {
-                    cmdCode = "BulkSendSms",
-                    alias = VMGBRAND,
+                    to = "0" + phone.Substring(2),
+                    type = 1, // Chăm sóc khách hàng
+                    from = VMGBRAND,
                     message = message,
-                    sendTime = String.Empty,
-                    authenticateUser = VMGACCOUNT,
-                    authenticatePass = VMGPASSWORD,
-                    msisdn = phone
+                    useUnicode = 0 // Gửi tin không unicode
                 });
 
                 streamWriter.Write(json);
@@ -52,7 +55,7 @@ namespace ann_shop_server.Services
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                var result = JsonConvert.DeserializeObject<RespondOTPModel>(streamReader.ReadToEnd());
+                var result = JsonConvert.DeserializeObject<SMSBrandNameRespondModel>(streamReader.ReadToEnd());
 
                 if (result == null)
                 {
@@ -60,58 +63,74 @@ namespace ann_shop_server.Services
                     return false;
                 }
 
-                if (result.error_code == 0)
+                if (result.errorCode == "000")
                     error = String.Empty;
-                else if (result.error_code == -1)
-                   error = "Nội dung tin nhắn có chứa ký tự unicode";
-                else if (result.error_code == -2)
-                   error = "Lỗi hệ thống VMG";
-                else if (result.error_code == 100)
-                   error = "Xác thực tài khoản VMG không thành công";
-                else if (result.error_code == 101)
-                   error = "Tài khoản VMG bị deactived";
-                else if (result.error_code == 102)
-                   error = "Tài khoản VMG bị hết hạn";
-                else if (result.error_code == 103)
-                   error = "Tài khoản VMG bị khóa";
-                else if (result.error_code == 104)
-                   error = "Template chưa được kích hoạt";
-                else if (result.error_code == 105)
-                   error = "Template chưa tồn tại";
-                else if (result.error_code == 106)
-                   error = "List user is empty";
-                else if (result.error_code == 107)
-                   error = "List user is full";
-                else if (result.error_code == 108)
-                   error = "Số điện thoại nhận tin nằm trong danh sách từ chối nhận tin(black list)";
-                else if (result.error_code == 109)
-                   error = "Processed (ads message only)";
-                else if (result.error_code == 110)
+                else if (result.errorCode == "001")
+                   error = "Có lỗi giá trị không phù hợp với ki u dữ liệu mô tả";
+                else if (result.errorCode == "002")
+                   error = "Loại tin không hợp lệ";
+                else if (result.errorCode == "003")
+                   error = "Loại tin không được phép gửi";
+                else if (result.errorCode == "005")
+                   error = "Số điện thoại nhận không hợp lệ";
+                else if (result.errorCode == "006")
+                   error = "Mã nhà mạng không hợp lệ";
+                else if (result.errorCode == "007")
+                   error = "Nội dung chứa từ bị khóa";
+                else if (result.errorCode == "008")
+                   error = "Nội dung chứa ký tự unicode";
+                else if (result.errorCode == "009")
+                   error = "Nội dung có ký tự không hợp lệ";
+                else if (result.errorCode == "010")
+                   error = "Độ dài nội dung không hợp lệ";
+                else if (result.errorCode == "011")
+                   error = "Nội dung không khớp với mẫu khai";
+                else if (result.errorCode == "012")
+                   error = "Tài khoản không được phân gửi tới nhà mạng";
+                else if (result.errorCode == "013")
+                   error = "Số điện thoại nhận trong danh sách cấm gửi";
+                else if (result.errorCode == "014")
+                   error = "Tài khoản không đủ tiền để chi trả";
+                else if (result.errorCode == "015")
+                   error = "Tài khoảng không đủ tin để gửi";
+                else if (result.errorCode == "016")
                    error = "Thời gian gửi tin không hợp lệ";
-                else if (result.error_code == 111)
-                   error = "ProgExisted";
-                else if (result.error_code == 112)
-                   error = "Nội dung tin nhắn không hợp lệ";
-                else if (result.error_code == 304)
-                   error = "Send the same content in short time";
-                else if (result.error_code == 400)
-                   error = "Không thể trừ tiền";
-                else if (result.error_code == 801)
-                   error = "ParamsInvalid";
-                else if (result.error_code == 802)
-                   error = "Can Not Identify Method";
-                else if (result.error_code == 900)
-                   error = "Lỗi lưu tin nhắn vào CSDL";
-                else if (result.error_code == 901)
-                   error = "Độ dài tin nhắn vượt quá 612(Viettel: 480) với ký tự thường và 355 ký tự unicode";
-                else if (result.error_code == 902)
-                   error = "Số điện thoại không đúng";
-                else if (result.error_code == 904)
-                   error = "BrandName chưa được khai báo";
-                else if (result.error_code == 905)
-                   error = "Nội dung không hợp lệ (gửi tin đầu số dài)";
+                else if (result.errorCode == "017")
+                   error = "Mã order không hợp lệ";
+                else if (result.errorCode == "018")
+                   error = "Mã gói không hợp lệ";
+                else if (result.errorCode == "019")
+                   error = "Số điện thoại không hợp lệ";
+                else if (result.errorCode == "020")
+                   error = "Số điện thoại không trong danh sách nhà mạng được lọc";
+                else if (result.errorCode == "021")
+                   error = "Gửi vào thời điểm bị cấm gửi quảng cáo";
+                else if (result.errorCode == "022")
+                   error = "Định dạnh nội dung không hợp lệ";
+                else if (result.errorCode == "100")
+                   error = "Token không hợp lệ";
+                else if (result.errorCode == "101")
+                   error = "Tài khoản bị khóa";
+                else if (result.errorCode == "102")
+                   error = "Tài khoản không đúng";
+                else if (result.errorCode == "304")
+                   error = "Tin bị lặp trong 5 phút";
+                else if (result.errorCode == "801")
+                   error = "Mẫu tin chưa được thiết lập";
+                else if (result.errorCode == "802")
+                   error = "Tài khoản chưa được thiết lập profile";
+                else if (result.errorCode == "803")
+                   error = "Tài khoản chưa được thiết lập giá";
+                else if (result.errorCode == "804")
+                   error = "Đường gửi tin chưa được thiết lập";
+                else if (result.errorCode == "805")
+                   error = "Đường gửi tin không hỗ trợ unicode";
+                else if (result.errorCode == "904")
+                   error = "Brandname không hợp lệ";
+                else if (result.errorCode == "999")
+                   error = "Lỗi khác trên hệ thống";
                 else
-                   error = "Đã có vấn đề lỗi trong post API SMS";
+                   error = "Đã có vấn đề trong post API SMS BrandName";
             }
 
             if (String.IsNullOrEmpty(error))
