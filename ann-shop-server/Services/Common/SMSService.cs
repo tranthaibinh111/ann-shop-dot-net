@@ -28,14 +28,11 @@ namespace ann_shop_server.Services
                 return false;
             }
 
-            // Init token
-            var headers = new WebHeaderCollection();
-            headers.Add("token", SMSBRAND_TOKEN);
             // Execute API
             var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://api.brandsms.vn:8018/api/SMSBrandname/SendSMS");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
-            httpWebRequest.Headers = headers;
+            httpWebRequest.Headers.Add("token", SMSBRAND_TOKEN);
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
@@ -46,7 +43,7 @@ namespace ann_shop_server.Services
                     from = VMGBRAND,
                     message = message,
                     scheduled = String.Empty,
-                    useUnicode = 1 // Gửi tin unicode
+                    useUnicode = 0 // Gửi tin unicode
                 });
 
                 streamWriter.Write(json);
