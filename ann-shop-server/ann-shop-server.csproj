@@ -342,6 +342,7 @@
     <Compile Include="Models\Common\NotificationCategory\NotificationCategoryModel.cs" />
     <Compile Include="Models\Common\Notification\NotificationKind.cs" />
     <Compile Include="Models\Common\PostCategory\PostCategoryModel.cs" />
+    <Compile Include="Models\Common\SMS\SMSBrandNameSendMessageModel.cs" />
     <Compile Include="Models\Flutter\FlutterBanner\FlutterBannerProductPosition.cs" />
     <Compile Include="Models\Flutter\FlutterPageNavigation.cs" />
     <Compile Include="Models\GroupNotifyPromotion.cs">
@@ -391,7 +392,7 @@
     <Compile Include="Models\Common\Product\TagModel.cs" />
     <Compile Include="Models\Common\Product\VariableKind.cs" />
     <Compile Include="Models\Common\Stock\StockProductVariableModel.cs" />
-    <Compile Include="Models\Common\SMS\RespondOTPModel.cs" />
+    <Compile Include="Models\Common\SMS\SMSBrandNameRespondModel.cs" />
     <Compile Include="Models\Common\SMS\SendOTPModel.cs" />
     <Compile Include="Models\Common\Product\Token\TokenModel.cs" />
     <Compile Include="Models\Common\User\UserRegisterModel.cs" />

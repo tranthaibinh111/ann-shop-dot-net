@@ -13,8 +13,7 @@ namespace ann_shop_server.Services
     public class SMSService: IANNService
     {
         protected const string VMGBRAND = "ann.com.vn";
-        protected const string VMGACCOUNT = "hkdann";
-        protected const string VMGPASSWORD = "Vmg@123456";
+        protected const string SMSBRAND_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c24iOiJoa2Rhbm4iLCJzaWQiOiJmNzdlYTcyZC1iMzFhLTRkNzYtYjA5Ny03NjkxMTRiYjM3NDkiLCJvYnQiOiIiLCJvYmoiOiIiLCJuYmYiOjE1ODg4NDU5NDksImV4cCI6MTU4ODg0OTU0OSwiaWF0IjoxNTg4ODQ1OTQ5fQ.CQWgHqxBqgs1Ikq29DbqD2MQrDjrfCf0FDzcn8pyf4A";
 
         public bool bulkSendSms(string phone, string message, out string error)
         {
@@ -31,7 +30,7 @@ namespace ann_shop_server.Services
 
             // Init token
             var headers = new WebHeaderCollection();
-            headers.Add("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c24iOiJoa2Rhbm4iLCJzaWQiOiJmNzdlYTcyZC1iMzFhLTRkNzYtYjA5Ny03NjkxMTRiYjM3NDkiLCJvYnQiOiIiLCJvYmoiOiIiLCJuYmYiOjE1ODg4NDU5NDksImV4cCI6MTU4ODg0OTU0OSwiaWF0IjoxNTg4ODQ1OTQ5fQ.CQWgHqxBqgs1Ikq29DbqD2MQrDjrfCf0FDzcn8pyf4A");
+            headers.Add("token", SMSBRAND_TOKEN);
             // Execute API
             var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://api.brandsms.vn:8018/api/SMSBrandname/SendSMS");
             httpWebRequest.ContentType = "application/json";
@@ -46,7 +45,8 @@ namespace ann_shop_server.Services
                     type = 1, // Chăm sóc khách hàng
                     from = VMGBRAND,
                     message = message,
-                    useUnicode = 0 // Gửi tin không unicode
+                    scheduled = String.Empty,
+                    useUnicode = 1 // Gửi tin unicode
                 });
 
                 streamWriter.Write(json);
@@ -66,7 +66,7 @@ namespace ann_shop_server.Services
                 if (result.errorCode == "000")
                     error = String.Empty;
                 else if (result.errorCode == "001")
-                   error = "Có lỗi giá trị không phù hợp với ki u dữ liệu mô tả";
+                   error = "Có lỗi giá trị không phù hợp với kiểu dữ liệu mô tả";
                 else if (result.errorCode == "002")
                    error = "Loại tin không hợp lệ";
                 else if (result.errorCode == "003")

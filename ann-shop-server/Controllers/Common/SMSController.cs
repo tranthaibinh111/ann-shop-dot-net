@@ -21,7 +21,7 @@ namespace ann_shop_server.Controllers
         }
 
         /// <summary>
-        /// Số điện thoại thêm 84
+        /// Dịch vụ gửi tin nhắn SMS Brand
         /// </summary>
         /// <param name="sms"></param>
         /// <returns></returns>
@@ -34,7 +34,7 @@ namespace ann_shop_server.Controllers
                 return BadRequest(ModelState);
 
             var error = String.Empty;
-            var message = String.Format("ANN.COM.VN - Ma OTP cua ban la: {0}. Ma se het han trong vong 5 phut. Cam on!", sms.otp);
+            var message = String.Format("ANN.COM.VN - Mã OTP của bạn là: {0}. Mã sẽ hết hạn trong vòng 5 phút. Cảm ơn!", sms.otp);
 
             try
             {
