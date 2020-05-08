@@ -33,7 +33,7 @@ namespace ann_shop_server.Services
             var headers = new WebHeaderCollection();
             headers.Add("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c24iOiJoa2Rhbm4iLCJzaWQiOiJmNzdlYTcyZC1iMzFhLTRkNzYtYjA5Ny03NjkxMTRiYjM3NDkiLCJvYnQiOiIiLCJvYmoiOiIiLCJuYmYiOjE1ODg4NDU5NDksImV4cCI6MTU4ODg0OTU0OSwiaWF0IjoxNTg4ODQ1OTQ5fQ.CQWgHqxBqgs1Ikq29DbqD2MQrDjrfCf0FDzcn8pyf4A");
             // Execute API
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://api.brandsms.vn:8018/api/SMSBrandname");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://api.brandsms.vn:8018/api/SMSBrandname/SendSMS");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             httpWebRequest.Headers = headers;
