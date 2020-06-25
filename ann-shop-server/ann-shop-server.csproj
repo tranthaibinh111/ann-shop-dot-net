@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -342,6 +343,7 @@
     <Compile Include="Models\Common\NotificationCategory\NotificationCategoryModel.cs" />
     <Compile Include="Models\Common\Notification\NotificationKind.cs" />
     <Compile Include="Models\Common\PostCategory\PostCategoryModel.cs" />
+    <Compile Include="Models\Common\SMS\SendIntroApp.cs" />
     <Compile Include="Models\Common\SMS\SMSBrandNameSendMessageModel.cs" />
     <Compile Include="Models\Flutter\FlutterBanner\FlutterBannerProductPosition.cs" />
     <Compile Include="Models\Flutter\FlutterPageNavigation.cs" />

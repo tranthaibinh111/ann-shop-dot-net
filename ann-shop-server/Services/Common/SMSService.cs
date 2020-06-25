@@ -15,7 +15,7 @@ namespace ann_shop_server.Services
         protected const string VMGBRAND = "ann.com.vn";
         protected const string SMSBRAND_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c24iOiJoa2Rhbm4iLCJzaWQiOiJmNzdlYTcyZC1iMzFhLTRkNzYtYjA5Ny03NjkxMTRiYjM3NDkiLCJvYnQiOiIiLCJvYmoiOiIiLCJuYmYiOjE1ODg4NDU5NDksImV4cCI6MTU4ODg0OTU0OSwiaWF0IjoxNTg4ODQ1OTQ5fQ.CQWgHqxBqgs1Ikq29DbqD2MQrDjrfCf0FDzcn8pyf4A";
 
-        public bool bulkSendSms(string phone, string message, out string error)
+        public bool bulkSendSms(string phone, string message, int unicode, out string error)
         {
             error = String.Empty;
 
@@ -43,7 +43,7 @@ namespace ann_shop_server.Services
                     from = VMGBRAND,
                     message = message,
                     scheduled = String.Empty,
-                    useUnicode = 0 // Gửi tin unicode
+                    useUnicode = unicode // Gửi tin unicode
                 });
 
                 streamWriter.Write(json);
