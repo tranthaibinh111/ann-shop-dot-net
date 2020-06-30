@@ -388,7 +388,7 @@ namespace ann_shop_server.Services
         {
             using (var con = new inventorymanagementEntities())
             {
-                string[] zaloShop = { "0918567409", "0913268406", "0936786404", "0918569400" };
+                string[] zaloShop = { "0918567409", "0913268406", "0936786404", "0918569400", "0971500506", "0946500509", "0914500502", "0946500504", "0915400401" };
 
                 var product = con.tbl_Product.Where(x => x.ID == productID).FirstOrDefault();
 
