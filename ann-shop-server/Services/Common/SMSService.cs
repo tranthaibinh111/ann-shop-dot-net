@@ -50,6 +50,7 @@ namespace ann_shop_server.Services
             }
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = JsonConvert.DeserializeObject<SMSBrandNameRespondModel>(streamReader.ReadToEnd());
