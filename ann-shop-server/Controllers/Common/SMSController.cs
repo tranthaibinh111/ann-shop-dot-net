@@ -65,7 +65,21 @@ namespace ann_shop_server.Controllers
                 return BadRequest(ModelState);
 
             var error = String.Empty;
-            var message = "Kho Sỉ ANN đã có ứng dụng điện thoại. Link tải app: http://bit.ly/sANN";
+            string[] messageRandom = {
+                "Kho Sỉ ANN đã có ứng dụng điện thoại. Link tải app: http://bit.ly/sANN",
+                "ANN.COM.VN đã có ứng dụng điện thoại xem sản phẩm: http://bit.ly/sANN",
+                "Kho Hàng Sỉ ANN xin mời khách tải App xem sản phẩm: http://bit.ly/sANN",
+                "ANN xin mời QKhách tải App điện thoại xem sản phẩm: http://bit.ly/sANN",
+                "Kho Hàng Sỉ ANN xin mời tải ứng dụng điện thoại: http://bit.ly/sANN",
+                "ANN đã có App điện thoại xem sản phẩm. Link tải: http://bit.ly/sANN",
+                "Mời QKhách tải ứng dụng điện thoại của Kho Sỉ ANN: http://bit.ly/sANN",
+                "Shop Sỉ ANN đã có App điện thoại. Link tải app: http://bit.ly/sANN",
+                "Kho Hàng ANN đã có ứng dụng điện thoại. Link tải: http://bit.ly/sANN",
+                "Kho Sỉ ANN xin mời khách tải App xem sản phẩm: http://bit.ly/sANN"
+            };
+            Random random = new Random();
+            int rand = random.Next(0, messageRandom.Length);
+            string message = messageRandom[rand];
 
             try
             {
