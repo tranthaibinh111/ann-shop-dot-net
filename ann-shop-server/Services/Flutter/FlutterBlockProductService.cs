@@ -42,55 +42,58 @@ namespace ann_shop_server.Services
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
-                    //banner = new FlutterBannerModel()
-                    //{
-                    //    action = FlutterPageNavigation.ViewMore,
-                    //    name = "Sỉ khẩu trang vải",
-                    //    actionValue = "si-khau-trang-vai",
-                    //    image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg",
-                    //    createdDate = DateTime.Now
-                    //},
+                    banner = new FlutterBannerModel()
+                    {
+                        action = FlutterPageNavigation.Product,
+                        name = "Cà phê sâm",
+                        actionValue = "CAFE SAM",
+                        image = "https://khohangsiann.com/wp-content/uploads/banner-ca-phe-sam.jpg",
+                        createdDate = DateTime.Now
+                    },
                     category = block1
                 });
             }
             #endregion
 
-            #region Khẩu trang
-            //var block2 = _category.createCategoryBlockProduct("khau-trang");
-            //if (block2 != null)
-            //{
-            //    blockProducts.Add(new FlutterBlockProductModel()
-            //    {
-            //        banner = new FlutterBannerModel()
-            //        {
-            //            action = FlutterPageNavigation.ViewMore,
-            //            name = "Sỉ khẩu trang vải",
-            //            actionValue = "si-khau-trang-vai",
-            //            image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg",
-            //            createdDate = DateTime.Now
-            //        },
-            //        category = block2
-            //    });
-            //}
-            #endregion
-
-            #region Mỹ phẩm
-            var block3 = _category.createCategoryBlockProduct("my-pham");
-            if (block3 != null)
+            #region Mỹ phẩm - Thực phẩm chức năng
+            var block2 = _category.createCategoryBySlugs(
+                "Mỹ phẩm - Thực phẩm chức năng",
+                new List<string>() { "my-pham", "thuc-pham-chuc-nang" }
+            );
+            if (block2 != null)
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
                     banner = new FlutterBannerModel()
                     {
                         action = "category",
-                        name = "Mỹ phẩm",
+                        name = "Mỹ phẩm - Thực phẩm chức năng",
                         actionValue = "my-pham",
                         image = "https://khohangsiann.com/wp-content/uploads/si-my-pham-lam-dep.png",
                         createdDate = DateTime.Now
                     },
-                    category = block3
+                    category = block2
                 });
             }
+            #endregion
+
+            #region Mỹ phẩm
+            //var block3 = _category.createCategoryBlockProduct("my-pham");
+            //if (block3 != null)
+            //{
+            //    blockProducts.Add(new FlutterBlockProductModel()
+            //    {
+            //        banner = new FlutterBannerModel()
+            //        {
+            //            action = "category",
+            //            name = "Mỹ phẩm & TPCN",
+            //            actionValue = "my-pham",
+            //            image = "https://khohangsiann.com/wp-content/uploads/si-my-pham-lam-dep.png",
+            //            createdDate = DateTime.Now
+            //        },
+            //        category = block3
+            //    });
+            //}
             #endregion
 
             #region Giày dép nữ
@@ -151,7 +154,7 @@ namespace ann_shop_server.Services
             }
             #endregion
 
-            //#region Áo dài cách tân
+            #region Áo dài cách tân
             //var block4 = _categoryService.createCategoryBlockProduct("ao-dai-cach-tan");
             //if (block4 != null)
             //{
@@ -168,41 +171,47 @@ namespace ann_shop_server.Services
             //        category = block4
             //    });
             //}
-            //#endregion
-
-            #region Áo thun nữ
-            var block6 = _category.getWomenTShirts();
-            blockProducts.Add(new FlutterBlockProductModel()
-            {
-                //banner = new FlutterBannerModel()
-                //{
-                //    action = "category",
-                //    name = "Áo thun nữ - Sơ mi nữ",
-                //    actionValue = "ao-thun-nu",
-                //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                //    createdDate = DateTime.Now
-                //},
-                category = block6
-            });
             #endregion
 
-            #region Áo kiểu nữ - Sơ mi nữ
+            #region Áo thun nữ
+            //var block6 = _category.getWomenTShirts();
+            //if (block6 != null)
+            //{
+            //    blockProducts.Add(new FlutterBlockProductModel()
+            //    {
+            //        //banner = new FlutterBannerModel()
+            //        //{
+            //        //    action = "category",
+            //        //    name = "Áo thun nữ - Sơ mi nữ",
+            //        //    actionValue = "ao-thun-nu",
+            //        //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+            //        //    createdDate = DateTime.Now
+            //        //},
+            //        category = block6
+            //    });
+            //}
+            #endregion
+
+            #region Áo thun nữ - Sơ mi nữ
             var block7 = _category.createCategoryBySlugs(
-                "Áo kiểu nữ - Sơ mi nữ",
-                new List<string>() { "ao-kieu-nu", "ao-so-mi-nu" }
+                "Áo thun nữ - Sơ mi nữ",
+                new List<string>() { "ao-thun-nu", "ao-kieu-nu", "ao-thun-nu-form-rong", "ao-so-mi-nu" }
             );
-            blockProducts.Add(new FlutterBlockProductModel()
+            if (block7 != null)
             {
-                //banner = new FlutterBannerModel()
-                //{
-                //    action = "category",
-                //    name = "Áo thun nữ - Sơ mi nữ",
-                //    actionValue = "ao-thun-nu",
-                //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                //    createdDate = DateTime.Now
-                //},
-                category = block7
-            });
+                blockProducts.Add(new FlutterBlockProductModel()
+                {
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = "category",
+                    //    name = "Áo thun nữ - Sơ mi nữ",
+                    //    actionValue = "ao-thun-nu",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                    //    createdDate = DateTime.Now
+                    //},
+                    category = block7
+                });
+            }
             #endregion
 
             #region Áo khoác nữ
@@ -229,18 +238,21 @@ namespace ann_shop_server.Services
                 "Quần nữ - Đồ lót nữ",
                 new List<string>() { "quan-nu", "quan-jeans-nu", "do-lot-nu" }
             );
-            blockProducts.Add(new FlutterBlockProductModel()
+            if (block9 != null)
             {
-                //banner = new FlutterBannerModel()
-                //{
-                //    action = "category",
-                //    name = "Quần nữ - Đồ lót nữ",
-                //    actionValue = "quan-nu",
-                //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                //    createdDate = DateTime.Now
-                //},
-                category = block9
-            });
+                blockProducts.Add(new FlutterBlockProductModel()
+                {
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = "category",
+                    //    name = "Quần nữ - Đồ lót nữ",
+                    //    actionValue = "quan-nu",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                    //    createdDate = DateTime.Now
+                    //},
+                    category = block9
+                });
+            }
             #endregion
 
             #region Áo thun nam
@@ -267,18 +279,21 @@ namespace ann_shop_server.Services
                 "Áo khoác nam - Sơ mi nam",
                 new List<string>() { "ao-khoac-nam", "ao-so-mi-nam" }
             );
-            blockProducts.Add(new FlutterBlockProductModel()
+            if (block11 != null)
             {
-                //banner = new FlutterBannerModel()
-                //{
-                //    action = "category",
-                //    name = "Quần nam - Quần lót nam",
-                //    actionValue = "quan-nam",
-                //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                //    createdDate = DateTime.Now
-                //},
-                category = block11
-            });
+                blockProducts.Add(new FlutterBlockProductModel()
+                {
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = "category",
+                    //    name = "Quần nam - Quần lót nam",
+                    //    actionValue = "quan-nam",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                    //    createdDate = DateTime.Now
+                    //},
+                    category = block11
+                });
+            }
             #endregion
 
             #region Quần nam - Quần lót nam
@@ -286,18 +301,21 @@ namespace ann_shop_server.Services
                 "Quần nam - Quần lót nam",
                 new List<string>() { "quan-nam", "quan-jeans-nam", "quan-lot-nam" }
             );
-            blockProducts.Add(new FlutterBlockProductModel()
+            if (block12 != null)
             {
-                //banner = new FlutterBannerModel()
-                //{
-                //    action = "category",
-                //    name = "Quần nam - Quần lót nam",
-                //    actionValue = "quan-nam",
-                //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
-                //    createdDate = DateTime.Now
-                //},
-                category = block12
-            });
+                blockProducts.Add(new FlutterBlockProductModel()
+                {
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = "category",
+                    //    name = "Quần nam - Quần lót nam",
+                    //    actionValue = "quan-nam",
+                    //    image = "https://khohangsiann.com/wp-content/uploads/si-bao-li-xi-2020.png",
+                    //    createdDate = DateTime.Now
+                    //},
+                    category = block12
+                });
+            }
             #endregion
 
             #region Nước hoa
@@ -315,6 +333,25 @@ namespace ann_shop_server.Services
                         createdDate = DateTime.Now
                     },
                     category = block13
+                });
+            }
+            #endregion
+
+            #region Khẩu trang
+            var block15 = _category.createCategoryBlockProduct("khau-trang");
+            if (block15 != null)
+            {
+                blockProducts.Add(new FlutterBlockProductModel()
+                {
+                    banner = new FlutterBannerModel()
+                    {
+                        action = FlutterPageNavigation.ViewMore,
+                        name = "Sỉ khẩu trang",
+                        actionValue = "si-khau-trang-vai",
+                        image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg",
+                        createdDate = DateTime.Now
+                    },
+                    category = block15
                 });
             }
             #endregion

@@ -13,16 +13,28 @@ namespace ann_shop_server.Services
             var result = new List<FlutterCategoryModel>();
 
             // Nước rửa tay
-            var key03 = new FlutterCategoryModel()
+            //var key03 = new FlutterCategoryModel()
+            //{
+            //    name = "nước rửa tay khô",
+            //    filter = new FlutterProductFilterModel()
+            //    {
+            //        productSKU = "XIT",
+            //        productSort = (int)ProductSortKind.ProductNew
+            //    }
+            //};
+            //result.Add(key03);
+
+            // Mỹ phẩm
+            var cosmetic = new FlutterCategoryModel()
             {
-                name = "nước rửa tay khô",
+                name = "mỹ phẩm",
                 filter = new FlutterProductFilterModel()
                 {
-                    productSKU = "XIT",
+                    categorySlug = "my-pham",
                     productSort = (int)ProductSortKind.ProductNew
                 }
             };
-            result.Add(key03);
+            result.Add(cosmetic);
 
             // Đồ bộ nữ
             var key01 = new FlutterCategoryModel()
@@ -47,18 +59,6 @@ namespace ann_shop_server.Services
                 }
             };
             result.Add(key02);
-
-            // Mỹ phẩm
-            var cosmetic = new FlutterCategoryModel()
-            {
-                name = "mỹ phẩm",
-                filter = new FlutterProductFilterModel()
-                {
-                    categorySlug = "my-pham",
-                    productSort = (int)ProductSortKind.ProductNew
-                }
-            };
-            result.Add(cosmetic);
 
             // Nước hoa
             var perfume = new FlutterCategoryModel()
@@ -120,10 +120,22 @@ namespace ann_shop_server.Services
             };
             result.Add(key05);
 
+            // kem body mềm chữ A
+            var key07 = new FlutterCategoryModel()
+            {
+                name = "kem body mềm A",
+                filter = new FlutterProductFilterModel()
+                {
+                    productSKU = "BDA110",
+                    productSort = (int)ProductSortKind.ProductNew
+                }
+            };
+            result.Add(key07);
+
             // kem body x3
             var key06 = new FlutterCategoryModel()
             {
-                name = "kem body x3",
+                name = "kem body collagen x3",
                 filter = new FlutterProductFilterModel()
                 {
                     productSKU = "BODY",
@@ -133,7 +145,7 @@ namespace ann_shop_server.Services
             result.Add(key06);
 
             // kích trắng x3
-            var key07 = new FlutterCategoryModel()
+            var key09 = new FlutterCategoryModel()
             {
                 name = "kích trắng x3",
                 filter = new FlutterProductFilterModel()
@@ -142,19 +154,31 @@ namespace ann_shop_server.Services
                     productSort = (int)ProductSortKind.ProductNew
                 }
             };
-            result.Add(key07);
+            result.Add(key09);
 
-            // trị mụn dr mai
+            // cà phê sâm
             var key08 = new FlutterCategoryModel()
             {
-                name = "trị mụn Dr Mai",
+                name = "cà phê sâm",
                 filter = new FlutterProductFilterModel()
                 {
-                    productSKU = "DRMAI",
+                    productSKU = "CAFE SAM",
                     productSort = (int)ProductSortKind.ProductNew
                 }
             };
             result.Add(key08);
+
+            // cần tây mật ong
+            var key10 = new FlutterCategoryModel()
+            {
+                name = "cần tây mật ong",
+                filter = new FlutterProductFilterModel()
+                {
+                    productSKU = "CTAY125",
+                    productSort = (int)ProductSortKind.ProductNew
+                }
+            };
+            result.Add(key10);
 
             return result;
         }

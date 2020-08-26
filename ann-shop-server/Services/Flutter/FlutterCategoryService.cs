@@ -9,6 +9,31 @@ namespace ann_shop_server.Services
     public class FlutterCategoryService : IANNService
     {
         #region Lấy thông tin về danh mục
+        #region Mỹ phẩm & Thực phẩm chức năng
+        /// <summary>
+        /// Lấy category Mỹ phẩm & Thực phẩm chức năng
+        /// </summary>
+        /// <returns></returns>
+        public FlutterCategoryModel getCosmetics()
+        {
+            // Mỹ phẩm & Thực phẩm chức năng
+            var womenShoes = createCategoryBySlug("my-pham");
+            womenShoes.name = "Mỹ phẩm";
+            if (womenShoes == null)
+                return null;
+
+            womenShoes.children = new List<FlutterCategoryModel>();
+
+            womenShoes.children.AddRange(
+                createCategoryBySlugs(new List<string>() {
+                    "my-pham",
+                    "thuc-pham-chuc-nang"
+                })
+            );
+
+            return womenShoes;
+        }
+        #endregion
         #region Danh mục giày dép nữ
         /// <summary>
         /// Lấy category Giày dép nữ
@@ -234,7 +259,9 @@ namespace ann_shop_server.Services
 
             womenTShirts.children.AddRange(
                 createCategoryBySlugs(new List<string>() {
-                    "ao-kieu-nu"
+                    "ao-thun-nu",
+                    "ao-kieu-nu",
+                    "ao-thun-nu-form-rong"
                 })
             );
 
@@ -365,6 +392,7 @@ namespace ann_shop_server.Services
                 createCategoryBySlugs(new List<string>() {
                     "ao-thun-ca-sau",
                     "ao-thun-the-thao",
+                    "ao-thun-nam-co-tron",
                     "ao-thun-soc-ngang"
                 })
             );
@@ -465,7 +493,7 @@ namespace ann_shop_server.Services
         #region Danh mục nước hoa
         public FlutterCategoryModel getPerfume()
         {
-            // Đồ bộ nữ
+            // Nước hoa
             var perfume = createCategoryBySlug("nuoc-hoa");
             if (perfume == null)
                 return null;
@@ -625,10 +653,10 @@ namespace ann_shop_server.Services
             //if (redEnvelop != null)
             //    result.Add(redEnvelop);
 
-            // Khẩu trang
-            var faceMask = createCategoryBySlug("khau-trang");
-            if (faceMask != null)
-                result.Add(faceMask);
+            // Mỹ phẩm
+            var cosmetics = getCosmetics();
+            if (cosmetics != null)
+                result.Add(cosmetics);
 
             // Giày dép nữ
             var womenShoes = getWomenShoes();
@@ -704,10 +732,11 @@ namespace ann_shop_server.Services
             if (perfume != null)
                 result.Add(perfume);
 
-            // Mỹ phẩm
-            var cosmetics = createCategoryBySlug("my-pham");
-            if (cosmetics != null)
-                result.Add(cosmetics);
+
+            // Khẩu trang
+            var faceMask = createCategoryBySlug("khau-trang");
+            if (faceMask != null)
+                result.Add(faceMask);
 
             // Tất cả sản phẩm
             var productSale = getProductSale(womenClothes, menClothes);
@@ -748,10 +777,20 @@ namespace ann_shop_server.Services
             if (hot != null)
                 result.Add(hot);
 
-            // Khẩu trang
-            var faceMask = createCategoryBySlug("khau-trang");
-            if (faceMask != null)
-                result.Add(faceMask);
+            // Mỹ phẩm
+            var cosmetics = createCategoryBySlug("my-pham");
+            if (cosmetics != null)
+                result.Add(cosmetics);
+
+            // Thực phẩm chức năng
+            var functionalFoods = createCategoryBySlug("thuc-pham-chuc-nang");
+            if (functionalFoods != null)
+                result.Add(functionalFoods);
+
+            // Nước hoa
+            var perfume = getPerfume();
+            if (perfume != null)
+                result.Add(perfume);
 
             // Giày dép nữ
             var womenShoes = getWomenShoes();
@@ -765,16 +804,6 @@ namespace ann_shop_server.Services
             // Quần áo nam
             if (menClothes != null)
                 result.Add(menClothes);
-
-            // Nước hoa
-            var perfume = getPerfume();
-            if (perfume != null)
-                result.Add(perfume);
-
-            // Mỹ phẩm
-            var cosmetics = createCategoryBySlug("my-pham");
-            if (cosmetics != null)
-                result.Add(cosmetics);
 
             // Đồ bộ nữ
             var womenOutfit = getWomenOutfit();
@@ -840,6 +869,16 @@ namespace ann_shop_server.Services
             var womenShirts = createCategoryBySlug("ao-so-mi-nu");
             if (womenShirts != null)
                 result.Add(womenShirts);
+
+            // Túi xách nữ
+            var bags = createCategoryBySlug("tui-xach-nu");
+            if (bags != null)
+                result.Add(bags);
+
+            // Khẩu trang
+            var faceMask = createCategoryBySlug("khau-trang");
+            if (faceMask != null)
+                result.Add(faceMask);
 
             return result;
         }

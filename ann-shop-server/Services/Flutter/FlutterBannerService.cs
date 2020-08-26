@@ -16,19 +16,40 @@ namespace ann_shop_server.Services
         {
             return new List<FlutterBannerModel>()
             {
+                //new FlutterBannerModel()
+                //{
+                //    action = FlutterPageNavigation.ViewMore,
+                //    name = "Sỉ khẩu trang vải",
+                //    actionValue = "si-khau-trang-vai",
+                //    image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg"
+                //},
+                //new FlutterBannerModel()
+                //{
+                //    action = FlutterPageNavigation.ViewMore,
+                //    name = "Sỉ gel rửa tay khô 24h",
+                //    actionValue = "si-gel-rua-tay-kho-24h",
+                //    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
+                //},
                 new FlutterBannerModel()
                 {
-                    action = FlutterPageNavigation.ViewMore,
-                    name = "Sỉ khẩu trang vải",
-                    actionValue = "si-khau-trang-vai",
-                    image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg"
+                    action = FlutterPageNavigation.Product,
+                    name = "Cần tây mật ong Motree",
+                    actionValue = "can-tay-mat-ong",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-can-tay-mat-ong.jpg"
                 },
                 new FlutterBannerModel()
                 {
-                    action = FlutterPageNavigation.ViewMore,
-                    name = "Sỉ gel rửa tay khô 24h",
-                    actionValue = "si-gel-rua-tay-kho-24h",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
+                    action = FlutterPageNavigation.Product,
+                    name = "Cà phê sâm",
+                    actionValue = "cafe-sam-khang-mo",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-ca-phe-sam.jpg"
+                },
+                new FlutterBannerModel()
+                {
+                    action = FlutterPageNavigation.Product,
+                    name = "Ngũ cốc Beone",
+                    actionValue = "ngu-coc-beone-250k",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-ngu-coc-beone.jpg"
                 },
                 new FlutterBannerModel()
                 {
@@ -125,17 +146,24 @@ namespace ann_shop_server.Services
             {
                 new FlutterBannerModel()
                 {
-                    action = FlutterPageNavigation.ViewMore,
-                    name = "Sỉ khẩu trang vải",
-                    actionValue = "si-khau-trang-vai",
-                    image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg"
+                    action = FlutterPageNavigation.Product,
+                    name = "Ngũ cốc Beone",
+                    actionValue = "ngu-coc-beone-250k",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-ngu-coc-beone.jpg"
                 },
                 new FlutterBannerModel()
                 {
-                    action = FlutterPageNavigation.ViewMore,
-                    name = "Sỉ gel rửa tay khô 24h",
-                    actionValue = "si-gel-rua-tay-kho-24h",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
+                    action = FlutterPageNavigation.Product,
+                    name = "Cần tây mật ong Motree",
+                    actionValue = "can-tay-mat-ong",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-can-tay-mat-ong.jpg"
+                },
+                new FlutterBannerModel()
+                {
+                    action = FlutterPageNavigation.Product,
+                    name = "Cà phê sâm",
+                    actionValue = "cafe-sam-khang-mo",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-ca-phe-sam.jpg"
                 },
             };
         }
@@ -153,13 +181,13 @@ namespace ann_shop_server.Services
 
             var header = new List<FlutterBannerModel>()
             {
-                new FlutterBannerModel()
-                {
-                    action = FlutterPageNavigation.ViewMore,
-                    name = "Sỉ khẩu trang vải",
-                    actionValue = "si-khau-trang-vai",
-                    image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg"
-                },
+                //new FlutterBannerModel()
+                //{
+                //    action = FlutterPageNavigation.ViewMore,
+                //    name = "Sỉ khẩu trang vải",
+                //    actionValue = "si-khau-trang-vai",
+                //    image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg"
+                //},
                 new FlutterBannerModel()
                 {
                     action = "category",
@@ -167,11 +195,53 @@ namespace ann_shop_server.Services
                     actionValue = "my-pham",
                     image = "https://khohangsiann.com/wp-content/uploads/si-my-pham-lam-dep.png",
                 },
-                
+                new FlutterBannerModel()
+                {
+                    action = FlutterPageNavigation.Product,
+                    name = "Cần tây mật ong Motree",
+                    actionValue = "can-tay-mat-ong",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-can-tay-mat-ong.jpg"
+                },
+                new FlutterBannerModel()
+                {
+                    action = FlutterPageNavigation.Product,
+                    name = "Cà phê sâm",
+                    actionValue = "cafe-sam-khang-mo",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-ca-phe-sam.jpg"
+                },
+                new FlutterBannerModel()
+                {
+                    action = FlutterPageNavigation.Product,
+                    name = "Ngũ cốc Beone",
+                    actionValue = "ngu-coc-beone-250k",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-ngu-coc-beone.jpg"
+                },
             };
 
             var footer = new List<FlutterBannerModel>()
             {
+
+                new FlutterBannerModel()
+                {
+                    action = FlutterPageNavigation.Product,
+                    name = "Cà phê sâm",
+                    actionValue = "cafe-sam-khang-mo",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-ca-phe-sam.jpg"
+                },
+                new FlutterBannerModel()
+                {
+                    action = FlutterPageNavigation.Product,
+                    name = "Ngũ cốc Beone",
+                    actionValue = "ngu-coc-beone-250k",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-ngu-coc-beone.jpg"
+                },
+                new FlutterBannerModel()
+                {
+                    action = FlutterPageNavigation.Product,
+                    name = "Cần tây mật ong Motree",
+                    actionValue = "can-tay-mat-ong",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-can-tay-mat-ong.jpg"
+                },
                 new FlutterBannerModel()
                 {
                     action = "category",
@@ -179,13 +249,13 @@ namespace ann_shop_server.Services
                     actionValue = "nuoc-hoa",
                     image = "https://khohangsiann.com/wp-content/uploads/si-nuoc-hoa-gia-re-1.png"
                 },
-                new FlutterBannerModel()
-                {
-                    action = FlutterPageNavigation.ViewMore,
-                    name = "Sỉ gel rửa tay khô 24h",
-                    actionValue = "si-gel-rua-tay-kho-24h",
-                    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
-                },
+                //new FlutterBannerModel()
+                //{
+                //    action = FlutterPageNavigation.ViewMore,
+                //    name = "Sỉ gel rửa tay khô 24h",
+                //    actionValue = "si-gel-rua-tay-kho-24h",
+                //    image = "https://khohangsiann.com/wp-content/uploads/si-gel-rua-tay-kho-24h.jpg"
+                //},
             };
 
             if (String.IsNullOrEmpty(position))
