@@ -56,22 +56,22 @@ namespace ann_shop_server.Services
             #endregion
 
             #region Khẩu trang
-            var block2 = _category.createCategoryBlockProduct("khau-trang");
-            if (block2 != null)
-            {
-                blockProducts.Add(new FlutterBlockProductModel()
-                {
-                    banner = new FlutterBannerModel()
-                    {
-                        action = FlutterPageNavigation.ViewMore,
-                        name = "Sỉ khẩu trang vải",
-                        actionValue = "si-khau-trang-vai",
-                        image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg",
-                        createdDate = DateTime.Now
-                    },
-                    category = block2
-                });
-            }
+            //var block2 = _category.createCategoryBlockProduct("khau-trang");
+            //if (block2 != null)
+            //{
+            //    blockProducts.Add(new FlutterBlockProductModel()
+            //    {
+            //        banner = new FlutterBannerModel()
+            //        {
+            //            action = FlutterPageNavigation.ViewMore,
+            //            name = "Sỉ khẩu trang vải",
+            //            actionValue = "si-khau-trang-vai",
+            //            image = "https://khohangsiann.com/wp-content/uploads/xuong-si-khau-trang-1.jpg",
+            //            createdDate = DateTime.Now
+            //        },
+            //        category = block2
+            //    });
+            //}
             #endregion
 
             #region Mỹ phẩm
