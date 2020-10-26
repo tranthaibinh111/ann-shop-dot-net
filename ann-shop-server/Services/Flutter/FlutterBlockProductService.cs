@@ -261,14 +261,14 @@ namespace ann_shop_server.Services
             {
                 blockProducts.Add(new FlutterBlockProductModel()
                 {
-                    banner = new FlutterBannerModel()
-                    {
-                        action = FlutterPageNavigation.ViewMore,
-                        name = "May áo thun đồng phục",
-                        actionValue = "may-ao-thun-dong-phuc",
-                        image = "https://khohangsiann.com/banner/xuong-may-ao-thun-dong-phuc-gia-re-ann.jpg",
-                        createdDate = DateTime.Now
-                    },
+                    //banner = new FlutterBannerModel()
+                    //{
+                    //    action = FlutterPageNavigation.ViewMore,
+                    //    name = "May áo thun đồng phục",
+                    //    actionValue = "may-ao-thun-dong-phuc",
+                    //    image = "https://khohangsiann.com/banner/xuong-may-ao-thun-dong-phuc-gia-re-ann.jpg",
+                    //    createdDate = DateTime.Now
+                    //},
                     category = block10
                 });
             }

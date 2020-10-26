@@ -871,14 +871,14 @@ namespace ann_shop_server.Services
                 result.Add(womenShirts);
 
             // Túi xách nữ
-            var bags = createCategoryBySlug("tui-xach-nu");
-            if (bags != null)
-                result.Add(bags);
+            //var bags = createCategoryBySlug("tui-xach-nu");
+            //if (bags != null)
+            //    result.Add(bags);
 
             // Khẩu trang
-            var faceMask = createCategoryBySlug("khau-trang");
-            if (faceMask != null)
-                result.Add(faceMask);
+            //var faceMask = createCategoryBySlug("khau-trang");
+            //if (faceMask != null)
+            //    result.Add(faceMask);
 
             return result;
         }

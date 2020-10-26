@@ -33,6 +33,13 @@ namespace ann_shop_server.Services
                 new FlutterBannerModel()
                 {
                     action = FlutterPageNavigation.Product,
+                    name = "Thảo mộc giảm cân Cenly",
+                    actionValue = "thao-moc-giam-can-cenly-cho-voc-dang-hoan-hao",
+                    image = "https://khohangsiann.com/wp-content/uploads/banner-thao-moc-giam-can-cenly.jpg"
+                },
+                new FlutterBannerModel()
+                {
+                    action = FlutterPageNavigation.Product,
                     name = "Cần tây mật ong Motree",
                     actionValue = "can-tay-mat-ong",
                     image = "https://khohangsiann.com/wp-content/uploads/banner-can-tay-mat-ong.jpg"
@@ -65,13 +72,13 @@ namespace ann_shop_server.Services
                     actionValue = "nuoc-hoa",
                     image = "https://khohangsiann.com/wp-content/uploads/si-nuoc-hoa-gia-re-1.png"
                 },
-                new FlutterBannerModel()
-                {
-                    action = FlutterPageNavigation.ViewMore,
-                    name = "May áo thun đồng phục",
-                    actionValue = "may-ao-thun-dong-phuc",
-                    image = "https://khohangsiann.com/banner/xuong-may-ao-thun-dong-phuc-gia-re-ann.jpg"
-                },
+                //new FlutterBannerModel()
+                //{
+                //    action = FlutterPageNavigation.ViewMore,
+                //    name = "May áo thun đồng phục",
+                //    actionValue = "may-ao-thun-dong-phuc",
+                //    image = "https://khohangsiann.com/banner/xuong-may-ao-thun-dong-phuc-gia-re-ann.jpg"
+                //},
             };
         }
 
@@ -144,6 +151,13 @@ namespace ann_shop_server.Services
         {
             return new List<FlutterBannerModel>()
             {
+                new FlutterBannerModel()
+                {
+                    action = "category",
+                    name = "Nước hoa",
+                    actionValue = "nuoc-hoa",
+                    image = "https://khohangsiann.com/wp-content/uploads/si-nuoc-hoa-gia-re-1.png"
+                },
                 new FlutterBannerModel()
                 {
                     action = FlutterPageNavigation.Product,
