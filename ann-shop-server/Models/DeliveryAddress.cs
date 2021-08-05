@@ -12,28 +12,35 @@ namespace ann_shop_server.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Coupon
+    public partial class DeliveryAddress
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Coupon()
+        public DeliveryAddress()
         {
             this.PreOrders = new HashSet<PreOrder>();
+            this.tbl_Order = new HashSet<tbl_Order>();
         }
     
-        public int ID { get; set; }
-        public string Code { get; set; }
-        public decimal Value { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
-        public bool Active { get; set; }
+        public long Id { get; set; }
+        public string FullName { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public int ProvinceId { get; set; }
+        public int DistrictId { get; set; }
+        public int WardId { get; set; }
+        public bool IsDefault { get; set; }
+        public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
         public System.DateTime ModifiedDate { get; set; }
-        public int ProductNumber { get; set; }
-        public decimal PriceMin { get; set; }
-        public string Name { get; set; }
-        public string Publish { get; set; }
+        public bool IsActive { get; set; }
     
+        public virtual DeliverySaveAddress DeliverySaveAddress { get; set; }
+        public virtual DeliverySaveAddress DeliverySaveAddress1 { get; set; }
+        public virtual DeliverySaveAddress DeliverySaveAddress2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PreOrder> PreOrders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_Order> tbl_Order { get; set; }
     }
 }

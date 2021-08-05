@@ -1,9 +1,13 @@
-﻿using ann_shop_server.Models;
-using ann_shop_server.Utils;
+﻿#region .NetFramework
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+#endregion
+
+#region ANN Shop
+using ann_shop_server.Models;
+using ann_shop_server.Utils;
+#endregion
 
 namespace ann_shop_server.Services
 {
@@ -31,7 +35,7 @@ namespace ann_shop_server.Services
         #endregion
 
         #region Lấy danh sách sản phẩm
-        #region Lấy thông tin biến thể màu 
+        #region Lấy thông tin biến thể màu
         /// <summary>
         /// Lấy thông tin biến thể màu
         /// </summary>

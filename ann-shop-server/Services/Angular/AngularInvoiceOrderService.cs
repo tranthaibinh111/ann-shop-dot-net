@@ -57,6 +57,13 @@ namespace ann_shop_server.Services
         {
             using (var con = new inventorymanagementEntities())
             {
+                #region Lấy triết khấu mặc định
+                var defaultDiscount = con.tbl_Order
+                    .Where(x => x.ID == orderID)
+                    .Select(x => x.DiscountPerProduct.HasValue ? x.DiscountPerProduct.Value : 0)
+                    .SingleOrDefault();
+                #endregion
+
                 #region Lấy thông chi tiết của đơn hàng
                 var orderItems = con.tbl_OrderDetail
                     .Where(x => x.OrderID.HasValue && x.OrderID.Value == orderID)
@@ -66,6 +73,7 @@ namespace ann_shop_server.Services
                         productVariableID = x.ProductVariableID.Value,
                         sku = x.SKU,
                         price = x.Price.HasValue ? x.Price.Value : 0,
+                        discount = x.DiscountPrice.HasValue ? x.DiscountPrice.Value : 0,
                         quantity = x.Quantity.HasValue ? (int)x.Quantity.Value : 0
                     });
                 #endregion
@@ -80,6 +88,7 @@ namespace ann_shop_server.Services
                         productVariableID = x.ProductVariableID,
                         sku = x.SKU,
                         price = x.Price,
+                        discount = 0D,
                         quantity = x.Quantity,
                         status = x.Status,
                         createdDate = x.CreatedDate
@@ -138,6 +147,7 @@ namespace ann_shop_server.Services
                               productVariableID = x.productVariableID,
                               sku = x.sku,
                               price = x.price,
+                              discount = 0D,
                               quantity = x.quantity,
                           });
 
@@ -163,6 +173,7 @@ namespace ann_shop_server.Services
                                     productVariableID = parent.orderItem.productVariableID,
                                     sku = parent.orderItem.sku,
                                     price = child != null ? child.price : parent.orderItem.price,
+                                    discount = 0D,
                                     quantity = child != null ? child.quantity : parent.orderItem.quantity,
                                 }
                             );
@@ -367,6 +378,7 @@ namespace ann_shop_server.Services
                         product = product,
                         price = x.orderItem.price,
                         quantity = Convert.ToInt32(x.orderItem.quantity),
+                        discount = x.orderItem.discount > 0 ? x.orderItem.discount : defaultDiscount,
                         totalPrice = x.orderItem.price * x.orderItem.quantity
                     };
                 }).ToList();
@@ -387,14 +399,13 @@ namespace ann_shop_server.Services
                     .Where(x => x.ID == orderID)
                     .Where(x => x.CustomerID == customer)
                     .FirstOrDefault();
-                
+
                 // Trường hợp đơn hàng không phải của khách
                 if (order == null)
                     return null;
 
                 var quantity = con.tbl_OrderDetail.Where(x => x.OrderID == order.ID).Count();
                 var priceNotDiscount = Convert.ToDouble(order.TotalPriceNotDiscount);
-                var discountPerItem = Convert.ToDouble(order.DiscountPerProduct);
                 var discount = Convert.ToDouble(order.TotalDiscount);
                 var feeShipping = Convert.ToDouble(order.FeeShipping);
                 var priceDiscount = priceNotDiscount - discount;
@@ -444,7 +455,6 @@ namespace ann_shop_server.Services
                     staffName = order.CreatedBy,
                     quantity = quantity,
                     priceNotDiscount = priceNotDiscount,
-                    discountPerItem = discountPerItem,
                     discount = discount,
                     priceDiscount = priceDiscount,
                     refund = refund,
@@ -527,7 +537,7 @@ namespace ann_shop_server.Services
                             con.SaveChanges();
                         }
                     }
-                    
+
                     if(index > 0)
                         con.SaveChanges();
 

@@ -12,15 +12,18 @@ namespace ann_shop_server.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_CheckWarehouse
+    public partial class PostVideo
     {
-        public int ID { get; set; }
-        public Nullable<int> AgentID { get; set; }
-        public Nullable<int> Type { get; set; }
-        public string Note { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public long Id { get; set; }
+        public string VideoId { get; set; }
+        public Nullable<int> PostId { get; set; }
+        public bool IsActive { get; set; }
         public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+    
+        public virtual PostPublic PostPublic { get; set; }
+        public virtual Video Video { get; set; }
     }
 }

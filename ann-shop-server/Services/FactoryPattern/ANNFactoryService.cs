@@ -12,12 +12,12 @@ namespace ann_shop_server.Services
         public static T getInstance<T>() where T: new()
         {
             IANNService instance;
-            bool exist = _instance.TryGetValue(typeof(T).Name, out instance);
+            bool exist = _instance.TryGetValue(typeof(T).FullName, out instance);
 
             if (!exist)
             {
                 instance = (IANNService)new T();
-                _instance.Add(typeof(T).Name, instance);
+                _instance.Add(typeof(T).FullName, instance);
             }
 
             return (T)instance;

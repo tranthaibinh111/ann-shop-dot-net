@@ -23,11 +23,11 @@ namespace ann_shop_server.Models
         public string Content { get; set; }
         public string Action { get; set; }
         public string ActionValue { get; set; }
+        public bool AtHome { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
-        public bool AtHome { get; set; }
         public Nullable<System.DateTime> AppUpdate { get; set; }
     }
 }

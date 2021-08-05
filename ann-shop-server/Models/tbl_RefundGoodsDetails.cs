@@ -37,5 +37,7 @@ namespace ann_shop_server.Models
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
+        public decimal CostOfGood { get; set; }
+        public Nullable<double> TotalCostOfGood { get; set; }
     }
 }

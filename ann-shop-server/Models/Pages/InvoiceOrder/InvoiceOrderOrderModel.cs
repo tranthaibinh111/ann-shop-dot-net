@@ -9,12 +9,11 @@ namespace ann_shop_server.Models
     {
         public int id { get; set; }
         public int kind { get; set; }
-        public DateTime createdDate { get; set; } 
+        public DateTime createdDate { get; set; }
         public Nullable<DateTime> dateDone { get; set; }
         public string staffName { get; set; }
         public int quantity { get; set; }
         public double priceNotDiscount { get; set; }
-        public double discountPerItem { get; set; }
         public double discount { get; set; }
         public double priceDiscount { get; set; }
         public InvoiceOrderRefundModel refund { get; set; }

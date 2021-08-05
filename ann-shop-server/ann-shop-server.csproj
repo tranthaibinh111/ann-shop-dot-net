@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -46,11 +47,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -339,12 +340,66 @@
     <Compile Include="Models\BankTransfer.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CheckWarehouse.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckWarehouseDetail.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Common\Category\CategoryModel.cs" />
     <Compile Include="Models\Common\NotificationCategory\NotificationCategoryModel.cs" />
     <Compile Include="Models\Common\Notification\NotificationKind.cs" />
     <Compile Include="Models\Common\PostCategory\PostCategoryModel.cs" />
     <Compile Include="Models\Common\SMS\SendIntroApp.cs" />
     <Compile Include="Models\Common\SMS\SMSBrandNameSendMessageModel.cs" />
+    <Compile Include="Models\Coupon.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CronJob.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CronJobProductStatu.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerCoupon.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerEditOrder.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Delivery.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliveryAddress.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliveryPostOffice.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliverySaveAddress.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliverySaveNotification.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliverySaveReason.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliverySaveReport.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliverySaveStatu.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExchangeRate.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fee.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FeeType.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Flutter\FlutterBanner\FlutterBannerProductPosition.cs" />
     <Compile Include="Models\Flutter\FlutterPageNavigation.cs" />
     <Compile Include="Models\GroupNotifyPromotion.cs">
@@ -368,113 +423,31 @@
     <Compile Include="Models\PostCategory.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PostClone.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PostPublic.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PostPublicImage.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserNotifyPromotion.cs">
+    <Compile Include="Models\PostVideo.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Services\Common\NotificationCategoryService.cs" />
-    <Compile Include="Services\Common\NotificationService.cs" />
-    <Compile Include="Services\Common\PostCategoryService .cs" />
-    <Compile Include="Services\Common\CouponService.cs" />
-    <Compile Include="Models\Common\Order\OrderType.cs" />
-    <Compile Include="Models\Common\Order\RequirementKind.cs" />
-    <Compile Include="Models\Common\Product\ColorModel.cs" />
-    <Compile Include="Models\Common\Product\ProductBadge.cs" />
-    <Compile Include="Models\Common\Product\ProductCardModel.cs" />
-    <Compile Include="Models\Common\Product\ProductFilterModel.cs" />
-    <Compile Include="Models\Common\Product\ProductSortKind.cs" />
-    <Compile Include="Models\Common\Product\ProductStyle.cs" />
-    <Compile Include="Models\Common\Product\SizeModel.cs" />
-    <Compile Include="Models\Common\Product\ProductSortModel.cs" />
-    <Compile Include="Models\Common\Product\TagModel.cs" />
-    <Compile Include="Models\Common\Product\VariableKind.cs" />
-    <Compile Include="Models\Common\Stock\StockProductVariableModel.cs" />
-    <Compile Include="Models\Common\SMS\SMSBrandNameRespondModel.cs" />
-    <Compile Include="Models\Common\SMS\SendOTPModel.cs" />
-    <Compile Include="Models\Common\Product\Token\TokenModel.cs" />
-    <Compile Include="Models\Common\User\UserRegisterModel.cs" />
-    <Compile Include="Models\Coupon.cs">
+    <Compile Include="Models\PostWordpress.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomerCoupon.cs">
+    <Compile Include="Models\PreOrder.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Flutter\FlutterCoupon\FlutterCouponModel.cs" />
-    <Compile Include="Models\Flutter\FlutterCoupon\FlutterPromotionModel.cs" />
-    <Compile Include="Models\Flutter\FlutterProduct\FlutterCarouselModel.cs" />
-    <Compile Include="Models\Flutter\FlutterProduct\FlutterCopyModel.cs" />
-    <Compile Include="Models\Flutter\FlutterUpload\FlutterAppReviewEvidenceModel.cs" />
-    <Compile Include="Models\Flutter\FlutterUser\FlutterCreatePasswordModel.cs" />
-    <Compile Include="Models\Flutter\FlutterUser\FlutterPasswordNewBithdayModel.cs" />
-    <Compile Include="Models\Common\User\UserInfoModel.cs" />
-    <Compile Include="Models\Common\User\ConfirmOTPModel.cs" />
-    <Compile Include="Models\CronJob.cs">
+    <Compile Include="Models\PreOrderDetail.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CronJobProductStatu.cs">
-      <DependentUpon>ann-shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CustomerEditOrder.cs">
-      <DependentUpon>ann-shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Delivery.cs">
-      <DependentUpon>ann-shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DeliveryPostOffice.cs">
-      <DependentUpon>ann-shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Fee.cs">
-      <DependentUpon>ann-shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FeeType.cs">
-      <DependentUpon>ann-shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Flutter\FlutterBanner\FlutterBannerModel.cs" />
-    <Compile Include="Models\Flutter\FlutterBlockProduct\FlutterBlockProductModel.cs" />
-    <Compile Include="Models\Flutter\FlutterFilter\FlutterBannerFilterModel.cs" />
-    <Compile Include="Models\Flutter\FlutterFilter\FlutterNotificationFilterModel.cs" />
-    <Compile Include="Models\Flutter\FlutterFilter\FlutterPostFilterModel.cs" />
-    <Compile Include="Models\Flutter\FlutterNotification\FlutterNotificationCardModel.cs" />
-    <Compile Include="Models\Flutter\FlutterNotification\FlutterNotificationModel.cs" />
-    <Compile Include="Models\Flutter\FlutterNotification\NotificationModel.cs" />
-    <Compile Include="Models\Flutter\FlutterPostCategory\FlutterPostCategoryModel.cs" />
-    <Compile Include="Models\Flutter\FlutterPost\FlutterPostCardModel.cs" />
-    <Compile Include="Models\Flutter\FlutterPost\FlutterPostModel.cs" />
-    <Compile Include="Models\Flutter\FlutterPost\NewsModel.cs" />
-    <Compile Include="Models\Flutter\FlutterProduct\FlutterDiscountModel.cs" />
-    <Compile Include="Models\Flutter\FlutterProduct\FlutterProductCardModel.cs" />
-    <Compile Include="Models\Flutter\FlutterProduct\FlutterProductModel.cs" />
-    <Compile Include="Models\Flutter\FlutterCategory\FlutterCategoryModel.cs" />
-    <Compile Include="Models\Flutter\FlutterFilter\FlutterProductFilterModel.cs" />
-    <Compile Include="Models\Flutter\FlutterUser\FlutterUserModel.cs" />
-    <Compile Include="Models\Pages\CategoryPage\CategoryPageFilterModel.cs" />
-    <Compile Include="Models\Pages\CategoryPage\CategoryPageParameterModel.cs" />
-    <Compile Include="Models\Pages\Home\HomePageFilterModel.cs" />
-    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderCustomerModel.cs" />
-    <Compile Include="Models\Common\LoginModel.cs" />
-    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderFeeOtherModel.cs" />
-    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderOrderItemModel.cs" />
-    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderOrderModel.cs" />
-    <Compile Include="Models\Common\PaginationMetadataModel.cs" />
-    <Compile Include="Models\Common\PagingParameterModel.cs" />
-    <Compile Include="Models\Common\Post\PostModel.cs" />
-    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderProductModel.cs" />
-    <Compile Include="Models\Common\Stock\StockModel.cs" />
-    <Compile Include="Models\Common\ThumbnailModel.cs" />
-    <Compile Include="Models\Common\VariableType.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderRefundModel.cs" />
-    <Compile Include="Models\Pages\Tag\TagPageFilterModel.cs" />
-    <Compile Include="Models\Pages\Tag\TagPageParameterModel.cs" />
-    <Compile Include="Models\post\PostPageModel.cs" />
-    <Compile Include="Models\Common\Product\ProductModel.cs" />
-    <Compile Include="Models\Common\Product\ProductRelatedModel.cs" />
     <Compile Include="Models\ProductTag.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductVideo.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReceivedProductHistory.cs">
@@ -486,13 +459,13 @@
     <Compile Include="Models\RegisterProduct.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Search\Product\SearchProductFilterModel.cs" />
-    <Compile Include="Models\Search\Product\SearchProductParameterModel.cs" />
-    <Compile Include="Models\Search\SearchProductOrderedModel.cs" />
     <Compile Include="Models\Session.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Shipper.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StockManager2.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tag.cs">
@@ -514,12 +487,6 @@
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Category.cs">
-      <DependentUpon>ann-shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbl_CheckWarehouse.cs">
-      <DependentUpon>ann-shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbl_CheckWarehouseDetail.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Config.cs">
@@ -615,9 +582,100 @@
     <Compile Include="Models\tbl_WhiteDomain.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Token.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>ann-shop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserNotifyPromotion.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Video.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewOrder.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebWordpress.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZaloIndustry.cs">
+      <DependentUpon>ann-shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Common\NotificationCategoryService.cs" />
+    <Compile Include="Services\Common\NotificationService.cs" />
+    <Compile Include="Services\Common\PostCategoryService .cs" />
+    <Compile Include="Services\Common\CouponService.cs" />
+    <Compile Include="Models\Common\Order\OrderType.cs" />
+    <Compile Include="Models\Common\Order\RequirementKind.cs" />
+    <Compile Include="Models\Common\Product\ColorModel.cs" />
+    <Compile Include="Models\Common\Product\ProductBadge.cs" />
+    <Compile Include="Models\Common\Product\ProductCardModel.cs" />
+    <Compile Include="Models\Common\Product\ProductFilterModel.cs" />
+    <Compile Include="Models\Common\Product\ProductSortKind.cs" />
+    <Compile Include="Models\Common\Product\ProductStyle.cs" />
+    <Compile Include="Models\Common\Product\SizeModel.cs" />
+    <Compile Include="Models\Common\Product\ProductSortModel.cs" />
+    <Compile Include="Models\Common\Product\TagModel.cs" />
+    <Compile Include="Models\Common\Product\VariableKind.cs" />
+    <Compile Include="Models\Common\Stock\StockProductVariableModel.cs" />
+    <Compile Include="Models\Common\SMS\SMSBrandNameRespondModel.cs" />
+    <Compile Include="Models\Common\SMS\SendOTPModel.cs" />
+    <Compile Include="Models\Common\Product\Token\TokenModel.cs" />
+    <Compile Include="Models\Common\User\UserRegisterModel.cs" />
+    <Compile Include="Models\Flutter\FlutterCoupon\FlutterCouponModel.cs" />
+    <Compile Include="Models\Flutter\FlutterCoupon\FlutterPromotionModel.cs" />
+    <Compile Include="Models\Flutter\FlutterProduct\FlutterCarouselModel.cs" />
+    <Compile Include="Models\Flutter\FlutterProduct\FlutterCopyModel.cs" />
+    <Compile Include="Models\Flutter\FlutterUpload\FlutterAppReviewEvidenceModel.cs" />
+    <Compile Include="Models\Flutter\FlutterUser\FlutterCreatePasswordModel.cs" />
+    <Compile Include="Models\Flutter\FlutterUser\FlutterPasswordNewBithdayModel.cs" />
+    <Compile Include="Models\Common\User\UserInfoModel.cs" />
+    <Compile Include="Models\Common\User\ConfirmOTPModel.cs" />
+    <Compile Include="Models\Flutter\FlutterBanner\FlutterBannerModel.cs" />
+    <Compile Include="Models\Flutter\FlutterBlockProduct\FlutterBlockProductModel.cs" />
+    <Compile Include="Models\Flutter\FlutterFilter\FlutterBannerFilterModel.cs" />
+    <Compile Include="Models\Flutter\FlutterFilter\FlutterNotificationFilterModel.cs" />
+    <Compile Include="Models\Flutter\FlutterFilter\FlutterPostFilterModel.cs" />
+    <Compile Include="Models\Flutter\FlutterNotification\FlutterNotificationCardModel.cs" />
+    <Compile Include="Models\Flutter\FlutterNotification\FlutterNotificationModel.cs" />
+    <Compile Include="Models\Flutter\FlutterNotification\NotificationModel.cs" />
+    <Compile Include="Models\Flutter\FlutterPostCategory\FlutterPostCategoryModel.cs" />
+    <Compile Include="Models\Flutter\FlutterPost\FlutterPostCardModel.cs" />
+    <Compile Include="Models\Flutter\FlutterPost\FlutterPostModel.cs" />
+    <Compile Include="Models\Flutter\FlutterPost\NewsModel.cs" />
+    <Compile Include="Models\Flutter\FlutterProduct\FlutterDiscountModel.cs" />
+    <Compile Include="Models\Flutter\FlutterProduct\FlutterProductCardModel.cs" />
+    <Compile Include="Models\Flutter\FlutterProduct\FlutterProductModel.cs" />
+    <Compile Include="Models\Flutter\FlutterCategory\FlutterCategoryModel.cs" />
+    <Compile Include="Models\Flutter\FlutterFilter\FlutterProductFilterModel.cs" />
+    <Compile Include="Models\Flutter\FlutterUser\FlutterUserModel.cs" />
+    <Compile Include="Models\Pages\CategoryPage\CategoryPageFilterModel.cs" />
+    <Compile Include="Models\Pages\CategoryPage\CategoryPageParameterModel.cs" />
+    <Compile Include="Models\Pages\Home\HomePageFilterModel.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderCustomerModel.cs" />
+    <Compile Include="Models\Common\LoginModel.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderFeeOtherModel.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderOrderItemModel.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderOrderModel.cs" />
+    <Compile Include="Models\Common\PaginationMetadataModel.cs" />
+    <Compile Include="Models\Common\PagingParameterModel.cs" />
+    <Compile Include="Models\Common\Post\PostModel.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderProductModel.cs" />
+    <Compile Include="Models\Common\Stock\StockModel.cs" />
+    <Compile Include="Models\Common\ThumbnailModel.cs" />
+    <Compile Include="Models\Common\VariableType.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Pages\InvoiceOrder\InvoiceOrderRefundModel.cs" />
+    <Compile Include="Models\Pages\Tag\TagPageFilterModel.cs" />
+    <Compile Include="Models\Pages\Tag\TagPageParameterModel.cs" />
+    <Compile Include="Models\post\PostPageModel.cs" />
+    <Compile Include="Models\Common\Product\ProductModel.cs" />
+    <Compile Include="Models\Common\Product\ProductRelatedModel.cs" />
+    <Compile Include="Models\Search\Product\SearchProductFilterModel.cs" />
+    <Compile Include="Models\Search\Product\SearchProductParameterModel.cs" />
+    <Compile Include="Models\Search\SearchProductOrderedModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -784,7 +842,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

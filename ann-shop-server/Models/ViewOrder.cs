@@ -12,19 +12,20 @@ namespace ann_shop_server.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CustomerEditOrder
+    public partial class ViewOrder
     {
-        public int ID { get; set; }
-        public int OrderID { get; set; }
-        public int OrderItemID { get; set; }
-        public int ProductID { get; set; }
-        public int ProductVariableID { get; set; }
-        public string SKU { get; set; }
-        public int Quantity { get; set; }
-        public double Price { get; set; }
-        public double TotalPrice { get; set; }
+        public string Phone { get; set; }
+        public long Id { get; set; }
         public int Status { get; set; }
-        public int CustomerID { get; set; }
+        public Nullable<long> PreOrderId { get; set; }
+        public Nullable<int> OrderId { get; set; }
+        public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public byte[] Timestamp { get; set; }
+    
+        public virtual PreOrder PreOrder { get; set; }
+        public virtual tbl_Order tbl_Order { get; set; }
     }
 }

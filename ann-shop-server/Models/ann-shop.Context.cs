@@ -12,41 +12,69 @@ namespace ann_shop_server.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class inventorymanagementEntities : DbContext
     {
         public inventorymanagementEntities()
             : base("name=inventorymanagementEntities")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<BankAccount> BankAccounts { get; set; }
         public virtual DbSet<BankTransfer> BankTransfers { get; set; }
+        public virtual DbSet<CheckWarehouse> CheckWarehouses { get; set; }
+        public virtual DbSet<CheckWarehouseDetail> CheckWarehouseDetails { get; set; }
+        public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<CronJob> CronJobs { get; set; }
         public virtual DbSet<CronJobProductStatu> CronJobProductStatus { get; set; }
+        public virtual DbSet<CustomerCoupon> CustomerCoupons { get; set; }
+        public virtual DbSet<CustomerEditOrder> CustomerEditOrders { get; set; }
         public virtual DbSet<Delivery> Deliveries { get; set; }
+        public virtual DbSet<DeliveryAddress> DeliveryAddresses { get; set; }
         public virtual DbSet<DeliveryPostOffice> DeliveryPostOffices { get; set; }
+        public virtual DbSet<DeliverySaveAddress> DeliverySaveAddresses { get; set; }
+        public virtual DbSet<DeliverySaveNotification> DeliverySaveNotifications { get; set; }
+        public virtual DbSet<DeliverySaveReason> DeliverySaveReasons { get; set; }
+        public virtual DbSet<DeliverySaveReport> DeliverySaveReports { get; set; }
+        public virtual DbSet<DeliverySaveStatu> DeliverySaveStatus { get; set; }
+        public virtual DbSet<ExchangeRate> ExchangeRates { get; set; }
         public virtual DbSet<Fee> Fees { get; set; }
         public virtual DbSet<FeeType> FeeTypes { get; set; }
+        public virtual DbSet<GroupNotifyPromotion> GroupNotifyPromotions { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<NotificationCategory> NotificationCategories { get; set; }
+        public virtual DbSet<NotifyNew> NotifyNews { get; set; }
+        public virtual DbSet<NotifyPromotion> NotifyPromotions { get; set; }
+        public virtual DbSet<NotifyUser> NotifyUsers { get; set; }
+        public virtual DbSet<PostCategory> PostCategories { get; set; }
+        public virtual DbSet<PostClone> PostClones { get; set; }
+        public virtual DbSet<PostPublic> PostPublics { get; set; }
+        public virtual DbSet<PostPublicImage> PostPublicImages { get; set; }
+        public virtual DbSet<PostVideo> PostVideos { get; set; }
+        public virtual DbSet<PostWordpress> PostWordpresses { get; set; }
+        public virtual DbSet<PreOrder> PreOrders { get; set; }
+        public virtual DbSet<PreOrderDetail> PreOrderDetails { get; set; }
+        public virtual DbSet<ProductTag> ProductTags { get; set; }
+        public virtual DbSet<ProductVideo> ProductVideos { get; set; }
         public virtual DbSet<ReceivedProductHistory> ReceivedProductHistories { get; set; }
         public virtual DbSet<Register> Registers { get; set; }
         public virtual DbSet<RegisterProduct> RegisterProducts { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
+        public virtual DbSet<StockManager2> StockManager2 { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<tbl_Account> tbl_Account { get; set; }
         public virtual DbSet<tbl_AccountInfo> tbl_AccountInfo { get; set; }
         public virtual DbSet<tbl_Agent> tbl_Agent { get; set; }
         public virtual DbSet<tbl_AgentProduct> tbl_AgentProduct { get; set; }
         public virtual DbSet<tbl_AgentProductVariable> tbl_AgentProductVariable { get; set; }
         public virtual DbSet<tbl_Category> tbl_Category { get; set; }
-        public virtual DbSet<tbl_CheckWarehouse> tbl_CheckWarehouse { get; set; }
-        public virtual DbSet<tbl_CheckWarehouseDetail> tbl_CheckWarehouseDetail { get; set; }
         public virtual DbSet<tbl_Config> tbl_Config { get; set; }
         public virtual DbSet<tbl_Customer> tbl_Customer { get; set; }
         public virtual DbSet<tbl_CustomerLevel> tbl_CustomerLevel { get; set; }
@@ -78,21 +106,12 @@ namespace ann_shop_server.Models
         public virtual DbSet<tbl_Variable> tbl_Variable { get; set; }
         public virtual DbSet<tbl_VariableValue> tbl_VariableValue { get; set; }
         public virtual DbSet<tbl_WhiteDomain> tbl_WhiteDomain { get; set; }
-        public virtual DbSet<CustomerEditOrder> CustomerEditOrders { get; set; }
-        public virtual DbSet<ProductTag> ProductTags { get; set; }
-        public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<Token> Tokens { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Coupon> Coupons { get; set; }
-        public virtual DbSet<CustomerCoupon> CustomerCoupons { get; set; }
-        public virtual DbSet<GroupNotifyPromotion> GroupNotifyPromotions { get; set; }
-        public virtual DbSet<Notification> Notifications { get; set; }
-        public virtual DbSet<NotifyNew> NotifyNews { get; set; }
-        public virtual DbSet<NotifyPromotion> NotifyPromotions { get; set; }
-        public virtual DbSet<NotifyUser> NotifyUsers { get; set; }
         public virtual DbSet<UserNotifyPromotion> UserNotifyPromotions { get; set; }
-        public virtual DbSet<NotificationCategory> NotificationCategories { get; set; }
-        public virtual DbSet<PostCategory> PostCategories { get; set; }
-        public virtual DbSet<PostPublic> PostPublics { get; set; }
-        public virtual DbSet<PostPublicImage> PostPublicImages { get; set; }
+        public virtual DbSet<Video> Videos { get; set; }
+        public virtual DbSet<ViewOrder> ViewOrders { get; set; }
+        public virtual DbSet<WebWordpress> WebWordpresses { get; set; }
+        public virtual DbSet<ZaloIndustry> ZaloIndustries { get; set; }
     }
 }

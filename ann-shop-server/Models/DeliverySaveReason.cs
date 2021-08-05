@@ -12,28 +12,20 @@ namespace ann_shop_server.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Coupon
+    public partial class DeliverySaveReason
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Coupon()
+        public DeliverySaveReason()
         {
-            this.PreOrders = new HashSet<PreOrder>();
+            this.DeliverySaveNotifications = new HashSet<DeliverySaveNotification>();
         }
     
-        public int ID { get; set; }
-        public string Code { get; set; }
-        public decimal Value { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
-        public bool Active { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime ModifiedDate { get; set; }
-        public int ProductNumber { get; set; }
-        public decimal PriceMin { get; set; }
-        public string Name { get; set; }
-        public string Publish { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PreOrder> PreOrders { get; set; }
+        public virtual ICollection<DeliverySaveNotification> DeliverySaveNotifications { get; set; }
     }
 }

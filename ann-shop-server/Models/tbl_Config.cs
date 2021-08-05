@@ -30,5 +30,7 @@ namespace ann_shop_server.Models
         public Nullable<int> HideProduct { get; set; }
         public Nullable<int> ViewAllOrders { get; set; }
         public Nullable<int> ViewAllReports { get; set; }
+        public int MinQuantityOfOrder { get; set; }
+        public int StaffIndex { get; set; }
     }
 }

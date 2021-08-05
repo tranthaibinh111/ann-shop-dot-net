@@ -11,6 +11,7 @@ namespace ann_shop_server.Models
         public InvoiceOrderProductModel product { get; set; }
         public int quantity { get; set; }
         public double price { get; set; }
+        public double discount { get; set; }
         public double totalPrice { get; set; }
     }
 }

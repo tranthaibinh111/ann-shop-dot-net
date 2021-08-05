@@ -25,5 +25,6 @@ namespace ann_shop_server.Models
         public string ModifiedBy { get; set; }
         public string VariableValueText { get; set; }
         public string SKUText { get; set; }
+        public string EnVariableValue { get; set; }
     }
 }
