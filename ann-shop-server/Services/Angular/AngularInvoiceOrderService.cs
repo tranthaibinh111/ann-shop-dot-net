@@ -349,6 +349,7 @@ namespace ann_shop_server.Services
 
                 return data.Select(x =>
                 {
+                    var discount = x.orderItem.discount > 0 ? x.orderItem.discount : defaultDiscount;
                     var product = new InvoiceOrderProductModel();
 
                     if (x.product != null && x.productVariable == null)
@@ -378,8 +379,8 @@ namespace ann_shop_server.Services
                         product = product,
                         price = x.orderItem.price,
                         quantity = Convert.ToInt32(x.orderItem.quantity),
-                        discount = x.orderItem.discount > 0 ? x.orderItem.discount : defaultDiscount,
-                        totalPrice = x.orderItem.price * x.orderItem.quantity
+                        discount = discount,
+                        totalPrice = (x.orderItem.price - discount) * x.orderItem.quantity
                     };
                 }).ToList();
             }
