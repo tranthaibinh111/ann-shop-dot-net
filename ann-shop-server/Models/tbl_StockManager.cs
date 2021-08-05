@@ -31,5 +31,6 @@ namespace ann_shop_server.Models
         public string SKU { get; set; }
         public Nullable<int> MoveProID { get; set; }
         public Nullable<int> ParentID { get; set; }
+        public byte[] Timestamp { get; set; }
     }
 }

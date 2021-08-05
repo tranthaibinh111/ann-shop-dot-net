@@ -26,5 +26,9 @@ namespace ann_shop_server.Models
         public string ModifiedBy { get; set; }
         public string Slug { get; set; }
         public string Icon { get; set; }
+        public Nullable<int> ZaloShop { get; set; }
+        public string EnName { get; set; }
+        public string EnDescription { get; set; }
+        public Nullable<int> ShopeeId { get; set; }
     }
 }

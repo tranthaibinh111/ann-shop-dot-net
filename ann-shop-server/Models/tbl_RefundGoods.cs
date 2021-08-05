@@ -19,7 +19,6 @@ namespace ann_shop_server.Models
         public string TotalPrice { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<int> CustomerID { get; set; }
-        public Nullable<double> TotalQuantity { get; set; }
         public string TotalRefundFee { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string CreatedBy { get; set; }
@@ -31,5 +30,7 @@ namespace ann_shop_server.Models
         public string RefundNote { get; set; }
         public Nullable<int> OrderSaleID { get; set; }
         public string UserHelp { get; set; }
+        public int TotalQuantity { get; set; }
+        public decimal TotalCostOfGood { get; set; }
     }
 }

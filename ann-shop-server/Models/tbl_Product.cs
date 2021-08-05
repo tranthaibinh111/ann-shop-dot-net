@@ -14,6 +14,13 @@ namespace ann_shop_server.Models
     
     public partial class tbl_Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbl_Product()
+        {
+            this.PreOrderDetails = new HashSet<PreOrderDetail>();
+            this.ProductVideos = new HashSet<ProductVideo>();
+        }
+    
         public int ID { get; set; }
         public Nullable<int> CategoryID { get; set; }
         public Nullable<int> ProductOldID { get; set; }
@@ -48,5 +55,18 @@ namespace ann_shop_server.Models
         public string Color { get; set; }
         public bool PreOrder { get; set; }
         public Nullable<double> Old_Price { get; set; }
+        public bool SyncKiotViet { get; set; }
+        public string EnName { get; set; }
+        public string ShortDescription { get; set; }
+        public Nullable<double> Price10 { get; set; }
+        public Nullable<double> BestPrice { get; set; }
+        public string ShopeeDescription { get; set; }
+        public string CleanName { get; set; }
+        public string FeaturedImage { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PreOrderDetail> PreOrderDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductVideo> ProductVideos { get; set; }
     }
 }

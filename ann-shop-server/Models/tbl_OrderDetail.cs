@@ -31,5 +31,8 @@ namespace ann_shop_server.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<bool> IsCount { get; set; }
+        public decimal CostOfGood { get; set; }
+        public Nullable<double> TotalCostOfGood { get; set; }
+        public byte[] Timestamp { get; set; }
     }
 }

@@ -12,15 +12,20 @@ namespace ann_shop_server.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserNotifyPromotion
+    public partial class PostWordpress
     {
         public int ID { get; set; }
-        public int GroupID { get; set; }
-        public string GroupSlug { get; set; }
-        public string Phone { get; set; }
-        public System.DateTime CreatedDate { get; set; }
+        public int PostPublicID { get; set; }
+        public string WebWordpress { get; set; }
+        public int PostWordpressID { get; set; }
+        public Nullable<int> CategoryID { get; set; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public string Content { get; set; }
+        public string Thumbnail { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public string CreatedBy { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
     }
 }

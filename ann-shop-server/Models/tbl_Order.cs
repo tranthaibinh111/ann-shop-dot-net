@@ -14,6 +14,13 @@ namespace ann_shop_server.Models
     
     public partial class tbl_Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbl_Order()
+        {
+            this.DeliverySaveNotifications = new HashSet<DeliverySaveNotification>();
+            this.ViewOrders = new HashSet<ViewOrder>();
+        }
+    
         public int ID { get; set; }
         public Nullable<int> AgentID { get; set; }
         public Nullable<int> OrderType { get; set; }
@@ -57,5 +64,18 @@ namespace ann_shop_server.Models
         public string VerifiedBy { get; set; }
         public Nullable<int> CouponID { get; set; }
         public Nullable<decimal> CouponValue { get; set; }
+        public Nullable<int> GHTKFee { get; set; }
+        public Nullable<double> Weight { get; set; }
+        public int TotalQuantity { get; set; }
+        public decimal TotalCostOfGood { get; set; }
+        public string Avatar { get; set; }
+        public Nullable<long> DeliveryAddressId { get; set; }
+        public byte[] Timestamp { get; set; }
+    
+        public virtual DeliveryAddress DeliveryAddress { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DeliverySaveNotification> DeliverySaveNotifications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ViewOrder> ViewOrders { get; set; }
     }
 }
